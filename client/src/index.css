@@ -1,6 +1,13 @@
+:root {
+  --primary-color: #8B45FF;
+}
+
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
 }
 
+a[href] {
+  color: var(--primary-color);
+}
