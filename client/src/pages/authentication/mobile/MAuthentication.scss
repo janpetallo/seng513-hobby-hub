@@ -1,12 +1,8 @@
-.m-logo-row {
-  margin-bottom: 10rem;
-}
-
 .m-form-label{
   width: 90%;
 }
 
-.m-login-btn {
+.m-auth-btn {
   height: 3.5rem;
 }
 
@@ -14,4 +10,10 @@
   top: 30%;
   min-width: 160%;
   z-index: -1;
+}
+
+@media (min-height: 800px) {
+  .m-logo-row {
+    margin-bottom: 10rem;
+  }
 }
