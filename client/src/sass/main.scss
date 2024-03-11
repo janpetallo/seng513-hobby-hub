@@ -5,7 +5,7 @@
 @import '../../node_modules/bootstrap/scss/variables';
 
 $custom-colors: (
-        "hobbyhubpurple": #8e47ff
+        "HHPurple": #8e47ff
 );
 
 $theme-colors:map-merge($theme-colors, $custom-colors);

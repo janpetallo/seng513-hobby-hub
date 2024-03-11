@@ -21,3 +21,9 @@ The following packages and dependencies are being used:
 1. I have set Bootstraps primary to be `#8B45FF` and the font family to Roboto. If you want to change any of bootstraps
    defaults you can under the sass folder there is a main.scss you can add the custom code there. Please be careful
    if you change padding or margins because it could break all bootstrap.
+2. Note that our theme is called HHPurple (short for HobbyHub Purple) and can be used like any other bootstrap utility
+```
+<Button className="btn-lg mb-2 w-75" variant="HHPurple" type="submit">
+   Login
+</Button>
+```

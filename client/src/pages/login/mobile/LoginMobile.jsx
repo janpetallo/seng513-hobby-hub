@@ -43,7 +43,7 @@ const LoginMobile = () => {
                             ?
                         </div>
 
-                        <Button className="text-hobbyhubpurple fw-bolder mb-2 w-75 m-login-btn" variant="light" type="submit">
+                        <Button className="text-HHPurple fw-bolder mb-2 w-75 m-login-btn" variant="light" type="submit">
                             <h1 className="m-0">Login</h1>
                         </Button>
 

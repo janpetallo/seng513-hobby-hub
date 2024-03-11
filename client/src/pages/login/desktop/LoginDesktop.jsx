@@ -43,7 +43,7 @@ const LoginDesktop = () => {
                         </div>
 
                         <div className="d-flex align-items-center justify-content-center">
-                            <Button className="btn-lg mb-2 w-75" variant="hobbyhubpurple" type="submit">
+                            <Button className="btn-lg mb-2 w-75" variant="HHPurple" type="submit">
                                 Login
                             </Button>
                         </div>
