@@ -12,7 +12,8 @@ The following packages and dependencies are being used:
 ## Getting started
 1. cd client
 2. npm install
-3. Go to the login page if the login button is not purple then the custom bootstrap colors are not working run the
+3. npm run dev
+4. Go to the login page if the login button is not purple then the custom bootstrap colors are not working run the
    command:
 
    `npm add -D sass`

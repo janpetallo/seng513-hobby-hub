@@ -1,6 +1,6 @@
 import { useMediaQuery } from 'react-responsive';
-import LoginDesktop from "./desktop/LoginDesktop.jsx";
-import LoginMobile from "./mobile/LoginMobile.jsx";
+import DLogin from "./desktop/DLogin.jsx";
+import MLogin from "./mobile/MLogin.jsx";
 
 const Login = () => {
 
@@ -10,7 +10,7 @@ const Login = () => {
 
     return (
         <div>
-            {isDesktopOrLaptop ? <LoginDesktop /> : <LoginMobile />}
+            {isDesktopOrLaptop ? <DLogin /> : <MLogin />}
         </div>
     );
 }

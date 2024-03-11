@@ -7,7 +7,7 @@ import {
 import {Col, Container, Row} from "react-bootstrap";
 import {useMediaQuery} from "react-responsive";
 
-import Login from "./pages/login/Login.jsx";
+import Login from "./pages/authentication/Login.jsx";
 import DNavBar from "./components/desktop/navbar/NavBar.jsx";
 import LeftMenu from "./components/desktop/leftmenu/LeftMenu.jsx";
 import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
@@ -15,6 +15,7 @@ import MNavBar from "./components/mobile/navbar/NavBar.jsx";
 import Header from "./components/mobile/header/Header.jsx";
 import DHome from "./pages/home/desktop/DHome.jsx";
 import MHome from "./pages/home/mobile/MHome.jsx";
+import Signup from "./pages/authentication/Signup.jsx";
 
 function App() {
 
@@ -61,6 +62,10 @@ function App() {
         {
             path: "/login",
             element: <Login/>
+        },
+        {
+            path: "/signup",
+            element: <Signup/>
         },
     ]);
 
