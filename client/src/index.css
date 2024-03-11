@@ -1,5 +1,6 @@
 :root {
-  --primary-color: #8B45FF;
+  --link-clr-desktop :#8B45FF;
+  --link-clr-mobile: #FFFFFF;
 }
 
 body {
@@ -9,5 +10,12 @@ body {
 }
 
 a[href] {
-  color: var(--primary-color);
+  color: var(--link-clr-mobile);
 }
+
+@media (min-width: 576px) {
+  a[href] {
+    color: var(--link-clr-desktop);
+  }
+}
+

@@ -7,13 +7,13 @@ import {
     Link,
 } from "react-router-dom";
 
-import LoginDesktop from "./pages/login/desktop/LoginDesktop.jsx";
+import Login from "./pages/login/Login.jsx";
 
 function App() {
     const router = createBrowserRouter([
         {
             path: "/",
-            element:<LoginDesktop/>
+            element:<Login/>
         },
     ]);
 

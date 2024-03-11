@@ -5,7 +5,10 @@ import Logo from "../../../assets/login/desktop/logo.svg"
 
 const LoginDesktop = () => {
     return (
-        <Container fluid className="d-flex justify-content-center align-items-center d-login-container">
+        <Container
+            fluid
+            className="d-flex justify-content-center align-items-center vh-100 d-login-container"
+        >
 
             <Row className="rounded-5 shadow d-login-row">
                 <Col sm={2} xl={4} xxl={6} className="rounded-start-5 position-relative d-login-left">
@@ -39,11 +42,13 @@ const LoginDesktop = () => {
                             ?
                         </div>
 
-                        <Button className="mb-2" variant="primary" type="submit">
-                            Login
-                        </Button>
+                        <div className="d-flex align-items-center justify-content-center">
+                            <Button className="btn-lg mb-2 w-75" variant="hobbyhubpurple" type="submit">
+                                Login
+                            </Button>
+                        </div>
 
-                        <div>
+                        <div className="mb-2">
                             Don't have an account?{' '}
                             <Link to="">Sign up!</Link>
                         </div>
