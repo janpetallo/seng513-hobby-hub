@@ -1,0 +1,20 @@
+// custom variables
+//$primary: #8B45FF;
+
+@import '../../node_modules/bootstrap/scss/functions';
+@import '../../node_modules/bootstrap/scss/variables';
+
+$custom-colors: (
+        "HHPurple": #8e47ff
+);
+
+$theme-colors:map-merge($theme-colors, $custom-colors);
+
+
+// import bootstrap
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+:root {
+  --bs-body-font-family: 'Roboto', sans-serif;
+}
