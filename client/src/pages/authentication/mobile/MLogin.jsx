@@ -37,9 +37,9 @@ const MLogin = () => {
 
                         <div className="text-white mb-2">
                             Forgot{' '}
-                            <Link to="">Username</Link>
+                            <Link to="/underdevelopment">Username</Link>
                             {' '}or{' '}
-                            <Link to="">Password</Link>
+                            <Link to="/underdevelopment">Password</Link>
                             ?
                         </div>
 

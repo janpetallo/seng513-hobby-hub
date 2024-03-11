@@ -3,6 +3,7 @@
     background-position: center;
     background-size: cover;
     position: relative;
+    min-height: 100vh;
 }
 
 .d-auth-container::before {
@@ -21,7 +22,7 @@
 .d-auth-row {
     z-index: 1;
     min-width: 75%;
-    min-height: 65%;
+    min-height: 400px;
 }
 
 .d-auth-left {
@@ -39,7 +40,8 @@
 }
 
 .d-auth-form{
-    min-width: 65%;
+    padding: 1.5rem;
+    min-width: 75%;
 }
 
 @media (min-width: 1200px) {
@@ -57,10 +59,15 @@
 @media (min-width: 1920px) {
     .d-auth-row {
         min-width: 60%;
-        min-height: 50%;
     }
 
     .d-auth-left img {
         max-width: 55%;
+    }
+}
+
+@media (min-height: 768px) {
+    .d-auth-row {
+        min-height: 600px;
     }
 }

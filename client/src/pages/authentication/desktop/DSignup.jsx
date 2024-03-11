@@ -7,7 +7,7 @@ const DSignup = () => {
     return (
         <Container
             fluid
-            className="d-flex justify-content-center align-items-center vh-100 d-auth-container"
+            className="d-flex justify-content-center align-items-center d-auth-container"
         >
 
             <Row className="rounded-5 shadow d-auth-row">
@@ -59,7 +59,7 @@ const DSignup = () => {
                         </FloatingLabel>
 
                         <div className="d-flex align-items-center justify-content-center">
-                            <Button className="btn-lg mb-2 w-75" variant="HHPurple" type="submit">
+                            <Button className="btn-lg mb-2 w-50" variant="HHPurple" type="submit">
                                 Sign Up
                             </Button>
                         </div>

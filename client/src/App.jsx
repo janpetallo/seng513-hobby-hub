@@ -16,6 +16,7 @@ import Header from "./components/mobile/header/Header.jsx";
 import DHome from "./pages/home/desktop/DHome.jsx";
 import MHome from "./pages/home/mobile/MHome.jsx";
 import Signup from "./pages/authentication/Signup.jsx";
+import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
 
 function App() {
 
@@ -66,6 +67,10 @@ function App() {
         {
             path: "/signup",
             element: <Signup/>
+        },
+        {
+            path: "/underdevelopment",
+            element: <UnderDevelopment/>
         },
     ]);
 

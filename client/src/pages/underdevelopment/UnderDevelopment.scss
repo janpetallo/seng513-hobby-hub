@@ -1,0 +1,15 @@
+.notfound-container {
+  background: linear-gradient(rgba(39, 11, 96, 0.5),
+          rgba(39, 11, 96, 0.5)), url("../../assets/notfound/notfoundbg.jpg") no-repeat center;
+  background-size: cover;
+}
+
+.notfound-col {
+  min-height: 100vh;
+
+  div {
+    border-radius: 2rem;
+    background-color: #19073FCC;
+  }
+}
+

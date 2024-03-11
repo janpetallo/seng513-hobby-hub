@@ -7,7 +7,7 @@ const DLogin = () => {
     return (
         <Container
             fluid
-            className="d-flex justify-content-center align-items-center vh-100 d-auth-container"
+            className="d-flex justify-content-center align-items-center d-auth-container"
         >
 
             <Row className="rounded-5 shadow d-auth-row">
@@ -36,14 +36,14 @@ const DLogin = () => {
 
                         <div className="mb-2">
                             Forgot{' '}
-                            <Link to="">Username</Link>
+                            <Link to="/underdevelopment">Username</Link>
                             {' '}or{' '}
-                            <Link to="">Password</Link>
+                            <Link to="/underdevelopment">Password</Link>
                             ?
                         </div>
 
                         <div className="d-flex align-items-center justify-content-center">
-                            <Button className="btn-lg mb-2 w-75" variant="HHPurple" type="submit">
+                            <Button className="btn-lg mb-2 w-50" variant="HHPurple" type="submit">
                                 Login
                             </Button>
                         </div>
