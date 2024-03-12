@@ -1,6 +1,5 @@
 # seng513-202401-group-19
 
-
 ## Dependencies
 The following packages and dependencies are being used:
 1. Vite
