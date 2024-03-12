@@ -23,7 +23,7 @@ const Login = () => {
 
                 <Col sm={10} xl={8} xxl={6} className="auth-form-col rounded-end-5">
                     <Form className="auth-form">
-                        <h1 className="d-none d-sm-block">Login</h1>
+                        <h1 className="d-none d-sm-block auth-text">Login</h1>
                         <FloatingLabel
                             controlId="floating-username"
                             label="Username"
@@ -32,6 +32,7 @@ const Login = () => {
                             <Form.Control
                                 type="text"
                                 placeholder=""
+                                required
                             />
                         </FloatingLabel>
 
@@ -40,12 +41,14 @@ const Login = () => {
                             label="Password"
                             className="mb-3 auth-label"
                         >
-                            <Form.Control type="password"
-                                          placeholder=""
+                            <Form.Control
+                                type="password"
+                                placeholder=""
+                                required
                             />
                         </FloatingLabel>
 
-                        <div className="mb-3 auth-links">
+                        <div className="mb-3 auth-text auth-links">
                             Forgot{' '}
                             <Link to="/underdevelopment">Username</Link>
                             {' '}or{' '}
@@ -63,7 +66,7 @@ const Login = () => {
                             </Button>
                         </div>
 
-                        <div className="auth-links">
+                        <div className="auth-text auth-links">
                             Don't have an account?{' '}
                             <Link to="/signup">Sign up!</Link>
                         </div>
