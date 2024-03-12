@@ -2,13 +2,11 @@ import "./MAuthentication.scss"
 import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import Logo from "../../../assets/authentication/mobile/logo.svg";
-import Background from "../../../assets/authentication/mobile/background.svg"
 
 const MLogin = () => {
     return(
         <Container fluid
-                   className="d-flex justify-content-center align-items-center flex-column vh-100 position-relative overflow-hidden">
-            <img className="position-absolute m-bg-img" src={Background} alt="Logo"/>
+                   className="d-flex justify-content-center align-items-center flex-column m-auth-container">
 
             <Row className="m-logo-row">
                 <Col className="d-flex justify-content-center align-items-center">
