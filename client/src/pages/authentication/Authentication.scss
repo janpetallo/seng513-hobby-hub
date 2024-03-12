@@ -1,0 +1,158 @@
+:root {
+    --HHPurple: #8e47ff;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.auth-container::before {
+    content: "";
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    z-index: -1;
+    height: 100%;
+    background-image: url("../../assets/authentication/mobile/background.svg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.m-logo-cont {
+    max-width: 350px;
+    margin: 0 auto;
+}
+
+.auth-form-row {
+    width: 100%;
+}
+
+.auth-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.auth-label{
+    width: 90%;
+}
+
+
+.auth-links {
+    color: white;
+
+    a[href] {
+        color: white;
+    }
+}
+
+
+@media screen and (min-width: 576px){
+
+    .auth-container {
+        background-image: url("../../assets/authentication/desktop/background.jpg");
+        background-position: center;
+        background-size: cover;
+        flex-direction: row;
+        justify-content: center;
+        position: relative;
+    }
+
+    .auth-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("../../assets/authentication/desktop/background.jpg");
+        background-position: center;
+        background-size: cover;
+        filter: blur(8px);
+    }
+
+    .auth-form-row {
+        width: auto;
+        z-index: 1;
+        min-width: 75%;
+        min-height: 500px;
+    }
+
+    .auth-form-col {
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .auth-form {
+        padding: 1.5rem;
+        min-width: 75%;
+        justify-content: normal;
+        align-items: normal;
+    }
+
+    .d-side-img {
+        background-image: url("../../assets/authentication/desktop/background.jpg");
+        background-position: center;
+        background-size: cover;
+
+        img {
+            padding: 2rem;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(270deg);
+
+        }
+    }
+
+    .auth-form{
+        padding: 1.5rem;
+        min-width: 90%;
+    }
+
+    .auth-links {
+        color: black;
+
+        a[href] {
+            color: var(--HHPurple);
+        }
+    }
+
+
+    @media (min-height: 768px) {
+        .auth-form-row  {
+            min-height: 600px;
+        }
+    }
+}
+
+@media (min-width: 1200px) {
+    .d-side-img {
+        img {
+            transform: none;
+            max-width: 80%;
+            left: auto;
+            top: 0;
+            right: 0;
+        }
+    }
+}
+
+@media (min-width: 1920px) {
+    .auth-form-row {
+        min-width: 60%;
+    }
+
+    .d-side-img {
+        max-width: 55%;
+    }
+}
