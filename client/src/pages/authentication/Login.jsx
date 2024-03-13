@@ -3,8 +3,27 @@ import Logo from "../../assets/authentication/mobile/logo.svg";
 import DLogo from "../../assets/authentication/desktop/logo.svg"
 import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import {useFormik} from "formik";
+import {LoginSchema} from "./schemas/LoginSchema.jsx";
 
 const Login = () => {
+
+    const onSubmit = async (values, actions) => {
+        console.log(values);
+        await new Promise((resolve) => setTimeout(resolve, 1000)); // mimic fake submit add functionality later
+        actions.resetForm();
+    }
+
+    const {values, errors, touched, isSubmitting,handleBlur, handleChange, handleSubmit} = useFormik({
+        initialValues: {
+            username:"",
+            password:"",
+        },
+
+        validationSchema: LoginSchema,
+
+        onSubmit,
+    })
 
     return (
         <Container fluid className="auth-container">
@@ -22,7 +41,7 @@ const Login = () => {
 
 
                 <Col sm={10} xl={8} xxl={6} className="auth-form-col rounded-end-5">
-                    <Form className="auth-form">
+                    <Form className="auth-form" onSubmit={handleSubmit}>
                         <h1 className="d-none d-sm-block auth-text">Login</h1>
                         <FloatingLabel
                             controlId="floating-username"
@@ -32,8 +51,16 @@ const Login = () => {
                             <Form.Control
                                 type="text"
                                 placeholder=""
-                                required
+                                name="username"
+                                value={values.username}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                isValid={touched.username && !errors.username}
+                                isInvalid={touched.username && !!errors.username}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.username}
+                            </Form.Control.Feedback>
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -44,8 +71,16 @@ const Login = () => {
                             <Form.Control
                                 type="password"
                                 placeholder=""
-                                required
+                                name="password"
+                                value={values.password}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                isValid={touched.password && !errors.password}
+                                isInvalid={touched.password && !!errors.password}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.password}
+                            </Form.Control.Feedback>
                         </FloatingLabel>
 
                         <div className="mb-3 auth-text auth-links">
@@ -56,12 +91,12 @@ const Login = () => {
                             ?
                         </div>
 
-                        <Button className="d-block d-sm-none text-HHPurple mb-3 w-75 auth-btn" variant="light" type="submit">
-                            <h1 className="m-0">Login</h1>
+                        <Button className="btn-HHPurple d-block d-sm-none mb-3 w-75 auth-btn" type="submit" disabled={isSubmitting}>
+                            <h5 className="m-0">Login</h5>
                         </Button>
 
                         <div className="d-none d-sm-flex align-items-center justify-content-center">
-                            <Button className="btn-lg mb-2 w-50" variant="HHPurple" type="submit">
+                            <Button className="btn-lg mb-2 w-50" variant="HHPurple" type="submit" disabled={isSubmitting}>
                                 Login
                             </Button>
                         </div>
