@@ -3,10 +3,10 @@ import {deleteUser} from "../controllers/user.controller.js";
 
 const router = express.Router();
 
-// routing the url request for user
+// routing the url request for user to the user controller
 
 // user delete route
-router.get("/delete", deleteUser)
+router.get("/delete", deleteUser);
 
 
 export default router;
