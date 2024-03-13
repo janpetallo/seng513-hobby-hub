@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import userRoute from "./routes/user.routes.js"
 
 const app = express()
 // env function to read from .env files
@@ -18,7 +19,11 @@ const connect = async () => {
     }
 };
 
-// when the backend server launches, log that it has started
+// routing end points (end of url's) to the appropriate action via the routes directory
+app.use("/api/users", userRoute); // for the users
+
+
+// launch the connection to the server
 app.listen(8800, () => {
     connect()
     console.log("Backend Server is Running!")

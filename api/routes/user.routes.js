@@ -1,0 +1,12 @@
+import express from "express";
+import {deleteUser} from "../controllers/user.controller.js";
+
+const router = express.Router();
+
+// routing the url request for user
+
+// user delete route
+router.get("/delete", deleteUser)
+
+
+export default router;
