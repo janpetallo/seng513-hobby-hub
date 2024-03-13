@@ -1,46 +1,25 @@
-version: "3.8"
+version: '3.8'
 
 services:
-  client:
-    container_name: hobbyhub-frontend
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+  backend:
+    build: ./api
     ports:
-      - "3000:3000"
-    networks:
-      - mern-app
-    env_file:
-      - .env
-
-  server:
-    container_name: hobbyhub-backend
-    build: 
-      context: ./backend
-      dockerfile: Dockerfile
-    ports:
-      - "5000:5000"
-    networks:
-      - mern-app
+      - "8800:8800"
+    environment:
+      - MONGO=${MONGO}
     depends_on:
       - mongo
-    env_file:
-      - .env
+
+  frontend:
+    build: ./client
+    ports:
+      - "5173:5173"
+    environment:
+      - REACT_APP_API_URL=http://localhost:8800
+    depends_on:
+      - backend
 
   mongo:
-    image: mongo:latest
+    image: mongo
     ports:
       - "27017:27017"
-    networks:
-      - mern-app
-    volumes:
-      - mongo-data:/data/db
-    env_file:
-      - .env
-
-networks:
-  mern-app:
-    driver: bridge
-
-volumes:
-  mongo-data:
