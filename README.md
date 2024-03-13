@@ -8,6 +8,8 @@ The following packages and dependencies are being used:
 3. React Router Dom
 4. sass/scss
 5. react-responsive
+6. formik
+7. yup
 
 ## Getting started
 1. cd client

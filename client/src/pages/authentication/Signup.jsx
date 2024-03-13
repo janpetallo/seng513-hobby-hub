@@ -3,8 +3,30 @@ import Logo from "../../assets/authentication/mobile/logo.svg";
 import DLogo from "../../assets/authentication/desktop/logo.svg"
 import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import {useFormik} from "formik";
+import {SignupSchema} from "./schemas/SignupSchema.jsx";
 
 const Signup = () => {
+
+    const onSubmit = async (values, actions) => {
+        console.log(values);
+        await new Promise((resolve) => setTimeout(resolve, 1000)); // mimic fake submit add functionality later
+        actions.resetForm();
+    }
+
+    const {values, errors, touched, isSubmitting,handleBlur, handleChange, handleSubmit} = useFormik({
+        initialValues: {
+            username:"",
+            email:"",
+            password:"",
+            confirmPassword:"",
+            birthdate:"",
+        },
+
+        validationSchema: SignupSchema,
+
+        onSubmit,
+    })
 
     return (
         <Container fluid className="auth-container">
@@ -22,8 +44,8 @@ const Signup = () => {
 
 
                 <Col sm={10} xl={8} xxl={6} className="auth-form-col rounded-end-5">
-                    <Form className="auth-form">
-                        <h1 className="d-none d-sm-block">Create an account</h1>
+                    <Form className="auth-form" onSubmit={handleSubmit}>
+                        <h1 className="d-none d-sm-block mb-2 auth-text">Create an account</h1>
                         <FloatingLabel
                             controlId="floating-username"
                             label="Username"
@@ -32,7 +54,16 @@ const Signup = () => {
                             <Form.Control
                                 type="text"
                                 placeholder=""
+                                name="username"
+                                value={values.username}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                isValid={touched.username && !errors.username}
+                                isInvalid={touched.username && !!errors.username}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.username}
+                            </Form.Control.Feedback>
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -43,7 +74,16 @@ const Signup = () => {
                             <Form.Control
                                 type="email"
                                 placeholder=""
+                                name="email"
+                                value={values.email}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                isValid={touched.email && !errors.email}
+                                isInvalid={touched.email && !!errors.email}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.email}
+                            </Form.Control.Feedback>
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -51,9 +91,19 @@ const Signup = () => {
                             label="Password"
                             className="mb-3 auth-label"
                         >
-                            <Form.Control type="password"
-                                          placeholder=""
+                            <Form.Control
+                                type="password"
+                                placeholder=""
+                                name="password"
+                                value={values.password}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                isValid={touched.password && !errors.password}
+                                isInvalid={touched.password && !!errors.password}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.password}
+                            </Form.Control.Feedback>
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -61,9 +111,19 @@ const Signup = () => {
                             label="Confirm Password"
                             className="mb-3 auth-label"
                         >
-                            <Form.Control type="password"
-                                          placeholder=""
+                            <Form.Control
+                                type="password"
+                                placeholder=""
+                                name="confirmPassword"
+                                value={values.confirmPassword}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                isValid={touched.confirmPassword && !errors.confirmPassword}
+                                isInvalid={touched.confirmPassword && !!errors.confirmPassword}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.confirmPassword}
+                            </Form.Control.Feedback>
                         </FloatingLabel>
 
                         <FloatingLabel
@@ -71,12 +131,22 @@ const Signup = () => {
                             label="Birthdate"
                             className="mb-3 auth-label"
                         >
-                            <Form.Control type="date"
-                                          placeholder=""
+                            <Form.Control
+                                type="date"
+                                placeholder=""
+                                name="birthdate"
+                                value={values.birthdate}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                isValid={touched.birthdate && !errors.birthdate}
+                                isInvalid={touched.birthdate && !!errors.birthdate}
                             />
+                            <Form.Control.Feedback type="invalid">
+                                {errors.birthdate}
+                            </Form.Control.Feedback>
                         </FloatingLabel>
 
-                        <div className="mb-3 auth-links">
+                        <Form.Group className="mb-3 auth-text auth-links">
                             <Form.Check
                                 type="checkbox"
                                 id="checkbox"
@@ -87,19 +157,19 @@ const Signup = () => {
                                 }
                                 defaultChecked // force checkbox always checked for now
                             />
-                        </div>
+                        </Form.Group>
 
-                        <Button className="d-block d-sm-none text-HHPurple mb-3 w-75 auth-btn" variant="light" type="submit">
-                            <h1 className="m-0">Sign Up</h1>
+                        <Button className="btn-HHPurple d-block d-sm-none mb-3 w-75 auth-btn" type="submit" disabled={isSubmitting}>
+                            <h5 className="m-0">Sign up</h5>
                         </Button>
 
                         <div className="d-none d-sm-flex align-items-center justify-content-center">
-                            <Button className="btn-lg mb-3 w-50" variant="HHPurple" type="submit">
+                            <Button className="btn-lg mb-3 w-50 auth-btn" variant="HHPurple" type="submit" disabled={isSubmitting}> {/* Disable the button when we submit */}
                                 Sign Up
                             </Button>
                         </div>
 
-                        <div className="auth-links">
+                        <div className="auth-links auth-text">
                             Already have an account?{' '}
                             <Link to="/login">Login</Link>
                         </div>
