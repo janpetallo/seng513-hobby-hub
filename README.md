@@ -14,10 +14,15 @@ The following packages and dependencies are being used:
 10. Docker
 
 ## Getting started (running with Docker)
+<u>Database Seeding Scripts:</u>
+- To populate the MongoDB Database with seed data, refer to the instructions in the README.md file in the DBSeedingScripts 
+directory. `project root directory/api/DBSeedingScripts`
+
+
 <u>Server (api) side:</u>
 1. From the root directory `cd api`
 2. within the api directory create a file called .env (You will only have to make this .env file once).
-3. Inside this file you will write MONGO = \<Mogo DB connection URL\> (Replace the <> with the connection settings from Mongodb).
+3. Inside this file you will write `MONGO = <Mogo DB connection URL> (Replace the <> with the connection settings from Mongodb)`
 
 
 <u>Root Directory:</u>
