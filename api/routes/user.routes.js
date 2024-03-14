@@ -6,7 +6,7 @@ const router = express.Router();
 // routing the url request for user to the user controller
 
 // user delete route
-router.get("/delete", deleteUser);
+router.delete("/:id", deleteUser);
 
 
 export default router;
