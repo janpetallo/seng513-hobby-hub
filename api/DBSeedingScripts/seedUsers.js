@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import User from '../models/user.model.js';
 import dotenv from "dotenv";
-import seedCommentData from "./seedComment.js";
 
 // configure dotenv to read from .env files
 dotenv.config();
