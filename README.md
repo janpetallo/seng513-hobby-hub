@@ -15,6 +15,8 @@ The following packages and dependencies are being used:
 10. Docker
 11. formik
 12. yup
+13. JsonWebToken
+14. Cookie-parser
 
 ## Getting started (running with Docker)
 <u>Database Seeding Scripts:</u>
@@ -86,3 +88,10 @@ desktop application.
 I changed the default link color for mobile to be white (because they are white on the login and signup pages).
 If the link seems to be missing on mobile (when you use a white background) that might be why
 try changing the link color.
+
+
+
+## Sources:
+1) MongoDB manual (for db useage instructions): https://www.mongodb.com/docs/manual/
+2) Mongoose api documentation (for mongoose mongodb functions): https://mongoosejs.com/docs/guide.html
+3) Lamadev (for lessons on backend creation): https://www.youtube.com/watch?v=csUM7yfiaMw&list=PLPj8a3iD-ToscwX1f6XOr7nrriXH4Q8OV&index=3&t=2917s
