@@ -27,7 +27,6 @@ export const register = async (req, res)=>{
 
     }catch (error){
         res.status(500).send("Error with registering");
-        console.log(error);
     }
 };
 
@@ -69,6 +68,10 @@ export const login = async (req, res)=>{
 // logout function
 export const logout = async (req, res)=>{
     try{
+        res.clearCookie("accessToken", {
+            sameSite: "none", // because from end and back end servers are not running on the same port, we do this to access the cookie
+            secure: true,
+        }).status(200).send("User logged out!")
 
     }catch (error){
         res.status(500).send("Error with logout");
