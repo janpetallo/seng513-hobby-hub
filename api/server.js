@@ -1,12 +1,17 @@
+// libraries
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import userRoute from "./routes/user.routes.js"
-import commentRoute from "./routes/comment.routes.js"
-import hubRoute from "./routes/hub.routes.js"
+import cookieParser from "cookie-parser";
+
+// routes
+import userRoute from "./routes/user.routes.js";
+import commentRoute from "./routes/comment.routes.js";
+import hubRoute from "./routes/hub.routes.js";
 import marketPlacePostRoutes from "./routes/marketPlacePost.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import authRoute from "./routes/auth.route.js";
+
 
 const app = express()
 // env function to read from .env files
@@ -24,8 +29,11 @@ const connect = async () => {
     }
 };
 
-// allow the app to take json input
-app.use(express.json());
+
+// middleware
+app.use(express.json()); // allow the app to take json input
+app.use(cookieParser()); // allow the app to use cookie parser
+
 
 
 // essentially the flow of requests goes like this: url -> server.js -> routes -> controller
