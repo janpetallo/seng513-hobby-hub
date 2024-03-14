@@ -27,10 +27,13 @@ directory. `project root directory/api/DBSeedingScripts`
 2. within the api directory create a file called .env (You will only have to make this .env file once).
 3. Inside this file you will write `MONGO = <Mogo DB connection URL> (Replace the <> with the connection settings from Mongodb)`
 
+`JWT = <replace with webstoken password>`
 
 <u>Root Directory:</u>
 1. From the root directory create a file called .env (You will only have to make this .env file once).
-2. Inside this file you will write MONGO = \<Mogo DB connection URL\> (Replace the <> with the connection settings from Mongodb).
+2. Inside this file you will write `MONGO = \<Mogo DB connection URL\> (Replace the <> with the connection settings from Mongodb).`
+
+   `JWT = <replace with webstoken password>`
 
 <u>Startup Instructions:</u>
 
