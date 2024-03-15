@@ -2,15 +2,26 @@ import "./Authentication.scss"
 import Logo from "../../assets/authentication/mobile/logo.svg";
 import DLogo from "../../assets/authentication/desktop/logo.svg"
 import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
 import {SignupSchema} from "./schemas/SignupSchema.jsx";
+import newRequest from "../../utilities/newRequest.js";
 
 const Signup = () => {
 
+    // navigation hook
+    const navigate = useNavigate();
+
+    // register user function
     const onSubmit = async (values, actions) => {
-        console.log(values);
-        await new Promise((resolve) => setTimeout(resolve, 1000)); // mimic fake submit add functionality later
+        try {
+            await newRequest.post("/auth/register", {username: values.username,
+                password: values.password, email: values.email, birthday: values.birthdate,});
+
+            navigate("/login"); // navigate to the login page
+        }catch (err){
+            console.log(err.response.data);
+        }
         actions.resetForm();
     }
 
