@@ -10,11 +10,9 @@ import {useMediaQuery} from "react-responsive";
 import Login from "./pages/authentication/Login.jsx";
 import DNavBar from "./components/desktop/navbar/NavBar.jsx";
 import LeftMenu from "./components/desktop/leftmenu/LeftMenu.jsx";
-import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
 import MNavBar from "./components/mobile/navbar/NavBar.jsx";
 import Header from "./components/mobile/header/Header.jsx";
-import DHome from "./pages/home/desktop/DHome.jsx";
-import MHome from "./pages/home/mobile/MHome.jsx";
+import Home from "./pages/home/Home.jsx";
 import Signup from "./pages/authentication/Signup.jsx";
 import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
 
@@ -24,27 +22,19 @@ function App() {
         query: '(min-device-width: 576px)'
     });
 
-    const DesktopLayout= () => {
+    const Layout= () => {
         return (
-            <Container fluid>
-                <DNavBar/>
-                <Row>
-                    <Col className="d-flex">
-                        <LeftMenu/>
+            <Container fluid className="m-0 p-0">
+                {isDesktopOrLaptop ? <DNavBar/> : <Header/>}
+                <Row className="m-0 home-body">
+                    <Col xl={3} className="m-0 p-0 d-none d-xl-block position-sticky">
+                        {isDesktopOrLaptop && <LeftMenu/>}
+                    </Col>
+                    <Col>
                         <Outlet/>
-                        <RightMenu/>
                     </Col>
                 </Row>
-            </Container>
-        )
-    }
-
-    const MobileLayout= () => {
-        return (
-            <Container fluid>
-                <Header/>
-                <Outlet/>
-                <MNavBar/>
+                {!isDesktopOrLaptop && <MNavBar/>}
             </Container>
         )
     }
@@ -52,11 +42,12 @@ function App() {
     const router = createBrowserRouter([
         {
             path: "/",
-            element: isDesktopOrLaptop ? <DesktopLayout/> : <MobileLayout/>,
+            element: <Layout/>,
             children: [
                 {
                     path: "/",
-                    element: isDesktopOrLaptop ? <DHome/> : <MHome/>
+                    element: <Home/>
+
                 },
             ]
         },
