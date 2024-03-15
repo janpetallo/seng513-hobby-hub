@@ -2,23 +2,27 @@ import "./Authentication.scss"
 import Logo from "../../assets/authentication/mobile/logo.svg";
 import DLogo from "../../assets/authentication/desktop/logo.svg"
 import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
 import {LoginSchema} from "./schemas/LoginSchema.jsx";
-import axios from "axios";
+import newRequest from "../../utilities/newRequest.js";
 
 const Login = () => {
+
+    // navigation hook
+    const navigate = useNavigate();
+
 
     // send password and username to the server upon submit
     const onSubmit = async (values, actions) => {
         try {
-            const res = await axios.post("http://localhost:8800/api/auth/login", {
-                username: values.username,
-                password: values.password
-            }, {withCredentials: true});
-            console.log(res.data);
+            const res = await newRequest.post("/auth/login", {username: values.username,
+                password: values.password});
+
+            localStorage.setItem("currentUser", JSON.stringify(res.data)); // store the user data returned from logging in
+            navigate("/"); // navigate back to the home page
         }catch (err){
-            console.log(err);
+            console.log(err.response.data);
         }
         actions.resetForm();
     }
