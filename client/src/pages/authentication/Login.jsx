@@ -5,12 +5,21 @@ import {Button, Col, Container, FloatingLabel, Form, Row} from "react-bootstrap"
 import {Link} from "react-router-dom";
 import {useFormik} from "formik";
 import {LoginSchema} from "./schemas/LoginSchema.jsx";
+import axios from "axios";
 
 const Login = () => {
 
+    // send password and username to the server upon submit
     const onSubmit = async (values, actions) => {
-        console.log(values);
-        await new Promise((resolve) => setTimeout(resolve, 1000)); // mimic fake submit add functionality later
+        try {
+            const res = await axios.post("http://localhost:8800/api/auth/login", {
+                username: values.username,
+                password: values.password
+            }, {withCredentials: true});
+            console.log(res.data);
+        }catch (err){
+            console.log(err);
+        }
         actions.resetForm();
     }
 

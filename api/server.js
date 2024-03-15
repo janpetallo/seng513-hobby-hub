@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 // routes
 import userRoute from "./routes/user.routes.js";
@@ -31,9 +32,9 @@ const connect = async () => {
 
 
 // middleware
+app.use(cors({origin:"http://localhost:5173", credentials:true})); // cors middleware to allow the front end to communicate with the backend
 app.use(express.json()); // allow the app to take json input
 app.use(cookieParser()); // allow the app to use cookie parser
-
 
 
 // essentially the flow of requests goes like this: url -> server.js -> routes -> controller

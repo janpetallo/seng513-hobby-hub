@@ -9,7 +9,7 @@ const router = express.Router();
 router.post("/register", register);
 // login user route
 router.post("/login", login);
-router.post("/login", logout);
+router.post("/logout", logout);
 
 
 export default router;
