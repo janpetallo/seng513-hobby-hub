@@ -17,6 +17,7 @@ The following packages and dependencies are being used:
 12. yup
 13. JsonWebToken
 14. Cookie-parser
+13. react-icons
 
 ## Getting started (running with Docker)
 <u>Database Seeding Scripts:</u>
@@ -75,21 +76,14 @@ desktop application.
 
 ## Customizing Bootstrap 
 1. I have created a custom theme and changed the font family to Roboto. If you want to change any of bootstraps
-   defaults you can under the sass folder there is a main.scss you can add the custom code there. Please be careful
-   if you change padding or margins because it could break all bootstrap.
+   defaults you can. Under the sass folder there is file called main.scss. This is where you edit Bootstraps default settings.
+   Change this with caution as if you change global settings and someone else is using the same component theirs will change too.
 2. Note: that our theme is called HHPurple (short for HobbyHub Purple) and can be used like any other bootstrap utility
 ```
 <Button className="btn-lg mb-2 w-75" variant="HHPurple" type="submit">
    Login
 </Button>
 ```
-
-## WARNING 
-I changed the default link color for mobile to be white (because they are white on the login and signup pages).
-If the link seems to be missing on mobile (when you use a white background) that might be why
-try changing the link color.
-
-
 
 ## Sources:
 1) MongoDB manual (for db useage instructions): https://www.mongodb.com/docs/manual/
