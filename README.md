@@ -15,6 +15,7 @@ The following packages and dependencies are being used:
 10. Docker
 11. formik
 12. yup
+13. react-icons
 
 ## Getting started (running with Docker)
 <u>Database Seeding Scripts:</u>
