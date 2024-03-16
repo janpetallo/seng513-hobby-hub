@@ -44,6 +44,10 @@
   width: 70%;
   height: 0.5px;
   background-color: rgb(0, 0, 0);
+
+  @media screen and ("max-width: 1700px") {
+    width: 100%;
+  }
 }
 
 .left-post-btn {
