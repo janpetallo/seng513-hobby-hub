@@ -7,11 +7,19 @@ import Market from "../../../assets/leftsidemenu/market.svg";
 import Posts from "../../../assets/leftsidemenu/posts.svg";
 import Ads from "../../../assets/leftsidemenu/ads.svg";
 import Trades from "../../../assets/leftsidemenu/trades.svg";
+import Logo from "../../../assets/authentication/mobile/logo.svg"
 
 
 const LeftMenu = () =>{
     return (
         <Container fluid className="d-flex flex-column p-3 left-menu">
+            <Row className="d-xl-none mb-3">
+                <Col className="d-flex align-items-center justify-content-center">
+                    <img className="navbar-logo" src={Logo} alt="HobbyHub"/>
+                </Col>
+                <hr className="item divider"/>
+            </Row>
+
             <Row>
                 <Col className="mb-3">
                     <a className="left-links" href="/">
