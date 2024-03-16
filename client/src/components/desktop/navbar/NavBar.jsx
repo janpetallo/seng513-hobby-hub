@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import "./NavBar.scss"
-import {Button, Navbar, Nav, Offcanvas, Container, Form, Row, Col, InputGroup} from 'react-bootstrap';
+import {Button, Navbar, Nav, Offcanvas, Container, Form, Row, Col} from 'react-bootstrap';
 import LeftMenu from "../leftmenu/LeftMenu.jsx";
 import {useMediaQuery} from "react-responsive";
 import Logo from "../../../assets/authentication/mobile/logo.svg"
