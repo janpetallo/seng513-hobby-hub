@@ -75,7 +75,9 @@ const NavBar = () => {
                                     <img src={Search} alt="search" />
                                 </button>
 
-                                <Form.Control type="text" placeholder="Search"></Form.Control>
+                                <Form.Control type="text" placeholder="Search HobbyHub..."></Form.Control>
+
+                                <Button  className="d-search-btn" variant="HHPurple">Search</Button>
                             </div>
 
                             <Button variant="HHPurple"> Log in</Button>
