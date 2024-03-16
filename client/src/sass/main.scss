@@ -18,3 +18,7 @@ $theme-colors:map-merge($theme-colors, $custom-colors);
 :root {
   --bs-body-font-family: 'Roboto', sans-serif;
 }
+
+.offcanvas-backdrop {
+  top: 76px;
+}
