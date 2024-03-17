@@ -5,6 +5,7 @@ import LeftMenu from "../leftmenu/LeftMenu.jsx";
 import {useMediaQuery} from "react-responsive";
 import Logo from "../../../assets/authentication/mobile/logo.svg"
 import Search from "../../../assets/navbar/search.svg"
+import {Link} from "react-router-dom";
 
 const NavBar = () => {
 
@@ -59,13 +60,14 @@ const NavBar = () => {
                 <Container fluid>
                     <Row className="w-100">
                         <Col className="d-flex align-items-center justify-content-between">
-
                             <div>
                                 <Navbar.Toggle className="navbar-toggle" aria-controls="basic-navbar-nav"
                                                onClick={handleShow}/>
 
-                                <Navbar.Brand className="me-auto ms-3" href="/">
-                                    <img className="navbar-logo" src={Logo} alt="HobbyHub"/>
+                                <Navbar.Brand className="me-auto ms-3">
+                                    <Link to={"/"}>
+                                        <img className="navbar-logo" src={Logo} alt="HobbyHub"/>
+                                    </Link>
                                 </Navbar.Brand>
                             </div>
 
@@ -77,7 +79,7 @@ const NavBar = () => {
 
                                 <Form.Control type="text" placeholder="Search HobbyHub..."></Form.Control>
 
-                                <Button  className="d-search-btn" variant="HHPurple">Search</Button>
+                                <Button className="d-search-btn" variant="HHPurple">Search</Button>
                             </div>
 
                             <Button variant="HHPurple"> Log in</Button>
@@ -88,6 +90,9 @@ const NavBar = () => {
 
             {/* Sidebar */}
             <Offcanvas show={showSidebar} onHide={handleClose} scroll={true} backdrop={true} className="home-sidebar">
+                <Offcanvas.Header closeButton className="offcanvas-header">
+                    <img className="sidebar-logo" src={Logo} alt="HobbyHub"/>
+                </Offcanvas.Header>
                 <Offcanvas.Body className="m-0 p-0 test">
                     <Nav className="flex-column">
                         <LeftMenu/>
