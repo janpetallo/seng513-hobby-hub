@@ -2,7 +2,7 @@ import './App.css'
 import {
     createBrowserRouter,
     RouterProvider,
-    Outlet,
+    Outlet, Navigate,
 } from "react-router-dom";
 import {Col, Container, Row} from "react-bootstrap";
 import {useMediaQuery} from "react-responsive";
@@ -49,10 +49,18 @@ function App() {
         )
     }
 
+    // route protection function
+    const ProtectedRoute = ({children}) => {
+        if(!localStorage.getItem("currentUser")){
+            return <Navigate to={"/Login"}/>;
+        }
+        return children;
+    }
+
     const router = createBrowserRouter([
         {
             path: "/",
-            element: isDesktopOrLaptop ? <DesktopLayout/> : <MobileLayout/>,
+            element: <ProtectedRoute> isDesktopOrLaptop ? <DesktopLayout/> : <MobileLayout/> </ProtectedRoute>,
             children: [
                 {
                     path: "/",
@@ -70,7 +78,7 @@ function App() {
         },
         {
             path: "/underdevelopment",
-            element: <UnderDevelopment/>
+            element:<UnderDevelopment/>
         },
     ]);
 
