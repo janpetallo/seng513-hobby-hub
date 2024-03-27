@@ -19,29 +19,30 @@ function CommunitySelection() {
             <div className="create-hub">
                 Create a Hub:<img className="create-icon" src={CreateIcon} alt="Create" onClick={() => setShowModal(true)} />
             </div>
-            <Modal show={showModal} onHide={() => setShowModal(false)} centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Create a New Hub</Modal.Title>
+            <Modal size='lg' show={showModal} onHide={() => setShowModal(false)} centered>
+                <Modal.Header className="create-modal-header" closeButton>
+                    <Modal.Title className="create-modal-title">Create a New Hub</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {/* Add your form to create a hub here */}
                     <Form>
                         <Form.Group controlId="formHubName">
-                            <Form.Label>Hub Name</Form.Label>
-                            <Form.Control type="text" placeholder="Enter hub name" />
+                            <Form.Label className="create-form-label" >Hub Name</Form.Label>
+                            <Form.Control className="create-form-control" type="text" placeholder="Enter hub name" />
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label className="create-form-label">Type</Form.Label>
+                            <Form.Check className="custom-radio" type="radio" id="publicHub" label={<><strong>Public Hub</strong><span> Anyone can view, post, and comment. Share your hub to the world!</span></>} name="hubType" />
+                            <Form.Check className="custom-radio" type="radio" id="privateHub" label={<><strong>Private Hub</strong><span> Only approved users can enter. Only those worthy shall pass!</span></>} name="hubType" />
                         </Form.Group>
                     </Form>
-                    <Form.Group>
-                        <Form.Label>Type</Form.Label>
-                        <Form.Check type="radio" id="publicHub" label={<><strong>Public Hub</strong><span> Anyone can view, post, and comment. Share your hub to the world!</span></>}name="hubType" />
-                        <Form.Check type="radio" id="privateHub" label={<><strong>Private Hub</strong><span> Only approved users can enter. Only those worthy shall pass!</span></>} name="hubType" />
-                    </Form.Group>
+                    
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={() => setShowModal(false)}>
+                    <Button className="cancel-button" onClick={() => setShowModal(false)}>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={() => {/* Add your function to create a hub here */}}>
+                    <Button className="create-button" onClick={() => {/* Add function to create a hub here */}}>
                         Create
                     </Button>
                 </Modal.Footer>
