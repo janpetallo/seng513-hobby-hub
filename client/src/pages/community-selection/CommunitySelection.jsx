@@ -20,14 +20,14 @@ function CommunitySelection() {
                 Create a Hub:<img className="create-icon" src={CreateIcon} alt="Create" onClick={() => setShowModal(true)} />
             </div>
             <Modal size='lg' show={showModal} onHide={() => setShowModal(false)} centered>
-                <Modal.Header className="create-modal-header" closeButton>
+                <Modal.Header id="create-modal-header" closeButton>
                     <Modal.Title className="create-modal-title">Create a New Hub</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group controlId="formHubName">
                             <Form.Label className="create-form-label" >Hub Name</Form.Label>
-                            <Form.Control className="create-form-control" type="text" placeholder="Enter hub name" />
+                            <Form.Control id="create-form-control" type="text" placeholder="Enter hub name" />
                         </Form.Group>
 
                         <Form.Group>
@@ -39,10 +39,10 @@ function CommunitySelection() {
                     
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button className="cancel-button" onClick={() => setShowModal(false)}>
+                    <Button id="cancel-button" onClick={() => setShowModal(false)}>
                         Cancel
                     </Button>
-                    <Button className="create-button" onClick={() => {/* Add function to create a hub here */}}>
+                    <Button id="create-button" onClick={() => {/* Add function to create a hub here */}}>
                         Create
                     </Button>
                 </Modal.Footer>
