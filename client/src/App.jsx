@@ -19,16 +19,16 @@ import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
 function App() {
 
     const isDesktopOrLaptop = useMediaQuery({
-        query: '(min-device-width: 576px)'
+        query: '(min-width: 576px)'
     });
 
-    const Layout= () => {
+    const Layout = () => {
         return (
             <Container fluid className="m-0 p-0">
                 {isDesktopOrLaptop ? <DNavBar/> : <Header/>}
                 <Row className="m-0 home-body">
-                    <Col xl={3} className="m-0 p-0 d-none d-xl-block position-sticky">
-                        {isDesktopOrLaptop && <LeftMenu/>}
+                    <Col xl={2} className="m-0 p-0 d-none d-xl-block position-sticky" style={{minWidth: `300px`}}>
+                        <LeftMenu/>
                     </Col>
                     <Col>
                         <Outlet/>
@@ -36,6 +36,32 @@ function App() {
                 </Row>
                 {!isDesktopOrLaptop && <MNavBar/>}
             </Container>
+        )
+    }
+
+    const HomeLayout = () => {
+        return (
+            <Row>
+                <Col className="m-0 p-0">
+                    <Outlet/>
+                </Col>
+                <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
+                    Test side
+                </Col>
+            </Row>
+        )
+    }
+
+    const HubLayout = () => {
+        return (
+            <Row>
+                <Col className="m-0 p-0">
+                    <Outlet/>
+                </Col>
+                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky hubs-rightbar">
+                    Test side
+                </Col>
+            </Row>
         )
     }
 
@@ -50,12 +76,32 @@ function App() {
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <ProtectedRoute> <Layout/> </ProtectedRoute>,
+            element: <Layout/>,
             children: [
+                // {
+                //     path: "/",
+                //     element: <Home/>
+                //
+                // },
                 {
                     path: "/",
-                    element: <Home/>
-
+                    element: <HomeLayout/>,
+                    children: [
+                        {
+                            path: "/",
+                            element: <Home/>
+                        },
+                    ]
+                },
+                {
+                    path: "/hubs",
+                    element: <HubLayout/>,
+                    children: [
+                        {
+                            path: "/hubs",
+                            element: <Home/>
+                        },
+                    ]
                 },
             ]
         },
