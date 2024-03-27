@@ -15,6 +15,7 @@ import Header from "./components/mobile/header/Header.jsx";
 import Home from "./pages/home/Home.jsx";
 import Signup from "./pages/authentication/Signup.jsx";
 import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
+import CommunitySelection from './pages/community-selection/CommunitySelection.jsx';
 
 function App() {
 
@@ -103,6 +104,10 @@ function App() {
                         },
                     ]
                 },
+                {
+                    path: "/community-selection",
+                    element:<CommunitySelection/>
+                },
             ]
         },
         {
@@ -117,6 +122,7 @@ function App() {
             path: "/underdevelopment",
             element:<UnderDevelopment/>
         },
+        
     ]);
 
     return (
