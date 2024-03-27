@@ -9,6 +9,7 @@ import Ads from "../../../assets/leftsidemenu/ads.svg";
 import Trades from "../../../assets/leftsidemenu/trades.svg";
 import Logo from "../../../assets/authentication/mobile/logo.svg"
 import {Link} from "react-router-dom";
+import CommunitySelection from "../../../pages/community-selection/CommunitySelection";
 
 
 const LeftMenu = () =>{
@@ -23,7 +24,7 @@ const LeftMenu = () =>{
                         </div>
                     </Link>
 
-                    <Link to="/" >
+                    <Link to="/community-selection" >
                         <div className="item">
                             <img src={Hubs} alt="hubs"></img>
                             <span>Browse Hubs</span>
