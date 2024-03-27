@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Row, Col, Card, Modal, Button } from 'react-bootstrap';
+import { Row, Col, Card, Modal, Button, Form} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import CreateIcon from '../../assets/create-hub/create.svg';
 import './CommunitySelection.scss'
 
 function CommunitySelection() {
@@ -16,21 +17,32 @@ function CommunitySelection() {
     return (
         <div className="hub-container">
             <div className="create-hub">
-                Create a Hub: <span onClick={() => setShowModal(true)}>+</span>
+                Create a Hub:<img className="create-icon" src={CreateIcon} alt="Create" onClick={() => setShowModal(true)} />
             </div>
-            <Modal show={showModal} onHide={() => setShowModal(false)}>
+            <Modal show={showModal} onHide={() => setShowModal(false)} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Create a Hub</Modal.Title>
+                    <Modal.Title>Create a New Hub</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     {/* Add your form to create a hub here */}
+                    <Form>
+                        <Form.Group controlId="formHubName">
+                            <Form.Label>Hub Name</Form.Label>
+                            <Form.Control type="text" placeholder="Enter hub name" />
+                        </Form.Group>
+                    </Form>
+                    <Form.Group>
+                        <Form.Label>Type</Form.Label>
+                        <Form.Check type="radio" id="publicHub" label={<><strong>Public Hub</strong><span> Anyone can view, post, and comment. Share your hub to the world!</span></>}name="hubType" />
+                        <Form.Check type="radio" id="privateHub" label={<><strong>Private Hub</strong><span> Only approved users can enter. Only those worthy shall pass!</span></>} name="hubType" />
+                    </Form.Group>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => setShowModal(false)}>
-                        Close
+                        Cancel
                     </Button>
                     <Button variant="primary" onClick={() => {/* Add your function to create a hub here */}}>
-                        Save Changes
+                        Create
                     </Button>
                 </Modal.Footer>
             </Modal>
