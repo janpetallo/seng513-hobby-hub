@@ -40,15 +40,15 @@ const Signup = () => {
             setPhoneError("")
             console.log(pNumber)
             console.log("YES")
-            try {
-                await newRequest.post("/auth/register", {username: values.username,
-                    password: values.password, email: values.email, birthday: values.birthdate,});
-
-                navigate("/login"); // navigate to the login page
-            }catch (err){
-                console.log(err.response.data);
-            }
-            actions.resetForm();
+            // try {
+            //     await newRequest.post("/auth/register", {username: values.username,
+            //         password: values.password, email: values.email, birthday: values.birthdate,});
+            //
+            //     navigate("/login"); // navigate to the login page
+            // }catch (err){
+            //     console.log(err.response.data);
+            // }
+            // actions.resetForm();
 
         } else{
             console.log("oh nyo")
@@ -149,6 +149,7 @@ const Signup = () => {
                                 value={phoneNumber.number}
                                 country={'ca'}
                                 onChange={handlePhone}
+                                placeholder="Optional Phone Number"
                             />
                             {phoneError &&
                                 <Form.Text className="text-danger">
