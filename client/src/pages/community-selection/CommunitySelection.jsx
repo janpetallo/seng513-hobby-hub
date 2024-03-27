@@ -49,12 +49,12 @@ function CommunitySelection() {
             </Modal>
             {categories.map((category, i) => (
                 <React.Fragment key={i}>
-                    <div className='hub-category'>{category.name}</div>
+                    <div id="hub-category" className='hub-category'>{category.name}</div>
                     <Row className="align-items-start">
                         {category.hubs.map((hub, index) => (
                             <Col key={index}>
                                 <Link to={`/${hub.replace(' ', '')}`} className="hub-card-link">
-                                    <Card className="hub-card">
+                                    <Card id="hub-card" className="hub-card">
                                         <Card.Body>
                                             <Card.Title className="hub-card-title">{hub}</Card.Title>
                                         </Card.Body>
