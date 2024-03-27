@@ -149,7 +149,7 @@ const Signup = () => {
                                 value={phoneNumber.number}
                                 country={'ca'}
                                 onChange={handlePhone}
-                                placeholder="Optional Phone Number"
+                                placeholder="Optional #"
                             />
                             {phoneError &&
                                 <Form.Text className="text-danger">
