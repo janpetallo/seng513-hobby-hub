@@ -6,6 +6,10 @@ import {Link, useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
 import {SignupSchema} from "./schemas/SignupSchema.jsx";
 import newRequest from "../../utilities/newRequest.js";
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/bootstrap.css';
+import {useState} from "react";
+import {formatNumber, isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNumberLength} from "libphonenumber-js";
 
 const Signup = () => {
 
@@ -14,16 +18,59 @@ const Signup = () => {
 
     // register user function
     const onSubmit = async (values, actions) => {
-        try {
-            await newRequest.post("/auth/register", {username: values.username,
-                password: values.password, email: values.email, birthday: values.birthdate,});
 
-            navigate("/login"); // navigate to the login page
-        }catch (err){
-            console.log(err.response.data);
+        // Pare and format the phone number input, remove the dialcode, so when formatting the dial code can be put
+        // back in
+        let pNumber = formatNumber(
+            {
+                country: phoneNumber.cc.countryCode.toUpperCase(),
+                phone: phoneNumber.number.slice(phoneNumber.cc.dialCode.length)
+            },
+            'INTERNATIONAL'
+        );
+
+        // If the phone number is entered and invalid then throw error
+        // If the phone number is empty it is okay (not required)
+        if(
+            (((isPossiblePhoneNumber(pNumber) &&
+                isValidPhoneNumber(pNumber) &&
+                validatePhoneNumberLength(pNumber) === undefined))) ||
+            (pNumber.length === phoneNumber.cc.dialCode.length + 1)
+        ) {
+            setPhoneError("")
+            console.log(pNumber)
+            console.log("YES")
+            try {
+                await newRequest.post("/auth/register", {username: values.username,
+                    password: values.password, email: values.email, birthday: values.birthdate,});
+
+                navigate("/login"); // navigate to the login page
+            }catch (err){
+                console.log(err.response.data);
+            }
+            actions.resetForm();
+
+        } else{
+            console.log("oh nyo")
+            setPhoneError("Invalid phone number")
         }
-        actions.resetForm();
     }
+
+    // Store phone number
+    const [phoneNumber, setPhoneNumber] = useState({
+        number: '',
+        cc: ''
+    });
+
+    // Store phone number
+    const handlePhone = (value, country) => {
+        setPhoneNumber({
+            number: value,
+            cc: country
+        });
+    };
+
+    const [phoneError, setPhoneError] = useState(null);
 
     const {values, errors, touched, isSubmitting,handleBlur, handleChange, handleSubmit} = useFormik({
         initialValues: {
@@ -96,6 +143,19 @@ const Signup = () => {
                                 {errors.email}
                             </Form.Control.Feedback>
                         </FloatingLabel>
+
+                        <Form.Group className="phone-dropdown auth-label mb-3">
+                            <PhoneInput
+                                value={phoneNumber.number}
+                                country={'ca'}
+                                onChange={handlePhone}
+                            />
+                            {phoneError &&
+                                <Form.Text className="text-danger">
+                                    {phoneError}
+                                </Form.Text>
+                            }
+                        </Form.Group>
 
                         <FloatingLabel
                             controlId="floating-password"
