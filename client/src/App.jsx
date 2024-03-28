@@ -17,6 +17,7 @@ import Signup from "./pages/authentication/Signup.jsx";
 import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
 import CommunitySelection from './pages/community-selection/CommunitySelection.jsx';
 import CreateHubPageMobile from './pages/community-selection/CreateHubPageMobile.jsx';
+import ChoosePostingLocation from './pages/posting-location/ChoosePostingLocation.jsx';
 
 function App() {
 
@@ -112,7 +113,11 @@ function App() {
                 {
                     path: "/create-hub",
                     element: <CreateHubPageMobile/>
-                }
+                },
+                {
+                    path: "/choose-posting",
+                    element: <ChoosePostingLocation/>
+                },
             ]
         },
         {
