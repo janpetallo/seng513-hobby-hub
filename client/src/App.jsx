@@ -15,6 +15,7 @@ import Header from "./components/mobile/header/Header.jsx";
 import Home from "./pages/home/Home.jsx";
 import Signup from "./pages/authentication/Signup.jsx";
 import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
+import HubMarketNavbar from "./pages/marketplace/HubMarketNavbar.jsx";
 
 function App() {
 
@@ -25,14 +26,18 @@ function App() {
     const Layout = () => {
         return (
             <Container fluid className="m-0 p-0">
+
                 {isDesktopOrLaptop ? <DNavBar/> : <Header/>}
                 <Row className="m-0 home-body">
+
                     <Col xl={2} className="m-0 p-0 d-none d-xl-block position-sticky" style={{minWidth: `300px`}}>
+
                         <LeftMenu/>
                     </Col>
                     <Col>
                         <Outlet/>
                     </Col>
+
                 </Row>
                 {!isDesktopOrLaptop && <MNavBar/>}
             </Container>
@@ -43,6 +48,7 @@ function App() {
         return (
             <Row>
                 <Col className="m-0 p-0">
+                    <HubMarketNavbar/>
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
@@ -103,6 +109,9 @@ function App() {
                         },
                     ]
                 },
+                {
+                    path:"/marketplace",
+                }
             ]
         },
         {

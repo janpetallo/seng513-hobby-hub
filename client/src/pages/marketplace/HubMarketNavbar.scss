@@ -1,0 +1,23 @@
+
+:root {
+  --fnt-reg: black;
+  --fnt-hover: #8e47ff;
+}
+.container{
+  width:100%;
+  height: 25%;
+}
+.LinkColor{
+  color: black;
+  font-size: 1.5rem;
+  // font-size: calc(1em + 1vw);
+}
+.LinkColor:hover{
+  color: var(--fnt-hover);
+
+}
+@media screen and (max-width: 576px){
+  .LinkColor{
+    font-size: 1rem;
+  }
+}
