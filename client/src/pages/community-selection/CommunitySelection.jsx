@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Row, Col, Card, Modal, Button, Form} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 import CreateIcon from '../../assets/create-hub/create.svg';
 import './CommunitySelection.scss'
 
 function CommunitySelection() {
     const [showModal, setShowModal] = useState(false);
+    const isMobile = useMediaQuery({ query: '(max-width: 575px)' });
 
     const categories = [
         { name: 'Outdoors', hubs: ['Mushroom Hunters', 'Fishing', 'Hiking'] },
@@ -16,9 +18,11 @@ function CommunitySelection() {
 
     return (
         <div className="hub-container">
-            <div className="create-hub">
-                Create a Hub:<img className="create-icon" src={CreateIcon} alt="Create" onClick={() => setShowModal(true)} />
-            </div>
+            {!isMobile && (
+                <div className="create-hub" >
+                    Create a Hub:<img className="create-icon" src={CreateIcon} alt="Create" onClick={() => setShowModal(true)} />
+                </div>
+            )}
             <Modal size='lg' show={showModal} onHide={() => setShowModal(false)} centered>
                 <Modal.Header id="create-modal-header" closeButton>
                     <Modal.Title className="create-modal-title">Create a New Hub</Modal.Title>
@@ -55,8 +59,8 @@ function CommunitySelection() {
                             <Col key={index}>
                                 <Link to={`/${hub.replace(' ', '')}`} className="hub-card-link">
                                     <Card id="hub-card" className="hub-card">
-                                        <Card.Body>
-                                            <Card.Title className="hub-card-title">{hub}</Card.Title>
+                                        <Card.Body id="hub-card-body">
+                                            <Card.Title id="hub-card-title" className="hub-card-title">{hub}</Card.Title>
                                         </Card.Body>
                                     </Card>
                                 </Link>
@@ -65,6 +69,11 @@ function CommunitySelection() {
                     </Row>
                 </React.Fragment>
             ))}
+            {isMobile && (
+                <div id="create-hub-mobile" className='create-hub-mobile'>
+                    Can't find what you are looking for? <Link to="/new-page">Create one yourself!</Link>
+                </div>
+            )}
         </div>
     );
 }
