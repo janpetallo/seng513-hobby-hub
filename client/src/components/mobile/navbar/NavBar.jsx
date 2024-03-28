@@ -10,7 +10,7 @@ import {Link} from "react-router-dom";
 
 const NavBar = () =>{
     return (
-        <Container className="bg-white sticky-bottom">
+        <Container className="bg-white fixed-bottom">
             <Row>
                 <Col className="d-flex justify-content-evenly mt-2 mb-2 p-1">
 
@@ -26,13 +26,13 @@ const NavBar = () =>{
                         </div>
                     </Link>
 
-                    <Link to="/" className="mobile-links">
+                    <Link to="/create-hub" className="mobile-links">
                         <div className="mobile-items mobile-create ">
                             <img src={Create} alt="Create"/>
                         </div>
                     </Link>
 
-                    <Link to="/" className="mobile-links">
+                    <Link to="/community-selection" className="mobile-links">
                         <div className="mobile-items">
                             <img src={Hubs} alt="Hubs"/>
                         </div>
