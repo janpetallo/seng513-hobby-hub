@@ -16,6 +16,7 @@ import Home from "./pages/home/Home.jsx";
 import Signup from "./pages/authentication/Signup.jsx";
 import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
 import CommunitySelection from './pages/community-selection/CommunitySelection.jsx';
+import CreateHubPageMobile from './pages/community-selection/CreateHubPageMobile.jsx';
 
 function App() {
 
@@ -108,6 +109,10 @@ function App() {
                     path: "/community-selection",
                     element:<CommunitySelection/>
                 },
+                {
+                    path: "/create-hub",
+                    element: <CreateHubPageMobile/>
+                }
             ]
         },
         {

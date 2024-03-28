@@ -5,6 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 import CreateIcon from '../../assets/create-hub/create.svg';
 import './CommunitySelection.scss'
 
+
 function CommunitySelection() {
     const [showModal, setShowModal] = useState(false);
     const isMobile = useMediaQuery({ query: '(max-width: 575px)' });
@@ -70,8 +71,8 @@ function CommunitySelection() {
                 </React.Fragment>
             ))}
             {isMobile && (
-                <div id="create-hub-mobile" className='create-hub-mobile'>
-                    Can't find what you are looking for? <Link to="/new-page">Create one yourself!</Link>
+                <div id="create-hub-mobile-link" className='create-hub-mobile'>
+                    Can't find what you are looking for? <Link to="/create-hub">Create one yourself!</Link>
                 </div>
             )}
         </div>
