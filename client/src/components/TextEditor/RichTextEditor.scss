@@ -1,6 +1,7 @@
 /* Set height for quill */
 .rich-text-editor {
     position: relative;
+    min-height: 300px;
 
     .ql-container {
         position: relative;

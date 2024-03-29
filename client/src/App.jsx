@@ -43,7 +43,7 @@ function App() {
     const HomeLayout = () => {
         return (
             <Row>
-                <Col className="m-0 p-0">
+                <Col className="m-0 p-0 home-layout-body">
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">

@@ -1,4 +1,8 @@
 .post {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
     button {
         width: 248px;
 
@@ -27,6 +31,15 @@
         @media screen and (min-width: 606px) {
             margin-top: revert;
         }
+
+    }
+
+    // Flex grow 1 to make the text editor go to bottom of page
+    .rich-text-editor {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
 
     }
 }
