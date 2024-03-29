@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './CommunitySelection.scss';
@@ -6,6 +6,13 @@ import './CommunitySelection.scss';
 function CreateHubPageMobile() {
     const [hubName, setHubName] = useState('');
     const navigate = useNavigate();
+
+    const [isHubNameTooLong, setIsHubNameTooLong] = useState(false);
+
+    useEffect(() => {
+        setIsHubNameTooLong(hubName.length == 18);
+    }, [hubName]);
+
 
     const handleCreate = () => {
         // Add function to create a hub here
@@ -19,7 +26,8 @@ function CreateHubPageMobile() {
             <Form>
                 <Form.Group controlId="formHubName">
                     <Form.Label id="hub-label-mobile">Hub Name</Form.Label>
-                    <Form.Control id="create-form-control-mobile" type="text" placeholder="Enter hub name" value={hubName} onChange={e => setHubName(e.target.value)} />
+                    <Form.Control id="create-form-control" type="text" placeholder="Enter hub name" maxLength={18} value={hubName} onChange={e => setHubName(e.target.value)} />
+                                {isHubNameTooLong && <Form.Text className="text-danger">Hub name cannot exceed 18 characters</Form.Text>}
                 </Form.Group>
                 <Form.Group>
                     <Form.Label id="hub-label-mobile" className="create-form-label">Type</Form.Label>

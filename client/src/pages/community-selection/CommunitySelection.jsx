@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Modal, Button, Form} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
@@ -9,6 +9,13 @@ import './CommunitySelection.scss'
 function CommunitySelection() {
     const [showModal, setShowModal] = useState(false);
     const isMobile = useMediaQuery({ query: '(max-width: 575px)' });
+
+    const [hubName, setHubName] = useState('');
+    const [isHubNameTooLong, setIsHubNameTooLong] = useState(false);
+
+    useEffect(() => {
+        setIsHubNameTooLong(hubName.length == 18);
+    }, [hubName]);
 
     const categories = [
         { name: 'Outdoors', hubs: ['Mushroom Hunters', 'Fishing', 'Hiking'] },
@@ -32,7 +39,8 @@ function CommunitySelection() {
                     <Form>
                         <Form.Group controlId="formHubName">
                             <Form.Label className="create-form-label" >Hub Name</Form.Label>
-                            <Form.Control id="create-form-control" type="text" placeholder="Enter hub name" />
+                            <Form.Control id="create-form-control" type="text" placeholder="Enter hub name" maxLength={18} value={hubName} onChange={e => setHubName(e.target.value)} />
+                                {isHubNameTooLong && <Form.Text className="text-danger">Hub name cannot exceed 18 characters</Form.Text>}
                         </Form.Group>
 
                         <Form.Group>
