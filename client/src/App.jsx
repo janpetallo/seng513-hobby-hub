@@ -16,16 +16,17 @@ import Home from "./pages/home/Home.jsx";
 import Signup from "./pages/authentication/Signup.jsx";
 import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
 
-function App() {
+//  External media query to prevent re-rendering of pages whenever it rescales
+function useDesktopOrLaptopMediaQuery() {
+    return useMediaQuery({ query: '(min-width: 576px)' });
+}
 
-    const isDesktopOrLaptop = useMediaQuery({
-        query: '(min-width: 576px)'
-    });
+function App() {
 
     const Layout = () => {
         return (
             <Container fluid className="m-0 p-0">
-                {isDesktopOrLaptop ? <DNavBar/> : <Header/>}
+                {useDesktopOrLaptopMediaQuery() ? <DNavBar/> : <Header/>}
                 <Row className="m-0 home-body">
                     <Col xl={2} className="m-0 p-0 d-none d-xl-block position-sticky" style={{minWidth: `300px`}}>
                         <LeftMenu/>
@@ -34,7 +35,7 @@ function App() {
                         <Outlet/>
                     </Col>
                 </Row>
-                {!isDesktopOrLaptop && <MNavBar/>}
+                {!useDesktopOrLaptopMediaQuery() && <MNavBar/>}
             </Container>
         )
     }
