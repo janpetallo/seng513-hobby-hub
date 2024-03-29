@@ -16,6 +16,7 @@ import Home from "./pages/home/Home.jsx";
 import Signup from "./pages/authentication/Signup.jsx";
 import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
 import HubPost from "./pages/hubpost/HubPost.jsx";
+import MarketPost from "./pages/marketpost/MarketPost.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -97,6 +98,11 @@ function App() {
                           path: "/hubpost",
                             element: <HubPost/>
                         },
+                        {
+                            path: "/marketpost",
+                            element: <MarketPost/>
+                        },
+
                     ]
                 },
                 {
