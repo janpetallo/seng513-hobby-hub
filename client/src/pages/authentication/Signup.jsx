@@ -19,27 +19,42 @@ const Signup = () => {
     // register user function
     const onSubmit = async (values, actions) => {
 
-        // Pare and format the phone number input, remove the dialcode, so when formatting the dial code can be put
-        // back in
-        let pNumber = formatNumber(
+        let pNumber = "";
+        let pass = true;
+
+        //  if the phone number is not empty, user is trying to give a number then check it otherwise, make account
+        if(phoneNumber.cc !== "") {
+            // Pare and format the phone number input, remove the dialcode, so when formatting the dial code can be put
+            // back in
+            pNumber = formatNumber(
+                {
+                    country: phoneNumber.cc.countryCode.toUpperCase(),
+                    phone: phoneNumber.number.slice(phoneNumber.cc.dialCode.length)
+                },
+                'INTERNATIONAL'
+            );
+
+            //  Check validity
+            if(
+                (((isPossiblePhoneNumber(pNumber) &&
+                    isValidPhoneNumber(pNumber) &&
+                    validatePhoneNumberLength(pNumber) === undefined))) ||
+                (pNumber.length === phoneNumber.cc.dialCode.length + 1)
+            )
             {
-                country: phoneNumber.cc.countryCode.toUpperCase(),
-                phone: phoneNumber.number.slice(phoneNumber.cc.dialCode.length)
-            },
-            'INTERNATIONAL'
-        );
+                setPhoneError("")
+                // console.log("YES")
+                // console.log(pNumber)
+            } else {
+                pass = false
+                setPhoneError("Invalid phone number")
+            }
+        }
 
         // If the phone number is entered and invalid then throw error
         // If the phone number is empty it is okay (not required)
-        if(
-            (((isPossiblePhoneNumber(pNumber) &&
-                isValidPhoneNumber(pNumber) &&
-                validatePhoneNumberLength(pNumber) === undefined))) ||
-            (pNumber.length === phoneNumber.cc.dialCode.length + 1)
-        ) {
-            setPhoneError("")
-            console.log(pNumber)
-            console.log("YES")
+        if(pass) {
+            console.log("we passed")
             // try {
             //     await newRequest.post("/auth/register", {username: values.username,
             //         password: values.password, email: values.email, birthday: values.birthdate,});
@@ -49,10 +64,6 @@ const Signup = () => {
             //     console.log(err.response.data);
             // }
             // actions.resetForm();
-
-        } else{
-            console.log("oh nyo")
-            setPhoneError("Invalid phone number")
         }
     }
 
@@ -147,7 +158,6 @@ const Signup = () => {
 
                         <Form.Group className="phone-dropdown auth-label mb-3">
                             <PhoneInput
-                                placeholder="Optional #"
                                 value={phoneNumber.number}
                                 country={'ca'}
                                 onChange={handlePhone}
