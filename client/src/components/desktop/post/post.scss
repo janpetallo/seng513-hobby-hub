@@ -1,0 +1,38 @@
+.post{
+  .postContainer{
+    // styling for the post container
+    padding: 20px;
+
+
+
+    .postHeading{
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    .hubName{
+      font-weight: bold;
+    }
+
+    .postTitle{
+      font-weight: bold;
+    }
+
+    .content{
+      img{
+        max-width: 90%;
+        max-height: 700px;
+        display: block;
+        margin: 0 auto;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+
+    }
+
+
+  }
+}
+
