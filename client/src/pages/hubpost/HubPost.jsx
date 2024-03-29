@@ -1,9 +1,9 @@
 import React, {useState} from "react";
-import "./Post.scss"
+import "./HubPost.scss"
 import RichTextEditor from "../../components/TextEditor/RichTextEditor.jsx";
 import PostToggle from "../../components/PostToggle/PostToggle.jsx";
 import {Button, FloatingLabel, Form} from "react-bootstrap";
-const Post = () => {
+const HubPost = () => {
 
     const [validated, setValidated] = useState(false);
 
@@ -51,4 +51,4 @@ const Post = () => {
     )
 }
 
-export default Post
+export default HubPost
