@@ -41,6 +41,9 @@
         align-items: center;
         gap: 10px;
 
+        // disable user selector so the number of likes doesn't keep getting selected
+        user-select: none;
+
         // this is to style the thumbs up when filled in
         .post_liked_thumbs_up{
           font-size: 24px;
@@ -62,6 +65,9 @@
         align-items: center;
         gap: 10px;
 
+        // disable user selector so the number of dislikes doesn't keep getting selected
+        user-select: none;
+
         // this is to style the thumbs down when filled in
         .post_dislike_thumbs_down{
           font-size: 24px;
@@ -82,6 +88,8 @@
         display: flex;
         align-items: center;
         gap: 10px;
+        // disable user selector so the number of comments doesn't keep getting selected
+        user-select: none;
 
         // this is to style the comment button when filled in
         .post_commented{

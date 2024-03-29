@@ -22,19 +22,41 @@ const Post = ({ post }) => {
 
     // temporary functions and variables to enable liking
     const [liked, setLiked] = useState(false);
+    const [numLikes, setNumLikes] = useState(post.likes);
+
     const toggleLiked = () => {
+        if(liked === false){
+            setNumLikes(numLikes + 1);
+        }else {
+            setNumLikes(numLikes - 1);
+        }
+
         setLiked(!liked);
     } ;
 
     // temporary functions and variables to enable disliking
     const [disliked, setDisliked] = useState(false);
+    const [numDislikes, setNumDislikes] = useState(post.dislikes);
     const toggleDisliked = () => {
+        if(disliked === false){
+            setNumDislikes(numDislikes + 1);
+        }else {
+            setNumDislikes(numDislikes - 1);
+        }
+
         setDisliked(!disliked);
     } ;
 
     // temporary functions and variables to enable commenting
     const [commented, setCommented] = useState(false);
+    const [numComments, setNumComments] = useState(post.comments);
     const toggleComment = () => {
+        if(commented === false){
+            setNumComments(numComments + 1);
+        }else {
+            setNumComments(numComments - 1);
+        }
+
         setCommented(!commented);
     } ;
 
@@ -84,17 +106,17 @@ const Post = ({ post }) => {
                 <div className="post_info">
                     <div className="post_liked">
                         {liked ? <FaThumbsUp className="post_liked_thumbs_up" onClick={toggleLiked}/> : <FaRegThumbsUp className="post_thumbs_up" onClick={toggleLiked}/>}
-                        1000
+                        {numLikes}
                     </div>
 
                     <div className="post_dislike">
                         {disliked ? <FaThumbsDown className="post_dislike_thumbs_down"  onClick={toggleDisliked}/> : <FaRegThumbsDown className="post_thumbs_down" onClick={toggleDisliked}/>}
-                        0
+                        {numDislikes}
                     </div>
 
                     <div className="post_comment">
                         {commented ? <FaComments className="post_commented" onClick={toggleComment}/> : <FaRegComments className="post_no_comment" onClick={toggleComment}/>}
-                        12
+                        {numComments}
                     </div>
 
                 </div>
@@ -106,6 +128,6 @@ const Post = ({ post }) => {
 
 
 //ToDO:
-// map titles and hubs and descriptions and likes for posts
+// likes for posts, live counters for likes and dislikes
 
 export default Post
