@@ -119,7 +119,11 @@ function App() {
                 {
                     path: "/create-hub",
                     element: <CreateHubPageMobile/>
-                }
+                },
+                {
+                    path: "/choose-posting",
+                    element: <ChoosePostingLocation/>
+                },
             ]
         },
         {

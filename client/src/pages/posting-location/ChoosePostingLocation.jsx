@@ -16,7 +16,7 @@ const ChoosePostingLocation = () => {
             </Row>
             <Row>
                 <Col>
-                    <Link to="/" id="posting-link">
+                    <Link to="/hubpost" id="posting-link">
                         <Button variant="light" size="lg" block id="square-button">
                             <img src={hubsSvg} alt="Hubs" id="button-svg" />
                             <span>Hubs</span>
