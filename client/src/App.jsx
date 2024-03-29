@@ -15,6 +15,7 @@ import Header from "./components/mobile/header/Header.jsx";
 import Home from "./pages/home/Home.jsx";
 import Signup from "./pages/authentication/Signup.jsx";
 import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
+import Post from "./pages/post/Post.jsx";
 
 function App() {
 
@@ -90,6 +91,10 @@ function App() {
                         {
                             path: "/",
                             element: <Home/>
+                        },
+                        {
+                          path: "/post",
+                            element: <Post/>
                         },
                     ]
                 },

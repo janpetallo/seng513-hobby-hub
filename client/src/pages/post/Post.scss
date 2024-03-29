@@ -1,0 +1,32 @@
+.post {
+    button {
+        width: 248px;
+
+        @media screen and (min-width: 576px) {
+            margin: revert;
+            width: 200px;
+        }
+    }
+
+    .form-control {
+        background-color: rgba(154, 112, 222, 0.17);
+    }
+
+
+    .post-button {
+        margin-top: 0.5rem;
+
+        @media screen and (min-width: 552px) {
+            margin-top: revert;
+        }
+
+        @media screen and (min-width: 576px) {
+            margin-top: 0.5rem;
+        }
+
+        @media screen and (min-width: 606px) {
+            margin-top: revert;
+        }
+
+    }
+}
