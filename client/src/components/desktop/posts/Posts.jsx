@@ -11,7 +11,7 @@ const Posts = () =>{
             postOwner: "M2 Guy",
             userId: 1,
             desc:"Last Wash before winter storage :( ",
-            img:"https://i.imgur.com/1tll26I.jpeg"
+            img:["https://i.imgur.com/1tll26I.jpeg"]
         },
 
         {
@@ -21,7 +21,17 @@ const Posts = () =>{
             postOwner: "M2 Guy",
             userId: 1,
             desc:"Took her out for a nice drive",
-            img:"https://i.imgur.com/uGYk8k9.jpeg"
+            img:["https://i.imgur.com/uGYk8k9.jpeg"]
+        },
+
+        {
+            id: 3,
+            hubName: "Bimmers",
+            postTitle:"Photos of My M2",
+            postOwner: "M2 Guy",
+            userId: 1,
+            desc:"All of the Photos I took of my M2 this year ",
+            img:["https://i.imgur.com/1tll26I.jpeg", "https://i.imgur.com/uGYk8k9.jpeg"]
         },
 
     ];
