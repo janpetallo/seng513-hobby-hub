@@ -2,6 +2,15 @@ import "./post.scss"
 import ImageModal from "./ImageModal.jsx";
 import React, {useState} from "react";
 import Carousel from 'react-bootstrap/Carousel';
+import { FaRegThumbsUp } from "react-icons/fa";
+import { FaThumbsUp } from "react-icons/fa";
+import { FaRegThumbsDown } from "react-icons/fa";
+import { FaThumbsDown } from "react-icons/fa";
+import { FaRegComments } from "react-icons/fa";
+import { FaComments } from "react-icons/fa6";
+
+
+
 
 const Post = ({ post }) => {
     // to control image pop up when clicked
@@ -11,7 +20,23 @@ const Post = ({ post }) => {
         setShowModal(!showModal);
     };
 
+    // temporary functions and variables to enable liking
+    const [liked, setLiked] = useState(false);
+    const toggleLiked = () => {
+        setLiked(!liked);
+    } ;
 
+    // temporary functions and variables to enable disliking
+    const [disliked, setDisliked] = useState(false);
+    const toggleDisliked = () => {
+        setDisliked(!disliked);
+    } ;
+
+    // temporary functions and variables to enable commenting
+    const [commented, setCommented] = useState(false);
+    const toggleComment = () => {
+        setCommented(!commented);
+    } ;
 
     return (
         <div className = "post">
@@ -56,12 +81,31 @@ const Post = ({ post }) => {
                     <p className = "postDescription"> {post.desc} </p>
                 </div>
 
-                <div className="post_info"></div>
+                <div className="post_info">
+                    <div className="post_liked">
+                        {liked ? <FaThumbsUp className="post_liked_thumbs_up" onClick={toggleLiked}/> : <FaRegThumbsUp className="post_thumbs_up" onClick={toggleLiked}/>}
+                        1000
+                    </div>
+
+                    <div className="post_dislike">
+                        {disliked ? <FaThumbsDown className="post_dislike_thumbs_down"  onClick={toggleDisliked}/> : <FaRegThumbsDown className="post_thumbs_down" onClick={toggleDisliked}/>}
+                        0
+                    </div>
+
+                    <div className="post_comment">
+                        {commented ? <FaComments className="post_commented" onClick={toggleComment}/> : <FaRegComments className="post_no_comment" onClick={toggleComment}/>}
+                        12
+                    </div>
+
+                </div>
                 {showModal && <ImageModal imageUrl={post.img} onClose={toggleModal} />}
             </div>
         </div>
     );
 };
 
+
+//ToDO:
+// map titles and hubs and descriptions and likes for posts
 
 export default Post
