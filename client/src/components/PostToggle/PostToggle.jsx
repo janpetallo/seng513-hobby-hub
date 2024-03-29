@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import "./PostToggle.scss"
+import {InputGroup} from "react-bootstrap";
 
 const PostToggle = () => {
 
@@ -9,7 +10,7 @@ const PostToggle = () => {
 
     const [selectedItem, setSelectedItem] = useState('');
 
-    const hubs = ['Bimmers', 'Hololive', 'MushroomHunters', 'Speedrunners'];
+    const hubs = ['Bimmers', 'Hololive', 'MushroomHunters', 'Nintendo', 'Playstation', 'RemnantGame', 'Speedrunners'];
 
     // Take database and lower case it so that any typing is case-insensitive
     const filteredHubs = hubs.filter(hub =>
@@ -31,13 +32,15 @@ const PostToggle = () => {
             <Dropdown.Menu variant="HHPurple">
 
                 {/* Searchbar value is the search result, onChange we set the searchResult*/}
-                <Form.Control
-                    autoFocus
-                    className="mx-2 my-2"
-                    placeholder="Type to filter..."
-                    onChange={(e) => setSearchResult(e.target.value)}
-                    value={searchResult}
-                />
+                <InputGroup className="post-search-wrapper">
+                    <Form.Control
+                        autoFocus
+                        className="mx-2 my-2"
+                        placeholder="Type to filter..."
+                        onChange={(e) => setSearchResult(e.target.value)}
+                        value={searchResult}
+                    />
+                </InputGroup>
 
                 {filteredHubs.length > 0 ? (
                     filteredHubs.map((Hub, index) => (

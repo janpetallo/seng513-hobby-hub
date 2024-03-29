@@ -18,10 +18,19 @@
     .dropdown-menu {
         width: 248px;
         padding: 0.3rem;
+        max-height: 250px;
+        overflow-y: auto;
+        overflow-x: hidden;
 
         @media screen and (min-width: 576px) {
             width: 350px;
         }
+    }
+
+    .post-search-wrapper {
+        position: sticky;
+        top: 0;
+        background-color: white;
     }
 
     .form-control {
