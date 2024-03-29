@@ -1,6 +1,15 @@
 import "./post.scss"
+import ImageModal from "./ImageModal.jsx";
+import React, {useState} from "react";
 
 const Post = ({ post }) => {
+    const [showModal, setShowModal] = useState(false);
+
+    const toggleModal = () => {
+        setShowModal(!showModal);
+    };
+
+
     return (
         <div className = "post">
             <div className="postContainer">
@@ -15,14 +24,18 @@ const Post = ({ post }) => {
                 </div>
 
                 <div className="content">
-                    <img src={post.img} alt="Image can't be loaded"/>
+                    <img
+                        src={post.img}
+                        alt="Image can't be loaded"
+                        onClick={toggleModal}
+                    />
                     <p className = "postOwner"> <strong>By: </strong> {post.postOwner}</p>
                     <p className = "postDescription"> {post.desc} </p>
 
                 </div>
 
                 <div className="info"></div>
-
+                {showModal && <ImageModal imageUrl={post.img} onClose={toggleModal} />}
             </div>
         </div>
     );
