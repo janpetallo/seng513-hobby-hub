@@ -1,0 +1,28 @@
+/* Set height for quill */
+.rich-text-editor {
+    position: relative;
+
+    .ql-container {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .ql-toolbar {
+        background-color: rgba(154, 112, 222, 0.17);
+    }
+
+    /* Set editor to have same font size as bootstrap */
+    .ql-editor {
+        background-color: rgba(154, 112, 222, 0.17);
+        font-size: 1rem;
+    }
+
+    .ql-tooltip {
+        position: absolute;
+        // The editor has built in inline styles. I must use important if I want to change default positioning so it doesn't run off screen.
+        // View the console to see this
+        left: 5px !important;
+        top: 0 !important;
+    }
+}
+
