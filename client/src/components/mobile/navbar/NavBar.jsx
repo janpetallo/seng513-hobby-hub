@@ -10,7 +10,7 @@ import {Link} from "react-router-dom";
 
 const NavBar = () =>{
     return (
-        <Container className="bg-white fixed-bottom">
+        <Container className="bg-white fixed-bottom mobile-nav">
             <Row>
                 <Col className="d-flex justify-content-evenly mt-2 mb-2 p-1">
 

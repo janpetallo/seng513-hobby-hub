@@ -1,0 +1,45 @@
+.post {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    button {
+        width: 248px;
+
+        @media screen and (min-width: 576px) {
+            margin: revert;
+            width: 200px;
+        }
+    }
+
+    .form-control {
+        background-color: rgba(154, 112, 222, 0.17);
+    }
+
+
+    .post-button {
+        margin-top: 0.5rem;
+
+        @media screen and (min-width: 552px) {
+            margin-top: revert;
+        }
+
+        @media screen and (min-width: 576px) {
+            margin-top: 0.5rem;
+        }
+
+        @media screen and (min-width: 606px) {
+            margin-top: revert;
+        }
+
+    }
+
+    // Flex grow 1 to make the text editor go to bottom of page
+    .rich-text-editor {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+
+
+    }
+}
