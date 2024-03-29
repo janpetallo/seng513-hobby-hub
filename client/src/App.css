@@ -1,5 +1,11 @@
 .home-body {
     padding-top: 76px;
+
+    padding-bottom: 65px;
+
+    @media screen and (min-width: 576px) {
+        padding-bottom: 0;
+    }
 }
 
 .home-rightbar {
