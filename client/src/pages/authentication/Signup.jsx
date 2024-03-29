@@ -64,6 +64,7 @@ const Signup = () => {
 
     // Store phone number
     const handlePhone = (value, country) => {
+        setPhoneError("")
         setPhoneNumber({
             number: value,
             cc: country
@@ -146,10 +147,10 @@ const Signup = () => {
 
                         <Form.Group className="phone-dropdown auth-label mb-3">
                             <PhoneInput
+                                placeholder="Optional #"
                                 value={phoneNumber.number}
                                 country={'ca'}
                                 onChange={handlePhone}
-                                placeholder="Optional #"
                             />
                             {phoneError &&
                                 <Form.Text className="text-danger">
