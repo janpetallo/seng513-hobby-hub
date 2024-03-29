@@ -15,6 +15,7 @@ import Header from "./components/mobile/header/Header.jsx";
 import Home from "./pages/home/Home.jsx";
 import Signup from "./pages/authentication/Signup.jsx";
 import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
+import HubPost from "./pages/hubpost/HubPost.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -43,7 +44,7 @@ function App() {
     const HomeLayout = () => {
         return (
             <Row>
-                <Col className="m-0 p-0">
+                <Col className="m-0 p-0 home-layout-body">
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
@@ -91,6 +92,10 @@ function App() {
                         {
                             path: "/",
                             element: <Home/>
+                        },
+                        {
+                          path: "/hubpost",
+                            element: <HubPost/>
                         },
                     ]
                 },
