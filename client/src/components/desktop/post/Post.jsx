@@ -27,18 +27,31 @@ const Post = ({ post }) => {
                 </div>
 
                 <div className="post_content">
-                    <Carousel interval={null} className="post-image-carousel">
-                        {post.img.map((image, index) => (
-                            <Carousel.Item key={index}>
-                                <img
-                                    onClick={toggleModal}
-                                    className="d-block w-100"
-                                    src={image}
-                                    alt="Image can't be loaded"
-                                />
-                            </Carousel.Item>
-                        ))}
-                    </Carousel>
+
+                    {post.img.length > 1 && (
+                        <Carousel interval={null} className="post-image-carousel">
+                            {post.img.map((image, index) => (
+                                <Carousel.Item key={index}>
+                                    <img
+                                        onClick={toggleModal}
+                                        className="d-block w-100"
+                                        src={image}
+                                        alt="Image can't be loaded"
+                                    />
+                                </Carousel.Item>
+                            ))}
+                        </Carousel>
+                    )}
+
+                    {post.img.length === 1 && (
+                        <img
+                            onClick={toggleModal}
+                            className="d-block w-100"
+                            src={post.img[0]}
+                            alt="Image can't be loaded"
+                        />
+                    )}
+
                     <p className = "postOwner"> <strong>By: </strong> {post.postOwner}</p>
                     <p className = "postDescription"> {post.desc} </p>
                 </div>
