@@ -105,7 +105,10 @@ function App() {
                             path: "/marketpost",
                             element: <MarketPost/>
                         },
-
+                        {
+                            path: "/choose-posting",
+                            element: <ChoosePostingLocation/>
+                        },
                     ]
                 },
                 {
@@ -125,10 +128,6 @@ function App() {
                 {
                     path: "/create-hub",
                     element: <CreateHubPageMobile/>
-                },
-                {
-                    path: "/choose-posting",
-                    element: <ChoosePostingLocation/>
                 },
             ]
         },
