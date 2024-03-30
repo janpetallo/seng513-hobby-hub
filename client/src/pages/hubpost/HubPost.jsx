@@ -19,7 +19,7 @@ const HubPost = () => {
     };
 
     return (
-        <Form className="p-3 post" noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form className="p-3 hub-post" noValidate validated={validated} onSubmit={handleSubmit}>
 
             <div className="d-flex justify-content-between flex-wrap">
                 <div className="me-4">
