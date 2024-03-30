@@ -5,6 +5,7 @@ import {useDropzone} from 'react-dropzone';
 import "./ImageDropzone.scss"
 import {MdOutlineAddToPhotos} from "react-icons/md";
 import { RiCloseCircleFill } from "react-icons/ri";
+import ImageModal from "../desktop/post/ImageModal.jsx";
 
 const ImageDropzone = () => {
     const [show, setShow] = useState(false);
@@ -45,6 +46,13 @@ const ImageDropzone = () => {
             'video/*' : [],
         }
     })
+
+    // to control image pop up when clicked
+    const [showModal, setShowModal] = useState(false);
+
+    const toggleModal = () => {
+        setShowModal(!showModal);
+    };
 
     return (
         <>
@@ -87,18 +95,20 @@ const ImageDropzone = () => {
                                         <img
                                             src={file.preview}
                                             alt={file.name}
+                                            onClick={toggleModal}
                                             //  // revoke url to prevent memory leak
                                             // onLoad={() => {
                                             //     URL.revokeObjectURL(file.preview)
                                             // }}
                                         />
                                     </div>
-
                                     <div className="dropzone-btn-wrapper">
                                         <Button variant="danger" onClick={() => removeFile(file.name)}>
                                             <RiCloseCircleFill />
                                         </Button>
                                     </div>
+
+                                    {showModal && <ImageModal imageUrl={file.preview} onClose={toggleModal} />}
                                 </li>
                             ))}
                         </ul>
