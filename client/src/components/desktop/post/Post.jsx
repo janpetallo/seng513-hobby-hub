@@ -25,8 +25,13 @@ const Post = ({ post }) => {
     const [numLikes, setNumLikes] = useState(post.likes);
 
     const toggleLiked = () => {
-        if(liked === false){
+        if(!liked){
             setNumLikes(numLikes + 1);
+
+            if(disliked){
+                toggleDisliked();
+            }
+
         }else {
             setNumLikes(numLikes - 1);
         }
@@ -38,8 +43,13 @@ const Post = ({ post }) => {
     const [disliked, setDisliked] = useState(false);
     const [numDislikes, setNumDislikes] = useState(post.dislikes);
     const toggleDisliked = () => {
-        if(disliked === false){
+        if(!disliked){
             setNumDislikes(numDislikes + 1);
+
+            if(liked){
+                toggleLiked();
+            }
+
         }else {
             setNumDislikes(numDislikes - 1);
         }
@@ -51,7 +61,7 @@ const Post = ({ post }) => {
     const [commented, setCommented] = useState(false);
     const [numComments, setNumComments] = useState(post.comments);
     const toggleComment = () => {
-        if(commented === false){
+        if(!commented){
             setNumComments(numComments + 1);
         }else {
             setNumComments(numComments - 1);
@@ -128,6 +138,6 @@ const Post = ({ post }) => {
 
 
 //ToDO:
-// likes for posts, live counters for likes and dislikes
+// prevent simulatenous like and disliking
 
 export default Post
