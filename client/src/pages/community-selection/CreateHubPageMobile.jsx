@@ -35,7 +35,7 @@ function CreateHubPageMobile() {
             <Form>
                 <Form.Group controlId="formHubName">
                     <Form.Label id="hub-label-mobile">Hub Name</Form.Label>
-                    <Form.Control id="create-form-control" type="text" placeholder="Enter hub name" maxLength={18} value={hubName} onChange={e => setHubName(e.target.value)} />
+                    <Form.Control id="create-form-control-mobile" type="text" placeholder="Enter hub name" maxLength={18} value={hubName} onChange={e => setHubName(e.target.value)} />
                                 {isHubNameTooLong && <Form.Text className="text-danger">Hub name cannot exceed 18 characters</Form.Text>}
                 </Form.Group>
                 <Form.Group>

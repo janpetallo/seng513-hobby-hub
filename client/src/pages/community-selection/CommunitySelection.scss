@@ -166,17 +166,24 @@
         width: 8rem;
     }
 
-    .hub-category#hub-category,
-    #create-hub-mobile-link{
-        font-size: 20px;
+    .hub-category#hub-category{
+        font-size: 16px;
+        // margin-top: 10px;
     }
 
-    #hub-card-title{
+    #hub-card-title,
+    #create-hub-mobile-link{
         font-size: 14px;
     }
 
     #hub-card-body {
         padding: 15px;
+    }
+
+    #create-hub-mobile-link {
+        font-size: 16px;
+        font-weight: 500;
+        margin-bottom: 30px;
     }
 
     #create-hub-mobile {
