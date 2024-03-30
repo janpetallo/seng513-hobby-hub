@@ -7,7 +7,9 @@ import './CommunitySelection.scss'
 
 
 function CommunitySelection() {
-    const [showModal, setShowModal] = useState(false);
+    const location = useLocation();
+    const [showModal, setShowModal] = useState(location.state?.openModal || false);
+    // const [showModal, setShowModal] = useState(false);
     const isMobile = useMediaQuery({ query: '(max-width: 575px)' });
 
     const [hubName, setHubName] = useState('');

@@ -1,17 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
+import { useNavigate, useLocation } from 'react-router-dom';
 import './CommunitySelection.scss';
 
 function CreateHubPageMobile() {
     const [hubName, setHubName] = useState('');
+    const isMobile = useMediaQuery({ query: '(max-width: 575px)' });
     const navigate = useNavigate();
+    const location = useLocation();
 
     const [isHubNameTooLong, setIsHubNameTooLong] = useState(false);
 
     useEffect(() => {
         setIsHubNameTooLong(hubName.length == 18);
     }, [hubName]);
+
+    useEffect(() => {
+        if (!isMobile && location.pathname === '/create-hub') {
+            navigate('/community-selection', { state: { openModal: true } });
+        }
+    }, [isMobile, navigate, location.pathname]);
 
 
     const handleCreate = () => {
