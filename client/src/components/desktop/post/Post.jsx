@@ -1,4 +1,4 @@
-import "./post.scss"
+import "./post.scss";
 import ImageModal from "./ImageModal.jsx";
 import React, {useState} from "react";
 import Carousel from 'react-bootstrap/Carousel';
@@ -8,6 +8,7 @@ import { FaRegThumbsDown } from "react-icons/fa";
 import { FaThumbsDown } from "react-icons/fa";
 import { FaRegComments } from "react-icons/fa";
 import { FaComments } from "react-icons/fa6";
+import Comments from "../comments/Comments.jsx";
 
 
 
@@ -15,10 +16,13 @@ import { FaComments } from "react-icons/fa6";
 const Post = ({ post }) => {
     // to control image pop up when clicked
     const [showModal, setShowModal] = useState(false);
+    const [modalImageUrl, setModalImageUrl] = useState("");
 
-    const toggleModal = () => {
+    const toggleModal = (imageUrl) => {
         setShowModal(!showModal);
+        setModalImageUrl(imageUrl);
     };
+
 
     // temporary functions and variables to enable liking
     const [liked, setLiked] = useState(false);
@@ -58,7 +62,10 @@ const Post = ({ post }) => {
     } ;
 
     // temporary functions and variables to enable commenting
+
+    // Todo: This one is to control if you have commented or not, fix this so later it only triggers if you post a comment
     const [commented, setCommented] = useState(false);
+    const[openComment, setOpenComment] = useState(false);
     const [numComments, setNumComments] = useState(post.comments);
     const toggleComment = () => {
         if(!commented){
@@ -68,6 +75,7 @@ const Post = ({ post }) => {
         }
 
         setCommented(!commented);
+        setOpenComment(!openComment);
     } ;
 
     return (
@@ -90,7 +98,7 @@ const Post = ({ post }) => {
                             {post.img.map((image, index) => (
                                 <Carousel.Item key={index}>
                                     <img
-                                        onClick={toggleModal}
+                                        onClick={() => toggleModal(image)}
                                         className="d-block w-100"
                                         src={image}
                                         alt="Image can't be loaded"
@@ -102,7 +110,7 @@ const Post = ({ post }) => {
 
                     {post.img.length === 1 && (
                         <img
-                            onClick={toggleModal}
+                            onClick={() => toggleModal(post.img[0])}
                             className="d-block w-100"
                             src={post.img[0]}
                             alt="Image can't be loaded"
@@ -130,11 +138,12 @@ const Post = ({ post }) => {
                     </div>
 
                 </div>
-                {showModal && <ImageModal imageUrl={post.img} onClose={toggleModal} />}
+                {showModal && <ImageModal imageUrl={modalImageUrl} onClose={toggleModal} />}
+                {openComment && <Comments/>}
             </div>
         </div>
     );
 };
 
 
-export default Post
+export default Post;
