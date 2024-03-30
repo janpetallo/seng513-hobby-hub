@@ -137,7 +137,4 @@ const Post = ({ post }) => {
 };
 
 
-//ToDO:
-// prevent simulatenous like and disliking
-
 export default Post
