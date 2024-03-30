@@ -37,8 +37,14 @@ const ImageDropzone = () => {
         setFiles(files => files.filter(file => file.name !== name))
     }
 
-    const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
-
+    //  only images and videos
+    const {getRootProps, getInputProps, isDragActive} = useDropzone({
+        onDrop,
+        accept: {
+            'image/*' : [],
+            'video/*' : [],
+        }
+    })
 
     return (
         <>
@@ -81,9 +87,6 @@ const ImageDropzone = () => {
                                         <img
                                             src={file.preview}
                                             alt={file.name}
-
-
-
                                             //  // revoke url to prevent memory leak
                                             // onLoad={() => {
                                             //     URL.revokeObjectURL(file.preview)

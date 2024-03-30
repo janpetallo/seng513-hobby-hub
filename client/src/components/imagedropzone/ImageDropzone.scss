@@ -58,6 +58,11 @@
 
                 img {
                     width: 100%;
+                    transition: transform 0.3s ease; // make transformation smooth
+                }
+
+                img:hover {
+                    transform: scale(1.2);
                 }
             }
 
