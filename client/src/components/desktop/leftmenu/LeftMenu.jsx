@@ -81,7 +81,9 @@ const LeftMenu = () =>{
             <Row>
                 <Col>
                     <div className="item">
-                    <Button as={Link} to="/choose-posting" className="btn-HHPurple left-post-btn">Post</Button>
+                        <Link to="/choose-posting">
+                            <Button className="btn-HHPurple left-post-btn">Post</Button>
+                        </Link>
                     </div>
                 </Col>
             </Row>
