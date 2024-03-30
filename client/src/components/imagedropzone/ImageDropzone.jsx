@@ -48,7 +48,7 @@ const ImageDropzone = () => {
 
     return (
         <>
-            <Button className="mb-3" variant="HHPurple" onClick={handleShow}>
+            <Button className="dropzone-modal-open mb-3" variant="HHPurple" onClick={handleShow}>
                 <IoImagesOutline/> Upload Images
             </Button>
 

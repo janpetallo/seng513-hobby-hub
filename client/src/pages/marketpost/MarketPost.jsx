@@ -4,6 +4,8 @@ import {Button, FloatingLabel, Form} from "react-bootstrap";
 import RichTextEditor from "../../components/TextEditor/RichTextEditor.jsx";
 import ImageDropzone from "../../components/imagedropzone/ImageDropzone.jsx";
 import UseGoBack from "../../utilities/UseGoBack/UseGoBack.jsx";
+import { MdCancelPresentation } from "react-icons/md";
+import { BiSend } from "react-icons/bi";
 
 const MarketPost = () => {
 
@@ -100,11 +102,11 @@ const MarketPost = () => {
 
           <div className="d-flex justify-content-center flex-wrap mt-3">
               <Button className="market-post-btn" variant="secondary" onClick={UseGoBack()}>
-                  Cancel
+                  <MdCancelPresentation /> Cancel
               </Button>
 
               <Button className="market-post-btn" variant="HHPurple" type="submit">
-                  Post
+                  <BiSend /> Post
               </Button>
           </div>
       </Form>
