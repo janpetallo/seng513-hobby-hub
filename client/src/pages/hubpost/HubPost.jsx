@@ -3,6 +3,7 @@ import "./HubPost.scss"
 import RichTextEditor from "../../components/TextEditor/RichTextEditor.jsx";
 import PostToggle from "../../components/PostToggle/PostToggle.jsx";
 import {Button, FloatingLabel, Form} from "react-bootstrap";
+import ImageDropzone from "../../components/imagedropzone/ImageDropzone.jsx";
 const HubPost = () => {
 
     const [validated, setValidated] = useState(false);
@@ -44,6 +45,7 @@ const HubPost = () => {
                 <Form.Control.Feedback type="invalid">Post needs a title!</Form.Control.Feedback>
             </FloatingLabel>
 
+            <ImageDropzone/>
 
             <RichTextEditor/>
 
