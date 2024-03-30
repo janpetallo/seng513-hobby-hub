@@ -56,3 +56,6 @@ const Posts = () =>{
 };
 
 export default Posts;
+
+// Todo:
+// disable over flow on image modal, make carousel fixed size, carousel second image doesn't expand in image modal
