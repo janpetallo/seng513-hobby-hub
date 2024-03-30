@@ -1,11 +1,12 @@
-import React, {useState} from "react";
+import React from "react";
 import "./MarketPost.scss"
 import {Button, FloatingLabel, Form} from "react-bootstrap";
 import RichTextEditor from "../../components/TextEditor/RichTextEditor.jsx";
-import PostToggle from "../../components/PostToggle/PostToggle.jsx";
+import ImageDropzone from "../../components/imagedropzone/ImageDropzone.jsx";
+
 const MarketPost = () => {
   return (
-      <Form className="p-3 market-post-form" style={{border: `1px solid red`}}>
+      <Form className="p-3 market-post-form">
           <FloatingLabel
               className="mb-3"
               controlId="floating-title"
@@ -90,6 +91,8 @@ const MarketPost = () => {
                   name="Tag"
               />
           </FloatingLabel>
+
+          <ImageDropzone/>
 
           <RichTextEditor/>
 
