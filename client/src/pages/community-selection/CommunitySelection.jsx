@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Card, Modal, Button, Form} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import CreateIcon from '../../assets/create-hub/create.svg';
 import './CommunitySelection.scss'
@@ -16,6 +16,15 @@ function CommunitySelection() {
     useEffect(() => {
         setIsHubNameTooLong(hubName.length == 18);
     }, [hubName]);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isMobile && showModal) {
+            setShowModal(false);
+            navigate('/create-hub');
+        }
+    }, [isMobile, showModal, navigate]);
 
     const categories = [
         { name: 'Outdoors', hubs: ['Mushroom Hunters', 'Fishing', 'Hiking'] },
