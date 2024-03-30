@@ -48,11 +48,15 @@ const ImageDropzone = () => {
     })
 
     // to control image pop up when clicked
+    // to control image pop up when clicked
     const [showModal, setShowModal] = useState(false);
+    const [modalImageUrl, setModalImageUrl] = useState("");
 
-    const toggleModal = () => {
+    const toggleModal = (imageUrl) => {
         setShowModal(!showModal);
+        setModalImageUrl(imageUrl);
     };
+
 
     return (
         <>
@@ -95,7 +99,7 @@ const ImageDropzone = () => {
                                         <img
                                             src={file.preview}
                                             alt={file.name}
-                                            onClick={toggleModal}
+                                            onClick={() => toggleModal(file.preview)}
                                             //  // revoke url to prevent memory leak
                                             // onLoad={() => {
                                             //     URL.revokeObjectURL(file.preview)
@@ -108,7 +112,7 @@ const ImageDropzone = () => {
                                         </Button>
                                     </div>
 
-                                    {showModal && <ImageModal imageUrl={file.preview} onClose={toggleModal} />}
+                                    {showModal && <ImageModal imageUrl={modalImageUrl} onClose={toggleModal} />}
                                 </li>
                             ))}
                         </ul>
