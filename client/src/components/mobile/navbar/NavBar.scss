@@ -1,14 +1,34 @@
-.mobile-links {
-    display: flex;
-    align-items: center;
-}
+.mobile-nav {
 
-.mobile-items {
-    width: 30px;
-    display: flex;
-    flex-direction: column;
-}
+    border-top: 1px solid rgba(145, 142, 142, 0.67);
 
-.mobile-create {
-    width: 40px;
+    .mobile-links {
+        display: flex;
+        align-items: center;
+    }
+
+    .mobile-items {
+        width: 30px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .mobile-create {
+        width: 40px;
+    }
+
+    #create-dropdown-custom.dropdown-toggle::after {
+        display: none;
+    }
+    
+    #create-dropdown-custom.dropdown-toggle {
+        background-color: transparent;
+        border: none;
+    }
+    
+    .create-item.active,
+    .create-item:hover {
+        background-color: #8e47ff;
+        color: white;
+    }
 }

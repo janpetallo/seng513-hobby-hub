@@ -5,7 +5,7 @@ import Posts from "../../components/desktop/posts/Posts.jsx";
 
 const Home = () => {
     return (
-        <div className="home">
+        <div className="bg-warning">
             <Posts/>
         </div>
 

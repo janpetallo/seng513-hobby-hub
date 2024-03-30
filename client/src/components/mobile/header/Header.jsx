@@ -11,7 +11,7 @@ const Header = () =>{
     const handleShow = () => setShow(true);
 
     return (
-        <Container className="fixed-top bg-white">
+        <Container className="fixed-top bg-white mobile-header">
             <Row className="p-2">
                 <Col className="d-flex align-items-center">
 

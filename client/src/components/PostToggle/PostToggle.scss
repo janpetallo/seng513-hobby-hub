@@ -1,0 +1,39 @@
+:root {
+    --HHPurple: #8e47ff
+}
+
+.post-toggle {
+    .dropdown-toggle {
+        white-space: normal;
+        width: 248px;
+
+        @media screen and (min-width: 576px) {
+            width: 350px;
+        }
+    }
+    .dropdown-item.active, .dropdown-item:active {
+        background-color: var(--HHPurple);
+    }
+
+    .dropdown-menu {
+        width: 248px;
+        padding: 0.3rem;
+        max-height: 250px;
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        @media screen and (min-width: 576px) {
+            width: 350px;
+        }
+    }
+
+    .post-search-wrapper {
+        position: sticky;
+        top: 0;
+        background-color: white;
+    }
+
+    .form-control {
+        width: 95%;
+    }
+}
