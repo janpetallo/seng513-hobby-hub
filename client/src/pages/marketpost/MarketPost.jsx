@@ -3,8 +3,15 @@ import "./MarketPost.scss"
 import {Button, FloatingLabel, Form} from "react-bootstrap";
 import RichTextEditor from "../../components/TextEditor/RichTextEditor.jsx";
 import ImageDropzone from "../../components/imagedropzone/ImageDropzone.jsx";
+import {useNavigate} from "react-router-dom";
 
 const MarketPost = () => {
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1);
+    };
+
   return (
       <Form className="p-3 market-post-form">
           <FloatingLabel
@@ -96,9 +103,8 @@ const MarketPost = () => {
 
           <RichTextEditor/>
 
-
           <div className="d-flex justify-content-center flex-wrap mt-3">
-              <Button className="me-3 market-post-btn" variant="HHPurple">
+              <Button className="me-3 market-post-btn" variant="HHPurple" onClick={goBack}>
                   Cancel
               </Button>
 
