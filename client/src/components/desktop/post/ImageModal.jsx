@@ -3,7 +3,7 @@ import "./ImageModal.scss";
 const ImageModal = ({ imageUrl, onClose }) => {
     return (
         <div className="postImageModal" onClick={onClose}>
-            <div className="modal-content">
+            <div className="postImageModal-content">
                 <img src={imageUrl} alt="Full size" />
             </div>
         </div>
