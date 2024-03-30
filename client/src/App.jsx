@@ -19,6 +19,7 @@ import CommunitySelection from './pages/community-selection/CommunitySelection.j
 import CreateHubPageMobile from './pages/community-selection/CreateHubPageMobile.jsx';
 import ChoosePostingLocation from './pages/posting-location/ChoosePostingLocation.jsx';
 import HubPost from "./pages/hubpost/HubPost.jsx";
+import MarketPost from "./pages/marketpost/MarketPost.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -100,6 +101,14 @@ function App() {
                           path: "/hubpost",
                             element: <HubPost/>
                         },
+                        {
+                            path: "/marketpost",
+                            element: <MarketPost/>
+                        },
+                        {
+                            path: "/choose-posting",
+                            element: <ChoosePostingLocation/>
+                        },
                     ]
                 },
                 {
@@ -119,10 +128,6 @@ function App() {
                 {
                     path: "/create-hub",
                     element: <CreateHubPageMobile/>
-                },
-                {
-                    path: "/choose-posting",
-                    element: <ChoosePostingLocation/>
                 },
             ]
         },

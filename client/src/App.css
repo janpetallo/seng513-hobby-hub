@@ -28,7 +28,7 @@
 
 .home-layout-body {
     min-height: calc(100vh - 76px - 65px);
-    
+
     @media screen and (min-width: 576px) {
         min-height: calc(100vh - 76px);
     }

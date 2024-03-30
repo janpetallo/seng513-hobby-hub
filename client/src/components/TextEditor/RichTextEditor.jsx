@@ -23,7 +23,7 @@ const toolbarOptions = [
     // indents
     [{ 'indent': '-1'}, { 'indent': '+1' }],
     [{ 'align': [] }],
-    ['link', 'image', 'video', 'formula'],
+    ['link'],
     ['blockquote', 'code-block'],
     ['clean']
 ]
