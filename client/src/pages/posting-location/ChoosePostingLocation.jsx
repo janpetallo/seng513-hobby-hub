@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button, Container, Row, Col } from 'react-bootstrap';
 import hubsSvg from '../../assets/leftsidemenu/hubs.svg';
 import marketSvg from '../../assets/leftsidemenu/market.svg';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './ChoosePostingLocation.scss';
 
 const ChoosePostingLocation = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkResize = () => {
+            if (window.innerWidth < 576) {
+                navigate('/');
+            }
+        };
+        window.addEventListener('resize', checkResize);
+        checkResize(); // check immediately on component mount
+        return () => window.removeEventListener('resize', checkResize);
+    }, [navigate]);
+
     return (
         <Container id="centered-container" className="centered-container">
             <div id="post-to-content">
