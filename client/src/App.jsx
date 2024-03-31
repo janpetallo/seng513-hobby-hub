@@ -15,6 +15,7 @@ import Header from "./components/mobile/header/Header.jsx";
 import Home from "./pages/home/Home.jsx";
 import Signup from "./pages/authentication/Signup.jsx";
 import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
+import EditProfile from './pages/editprofile/EditProfile.jsx';
 
 function App() {
 
@@ -116,6 +117,10 @@ function App() {
         {
             path: "/underdevelopment",
             element:<UnderDevelopment/>
+        },
+        {
+            path: "/editprofile",
+            element:<EditProfile/>
         },
     ]);
 

@@ -1,0 +1,97 @@
+.img-icon{
+    margin-right:0.5em;
+}
+
+.change-img-btn{
+    border-radius: 15px;
+    border: 1px solid var(--HHPurple);;
+    background-color: #f9f9f9;
+}
+
+.edit-prof-sub-btn{
+    border-radius: 15px;
+}
+
+.img-user{
+    width: 6em;
+    height: 6em;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1em;
+    margin-top: 1em;
+}
+
+
+.backbutton{
+    margin-left: 3vw;
+}
+
+/* Custom CSS
+.custom-input {
+    width:100%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    border: 1px solid #ced4da;
+    background-color: #f9f9f9;
+}
+
+.custom-input:focus {
+    outline: none;
+    border-color: var(--HHPurple);
+    box-shadow: 0 0 5px rgba(108, 117, 125, 0.5);
+} */
+
+.edit-prof-sub-btn{
+    margin-left: 3vw;
+    margin-right: 3vw;
+}
+
+@media screen and (min-width: 575px){
+    .background {
+        background-image: url("../../assets/authentication/desktop/background.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        min-height: 100vh;
+        padding: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .edit-prof-container {
+        max-width:996px;
+        background-color: white; /* Background color for the container */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add shadow for a box effect */
+        display: flex;
+        flex-direction:row;
+        justify-content: space-evenly;
+    }
+
+    .avantar-section{
+        margin-right: 5vw;
+        margin-top: 3vw;
+    }
+
+    .edit-prof-img{
+        margin-left:3vw;
+        margin-top: 5vh;
+    }
+
+    .backbutton{
+        margin-left: 0;
+    }
+}
+@media screen and (max-width: 815px) {
+    .avantar-section{
+        margin:0;
+        margin-top:70px;
+    }
+    .edit-prof-img{
+        margin: 0;
+    }
+    
+
+}
