@@ -54,16 +54,15 @@ const Signup = () => {
         // If the phone number is entered and invalid then throw error
         // If the phone number is empty it is okay (not required)
         if(pass) {
-            console.log("we passed")
-            // try {
-            //     await newRequest.post("/auth/register", {username: values.username,
-            //         password: values.password, email: values.email, birthday: values.birthdate,});
-            //
-            //     navigate("/login"); // navigate to the login page
-            // }catch (err){
-            //     console.log(err.response.data);
-            // }
-            // actions.resetForm();
+             try {
+                 await newRequest.post("/auth/register", {username: values.username,
+                     password: values.password, email: values.email, birthday: values.birthdate, phone: phoneNumber.number});
+
+                navigate("/login"); // navigate to the login page
+            }catch (err){
+                console.log(err.response.data);
+            }
+            actions.resetForm();
         }
     }
 
