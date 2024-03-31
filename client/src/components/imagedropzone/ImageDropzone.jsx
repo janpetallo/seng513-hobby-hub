@@ -5,6 +5,7 @@ import {useDropzone} from 'react-dropzone';
 import "./ImageDropzone.scss"
 import {MdOutlineAddToPhotos} from "react-icons/md";
 import { RiCloseCircleFill } from "react-icons/ri";
+import ImageModal from "../desktop/post/ImageModal.jsx";
 
 const ImageDropzone = () => {
     const [show, setShow] = useState(false);
@@ -46,9 +47,20 @@ const ImageDropzone = () => {
         }
     })
 
+    // to control image pop up when clicked
+    // to control image pop up when clicked
+    const [showModal, setShowModal] = useState(false);
+    const [modalImageUrl, setModalImageUrl] = useState("");
+
+    const toggleModal = (imageUrl) => {
+        setShowModal(!showModal);
+        setModalImageUrl(imageUrl);
+    };
+
+
     return (
         <>
-            <Button className="mb-3" variant="HHPurple" onClick={handleShow}>
+            <Button className="dropzone-modal-open mb-3" variant="HHPurple" onClick={handleShow}>
                 <IoImagesOutline/> Upload Images
             </Button>
 
@@ -87,18 +99,20 @@ const ImageDropzone = () => {
                                         <img
                                             src={file.preview}
                                             alt={file.name}
+                                            onClick={() => toggleModal(file.preview)}
                                             //  // revoke url to prevent memory leak
                                             // onLoad={() => {
                                             //     URL.revokeObjectURL(file.preview)
                                             // }}
                                         />
                                     </div>
-
                                     <div className="dropzone-btn-wrapper">
                                         <Button variant="danger" onClick={() => removeFile(file.name)}>
                                             <RiCloseCircleFill />
                                         </Button>
                                     </div>
+
+                                    {showModal && <ImageModal imageUrl={modalImageUrl} onClose={toggleModal} />}
                                 </li>
                             ))}
                         </ul>
