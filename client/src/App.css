@@ -16,16 +16,6 @@
     border-top: 1px solid rgba(145, 142, 142, 0.67);;
 }
 
-
-.hubs-rightbar {
-    position: sticky;
-    top: 76px;
-    height: calc(100vh - 76px);
-    border-left: 1px solid rgba(145, 142, 142, 0.67);
-    border-top: 1px solid rgba(145, 142, 142, 0.67);;
-    min-width: 350px;
-}
-
 .home-layout-body {
     min-height: calc(100vh - 76px - 65px);
 

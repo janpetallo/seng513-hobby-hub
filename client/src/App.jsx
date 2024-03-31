@@ -20,6 +20,7 @@ import CreateHubPageMobile from './pages/community-selection/CreateHubPageMobile
 import ChoosePostingLocation from './pages/posting-location/ChoosePostingLocation.jsx';
 import HubPost from "./pages/hubpost/HubPost.jsx";
 import MarketPost from "./pages/marketpost/MarketPost.jsx";
+import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -64,8 +65,8 @@ function App() {
                 <Col className="m-0 p-0">
                     <Outlet/>
                 </Col>
-                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky hubs-rightbar">
-                    Test side
+                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky" style={{minWidth: `350px`}}>
+                    <RightMenu/>
                 </Col>
             </Row>
         )
@@ -117,7 +118,7 @@ function App() {
                     children: [
                         {
                             path: "/hubs",
-                            element: <Home/>
+                            element: <div>empty</div>
                         },
                     ]
                 },
