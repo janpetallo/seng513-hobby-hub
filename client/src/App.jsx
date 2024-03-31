@@ -21,6 +21,7 @@ import ChoosePostingLocation from './pages/posting-location/ChoosePostingLocatio
 import HubPost from "./pages/hubpost/HubPost.jsx";
 import MarketPost from "./pages/marketpost/MarketPost.jsx";
 import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
+import DedicatedHub from "./pages/dedicatedhub/DedicatedHub.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -118,7 +119,7 @@ function App() {
                     children: [
                         {
                             path: "/hubs",
-                            element: <div>empty</div>
+                            element: <DedicatedHub/>
                         },
                     ]
                 },
