@@ -1,0 +1,62 @@
+import React, {useState} from "react";
+import "./HubPost.scss"
+import RichTextEditor from "../../components/TextEditor/RichTextEditor.jsx";
+import PostToggle from "../../components/PostToggle/PostToggle.jsx";
+import {Button, FloatingLabel, Form} from "react-bootstrap";
+import ImageDropzone from "../../components/imagedropzone/ImageDropzone.jsx";
+import UseGoBack from "../../utilities/UseGoBack/UseGoBack.jsx";
+import { MdCancelPresentation } from "react-icons/md";
+import { BiSend } from "react-icons/bi";
+
+const HubPost = () => {
+
+    const [validated, setValidated] = useState(false);
+
+    const handleSubmit = (event) => {
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        setValidated(true);
+    };
+
+    return (
+        <Form className="p-3 hub-post" noValidate validated={validated} onSubmit={handleSubmit}>
+
+            <PostToggle/>
+
+            <FloatingLabel
+                className="mt-3 mb-3"
+                controlId="floating-title"
+                label="Title"
+            >
+                <Form.Control
+                    type="text"
+                    placeholder=""
+                    name="Title"
+                    required
+                />
+                <Form.Control.Feedback type="invalid">Post needs a title!</Form.Control.Feedback>
+            </FloatingLabel>
+
+            <ImageDropzone/>
+
+            <RichTextEditor/>
+
+            <div className="d-flex justify-content-center flex-wrap mt-3">
+                <Button className="hub-post-btn" variant="secondary" onClick={UseGoBack()}>
+                    <MdCancelPresentation /> Cancel
+                </Button>
+
+                <Button className="hub-post-btn" variant="HHPurple" type="submit">
+                    <BiSend /> Post
+                </Button>
+            </div>
+
+        </Form>
+    )
+}
+
+export default HubPost

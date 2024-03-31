@@ -1,16 +1,21 @@
-.m-hamburger{
-    border: none;
-    background: transparent;
-    font-size: 35px;
+.mobile-header {
+    border-bottom: 1px solid rgba(145, 142, 142, 0.67);
+
+    .m-hamburger{
+        border: none;
+        background: transparent;
+        font-size: 35px;
+    }
+
+    .m-hamburger{
+        display: flex;
+        align-items: center;
+    }
+
+    .m-navbar-logo-wrapper {
+        flex-grow: 1;
+        text-align: center;
+        margin-right: 2rem;
+    }
 }
 
-.m-hamburger{
-    display: flex;
-    align-items: center;
-}
-
-.m-navbar-logo-wrapper {
-    flex-grow: 1;
-    text-align: center;
-    margin-right: 2rem;
-}

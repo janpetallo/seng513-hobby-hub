@@ -15,17 +15,25 @@ import Header from "./components/mobile/header/Header.jsx";
 import Home from "./pages/home/Home.jsx";
 import Signup from "./pages/authentication/Signup.jsx";
 import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
+import CommunitySelection from './pages/community-selection/CommunitySelection.jsx';
+import CreateHubPageMobile from './pages/community-selection/CreateHubPageMobile.jsx';
+import ChoosePostingLocation from './pages/posting-location/ChoosePostingLocation.jsx';
+import HubPost from "./pages/hubpost/HubPost.jsx";
+import MarketPost from "./pages/marketpost/MarketPost.jsx";
+import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
+import DedicatedHub from "./pages/dedicatedhub/DedicatedHub.jsx";
+
+//  External media query to prevent re-rendering of pages whenever it rescales
+function useDesktopOrLaptopMediaQuery() {
+    return useMediaQuery({ query: '(min-width: 576px)' });
+}
 
 function App() {
-
-    const isDesktopOrLaptop = useMediaQuery({
-        query: '(min-width: 576px)'
-    });
 
     const Layout = () => {
         return (
             <Container fluid className="m-0 p-0">
-                {isDesktopOrLaptop ? <DNavBar/> : <Header/>}
+                {useDesktopOrLaptopMediaQuery() ? <DNavBar/> : <Header/>}
                 <Row className="m-0 home-body">
                     <Col xl={2} className="m-0 p-0 d-none d-xl-block position-sticky" style={{minWidth: `300px`}}>
                         <LeftMenu/>
@@ -34,7 +42,7 @@ function App() {
                         <Outlet/>
                     </Col>
                 </Row>
-                {!isDesktopOrLaptop && <MNavBar/>}
+                {!useDesktopOrLaptopMediaQuery() && <MNavBar/>}
             </Container>
         )
     }
@@ -42,7 +50,7 @@ function App() {
     const HomeLayout = () => {
         return (
             <Row>
-                <Col className="m-0 p-0">
+                <Col className="m-0 p-0 home-layout-body">
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
@@ -58,8 +66,8 @@ function App() {
                 <Col className="m-0 p-0">
                     <Outlet/>
                 </Col>
-                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky hubs-rightbar">
-                    Test side
+                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky" style={{minWidth: `350px`}}>
+                    <RightMenu/>
                 </Col>
             </Row>
         )
@@ -91,6 +99,18 @@ function App() {
                             path: "/",
                             element: <Home/>
                         },
+                        {
+                          path: "/hubpost",
+                            element: <HubPost/>
+                        },
+                        {
+                            path: "/marketpost",
+                            element: <MarketPost/>
+                        },
+                        {
+                            path: "/choose-posting",
+                            element: <ChoosePostingLocation/>
+                        },
                     ]
                 },
                 {
@@ -99,9 +119,17 @@ function App() {
                     children: [
                         {
                             path: "/hubs",
-                            element: <Home/>
+                            element: <DedicatedHub/>
                         },
                     ]
+                },
+                {
+                    path: "/community-selection",
+                    element:<CommunitySelection/>
+                },
+                {
+                    path: "/create-hub",
+                    element: <CreateHubPageMobile/>
                 },
             ]
         },
