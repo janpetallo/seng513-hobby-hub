@@ -21,6 +21,7 @@ import ChoosePostingLocation from './pages/posting-location/ChoosePostingLocatio
 import HubPost from "./pages/hubpost/HubPost.jsx";
 import MarketPost from "./pages/marketpost/MarketPost.jsx";
 import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
+import SearchMenu from "./pages/search-menu/SearchMenu.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -109,6 +110,10 @@ function App() {
                         {
                             path: "/choose-posting",
                             element: <ChoosePostingLocation/>
+                        },
+                        {
+                            path: "/search-menu",
+                            element: <SearchMenu/>
                         },
                     ]
                 },
