@@ -54,14 +54,14 @@
 }
 
 .d-searchbar .search-dropdown {
-    box-sizing: content-box;
+    box-sizing: border-box;
     position: absolute;
-    top: 97%;
-    left: -0.07vw;
-    width: 98%;
+    top: 95%;
+    left: -1px;
+    width: calc(100% + 2.5px);
     background-color: #d9ccef;
     border-radius: 0 0 5px 5px;
-    padding:0.63vw;
+    padding:5px;
     display:none;
     z-index: 1;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -69,10 +69,8 @@
 }
 
 .d-searchbar:hover {
-    .d-searchbar{
-        border-radius: 5px 5px 0 0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
     .search-dropdown {
         display: block;
@@ -113,8 +111,6 @@
         .search-dropdown {
             border: 2px solid #8e47ff;
             border-top:none;
-            left: -0.17vw;
-            padding:0.7vw;
         }
 
         &:hover {
@@ -148,6 +144,7 @@
         }
 
         &:hover {
+            box-shadow: 0 0 0 100vmax rgba(18, 18, 18, 0.28);
             .d-searchbar{
                 border-radius: 5px 5px 0 0;
                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
