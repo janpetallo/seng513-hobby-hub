@@ -79,7 +79,13 @@ const NavBar = () => {
 
                                 <Form.Control type="text" placeholder="Search HobbyHub..."></Form.Control>
 
+                                
                                 <Button className="d-search-btn" variant="HHPurple">Search</Button>
+                                <div className="search-dropdown"  id="search-dropdown">
+                                    <span>Search in:  </span>
+                                    <label><input type="radio" value="Hubs" defaultChecked/> Hubs</label>
+                                    <label><input type="radio" value="Market"/> Market</label>
+                                </div>  
                             </div>
 
                             <Button variant="HHPurple"> Log in</Button>

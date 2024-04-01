@@ -14,7 +14,7 @@ const SearchMenu = () => {
                 <Form.Control type="text" placeholder="Search" style={{ border: 'none',width:'66vw',padding:'0px',height:'2em'}}></Form.Control>
             </div>
             <div className='search-selection'>
-                <Form.Check className="search-radio hub-radio" type="radio" id="searchHub" label={<>Hubs</>} name="searchSelection" />
+                <Form.Check className="search-radio hub-radio" type="radio" id="searchHub" label={<>Hubs</>} name="searchSelection" defaultChecked/>
                 <Form.Check className="search-radio" type="radio" id="searchMarket" label={<>Market</>} name="searchSelection" />
             </div>
         </div>
