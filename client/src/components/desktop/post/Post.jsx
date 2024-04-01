@@ -9,11 +9,11 @@ import { FaThumbsDown } from "react-icons/fa";
 import { FaRegComments } from "react-icons/fa";
 import { FaComments } from "react-icons/fa6";
 import Comments from "../comments/Comments.jsx";
+import PostPopup from "../../PostPopup/PostPopup.jsx";
 
 
 
-
-const Post = ({ post }) => {
+const Post = ({ post, isPopup, hubTitle }) => {
     // to control image pop up when clicked
     const [showModal, setShowModal] = useState(false);
     const [modalImageUrl, setModalImageUrl] = useState("");
@@ -78,16 +78,35 @@ const Post = ({ post }) => {
         setOpenComment(!openComment);
     } ;
 
+    const maxLength = 350;
+
     return (
         <div className = "post">
             <div className="postContainer">
 
                 <div className="postHeading">
-                    <div className="post_hubName">
-                       Hub: {post.hubName}
-                    </div>
+
+                    {hubTitle ? (
+                        <div className="post_hubName">
+                            Hub: {post.hubName}
+                        </div>
+                    ) : null}
+
                     <div className="postTitle">
-                        {post.postTitle}
+                        {!isPopup && (
+                            <PostPopup
+                                title={post.postTitle}
+                                hubName={post.hubName}
+                                content={post}
+                                owner={post.postOwner}
+                            />
+                        )}
+
+                        {isPopup && (
+                            <div>
+                                {post.postTitle}
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -118,7 +137,26 @@ const Post = ({ post }) => {
                     )}
 
                     <p className = "postOwner"> <strong>By: </strong> {post.postOwner}</p>
-                    <p className = "postDescription"> {post.desc} </p>
+
+                    {isPopup && (
+                        <p className = "postDescription"> {post.desc} </p>
+                    )}
+
+                    {!isPopup && (
+                        <div>
+                            <p className="postDescription">
+                                {post.desc.length > maxLength ? `${post.desc.substring(0, maxLength)}...` : post.desc}
+                            </p>
+                            {post.desc.length > maxLength && (
+                                <PostPopup
+                                    title="Read more..."
+                                    hubName={post.hubName}
+                                    content={post}
+                                    owner={post.postOwner}
+                                />
+                            )}
+                        </div>
+                    )}
                 </div>
 
                 <div className="post_info">
@@ -139,7 +177,10 @@ const Post = ({ post }) => {
 
                 </div>
                 {showModal && <ImageModal imageUrl={modalImageUrl} onClose={toggleModal} />}
-                {openComment && <Comments/>}
+
+                {!isPopup && openComment && <Comments post={post} isPopup={isPopup}/>}
+
+                {isPopup && <Comments post={post} isPopup={isPopup}/>}
             </div>
         </div>
     );

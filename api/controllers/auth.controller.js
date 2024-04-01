@@ -26,7 +26,17 @@ export const register = async (req, res)=>{
         res.status(201).send("Created new user successfully!");
 
     }catch (error){
-        res.status(500).send("Error with registering");
+        if (error.code === 11000) { // MongoDB duplicate key error
+            let errorMessage = "An error occurred while registering";
+            if (error.keyPattern.username) {
+                errorMessage = "Username is already in use.";
+            } else if (error.keyPattern.email) {
+                errorMessage = "Email is already in use.";
+            }
+            res.status(400).send(errorMessage);
+        }else {
+            res.status(500).send("Error with registering");
+        }
     }
 };
 
