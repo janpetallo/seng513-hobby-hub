@@ -5,6 +5,8 @@ import PostToggle from "../../components/PostToggle/PostToggle.jsx";
 import {Button, FloatingLabel, Form} from "react-bootstrap";
 import ImageDropzone from "../../components/imagedropzone/ImageDropzone.jsx";
 import UseGoBack from "../../utilities/UseGoBack/UseGoBack.jsx";
+import { MdCancelPresentation } from "react-icons/md";
+import { BiSend } from "react-icons/bi";
 
 const HubPost = () => {
 
@@ -45,11 +47,11 @@ const HubPost = () => {
 
             <div className="d-flex justify-content-center flex-wrap mt-3">
                 <Button className="hub-post-btn" variant="secondary" onClick={UseGoBack()}>
-                    Cancel
+                    <MdCancelPresentation /> Cancel
                 </Button>
 
                 <Button className="hub-post-btn" variant="HHPurple" type="submit">
-                    Post
+                    <BiSend /> Post
                 </Button>
             </div>
 

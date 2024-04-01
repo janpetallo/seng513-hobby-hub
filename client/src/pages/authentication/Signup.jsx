@@ -6,24 +6,99 @@ import {Link, useNavigate} from "react-router-dom";
 import {useFormik} from "formik";
 import {SignupSchema} from "./schemas/SignupSchema.jsx";
 import newRequest from "../../utilities/newRequest.js";
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/bootstrap.css';
+import {useState} from "react";
+import {formatNumber, isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNumberLength} from "libphonenumber-js";
 
 const Signup = () => {
+    // for errors coming out of the controller when trying to register
+    const [emailErrors, setEmailErrors] = useState({message: "", status: false});
+    const [usernameErrors, setUsernameErrors] = useState({message: "", status: false});
 
     // navigation hook
     const navigate = useNavigate();
 
     // register user function
     const onSubmit = async (values, actions) => {
-        try {
-            await newRequest.post("/auth/register", {username: values.username,
-                password: values.password, email: values.email, birthday: values.birthdate,});
 
-            navigate("/login"); // navigate to the login page
-        }catch (err){
-            console.log(err.response.data);
+        let pNumber = "";
+        let pass = true;
+
+        //  if the phone number is not empty, user is trying to give a number then check it otherwise, make account
+        if(phoneNumber.cc !== "") {
+            // Pare and format the phone number input, remove the dialcode, so when formatting the dial code can be put
+            // back in
+            pNumber = formatNumber(
+                {
+                    country: phoneNumber.cc.countryCode.toUpperCase(),
+                    phone: phoneNumber.number.slice(phoneNumber.cc.dialCode.length)
+                },
+                'INTERNATIONAL'
+            );
+
+            //  Check validity
+            if(
+                (((isPossiblePhoneNumber(pNumber) &&
+                    isValidPhoneNumber(pNumber) &&
+                    validatePhoneNumberLength(pNumber) === undefined))) ||
+                (pNumber.length === phoneNumber.cc.dialCode.length + 1)
+            )
+            {
+                setPhoneError("")
+                // console.log("YES")
+                // console.log(pNumber)
+            } else {
+                pass = false
+                setPhoneError("Invalid phone number")
+            }
         }
-        actions.resetForm();
+
+        // If the phone number is entered and invalid then throw error
+        // If the phone number is empty it is okay (not required)
+        if(pass) {
+             try {
+                 await newRequest.post("/auth/register", {username: values.username,
+                     password: values.password, email: values.email, birthday: values.birthdate, phone: phoneNumber.number});
+                 setEmailErrors({message: "", status: false}); // clear email errors
+                 setUsernameErrors({message: "", status: false}); // clear username errors
+                 navigate("/login"); // navigate to the login page
+                 actions.resetForm();
+            }catch (err){
+                 console.log("here");
+                 console.log(err);
+                 if (err.response && err.response.status === 400) {
+                      if(err.response.data === "Username is already in use."){
+                         setUsernameErrors({message: "Username is already in use.", status: true});
+                         setEmailErrors({message: "", status: false}); // clear email errors
+
+                     }else if (err.response.data === "Email is already in use."){
+                         setUsernameErrors({message: "", status: false}); // clear username errors
+                         setEmailErrors({message: "Email is already in use.", status: true});
+                     }
+                 } else {
+                     console.log(err);
+                 }
+            }
+        }
     }
+
+    // Store phone number
+    const [phoneNumber, setPhoneNumber] = useState({
+        number: '',
+        cc: ''
+    });
+
+    // Store phone number
+    const handlePhone = (value, country) => {
+        setPhoneError("")
+        setPhoneNumber({
+            number: value,
+            cc: country
+        });
+    };
+
+    const [phoneError, setPhoneError] = useState(null);
 
     const {values, errors, touched, isSubmitting,handleBlur, handleChange, handleSubmit} = useFormik({
         initialValues: {
@@ -70,10 +145,10 @@ const Signup = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 isValid={touched.username && !errors.username}
-                                isInvalid={touched.username && !!errors.username}
+                                isInvalid={touched.username && (!!errors.username || usernameErrors.status)}
                             />
                             <Form.Control.Feedback type="invalid">
-                                {errors.username}
+                                {errors.username || usernameErrors.message}
                             </Form.Control.Feedback>
                         </FloatingLabel>
 
@@ -90,12 +165,25 @@ const Signup = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 isValid={touched.email && !errors.email}
-                                isInvalid={touched.email && !!errors.email}
+                                isInvalid={touched.email && (!!errors.email || emailErrors.status)}
                             />
                             <Form.Control.Feedback type="invalid">
-                                {errors.email}
+                                {errors.email || emailErrors.message}
                             </Form.Control.Feedback>
                         </FloatingLabel>
+
+                        <Form.Group className="phone-dropdown auth-label mb-3">
+                            <PhoneInput
+                                value={phoneNumber.number}
+                                country={'ca'}
+                                onChange={handlePhone}
+                            />
+                            {phoneError &&
+                                <Form.Text className="text-danger">
+                                    {phoneError}
+                                </Form.Text>
+                            }
+                        </Form.Group>
 
                         <FloatingLabel
                             controlId="floating-password"
