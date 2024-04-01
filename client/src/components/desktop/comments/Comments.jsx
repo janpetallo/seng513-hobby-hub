@@ -72,12 +72,14 @@ const Comments = ( {post, isPopup} ) => {
                 ))}
 
                 {comments.length > maxCommentsToShow && (
-                    <PostPopup
-                        title={`View more comments...`}
-                        hubName={post.hubName}
-                        content={post}
-                        owner={post.postOwner}
-                    />
+                    <div className="ms-4">
+                        <PostPopup
+                            title={`View more comments...`}
+                            hubName={post.hubName}
+                            content={post}
+                            owner={post.postOwner}
+                        />
+                    </div>
                 )}
             </div>
         )}
