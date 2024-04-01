@@ -12,6 +12,9 @@ import {useState} from "react";
 import {formatNumber, isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNumberLength} from "libphonenumber-js";
 
 const Signup = () => {
+    // for errors coming out of the controller when trying to register
+    const [emailErrors, setEmailErrors] = useState({message: "", status: false});
+    const [usernameErrors, setUsernameErrors] = useState({message: "", status: false});
 
     // navigation hook
     const navigate = useNavigate();
@@ -57,12 +60,26 @@ const Signup = () => {
              try {
                  await newRequest.post("/auth/register", {username: values.username,
                      password: values.password, email: values.email, birthday: values.birthdate, phone: phoneNumber.number});
-
-                navigate("/login"); // navigate to the login page
+                 setEmailErrors({message: "", status: false}); // clear email errors
+                 setUsernameErrors({message: "", status: false}); // clear username errors
+                 navigate("/login"); // navigate to the login page
+                 actions.resetForm();
             }catch (err){
-                console.log(err.response.data);
+                 console.log("here");
+                 console.log(err);
+                 if (err.response && err.response.status === 400) {
+                      if(err.response.data === "Username is already in use."){
+                         setUsernameErrors({message: "Username is already in use.", status: true});
+                         setEmailErrors({message: "", status: false}); // clear email errors
+
+                     }else if (err.response.data === "Email is already in use."){
+                         setUsernameErrors({message: "", status: false}); // clear username errors
+                         setEmailErrors({message: "Email is already in use.", status: true});
+                     }
+                 } else {
+                     console.log(err);
+                 }
             }
-            actions.resetForm();
         }
     }
 
@@ -128,10 +145,10 @@ const Signup = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 isValid={touched.username && !errors.username}
-                                isInvalid={touched.username && !!errors.username}
+                                isInvalid={touched.username && (!!errors.username || usernameErrors.status)}
                             />
                             <Form.Control.Feedback type="invalid">
-                                {errors.username}
+                                {errors.username || usernameErrors.message}
                             </Form.Control.Feedback>
                         </FloatingLabel>
 
@@ -148,10 +165,10 @@ const Signup = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 isValid={touched.email && !errors.email}
-                                isInvalid={touched.email && !!errors.email}
+                                isInvalid={touched.email && (!!errors.email || emailErrors.status)}
                             />
                             <Form.Control.Feedback type="invalid">
-                                {errors.email}
+                                {errors.email || emailErrors.message}
                             </Form.Control.Feedback>
                         </FloatingLabel>
 
