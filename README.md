@@ -18,6 +18,8 @@ The following packages and dependencies are being used:
 13. JsonWebToken
 14. Cookie-parser
 13. react-icons
+14. libphonenumber-js
+15. react-phone-input-2
 
 ## Getting started (running with Docker)
 <u>Database Seeding Scripts:</u>
