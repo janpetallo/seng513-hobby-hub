@@ -1,7 +1,7 @@
 import "./posts.scss";
 import Post from "../post/Post.jsx";
 
-const Posts = () =>{
+const Posts = ({hubTitle}) =>{
     // Temporary data
     const posts = [
         {
@@ -92,18 +92,15 @@ const Posts = () =>{
             dislikes: 2,
             comments: 7,
         },
-
-    ];
-
+];
 
     return <div className = "posts">
         {posts.map(post=>(
-            <Post post={post} isPopup={false} key={post.id}/>
+            <Post hubTitle={hubTitle} post={post} isPopup={false} key={post.id}/>
         ))}
         </div>;
 };
 
 export default Posts;
 
-// Todo:
-// disable over flow on image modal, make carousel fixed size, carousel second image doesn't expand in image modal
+// Todo: make carousel fixed size

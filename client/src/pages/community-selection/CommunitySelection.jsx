@@ -47,10 +47,10 @@ function CommunitySelection() {
                     <Modal.Title className="create-modal-title">Create a New Hub</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form>
+                    <Form className="ps-3 pe-3">
                         <Form.Group controlId="formHubName">
                             <Form.Label className="create-form-label" >Hub Name</Form.Label>
-                            <Form.Control id="create-form-control" type="text" placeholder="Enter hub name" maxLength={18} value={hubName} onChange={e => setHubName(e.target.value)} />
+                            <Form.Control className="mb-3" id="create-form-control" type="text" placeholder="Enter hub name" maxLength={18} value={hubName} onChange={e => setHubName(e.target.value)} />
                                 {isHubNameTooLong && <Form.Text className="text-danger">Hub name cannot exceed 18 characters</Form.Text>}
                         </Form.Group>
 

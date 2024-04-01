@@ -55,7 +55,6 @@ function App() {
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
-                    Test side
                 </Col>
             </Row>
         )
@@ -87,11 +86,6 @@ function App() {
             path: "/",
             element: <Layout/>,
             children: [
-                // {
-                //     path: "/",
-                //     element: <Home/>
-                //
-                // },
                 {
                     path: "/",
                     element: <HomeLayout/>,

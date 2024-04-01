@@ -6,7 +6,7 @@ import Posts from "../../components/desktop/posts/Posts.jsx";
 const Home = () => {
     return (
         <div className="home">
-            <Posts/>
+            <Posts hubTitle={true}/>
         </div>
     )
 }

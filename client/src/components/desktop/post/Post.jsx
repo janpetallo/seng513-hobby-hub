@@ -12,7 +12,8 @@ import Comments from "../comments/Comments.jsx";
 import PostPopup from "../../PostPopup/PostPopup.jsx";
 
 
-const Post = ({ post, isPopup }) => {
+
+const Post = ({ post, isPopup, hubTitle }) => {
     // to control image pop up when clicked
     const [showModal, setShowModal] = useState(false);
     const [modalImageUrl, setModalImageUrl] = useState("");
@@ -84,24 +85,28 @@ const Post = ({ post, isPopup }) => {
             <div className="postContainer">
 
                 <div className="postHeading">
-                    <div className="post_hubName">
-                        Hub: {post.hubName}
-                    </div>
+
+                    {hubTitle ? (
+                        <div className="post_hubName">
+                            Hub: {post.hubName}
+                        </div>
+                    ) : null}
+
                     <div className="postTitle">
-                        {!isPopup &&
+                        {!isPopup && (
                             <PostPopup
                                 title={post.postTitle}
                                 hubName={post.hubName}
                                 content={post}
                                 owner={post.postOwner}
                             />
-                        }
+                        )}
 
-                        {isPopup &&
+                        {isPopup && (
                             <div>
                                 {post.postTitle}
                             </div>
-                        }
+                        )}
                     </div>
                 </div>
 
