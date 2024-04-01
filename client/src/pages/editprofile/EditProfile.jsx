@@ -10,6 +10,7 @@ import Back from "../../assets/editprofile/back.svg";
 import Birthday from "../../assets/editprofile/birthday.svg";
 import {FormikContext, useFormik} from "formik";
 import {UserSchema} from "../editprofile/UserSchema.jsx";
+import { useNavigate} from 'react-router-dom';
 
 
 const EditProfilePage = () => {
@@ -55,15 +56,18 @@ const EditProfilePage = () => {
         onSubmit,
     })
 
-    console.log(touched.password);
+
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1); // This will navigate back one page
+    };
 
     return (
-    <div className="background">
+    <div className="edit-prof-background">
         <div className="edit-prof-container">
-            <div className="backbutton">
-                <Link to="/">
-                    <img src={Back} alt="back button" className ="img-icon mt-4"/>
-                </Link>
+            <div className="edit-prof-backbutton" onClick={goBack}>
+                <img src={Back} alt="back button" className ="img-icon mt-4"/>
             </div>
             <div className = "avantar-section">
                 <div className = "edit-prof-img d-flex flex-column align-items-center">

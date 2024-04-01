@@ -82,6 +82,14 @@ const NavBar = () => {
                                 <Button className="d-search-btn" variant="HHPurple">Search</Button>
                             </div>
 
+
+                            <div className="nav-profileImage">
+                                <Link to={"/editprofile"}>
+                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile Image" className="nav-profilePic"/>
+                                </Link>
+                                <p className="nav-profileImageText">Click to Edit Profile</p>
+                            </div>
+
                             <Button variant="HHPurple"> Log in</Button>
                         </Col>
                     </Row>

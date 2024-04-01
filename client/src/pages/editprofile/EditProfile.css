@@ -22,8 +22,9 @@
 }
 
 
-.backbutton{
+.edit-prof-backbutton{
     margin-left: 3vw;
+    cursor: pointer;
 }
 
 /* Custom CSS
@@ -47,7 +48,7 @@
 }
 
 @media screen and (min-width: 575px){
-    .background {
+    .edit-prof-background {
         background-image: url("../../assets/authentication/desktop/background.jpg");
         background-size: cover;
         background-repeat: no-repeat;

@@ -106,3 +106,41 @@
     margin-left: auto;
     height: 60px;
 }
+
+.nav-profilePic{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.nav-profileImage {
+    position: relative; /* Set the container to relative positioning */
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.nav-profileImageText {
+    visibility: hidden; /* Hide the tooltip text by default */
+    width: auto;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    text-align: center;
+    position: absolute; /* Position the tooltip text absolutely */
+    top: 100%; /* Position it above the image */
+    left: 40%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+    width:120px;
+    height:16px;
+}
+
+.nav-profileImage:hover .nav-profileImageText {
+    visibility: visible; /* Show the tooltip text when hovering over the container */
+    opacity: 1;
+}
