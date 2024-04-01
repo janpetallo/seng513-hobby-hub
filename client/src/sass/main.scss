@@ -5,7 +5,8 @@
 @import '../../node_modules/bootstrap/scss/variables';
 
 $custom-colors: (
-        "HHPurple": #8e47ff
+        "HHPurple": #8e47ff,
+        "HHPurple-subtle": #f2eff5,
 );
 
 $theme-colors:map-merge($theme-colors, $custom-colors);
