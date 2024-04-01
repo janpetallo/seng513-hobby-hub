@@ -11,13 +11,13 @@
 .card-title {
   font-size: 1.1rem; /* Adjust the font size as needed */
   font-weight: 500;
-  margin: 0%;
+  margin: 0;
 
 }
 .card-text{
   font-size: 1rem;
   padding: 0;
-  margin: 0%;
+  margin: 0;
 }
 .card-img-resize {
   object-fit: cover;
@@ -35,7 +35,7 @@
   display: flex;
   flex-direction: column;
   height: 100%;
-  margin: 0%;
+  margin: 0;
 }
 .badge-color{
   background-color:var(--fnt-hover);
@@ -43,4 +43,7 @@
 }
 .star-rating{
   padding-right: 4px;
+}
+.remove-styling{
+  text-decoration: none;
 }

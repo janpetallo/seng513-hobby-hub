@@ -24,7 +24,7 @@ const Marketplace = () => {
             username: "user2",
             email:"user1@email.com",
             phone:1234567890,
-            description: "Gyarados super long text for testing",
+            description: "Gyarados",
             image:"https://crystal-cdn4.crystalcommerce.com/photos/6772128/430px-GyaradosPok%C3%A9monGO22.jpg",
             price: 3.50,
             condition:"New",
@@ -75,6 +75,7 @@ const Marketplace = () => {
                 {cards.map((card, i) => (
                     <Col className="mb-4 d-flex justify-content-center align-items-stretch" key={i}>
                         <div className="card-deck">
+                            <Link to="sellingItems" state={card} className="card-deck p-0 m-0 remove-styling">
                             <Card className="card" style={{ width: '13.5rem'}}>
                                 <Card.Img variant="top" className="card-img card-img-resize" src={card.image}  height={200} />
                                 <Card.Body className="p-0 m-0" style={{ height: '100%' }}>
@@ -93,6 +94,7 @@ const Marketplace = () => {
                                     </div>
                                 </Card.Body>
                             </Card>
+                            </Link>
                         </div>
                     </Col>
                 ))}

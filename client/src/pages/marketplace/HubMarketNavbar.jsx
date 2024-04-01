@@ -14,7 +14,7 @@ const HubMarketNavbar = () => {
                     <Link className="text-decoration-none LinkColor">My Hub Corner</Link>
                 </Col>
                 <Col className="d-flex justify-content-center align-items-center">
-                    <Link className="text-decoration-none LinkColor">My Marketplace Corner</Link>
+                    <Link to="/marketplace" className="text-decoration-none LinkColor">My Marketplace Corner</Link>
                 </Col>
 
             </Container>

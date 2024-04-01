@@ -16,6 +16,7 @@ import Home from "./pages/home/Home.jsx";
 import Signup from "./pages/authentication/Signup.jsx";
 import UnderDevelopment from "./pages/underdevelopment/UnderDevelopment.jsx";
 import HubMarketNavbar from "./pages/marketplace/HubMarketNavbar.jsx";
+import Marketplace from "./pages/marketplace/Marketplace.jsx";
 
 function App() {
 
@@ -70,6 +71,20 @@ function App() {
             </Row>
         )
     }
+    const MarketplaceLayout = () => {
+        return (
+            <Row>
+                <Col className="m-0 p-0">
+                    <HubMarketNavbar/>
+                    <Outlet/>
+                </Col>
+                <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
+                    Test side
+                </Col>
+            </Row>
+        )
+    }
+
 
     // route protection function
     const ProtectedRoute = ({children}) => {
@@ -111,7 +126,14 @@ function App() {
                 },
                 {
                     path:"/marketplace",
-                }
+                    element:<MarketplaceLayout/>,
+                    children:[
+                        {
+                            path:"/marketplace",
+                            element: <Marketplace/>
+                        },
+                    ]
+                },
             ]
         },
         {
