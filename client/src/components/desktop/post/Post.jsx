@@ -9,6 +9,7 @@ import { FaThumbsDown } from "react-icons/fa";
 import { FaRegComments } from "react-icons/fa";
 import { FaComments } from "react-icons/fa6";
 import Comments from "../comments/Comments.jsx";
+import PostPopup from "../../PostPopup/PostPopup.jsx";
 
 
 
