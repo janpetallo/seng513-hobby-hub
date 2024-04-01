@@ -1,0 +1,14 @@
+:root {
+    --default-fnt-clr: #8e47ff;
+    --hover-fnt-clr: #6100f5;
+}
+
+.post-pop-link {
+    text-decoration: underline;
+    color: var(--default-fnt-clr);
+}
+
+.post-pop-link:hover {
+    cursor: pointer;
+    color: var(--hover-fnt-clr);
+}
