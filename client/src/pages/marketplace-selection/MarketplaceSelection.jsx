@@ -21,7 +21,7 @@ const MarketplaceSelection = () => {
                         <Row>
                             {/* <Row id={i} className="font-check"> */}
                             {category.markets.map((market, index) => (
-                                <Col sm={2} xs={4} key={index} className="col-container m-2 p-0">
+                                <Col sm={2} xs={4} key={index} className="col-container my-2 me-4 p-3">
                                     <div className="text-center p-1 ">
                                         {market}
                                     </div>
