@@ -30,7 +30,7 @@ function CreateHubPageMobile() {
     }
 
     return (
-        <div className="create-hub-page">
+        <div className="create-hub-page ms-2 me-2">
             <div id="create-hub-mobile">Create a New Hub</div>
             <Form>
                 <Form.Group controlId="formHubName">
