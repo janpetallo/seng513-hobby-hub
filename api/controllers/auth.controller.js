@@ -26,9 +26,6 @@ export const register = async (req, res)=>{
         res.status(201).send("Created new user successfully!");
 
     }catch (error){
-        console.log("here");
-        console.log(error);
-        console.log(error.code);
         if (error.code === 11000) { // MongoDB duplicate key error
             let errorMessage = "An error occurred while registering";
             if (error.keyPattern.username) {
