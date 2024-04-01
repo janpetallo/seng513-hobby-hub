@@ -20,7 +20,7 @@ function PostPopup({ title, hubName, owner, content }) {
                 </Offcanvas.Header>
                 <Offcanvas.Body className="p-0 bg-HHPurple-subtle">
                     <Container className="bg-white">
-                        <Post post={content} isPopup={true}/>
+                        <Post hubTitle={true} post={content} isPopup={true}/>
                     </Container>
                 </Offcanvas.Body>
             </Offcanvas>

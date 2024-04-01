@@ -93,20 +93,20 @@ const Post = ({ post, isPopup, hubTitle }) => {
                     ) : null}
 
                     <div className="postTitle">
-                        {!isPopup &&
+                        {!isPopup && (
                             <PostPopup
                                 title={post.postTitle}
                                 hubName={post.hubName}
                                 content={post}
                                 owner={post.postOwner}
                             />
-                        }
+                        )}
 
-                        {isPopup &&
+                        {isPopup && (
                             <div>
                                 {post.postTitle}
                             </div>
-                        }
+                        )}
                     </div>
                 </div>
 
