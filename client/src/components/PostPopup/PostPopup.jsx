@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Post from "../desktop/post/Post.jsx";
-import {Offcanvas} from "react-bootstrap";
+import {Col, Container, Offcanvas, Row} from "react-bootstrap";
 import "./PostPopup.scss"
 
 function PostPopup({ title, hubName, owner, content }) {
@@ -18,8 +18,10 @@ function PostPopup({ title, hubName, owner, content }) {
                 <Offcanvas.Header className="bg-HHPurple text-white" closeButton>
                     <Offcanvas.Title>{`${owner} posted to ${hubName}`}</Offcanvas.Title>
                 </Offcanvas.Header>
-                <Offcanvas.Body>
-                    <Post post={content} isPopup={true}/>
+                <Offcanvas.Body className="p-0 bg-HHPurple-subtle">
+                    <Container className="bg-white">
+                        <Post post={content} isPopup={true}/>
+                    </Container>
                 </Offcanvas.Body>
             </Offcanvas>
         </>
