@@ -72,6 +72,15 @@
     opacity: 0.5;
 }
 
+.phone-dropdown {
+    z-index: 9999;
+    .react-tel-input {
+        .form-control {
+            width: 100%;
+        }
+    }
+}
+
 
 @media screen and (min-width: 576px){
 

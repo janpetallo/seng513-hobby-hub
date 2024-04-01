@@ -1,15 +1,10 @@
 import React from "react";
 import "./UnderDevelopment.scss"
 import {Col, Container, Row} from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
+import UseGoBack from "../../utilities/UseGoBack/UseGoBack.jsx";
 
 const UnderDevelopment = () =>{
-
-    const navigate = useNavigate();
-
-    const goBack = () => {
-        navigate(-1);
-    };
 
     return (
         <Container fluid className="notfound-container">
@@ -19,7 +14,7 @@ const UnderDevelopment = () =>{
                         <h1 className="text-white fw-bolder">This Page Is Under Development</h1>
                         <h1 className="text-white fw-bolder">Some Journey Too Far Into The Great Unknown</h1>
                         <h1 className="text-white fw-bolder">There Is Nothing Here For You</h1>
-                        <Link onClick={goBack} to="#"><h2 className="text-white fw-bolder">It Is Time To Return To Your World!</h2></Link>
+                        <Link onClick={UseGoBack()} to="#"><h2 className="text-white fw-bolder">It Is Time To Return To Your World!</h2></Link>
                     </div>
                 </Col>
             </Row>

@@ -1,0 +1,112 @@
+.post{
+  .postContainer{
+    // styling for the post container
+    padding: 20px;
+
+    .postHeading{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .post_hubName{
+      font-weight: bold;
+    }
+
+    .postTitle{
+      font-weight: bold;
+    }
+
+    .post_content{
+      img{
+        max-width: 90%;
+        display: block;
+        margin: 0 auto;
+        padding-top: 10px;
+        padding-bottom: 20px;
+        border-radius: 30px;
+      }
+    }
+
+    .post_info{
+      // flex the 3 buttons inside of the post_info
+      display: flex;
+      align-items: center;
+      gap: 25px;
+
+
+      // for the like button
+      .post_liked{
+        // this is to flex and gap the thumbs up and number of likes
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        // disable user selector so the number of likes doesn't keep getting selected
+        user-select: none;
+
+        // this is to style the thumbs up when filled in
+        .post_liked_thumbs_up{
+          font-size: 24px;
+          color: #8e47ff;
+        }
+
+        // this is to style the thumbs up when not filled in (the user didn't click it yet)
+        .post_thumbs_up{
+          font-size: 24px;
+          color: #8e47ff;
+        }
+      }
+
+
+      // for the dislike button
+      .post_dislike{
+        // this is to flex and gap the thumbs up and number of likes
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        // disable user selector so the number of dislikes doesn't keep getting selected
+        user-select: none;
+
+        // this is to style the thumbs down when filled in
+        .post_dislike_thumbs_down{
+          font-size: 24px;
+          color: #8e47ff;
+        }
+
+        // this is to style the thumbs down when not filled in (the user didn't click it yet)
+        .post_thumbs_down{
+          font-size: 24px;
+          color: #8e47ff;
+        }
+      }
+
+
+      // for the comment button
+      .post_comment{
+        // this is to flex and gap the thumbs up and number of likes
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        // disable user selector so the number of comments doesn't keep getting selected
+        user-select: none;
+
+        // this is to style the comment button when filled in
+        .post_commented{
+          font-size: 30px;
+          color: #8e47ff;
+        }
+
+        // this is to style the comment button when not filled in (the user didn't click it yet)
+        .post_no_comment{
+          font-size: 30px;
+          color: #8e47ff;
+        }
+      }
+
+
+    }
+
+  }
+}
+

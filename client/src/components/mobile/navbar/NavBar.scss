@@ -16,4 +16,19 @@
     .mobile-create {
         width: 40px;
     }
+
+    #create-dropdown-custom.dropdown-toggle::after {
+        display: none;
+    }
+    
+    #create-dropdown-custom.dropdown-toggle {
+        background-color: transparent;
+        border: none;
+    }
+    
+    .create-item.active,
+    .create-item:hover {
+        background-color: #8e47ff;
+        color: white;
+    }
 }
