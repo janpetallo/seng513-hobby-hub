@@ -13,7 +13,7 @@ import Comments from "../comments/Comments.jsx";
 
 
 
-const Post = ({ post }) => {
+const Post = ({ post, hubTitle }) => {
     // to control image pop up when clicked
     const [showModal, setShowModal] = useState(false);
     const [modalImageUrl, setModalImageUrl] = useState("");
@@ -83,9 +83,13 @@ const Post = ({ post }) => {
             <div className="postContainer">
 
                 <div className="postHeading">
-                    <div className="post_hubName">
-                       Hub: {post.hubName}
-                    </div>
+
+                    {hubTitle ? (
+                        <div className="post_hubName">
+                            Hub: {post.hubName}
+                        </div>
+                    ) : null}
+
                     <div className="postTitle">
                         {post.postTitle}
                     </div>
