@@ -92,9 +92,7 @@ const Posts = ({hubTitle}) =>{
             dislikes: 2,
             comments: 7,
         },
-
-
-
+];
 
     return <div className = "posts">
         {posts.map(post=>(
