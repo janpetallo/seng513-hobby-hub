@@ -83,8 +83,8 @@ const NavBar = () => {
                                 <Button className="d-search-btn" variant="HHPurple">Search</Button>
                                 <div className="search-dropdown"  id="search-dropdown">
                                     <span>Search in:  </span>
-                                    <label><input type="radio" value="Hubs" defaultChecked/> Hubs</label>
-                                    <label><input type="radio" value="Market"/> Market</label>
+                                    <label><input type="radio" name="searchSelection" value="Hubs" defaultChecked/> Hubs</label>
+                                    <label><input type="radio" name ="searchSelection" value="Market"/> Market</label>
                                 </div>  
                             </div>
 
