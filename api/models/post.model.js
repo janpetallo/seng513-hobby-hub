@@ -3,10 +3,9 @@ const { Schema } = mongoose;
 
 // post schema model
 const forumPostSchema = new Schema({
-    username:{
-        type: Schema.Types.ObjectId,
-        ref: 'User', // Reference to the User model
-        required: false //todo: make this true once final model is completed
+    userId:{
+        type: String,
+        required: true
     },
     hubName: {
         type: String,

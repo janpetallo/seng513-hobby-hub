@@ -5,7 +5,7 @@ export const deleteUser = async (req, res)=>{
     // get the current user
     const currentUser = await User.findById(req.params.id);
 
-    if(req.user.id !== currentUser._id.toString()){
+    if(req.userId !== currentUser._id.toString()){
         return res.status(403).send("Error you are not authorized to delete this account! You can only delete your own account!");
     }
     // delete user by id
