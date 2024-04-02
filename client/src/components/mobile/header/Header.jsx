@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Link } from "react-router-dom";
 import "./Header.scss"
 import {Col, Container, Offcanvas, Row} from "react-bootstrap";
 import Logo from "../../../assets/authentication/mobile/logo.svg"
@@ -24,8 +25,11 @@ const Header = () =>{
                             <Offcanvas.Title>Offcanvas</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
-                            Some text as placeholder. In real life you can have the elements you
-                            have chosen. Like, text, images, lists, etc.
+                            <ul id='menu-list' className="menu-list">
+                                <li className="hamburger-menu-item mb"><Link to="/" onClick={handleClose}>Home</Link></li>
+                                <li className="hamburger-menu-item mb"><Link to="/search-menu" onClick={handleClose}>Search</Link></li>
+                                {/* ... other menu items ... */}
+                            </ul>
                         </Offcanvas.Body>
                     </Offcanvas>
 
