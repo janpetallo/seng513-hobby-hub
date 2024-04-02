@@ -27,6 +27,7 @@ import MarketplaceSelection from "./pages/marketplace-selection/MarketplaceSelec
 function useDesktopOrLaptopMediaQuery() {
     return useMediaQuery({ query: '(min-width: 576px)' });
 }
+import EditProfile from './pages/editprofile/EditProfile.jsx';
 
 function App() {
 
@@ -156,6 +157,10 @@ function App() {
         {
             path: "/underdevelopment",
             element:<UnderDevelopment/>
+        },
+        {
+            path: "/editprofile",
+            element:<EditProfile/>
         },
     ]);
 
