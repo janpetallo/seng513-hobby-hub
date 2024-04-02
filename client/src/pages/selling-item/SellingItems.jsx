@@ -12,10 +12,10 @@ import number from "../../assets/selling-items/phoneNumber.svg";
 
 const SellingItem = () => {
     return(
-        <Container className="border border-5">
+        <Container className="border border-5 h-100 w-100">
             <Row md={2} xs={1} >
                 <Col className="border border-3 col-length">
-                    <div className="container-size">
+                    <div className="contain-image">
                         <Image
                             src="https://crystal-cdn4.crystalcommerce.com/photos/6772128/430px-GyaradosPok%C3%A9monGO22.jpg"
                             className="post-img"
