@@ -27,7 +27,7 @@ import SellingItems from "./pages/selling-item/SellingItems.jsx";
 import SearchMenu from "./pages/search-menu/SearchMenu.jsx";
 import MarketplaceSelection from "./pages/marketplace-selection/MarketplaceSelection.jsx";
 import EditProfile from './pages/editprofile/EditProfile.jsx';
-
+import MarketMenu from "./components/desktop/marketmenu/MarketMenu.jsx";
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
     return useMediaQuery({ query: '(min-width: 576px)' });
@@ -83,6 +83,7 @@ function App() {
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
+                    <MarketMenu/>
                 </Col>
             </Row>
         )
