@@ -11,9 +11,9 @@ const MarketMenu = () => {
     return(
 
 
-        <Container fluid className="border border-5">
+        <Container fluid>
             <div className="d-flex justify-content-center fw-bold">Filter</div>
-            <Row className="border">
+            <Row >
                 <div className="store-filter">
                 <button className="button market-button" id="button-menu">
                     Type
@@ -36,35 +36,35 @@ const MarketMenu = () => {
                             />
                         </button>
 
-                        <div className="w-100 m-0 border border-3">
+                        <div className="w-100 m-0">
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={star} alt="rating" className="rating-stars"/>
                         </div>
-                        <div className="w-100 m-0 border border-3">
+                        <div className="w-100 m-0">
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={unfilledStar} alt="rating" className="rating-stars"/>
                         </div>
-                        <div className="w-100 m-0 border border-3">
+                        <div className="w-100 m-0">
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={unfilledStar} alt="rating" className="rating-stars"/>
                             <Image src={unfilledStar} alt="rating" className="rating-stars"/>
                         </div>
-                        <div className="w-100 m-0 border border-3">
+                        <div className="w-100 m-0">
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={unfilledStar} alt="rating" className="rating-stars"/>
                             <Image src={unfilledStar} alt="rating" className="rating-stars"/>
                             <Image src={unfilledStar} alt="rating" className="rating-stars"/>
                         </div>
-                        <div className="w-100 m-0 border border-3">
+                        <div className="w-100 m-0">
                             <Image src={star} alt="rating" className="rating-stars"/>
                             <Image src={unfilledStar} alt="rating" className="rating-stars"/>
                             <Image src={unfilledStar} alt="rating" className="rating-stars"/>
