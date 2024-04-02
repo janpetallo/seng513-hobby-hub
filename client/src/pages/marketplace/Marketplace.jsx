@@ -79,8 +79,8 @@ const Marketplace = () => {
                             <Card className="card-market">
                                 <Card.Img variant="top" className="card-img card-img-resize" src={card.image}  height={200} />
                                 <Card.Body className="p-0 m-0" style={{ height: '100%' }}>
-                                    <Card.Title class="card-market-title m-0">{card.description}</Card.Title>
-                                    <Badge class="badge" id="badge-color">{card.tag}</Badge>
+                                    <Card.Title className="card-market-title m-0">{card.description}</Card.Title>
+                                    <Badge bg="HHPurple" className="badge" id="badge-color">{card.tag}</Badge>
                                     <div className="d-flex justify-content-between p-0 mb-0">
                                         <Card.Text className="card-market-text fw-bold">C${card.price}</Card.Text>
                                         <div className="d-flex">
