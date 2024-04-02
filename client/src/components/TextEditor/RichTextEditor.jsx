@@ -35,7 +35,7 @@ const modules = {
     }
 }
 
-const RichTextEditor = () => {
+const RichTextEditor = ({ onTextContentChange }) => {
 
     // Callback hook to prevent re-rendering of the text editor toolbar
     // once the div is rendered then callback function is called. This way the div is always defined.
@@ -44,14 +44,27 @@ const RichTextEditor = () => {
         // Check in case the div was not rendered return null instead of error
         if (wrapper == null) return
 
+        // Check if the wrapper already contains the Rich Text Editor
+        if (wrapper.querySelector('.ql-editor')) return;
+
+
         // everytime we render this clear what was there before
         wrapper.innerHTML = ""
 
         // Create a div element to put the editor in
         const richTextEditor = document.createElement("div")
         wrapper.append(richTextEditor)
-        new Quill(richTextEditor, {theme:"snow", modules: modules})
-    }, [])
+
+
+        // Initialize Quill editor
+        const quill = new Quill(richTextEditor, { theme:"snow", modules: modules })
+
+        quill.on("text-change", () => {
+            const content = quill.root.innerHTML;
+            onTextContentChange(content);
+        });
+
+    }, [onTextContentChange]);
 
     return <div className="rich-text-editor" id="container" ref={wrapperRef}></div>
 }
