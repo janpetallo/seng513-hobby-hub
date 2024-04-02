@@ -14,7 +14,7 @@ const MarketplaceSelection = () => {
     ];
     return(
         <>
-            <Container >
+            <Container className="pb-3">
                 {categories.map((category, i) => (
                     <Row key={i} className="mt-2 section-font">
                         {category.section}
