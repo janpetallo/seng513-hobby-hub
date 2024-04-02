@@ -40,7 +40,7 @@ const LeftMenu = () =>{
                         </div>
                     </Link>
 
-                    <Link to="/marketSelection" onClick={() => handleMenuClick('/marketSelection')}>
+                    <Link to="/marketplace-selection" onClick={() => handleMenuClick('/marketSelection')}>
                         <div className={getMenuItemClass('/marketSelection')}>
                             <img src={Market} alt="market"></img>
                             <span>Browse Market</span>
