@@ -20,6 +20,7 @@ const Header = () =>{
 
     const handleMenuClick = (path) => {
         setSelectedMenu(path);
+        setShow(false);
     }
 
     const getMenuItemClass = (path) => {
