@@ -145,7 +145,7 @@ const EditProfilePage = () => {
     };
 
     return (
-    <div className="edit-prof-background">
+    <div className="edit-prof-background pb-3">
         <div className="edit-prof-backbutton" onClick={goBack}>
             <img src={Back} alt="back button" className ="img-icon mt-4"/>
         </div>

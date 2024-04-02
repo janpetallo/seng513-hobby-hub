@@ -17,5 +17,50 @@
         text-align: center;
         margin-right: 2rem;
     }
+
+    
 }
 
+.mobile-left-menu {
+    // position: sticky;
+    // top: 56px;
+    // height: calc(100vh - 76px);
+    // border-right: 1px solid rgba(145, 142, 142, 0.67);
+    border-top: 1px solid rgba(145, 142, 142, 0.67);
+    // overflow: hidden;
+    // direction: rtl;
+}
+
+.mobile-left-menu .item {
+    width: 250px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    margin-left: auto;
+    direction: ltr;
+}
+
+.mobile-left-menu .item .profile-image-mobile {
+    width: 80px; /* Adjust as needed */
+    height: 80px; /* Adjust as needed */
+}
+
+.mobile-left-menu .item img {
+    width: 30px;
+}
+
+.mobile-left-menu .item span {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+
+.no-link-style {
+    text-decoration: none;
+    color: inherit;
+}
+
+.mobile-left-menu .item span .edit-profile-mobile {
+    font-size: 0.8rem; /* Adjust as needed */
+}

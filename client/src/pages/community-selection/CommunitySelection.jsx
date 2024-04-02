@@ -77,7 +77,7 @@ function CommunitySelection() {
                         {category.name}
                         <Row>
                             {category.hubs.map((hub, index) => (
-                                <Col xs={4.5} sm={4} md={3.5} lg={3} key={index} className="col-container my-2 me-4 p-2">
+                                <Col xs={4.5} sm={4} md={3.5} lg={3} key={index} className="col-container my-2 me-4 p-3">
                                     <div className="text-center ">
                                         <Link className='hub-card-link' to={`/${hub.replace(' ', '')}`}>
                                             {hub}
