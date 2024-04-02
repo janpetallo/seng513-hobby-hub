@@ -28,6 +28,7 @@ import SearchMenu from "./pages/search-menu/SearchMenu.jsx";
 import MarketplaceSelection from "./pages/marketplace-selection/MarketplaceSelection.jsx";
 import EditProfile from './pages/editprofile/EditProfile.jsx';
 import MyAdsTrades from "./pages/MyAdsTrades/MyAdsTrades.jsx";
+import MyHubs from "./pages/myhubs/MyHubs.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -121,6 +122,10 @@ function App() {
                         {
                             path: "/choose-posting",
                             element: <ChoosePostingLocation/>
+                        },
+                        {
+                            path: "/myhubs",
+                            element: <MyHubs/>
                         },
                         {
                             path: "/myadstrades",
