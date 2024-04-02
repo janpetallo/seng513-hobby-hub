@@ -48,7 +48,7 @@ const Header = () =>{
                         <Offcanvas.Body>
                         <Container fluid className="p-3 left-menu-hamburger mobile-left-menu">
                                 <Row>
-                                    <Col className="mb-3">
+                                    <Col >
 
                                         <Link to='/editprofile' className="no-link-style" onClick={() => handleMenuClick('/editprofile')}>
                                             <div className={getMenuItemClass('/editprofile')} >
@@ -68,7 +68,7 @@ const Header = () =>{
 
                             <Container fluid className="p-3 left-menu-hamburger mobile-left-menu">
                                 <Row>
-                                    <Col className="">
+                                    <Col >
 
                                         <Link to="/myhubs" className="no-link-style" onClick={() => handleMenuClick('/myhubs')}>
                                             <div className={getMenuItemClass('/myhubs')}>
@@ -105,7 +105,6 @@ const Header = () =>{
                                             </div>
                                         </Link>
 
-                                        
                                     </Col>
                                 </Row>
                             </Container>
