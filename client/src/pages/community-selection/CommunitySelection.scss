@@ -58,7 +58,7 @@
 
 .hub-card-link{
     text-decoration: none;
-    color: 'inherit';
+    color: var(--fnt-reg)
 }
 
 .hub-card .hub-card-title {
@@ -190,7 +190,7 @@
         width: 100%;
         font-size: 20px;
         font-weight: 800;
-        border-top: 1px solid #A19C9C;
+        //border-top: 1px solid #A19C9C;
         border-bottom: 1px solid #A19C9C;
         padding: 10px 0;
         margin: 10px 0; // Add some margin to the top and bottom
@@ -213,3 +213,7 @@
 
     
 }
+
+
+
+

@@ -31,6 +31,7 @@
         cursor: pointer;
         background-color: transparent;
         border: none;
+        height:30px;
     }
 
     img {
@@ -53,6 +54,41 @@
     }
 }
 
+.d-searchbar .search-dropdown {
+    box-sizing: border-box;
+    position: absolute;
+    top: 95%;
+    left: -1px;
+    width: calc(100% + 2.5px);
+    background-color: #d9ccef;
+    border-radius: 0 0 5px 5px;
+    padding:5px;
+    display:none;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    height: 3em;
+}
+
+.d-searchbar:hover {
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    .search-dropdown {
+        display: block;
+    }
+}
+
+
+.search-dropdown input[type="radio"]{
+    accent-color: var(--HHPurple);
+    width:1em;
+    height:1em;
+}
+
+.search-dropdown label{
+    padding: 5px;
+}
+
 
 @media screen and (max-width: 991px) {
     .d-searchbar {
@@ -73,7 +109,20 @@
             display: none;
         }
 
+        .search-dropdown {
+            border: 2px solid #8e47ff;
+            border-top:none;
+        }
+
+        &:hover {
+            .search-dropdown {
+                display: none;
+            }
+        }
+
     }
+
+
 
     .search-visible {
         width: 75%;
@@ -95,7 +144,26 @@
         .d-search-btn {
             display: block;
         }
+
+        .nav-profileImage{
+            display: none;
+        }
+
+        &:hover {
+            box-shadow: 0 0 0 100vmax rgba(18, 18, 18, 0.28);
+            .d-searchbar{
+                border-radius: 5px 5px 0 0;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+        
+            .search-dropdown {
+                display: block;
+            }
+
+            
+        }
     }
+
 }
 
 .offcanvas-header {
@@ -105,4 +173,39 @@
 .sidebar-logo {
     margin-left: auto;
     height: 60px;
+}
+
+.nav-profilePic{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.nav-profileImage {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.nav-profileImageText {
+    visibility: hidden; /* Hide the tooltip text by default */
+    width: auto;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    text-align: center;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 12px;
+    width:120px;
+    height:16px;
+    margin-left: 30px;
+}
+
+.nav-profileImage:hover .nav-profileImageText {
+    visibility: visible; /* Show the tooltip text when hovering over the container */
+    opacity: 1;
 }

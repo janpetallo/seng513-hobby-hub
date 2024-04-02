@@ -22,6 +22,14 @@ import HubPost from "./pages/hubpost/HubPost.jsx";
 import MarketPost from "./pages/marketpost/MarketPost.jsx";
 import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
 import DedicatedHub from "./pages/dedicatedhub/DedicatedHub.jsx";
+import Marketplace from "./pages/marketplace/Marketplace.jsx";
+import SellingItems from "./pages/selling-item/SellingItems.jsx";
+import SearchMenu from "./pages/search-menu/SearchMenu.jsx";
+import MarketplaceSelection from "./pages/marketplace-selection/MarketplaceSelection.jsx";
+import EditProfile from './pages/editprofile/EditProfile.jsx';
+import MyAdsTrades from "./pages/MyAdsTrades/MyAdsTrades.jsx";
+import MyHubs from "./pages/myhubs/MyHubs.jsx";
+import MyPosts from "./pages/myposts/MyPosts.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -54,7 +62,6 @@ function App() {
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
-                    Test side
                 </Col>
             </Row>
         )
@@ -68,6 +75,17 @@ function App() {
                 </Col>
                 <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky" style={{minWidth: `350px`}}>
                     <RightMenu/>
+                </Col>
+            </Row>
+        )
+    }
+    const MarketplaceLayout = () => {
+        return (
+            <Row>
+                <Col className="m-0 p-0 home-layout-body">
+                    <Outlet/>
+                </Col>
+                <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
                 </Col>
             </Row>
         )
@@ -86,11 +104,6 @@ function App() {
             path: "/",
             element: <Layout/>,
             children: [
-                // {
-                //     path: "/",
-                //     element: <Home/>
-                //
-                // },
                 {
                     path: "/",
                     element: <HomeLayout/>,
@@ -111,6 +124,18 @@ function App() {
                             path: "/choose-posting",
                             element: <ChoosePostingLocation/>
                         },
+                        {
+                            path: "/myhubs",
+                            element: <MyHubs/>
+                        },
+                        {
+                            path: "/myposts",
+                            element: <MyPosts/>
+                        },
+                        {
+                            path: "/myadstrades",
+                            element: <MyAdsTrades/>
+                        },
                     ]
                 },
                 {
@@ -124,8 +149,26 @@ function App() {
                     ]
                 },
                 {
+                    path: "/marketplace",
+                    element: <MarketplaceLayout/>,
+                    children: [
+                        {
+                            path: "/marketplace",
+                            element: <Marketplace/>
+                        },
+                    ]
+                },
+                {
+                    path: "/selling-item",
+                    element:<SellingItems/>
+                },
+                {
                     path: "/community-selection",
                     element:<CommunitySelection/>
+                },
+                {
+                    path: "/marketplace-selection",
+                    element: <MarketplaceSelection/>
                 },
                 {
                     path: "/create-hub",
@@ -144,6 +187,10 @@ function App() {
         {
             path: "/underdevelopment",
             element:<UnderDevelopment/>
+        },
+        {
+          path:"editprofile",
+          element:<EditProfile/>
         },
     ]);
 
