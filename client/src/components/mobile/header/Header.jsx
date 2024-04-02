@@ -4,6 +4,11 @@ import "./Header.scss"
 import {Col, Container, Offcanvas, Row} from "react-bootstrap";
 import Logo from "../../../assets/authentication/mobile/logo.svg"
 import { RxHamburgerMenu } from "react-icons/rx";
+import Hubs from "../../../assets/leftsidemenu/hubs.svg";
+import Posts from "../../../assets/leftsidemenu/posts.svg";
+import Ads from "../../../assets/leftsidemenu/ads.svg";
+import Trades from "../../../assets/leftsidemenu/trades.svg";
+
 
 const Header = () =>{
     const [show, setShow] = useState(false);
@@ -25,11 +30,40 @@ const Header = () =>{
                             <Offcanvas.Title>Offcanvas</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
-                            <ul id='menu-list' className="menu-list">
-                                <li className="hamburger-menu-item mb"><Link to="/" onClick={handleClose}>Home</Link></li>
-                                <li className="hamburger-menu-item mb"><Link to="/search-menu" onClick={handleClose}>Search</Link></li>
-                                {/* ... other menu items ... */}
-                            </ul>
+                        <Row>
+                            <Col className="mb-3">
+
+                                <Link to="/" onClick={() => handleMenuClick('/')}>
+                                    <div className="item">
+                                        <img src={Hubs} alt="hubs"></img>
+                                        <span>My Hubs</span>
+                                    </div>
+                                </Link>
+
+                                <Link to="/" onClick={() => handleMenuClick('/')}>
+                                    <div className="item">
+                                        <img src={Posts} alt="hubs"></img>
+                                        <span>My Posts</span>
+                                    </div>
+                                </Link>
+
+                                <Link to="/">
+                                    <div className="item" onClick={() => handleMenuClick('/')}>
+                                        <img src={Ads} alt="hubs"></img>
+                                        <span>My Ads</span>
+                                    </div>
+                                </Link>
+
+                                <Link to="/">
+                                    <div className="item">
+                                        <img src={Trades} alt="hubs"></img>
+                                        <span>My Trades</span>
+                                    </div>
+                                </Link>
+
+                                <hr className="item divider"/>
+                            </Col>
+                        </Row>
                         </Offcanvas.Body>
                     </Offcanvas>
 
