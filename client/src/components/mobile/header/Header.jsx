@@ -7,6 +7,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import Hubs from "../../../assets/leftsidemenu/hubs.svg";
 import Posts from "../../../assets/leftsidemenu/posts.svg";
 import Ads from "../../../assets/leftsidemenu/ads.svg";
+import Logout from "../../../assets/leftsidemenu/logout.svg";
 import Trades from "../../../assets/leftsidemenu/trades.svg";
 
 
@@ -86,6 +87,7 @@ const Header = () =>{
 
                                         <Link to="/login" className="no-link-style" onClick={() => handleMenuClick('/login')}>
                                             <div className={getMenuItemClass('/login')}>
+                                                <img src={Logout} alt="logout"></img>
                                                 <span>Logout</span>
                                             </div>
                                         </Link>
