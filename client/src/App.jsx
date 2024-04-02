@@ -22,7 +22,7 @@ import HubPost from "./pages/hubpost/HubPost.jsx";
 import MarketPost from "./pages/marketpost/MarketPost.jsx";
 import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
 import DedicatedHub from "./pages/dedicatedhub/DedicatedHub.jsx";
-import HubMarketNavbar from "./pages/marketplace/HubMarketNavbar.jsx";
+// import HubMarketNavbar from "./pages/marketplace/HubMarketNavbar.jsx";
 import Marketplace from "./pages/marketplace/Marketplace.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
@@ -53,7 +53,7 @@ function App() {
         return (
             <Row>
                 <Col className="m-0 p-0 home-layout-body">
-                    <HubMarketNavbar/>
+                    {/*<HubMarketNavbar/>*/}
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
@@ -78,7 +78,7 @@ function App() {
         return (
             <Row>
                 <Col className="m-0 p-0 home-layout-body">
-                    <HubMarketNavbar/>
+                    {/*<HubMarketNavbar/>*/}
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">

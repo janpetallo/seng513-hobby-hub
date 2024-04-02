@@ -71,12 +71,12 @@ const Marketplace = () => {
 
         <Container>
 
-            <Row md={3} sm={2} xs={1} className="my-4">
+            <Row lg={3}  sm={2} xs={1} className="my-4">
                 {cards.map((card, i) => (
                     <Col className="mb-4 d-flex justify-content-center align-items-stretch" key={i}>
                         <div className="card-deck">
                             <Link to="sellingItems" state={card} className="card-deck p-0 m-0 remove-styling">
-                            <Card className="card" style={{ width: '13.5rem'}}>
+                            <Card className="card">
                                 <Card.Img variant="top" className="card-img card-img-resize" src={card.image}  height={200} />
                                 <Card.Body className="p-0 m-0" style={{ height: '100%' }}>
                                     <Card.Title class="card-title m-0">{card.description}</Card.Title>

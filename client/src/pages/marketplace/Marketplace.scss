@@ -27,6 +27,7 @@
 }
 .card{
   transition: all 0.3s;
+  width: 14.5rem;
 }
 .card:hover{
   transform: scale(1.1);
@@ -46,4 +47,29 @@
 }
 .remove-styling{
   text-decoration: none;
+}
+
+@media (min-width: 820px) {
+  .card{
+    transition: all 0.3s;
+    width: 13rem;
+  }
+}
+@media (max-width: 1000px) {
+  .card{
+    transition: all 0.3s;
+    width: 16rem;
+  }
+}
+@media (max-width: 575px) {
+  .card{
+    transition: all 0.3s;
+    width: 16rem;
+  }
+}
+@media (min-width: 1001px) {
+  .card{
+    transition: all 0.3s;
+    width: 17rem;
+  }
 }
