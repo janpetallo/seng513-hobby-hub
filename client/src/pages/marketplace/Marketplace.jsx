@@ -5,7 +5,7 @@ import {Col, Container, Card, Badge,Image} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import "./Marketplace.scss";
 import star from "../../assets/marketplace/star.svg";
-
+import HubMarketNavbar from "./HubMarketNavbar.jsx";
 const Marketplace = () => {
 
     const [cards] = useState([
@@ -68,9 +68,10 @@ const Marketplace = () => {
 
 
     return(
+        <>
+        <HubMarketNavbar/>
 
-        <Container>
-
+        <Container className="w-100">
             <Row lg={3}  sm={2} xs={1} className="my-4">
                 {cards.map((card, i) => (
                     <Col className="mb-4 d-flex justify-content-center align-items-stretch" key={i}>
@@ -101,6 +102,7 @@ const Marketplace = () => {
 
             </Row>
         </Container>
+        </>
     )
 }
 export default Marketplace
