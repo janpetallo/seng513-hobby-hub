@@ -128,6 +128,10 @@ function App() {
                             path: "/search-menu",
                             element: <SearchMenu/>
                         },
+                        {
+                            path: "/editprofile",
+                            element:<EditProfile/>
+                        },
                     ]
                 },
                 {
@@ -165,10 +169,6 @@ function App() {
         {
             path: "/underdevelopment",
             element:<UnderDevelopment/>
-        },
-        {
-            path: "/editprofile",
-            element:<EditProfile/>
         },
     ]);
 
