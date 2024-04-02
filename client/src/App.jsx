@@ -23,6 +23,7 @@ import MarketPost from "./pages/marketpost/MarketPost.jsx";
 import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
 import DedicatedHub from "./pages/dedicatedhub/DedicatedHub.jsx";
 import SearchMenu from "./pages/search-menu/SearchMenu.jsx";
+import MyHubs from "./pages/MyHubs/MyHubs.jsx";
 
 
 import MarketplaceSelection from "./pages/marketplace-selection/MarketplaceSelection.jsx";
@@ -127,6 +128,10 @@ function App() {
                         {
                             path: "/search-menu",
                             element: <SearchMenu/>
+                        },
+                        {
+                            path: "/myhubs",
+                            element: <MyHubs/>
                         },
                     ]
                 },

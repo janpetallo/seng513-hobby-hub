@@ -54,7 +54,7 @@ const LeftMenu = () =>{
             <Row>
                 <Col className="mb-3">
 
-                    <Link to="/" onClick={() => handleMenuClick('/')}>
+                    <Link to="/myhubs" onClick={() => handleMenuClick('/')}>
                         <div className="item">
                             <img src={Hubs} alt="hubs"></img>
                             <span>My Hubs</span>
