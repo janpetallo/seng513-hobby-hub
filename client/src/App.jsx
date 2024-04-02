@@ -155,6 +155,10 @@ function App() {
                     element:<CommunitySelection/>
                 },
                 {
+                    path: "/marketplace-selection",
+                    element: <MarketplaceSelection/>
+                },
+                {
                     path: "/create-hub",
                     element: <CreateHubPageMobile/>
                 },
