@@ -5,7 +5,7 @@ import User from "../models/user.model.js";
 export const createPost = async (req, res) => {
     try {
         // get the current user
-        const currentUser = await User.findById(req.body.userId);
+        const currentUser = await User.findById(req.body.userID);
 
         // identity verification required to post on your own account
         if(req.userId !== currentUser._id.toString()){

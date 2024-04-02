@@ -3,7 +3,11 @@ const { Schema } = mongoose;
 
 // post schema model
 const forumPostSchema = new Schema({
-    userId:{
+    userName:{
+        type: String,
+        required: true
+    },
+    userID:{
         type: String,
         required: true
     },
