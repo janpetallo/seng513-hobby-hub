@@ -25,12 +25,12 @@ import DedicatedHub from "./pages/dedicatedhub/DedicatedHub.jsx";
 import Marketplace from "./pages/marketplace/Marketplace.jsx";
 import SearchMenu from "./pages/search-menu/SearchMenu.jsx";
 import MarketplaceSelection from "./pages/marketplace-selection/MarketplaceSelection.jsx";
+import EditProfile from './pages/editprofile/EditProfile.jsx';
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
     return useMediaQuery({ query: '(min-width: 576px)' });
 }
-import EditProfile from './pages/editprofile/EditProfile.jsx';
 
 function App() {
 
@@ -81,7 +81,8 @@ function App() {
                 <Col className="m-0 p-0">
                     <Outlet/>
                 </Col>
-
+                <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
+                </Col>
             </Row>
         )
     }
@@ -143,8 +144,22 @@ function App() {
                     ]
                 },
                 {
+                    path: "/marketplace",
+                    element: <MarketplaceLayout/>,
+                    children: [
+                        {
+                            path: "/marketplace",
+                            element: <Marketplace/>
+                        },
+                    ]
+                },
+                {
                     path: "/community-selection",
                     element:<CommunitySelection/>
+                },
+                {
+                    path: "/marketplace-selection",
+                    element:<MarketplaceSelection/>
                 },
                 {
                     path: "/create-hub",
