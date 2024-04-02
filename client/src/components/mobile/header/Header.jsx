@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Header.scss"
 import {Col, Container, Offcanvas, Row} from "react-bootstrap";
 import Logo from "../../../assets/authentication/mobile/logo.svg"
@@ -20,12 +20,12 @@ const Header = () =>{
     const [selectedMenu, setSelectedMenu] = useState('/'); // default selected menu is home
 
     const handleMenuClick = (path) => {
-        setSelectedMenu(path);
+        // setSelectedMenu(path);
         setShow(false);
     }
 
     const getMenuItemClass = (path) => {
-        return selectedMenu === path ? 'item selected' : 'item';
+        return location.pathname === path ? 'item selected' : 'item';
     }
 
     return (
@@ -97,7 +97,7 @@ const Header = () =>{
                             <Container fluid className="p-3 left-menu-hamburger mobile-left-menu">
                                 <Row>
                                     <Col className="mb-3">
-                                        
+
                                         <Link to="/login" className="no-link-style" onClick={() => handleMenuClick('/login')}>
                                             <div className={getMenuItemClass('/login')}>
                                                 <img src={Logout} alt="logout"></img>
