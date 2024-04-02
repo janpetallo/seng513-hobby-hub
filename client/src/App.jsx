@@ -24,10 +24,14 @@ import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
 import DedicatedHub from "./pages/dedicatedhub/DedicatedHub.jsx";
 import SearchMenu from "./pages/search-menu/SearchMenu.jsx";
 
+
+import MarketplaceSelection from "./pages/marketplace-selection/MarketplaceSelection.jsx";
+
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
     return useMediaQuery({ query: '(min-width: 576px)' });
 }
+import EditProfile from './pages/editprofile/EditProfile.jsx';
 
 function App() {
 
@@ -72,6 +76,20 @@ function App() {
             </Row>
         )
     }
+    const MarketSelection = () => {
+        return (
+            <Row>
+                <Col className="m-0 p-0">
+                    <Outlet/>
+                </Col>
+                {/*<Col md={3} className="m-0 p-0 d-none d-md-block position-sticky" style={{minWidth: `350px`}}>*/}
+                {/*    <RightMenu/>*/}
+                {/*</Col>*/}
+            </Row>
+        )
+    }
+
+
 
     // route protection function
     const ProtectedRoute = ({children}) => {
@@ -130,6 +148,10 @@ function App() {
                     path: "/create-hub",
                     element: <CreateHubPageMobile/>
                 },
+                {
+                    path:"/marketSelection",
+                    element: <MarketplaceSelection/>
+                }
             ]
         },
         {
@@ -143,6 +165,10 @@ function App() {
         {
             path: "/underdevelopment",
             element:<UnderDevelopment/>
+        },
+        {
+            path: "/editprofile",
+            element:<EditProfile/>
         },
     ]);
 

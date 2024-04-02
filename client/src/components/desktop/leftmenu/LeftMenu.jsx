@@ -31,7 +31,7 @@ const LeftMenu = () =>{
                         </div>
                     </Link>
 
-                    <Link to="/">
+                    <Link to="/marketSelection">
                         <div className="item">
                             <img src={Market} alt="market"></img>
                             <span>Browse Market</span>
