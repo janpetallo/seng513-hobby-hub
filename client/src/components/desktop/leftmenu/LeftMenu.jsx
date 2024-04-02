@@ -54,23 +54,23 @@ const LeftMenu = () =>{
             <Row>
                 <Col className="mb-3">
 
-                    <Link to="/myhubs" onClick={() => handleMenuClick('/')}>
-                        <div className="item">
+                    <Link to="/myhubs" onClick={() => handleMenuClick('/myhubs')}>
+                        <div className={getMenuItemClass('/myhubs')}>
                             <img src={Hubs} alt="hubs"></img>
                             <span>My Hubs</span>
                         </div>
                     </Link>
 
-                    <Link to="/myposts" onClick={() => handleMenuClick('/')}>
-                        <div className="item">
+                    <Link to="/myposts" onClick={() => handleMenuClick('/myposts')}>
+                        <div className={getMenuItemClass('/myposts')} >
                             <img src={Posts} alt="hubs"></img>
                             <span>My Posts</span>
                         </div>
                     </Link>
 
 
-                    <Link to="/myadstrades">
-                        <div className="item" onClick={() => handleMenuClick('/')}>
+                    <Link to="/myadstrades" onClick={() => handleMenuClick('/myadstrades')}>
+                        <div className={getMenuItemClass('/myadstrades')} >
                             <img src={Ads} alt="hubs"></img>
                             <span>My Ads / Trades</span>
                         </div>
@@ -89,8 +89,8 @@ const LeftMenu = () =>{
 
             <Row>
                 <Col>
-                    <div className="item">
-                        <Link to="/choose-posting">
+                    <div className="item" >
+                        <Link to="/choose-posting" onClick={() => handleMenuClick('/chooseposting')}>
                             <Button className="btn-HHPurple left-post-btn">Post</Button>
                         </Link>
                     </div>
