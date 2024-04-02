@@ -22,7 +22,9 @@ import HubPost from "./pages/hubpost/HubPost.jsx";
 import MarketPost from "./pages/marketpost/MarketPost.jsx";
 import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
 import DedicatedHub from "./pages/dedicatedhub/DedicatedHub.jsx";
+import HubMarketNavbar from "./pages/marketplace/HubMarketNavbar.jsx";
 import Marketplace from "./pages/marketplace/Marketplace.jsx";
+import SellingItems from "./pages/selling-item/SellingItems.jsx";
 import SearchMenu from "./pages/search-menu/SearchMenu.jsx";
 import MarketplaceSelection from "./pages/marketplace-selection/MarketplaceSelection.jsx";
 import EditProfile from './pages/editprofile/EditProfile.jsx';
@@ -55,6 +57,7 @@ function App() {
         return (
             <Row>
                 <Col className="m-0 p-0 home-layout-body">
+                    <HubMarketNavbar/>
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
@@ -75,11 +78,11 @@ function App() {
             </Row>
         )
     }
-
     const MarketplaceLayout = () => {
         return (
             <Row>
                 <Col className="m-0 p-0 home-layout-body">
+                    <HubMarketNavbar/>
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
@@ -148,10 +151,6 @@ function App() {
                     element:<CommunitySelection/>
                 },
                 {
-                    path: "/marketplace-selection",
-                    element:<MarketplaceSelection/>
-                },
-                {
                     path: "/create-hub",
                     element: <CreateHubPageMobile/>
                 },
@@ -168,10 +167,6 @@ function App() {
         {
             path: "/underdevelopment",
             element:<UnderDevelopment/>
-        },
-        {
-            path: "/editprofile",
-            element:<EditProfile/>
         },
     ]);
 
