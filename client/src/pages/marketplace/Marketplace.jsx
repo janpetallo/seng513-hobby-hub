@@ -77,8 +77,8 @@ const Marketplace = () => {
                         <div className="card-deck">
                             <Link to="sellingItems" state={card} className="card-deck p-0 m-0 remove-styling">
                             <Card className="card-market">
-                                <Card.Img variant="top" className="card-img card-img-resize" src={card.image}  height={200} />
-                                <Card.Body className="p-0 m-0" style={{ height: '100%' }}>
+                                <Card.Img variant="top" className="card-img card-img-resize" src={card.image}/>
+                                <Card.Body className="p-2 m-0">
                                     <Card.Title className="card-market-title m-0">{card.description}</Card.Title>
                                     <Badge bg="HHPurple" className="badge" id="badge-color">{card.tag}</Badge>
                                     <div className="d-flex justify-content-between p-0 mb-0">

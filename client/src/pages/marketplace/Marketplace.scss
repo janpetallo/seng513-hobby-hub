@@ -14,17 +14,20 @@
   margin: 0;
 
 }
+
 .card-market-text{
   font-size: 1rem;
   padding: 0;
   margin: 0;
 }
+
 .card-img-resize {
-  object-fit: cover;
-  width: 100%;
-  min-height: 40vh;
-  max-height: 40vh;
+  background-color: #f6f3fc;
+  object-fit: contain;
+  overflow: hidden;
+  height: 300px;
 }
+
 .card-market{
   transition: all 0.3s;
   width: 14.5rem;
