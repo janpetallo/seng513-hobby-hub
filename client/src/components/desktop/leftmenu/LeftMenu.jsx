@@ -69,19 +69,19 @@ const LeftMenu = () =>{
                     </Link>
 
 
-                    <Link to="/">
+                    <Link to="/myadstrades">
                         <div className="item" onClick={() => handleMenuClick('/')}>
                             <img src={Ads} alt="hubs"></img>
-                            <span>My Ads</span>
+                            <span>My Ads / Trades</span>
                         </div>
                     </Link>
 
-                    <Link to="/">
-                        <div className="item">
-                            <img src={Trades} alt="hubs"></img>
-                            <span>My Trades</span>
-                        </div>
-                    </Link>
+                    {/*<Link to="/">*/}
+                    {/*    <div className="item">*/}
+                    {/*        <img src={Trades} alt="hubs"></img>*/}
+                    {/*        <span>My Trades</span>*/}
+                    {/*    </div>*/}
+                    {/*</Link>*/}
 
                     <hr className="item divider"/>
                 </Col>
