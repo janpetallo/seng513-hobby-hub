@@ -33,6 +33,7 @@ function useDesktopOrLaptopMediaQuery() {
     return useMediaQuery({ query: '(min-width: 576px)' });
 }
 import EditProfile from './pages/editprofile/EditProfile.jsx';
+import MyPosts from "./pages/MyPosts/MyPosts.jsx";
 
 function App() {
 
@@ -132,6 +133,10 @@ function App() {
                         {
                             path: "/myhubs",
                             element: <MyHubs/>
+                        },
+                        {
+                            path: "/myposts",
+                            element: <MyPosts/>
                         },
                     ]
                 },

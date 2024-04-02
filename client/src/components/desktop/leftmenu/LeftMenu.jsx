@@ -61,7 +61,7 @@ const LeftMenu = () =>{
                         </div>
                     </Link>
 
-                    <Link to="/" onClick={() => handleMenuClick('/')}>
+                    <Link to="/myposts" onClick={() => handleMenuClick('/')}>
                         <div className="item">
                             <img src={Posts} alt="hubs"></img>
                             <span>My Posts</span>
