@@ -21,7 +21,7 @@ const NavBar = () =>{
                         </div>
                     </Link>
 
-                    <Link to="/" className="mobile-links">
+                    <Link to="/search-menu" className="mobile-links">
                         <div className="mobile-items">
                             <img src={Search} alt="Search"/>
                         </div>

@@ -1,0 +1,48 @@
+.search-background {
+    height: 100vh;
+    background-image: url("../../assets/search-menu/logobg.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    border-radius: 20px;
+    border-color: gray;
+    border-style: solid;
+    border-width: 1px;
+    background-color: white;
+    height:2.8em
+}
+
+.search-icon{
+    height: 20px;
+    margin-right: 10px;
+}
+
+.search-selection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 50%;
+    margin-top: 20px;
+}
+
+/* Common styles for both checked and unchecked states */
+.search-radio .form-check-input {
+    accent-color: var(--HHPurple);
+    appearance: revert-layer;
+}
+
+
+
+
+

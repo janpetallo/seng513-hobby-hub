@@ -22,7 +22,11 @@ import HubPost from "./pages/hubpost/HubPost.jsx";
 import MarketPost from "./pages/marketpost/MarketPost.jsx";
 import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
 import DedicatedHub from "./pages/dedicatedhub/DedicatedHub.jsx";
+import SearchMenu from "./pages/search-menu/SearchMenu.jsx";
+
+
 import MarketplaceSelection from "./pages/marketplace-selection/MarketplaceSelection.jsx";
+
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
     return useMediaQuery({ query: '(min-width: 576px)' });
@@ -119,6 +123,10 @@ function App() {
                         {
                             path: "/choose-posting",
                             element: <ChoosePostingLocation/>
+                        },
+                        {
+                            path: "/search-menu",
+                            element: <SearchMenu/>
                         },
                     ]
                 },
