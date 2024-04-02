@@ -147,6 +147,10 @@ function App() {
                     ]
                 },
                 {
+                    path: "/selling-item",
+                    element:<SellingItems/>
+                },
+                {
                     path: "/community-selection",
                     element:<CommunitySelection/>
                 },
