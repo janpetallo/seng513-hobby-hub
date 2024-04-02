@@ -40,8 +40,8 @@ const DedicatedHubHeader = () => {
 
 
     return (
-        <Row className="d-block d-md-none hub-mobile-header">
-            <Col className="d-flex flex-column justify-content-center align-items-center">
+        <Row className="d-block d-md-none m-0 p-0">
+            <Col className="d-flex flex-column justify-content-center align-items-center hub-mobile-header">
                 <h5 className="text-center">Hub: {hubName}</h5>
 
                 <div className="d-flex align-items-center justify-content-center flex-wrap">

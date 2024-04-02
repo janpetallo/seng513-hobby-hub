@@ -19,7 +19,6 @@
     // switch scrollbar to left side
     direction: rtl;
 
-
     .item {
         width: 250px;
         display: flex;
@@ -46,7 +45,7 @@
         height: 0.5px;
         background-color: var(--divider-clr);
 
-        @media screen and ("max-width: 1700px") {
+        @media screen and (max-width: 1700px) {
             width: 100%;
         }
     }

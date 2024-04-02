@@ -70,7 +70,7 @@ function App() {
     const HubLayout = () => {
         return (
             <Row>
-                <Col className="m-0 p-0">
+                <Col className="m-0 p-0 home-layout-body">
                     <Outlet/>
                 </Col>
                 <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky" style={{minWidth: `350px`}}>
@@ -136,6 +136,14 @@ function App() {
                             path: "/myadstrades",
                             element: <MyAdsTrades/>
                         },
+                        {
+                            path: "/editprofile",
+                            element:<EditProfile/>
+                        },
+                        {
+                            path: "/search-menu",
+                            element: <SearchMenu/>
+                        },
                     ]
                 },
                 {
@@ -187,10 +195,6 @@ function App() {
         {
             path: "/underdevelopment",
             element:<UnderDevelopment/>
-        },
-        {
-          path:"editprofile",
-          element:<EditProfile/>
         },
     ]);
 

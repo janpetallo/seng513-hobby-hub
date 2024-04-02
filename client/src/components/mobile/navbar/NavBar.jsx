@@ -6,10 +6,16 @@ import Create from "../../../assets/mobilenavbar/create.svg"
 import Hubs from "../../../assets/mobilenavbar/hubs.svg"
 import Market from "../../../assets/mobilenavbar/market.svg"
 import Search from "../../../assets/mobilenavbar/search.svg"
-import {Link} from "react-router-dom";
+import HomeFilled from "../../../assets/leftsidemenu/home.svg";
+import HubsFilled from "../../../assets/leftsidemenu/hubs.svg";
+import MarketFilled from "../../../assets/leftsidemenu/market.svg";
+import SearchFilled from "../../../assets/mobilenavbar/search-filled.svg";
+import {Link, useLocation} from "react-router-dom";
 
 const NavBar = () =>{
+    const location = useLocation();
     const [modalShow, setModalShow] = React.useState(false);
+
     return (
         <Container className="bg-white fixed-bottom mobile-nav">
             <Row>
@@ -17,13 +23,13 @@ const NavBar = () =>{
 
                     <Link to="/" className="mobile-links">
                         <div className="mobile-items">
-                            <img src={Home} alt="Home"/>
+                            <img src={location.pathname === '/' ? HomeFilled : Home} alt="Home"/>
                         </div>
                     </Link>
 
                     <Link to="/search-menu" className="mobile-links">
                         <div className="mobile-items">
-                            <img src={Search} alt="Search"/>
+                            <img src={location.pathname === '/search-menu' ? SearchFilled : Search} alt="Search"/>
                         </div>
                     </Link>
 
@@ -49,13 +55,13 @@ const NavBar = () =>{
 
                     <Link to="/community-selection" className="mobile-links">
                         <div className="mobile-items">
-                            <img src={Hubs} alt="Hubs"/>
+                            <img src={location.pathname === '/community-selection' ? HubsFilled : Hubs} alt="Hubs"/>
                         </div>
                     </Link>
 
-                    <Link to="/" className="mobile-links">
+                    <Link to="/marketplace-selection" className="mobile-links">
                         <div className="mobile-items">
-                            <img src={Market} alt="Market"/>
+                            <img src={location.pathname === '/marketplace-selection' ? MarketFilled : Market} alt="Market"/>
                         </div>
                     </Link>
                 </Col>
