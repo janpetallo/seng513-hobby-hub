@@ -9,7 +9,7 @@ dotenv.config();
 const data = [
     {
         username: 'user1',
-        hub: "shroom hunters",
+        hubName: "shroom hunters",
         title: 'Title 1',
         description: 'Description 1',
         upvote: 10,
@@ -17,7 +17,7 @@ const data = [
     },
     {
         username: 'user2',
-        hub: "pokemon catchers",
+        hubName: "pokemon catchers",
         title: 'Title 2',
         description: 'Description 2',
         upvote: 5,
@@ -25,7 +25,7 @@ const data = [
     },
     {
         username: 'user3',
-        hub: "gaming legends",
+        hubName: "gaming legends",
         title: 'Title 3',
         description: 'Description 3',
         upvote: 15,

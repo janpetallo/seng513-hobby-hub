@@ -1,12 +1,13 @@
 import express from "express";
-import {tempfunction} from "../controllers/post.controller.js";
+import {createPost} from "../controllers/post.controller.js";
+import {verifyToken} from "../middleware/jwt.js";
 
 const router = express.Router();
 
 // routing the url request for posts to the post controller
 
-// temp function
-router.get("/temp", tempfunction);
+// route to the createPost function. Token verified before hand
+router.post("/createPost", verifyToken, createPost);
 
 
 export default router;

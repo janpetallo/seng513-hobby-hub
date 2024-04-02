@@ -29,7 +29,11 @@ const userSchema = new Schema({
     marketplaceRating: {
         type: Number,
         default:0
-    }
+    },
+    posts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'ForumPost' // Reference to the post model
+    }],
 });
 
 
