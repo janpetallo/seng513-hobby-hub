@@ -24,6 +24,7 @@ import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
 import DedicatedHub from "./pages/dedicatedhub/DedicatedHub.jsx";
 import HubMarketNavbar from "./pages/marketplace/HubMarketNavbar.jsx";
 import Marketplace from "./pages/marketplace/Marketplace.jsx";
+import SellingItems from "./pages/selling-item/SellingItems.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -141,6 +142,10 @@ function App() {
                             element: <Marketplace/>
                         },
                     ]
+                },
+                {
+                    path: "/selling-item",
+                    element:<SellingItems/>
                 },
                 {
                     path: "/community-selection",
