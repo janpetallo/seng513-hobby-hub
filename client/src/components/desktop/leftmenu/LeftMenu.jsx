@@ -1,4 +1,3 @@
-import React from "react";
 import "./LeftMenu.scss"
 import {Button, Col, Container, Row} from "react-bootstrap";
 import Home from "../../../assets/leftsidemenu/home.svg";
@@ -10,29 +9,39 @@ import Trades from "../../../assets/leftsidemenu/trades.svg";
 import Logo from "../../../assets/authentication/mobile/logo.svg"
 import {Link} from "react-router-dom";
 import CommunitySelection from "../../../pages/community-selection/CommunitySelection";
-
+import React, { useState } from "react";
 
 const LeftMenu = () =>{
+    const [selectedMenu, setSelectedMenu] = useState('/'); // default selected menu is home
+
+    const handleMenuClick = (path) => {
+        setSelectedMenu(path);
+    }
+
+    const getMenuItemClass = (path) => {
+        return selectedMenu === path ? 'item selected' : 'item';
+    }
+
     return (
         <Container fluid className="p-3 left-menu">
             <Row>
-                <Col className="mb-3">
-                    <Link to="/">
-                        <div className="item">
+            <Col className="mb-3">
+                    <Link to="/" onClick={() => handleMenuClick('/')}>
+                        <div className={getMenuItemClass('/')}>
                             <img src={Home} alt="home"></img>
                             <span>Home</span>
                         </div>
                     </Link>
 
-                    <Link to="/community-selection" >
-                        <div className="item">
+                    <Link to="/community-selection" onClick={() => handleMenuClick('/community-selection')}>
+                        <div className={getMenuItemClass('/community-selection')}>
                             <img src={Hubs} alt="hubs"></img>
                             <span>Browse Hubs</span>
                         </div>
                     </Link>
 
-                    <Link to="/marketSelection">
-                        <div className="item">
+                    <Link to="/marketSelection" onClick={() => handleMenuClick('/marketSelection')}>
+                        <div className={getMenuItemClass('/marketSelection')}>
                             <img src={Market} alt="market"></img>
                             <span>Browse Market</span>
                         </div>
@@ -45,14 +54,14 @@ const LeftMenu = () =>{
             <Row>
                 <Col className="mb-3">
 
-                    <Link to="/">
+                    <Link to="/" onClick={() => handleMenuClick('/')}>
                         <div className="item">
                             <img src={Hubs} alt="hubs"></img>
                             <span>My Hubs</span>
                         </div>
                     </Link>
 
-                    <Link to="/">
+                    <Link to="/" onClick={() => handleMenuClick('/')}>
                         <div className="item">
                             <img src={Posts} alt="hubs"></img>
                             <span>My Posts</span>
@@ -61,7 +70,7 @@ const LeftMenu = () =>{
 
 
                     <Link to="/">
-                        <div className="item">
+                        <div className="item" onClick={() => handleMenuClick('/')}>
                             <img src={Ads} alt="hubs"></img>
                             <span>My Ads</span>
                         </div>

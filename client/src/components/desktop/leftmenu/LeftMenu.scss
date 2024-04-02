@@ -4,6 +4,10 @@
     --divider-clr: black;
 }
 
+.item.selected {
+    color: var(--fnt-hover);
+}
+
 .left-menu {
     position: sticky;
     top: 76px;
