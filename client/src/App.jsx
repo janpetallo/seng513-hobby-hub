@@ -136,6 +136,10 @@ function App() {
                             path: "/myadstrades",
                             element: <MyAdsTrades/>
                         },
+                        {
+                            path: "/editprofile",
+                            element:<EditProfile/>
+                        },
                     ]
                 },
                 {
@@ -187,10 +191,6 @@ function App() {
         {
             path: "/underdevelopment",
             element:<UnderDevelopment/>
-        },
-        {
-          path:"editprofile",
-          element:<EditProfile/>
         },
     ]);
 
