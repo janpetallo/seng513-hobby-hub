@@ -39,7 +39,7 @@ const ReadMore = () => {
             <Row className="read-more-section">
                 <Col>
                     <h5>Resources</h5>
-                    <p>
+                    <div>
                         Want to get into speedrunning here are some great links to start:
                         <ul>
                             <li>
@@ -59,7 +59,7 @@ const ReadMore = () => {
                                 "https://www.xsplit.com/"
                             </li>
                         </ul>
-                    </p>
+                    </div>
                 </Col>
             </Row>
 
