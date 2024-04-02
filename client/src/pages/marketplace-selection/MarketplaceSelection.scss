@@ -1,0 +1,61 @@
+
+
+:root {
+  --fnt-reg: black;
+  --fnt-hover: #8e47ff;
+}
+
+.font-check{
+  font-size: 0;
+}
+.font-check .col-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  border-radius: 5px;
+  // padding: 4px;
+  // margin: -4;
+  font-size: 1rem;
+}
+.col-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  word-wrap: break-word;
+  border: 2px solid var(--fnt-hover);
+  width: fit-content;
+  border-radius: 5px;
+  // padding: 4px;
+  // margin: -4;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all 0.3s;
+
+}
+.col-container:hover{
+  transform: scale(1.1);
+  cursor: pointer;
+}
+@media (max-width: 400px){
+  .col-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    word-wrap: break-word;
+    width: fit-content;
+    border-radius: 5px;
+    // padding: 4px;
+    // margin: -4;
+    font-size: 0.8rem;
+  }
+}
+
+.center-items{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.section-font{
+  font-weight: 600;
+}

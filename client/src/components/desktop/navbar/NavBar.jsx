@@ -79,7 +79,21 @@ const NavBar = () => {
 
                                 <Form.Control type="text" placeholder="Search HobbyHub..."></Form.Control>
 
+                                
                                 <Button className="d-search-btn" variant="HHPurple">Search</Button>
+                                <div className="search-dropdown"  id="search-dropdown">
+                                    <span>Search in:  </span>
+                                    <label><input type="radio" name="searchSelection" value="Hubs" defaultChecked/> Hubs</label>
+                                    <label><input type="radio" name ="searchSelection" value="Market"/> Market</label>
+                                </div>  
+                            </div>
+
+
+                            <div className="nav-profileImage">
+                                <Link to={"/editprofile"}>
+                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile Image" className="nav-profilePic"/>
+                                </Link>
+                                <p className="nav-profileImageText">Click to Edit Profile</p>
                             </div>
 
                             <Button variant="HHPurple"> Log in</Button>

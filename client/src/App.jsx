@@ -22,7 +22,12 @@ import HubPost from "./pages/hubpost/HubPost.jsx";
 import MarketPost from "./pages/marketpost/MarketPost.jsx";
 import RightMenu from "./components/desktop/rightmenu/RightMenu.jsx";
 import DedicatedHub from "./pages/dedicatedhub/DedicatedHub.jsx";
-import MarketMenu from "./components/desktop/marketmenu/MarketMenu.jsx";
+import Marketplace from "./pages/marketplace/Marketplace.jsx";
+import SellingItems from "./pages/selling-item/SellingItems.jsx";
+import SearchMenu from "./pages/search-menu/SearchMenu.jsx";
+import MarketplaceSelection from "./pages/marketplace-selection/MarketplaceSelection.jsx";
+import EditProfile from './pages/editprofile/EditProfile.jsx';
+
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
     return useMediaQuery({ query: '(min-width: 576px)' });
@@ -66,7 +71,18 @@ function App() {
                     <Outlet/>
                 </Col>
                 <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky" style={{minWidth: `350px`}}>
-                    <MarketMenu/>
+                    <RightMenu/>
+                </Col>
+            </Row>
+        )
+    }
+    const MarketplaceLayout = () => {
+        return (
+            <Row>
+                <Col className="m-0 p-0 home-layout-body">
+                    <Outlet/>
+                </Col>
+                <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
                 </Col>
             </Row>
         )
@@ -118,8 +134,26 @@ function App() {
                     ]
                 },
                 {
+                    path: "/marketplace",
+                    element: <MarketplaceLayout/>,
+                    children: [
+                        {
+                            path: "/marketplace",
+                            element: <Marketplace/>
+                        },
+                    ]
+                },
+                {
+                    path: "/selling-item",
+                    element:<SellingItems/>
+                },
+                {
                     path: "/community-selection",
                     element:<CommunitySelection/>
+                },
+                {
+                    path: "/marketplace-selection",
+                    element: <MarketplaceSelection/>
                 },
                 {
                     path: "/create-hub",
@@ -138,6 +172,10 @@ function App() {
         {
             path: "/underdevelopment",
             element:<UnderDevelopment/>
+        },
+        {
+          path:"editprofile",
+          element:<EditProfile/>
         },
     ]);
 

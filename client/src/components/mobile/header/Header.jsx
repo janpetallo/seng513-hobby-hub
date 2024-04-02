@@ -32,6 +32,7 @@ const Header = () =>{
                     <span className="m-navbar-logo-wrapper">
                         <img className="navbar-logo" src={Logo} alt="HobbyHub"/>
                     </span>
+                    
                 </Col>
             </Row>
         </Container>
