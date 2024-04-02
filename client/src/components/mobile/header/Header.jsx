@@ -46,6 +46,26 @@ const Header = () =>{
                             </Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
+                        <Container fluid className="p-3 left-menu-hamburger mobile-left-menu">
+                                <Row>
+                                    <Col className="mb-3">
+
+                                        <Link to='/editprofile' className="no-link-style" onClick={() => handleMenuClick('/editprofile')}>
+                                            <div className={getMenuItemClass('/editprofile')} >
+                                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" 
+                                                    alt="Profile Image"
+                                                    className="nav-profilePic profile-image-mobile"
+                                                />
+                                                <span> Max123 
+                                                    <br></br> 
+                                                    <span className="edit-profile-mobile">Edit Profile</span>
+                                                </span>
+                                            </div>
+                                        </Link>
+                                    </Col>
+                                </Row>
+                            </Container>
+
                             <Container fluid className="p-3 left-menu-hamburger mobile-left-menu">
                                 <Row>
                                     <Col className="">
@@ -77,14 +97,7 @@ const Header = () =>{
                             <Container fluid className="p-3 left-menu-hamburger mobile-left-menu">
                                 <Row>
                                     <Col className="mb-3">
-
-                                        <Link to='/editprofile' className="no-link-style" onClick={() => handleMenuClick('/editprofile')}>
-                                            <div className={getMenuItemClass('/editprofile')} >
-                                                {/* <img src={Trades} alt="hubs"></img> */}
-                                                <span>Edit Profile</span>
-                                            </div>
-                                        </Link>
-
+                                        
                                         <Link to="/login" className="no-link-style" onClick={() => handleMenuClick('/login')}>
                                             <div className={getMenuItemClass('/login')}>
                                                 <img src={Logout} alt="logout"></img>

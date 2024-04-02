@@ -41,12 +41,17 @@
     direction: ltr;
 }
 
+.mobile-left-menu .item .profile-image-mobile {
+    width: 80px; /* Adjust as needed */
+    height: 80px; /* Adjust as needed */
+}
+
 .mobile-left-menu .item img {
     width: 30px;
 }
 
 .mobile-left-menu .item span {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
@@ -54,4 +59,8 @@
 .no-link-style {
     text-decoration: none;
     color: inherit;
+}
+
+.mobile-left-menu .item span .edit-profile-mobile {
+    font-size: 0.8rem; /* Adjust as needed */
 }
