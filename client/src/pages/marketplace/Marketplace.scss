@@ -1,0 +1,78 @@
+:root {
+  --fnt-reg: black;
+  --fnt-hover: #8e47ff;
+}
+.card-deck {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  margin-bottom: 10px;
+}
+.card-market-title {
+  font-size: 1.1rem; /* Adjust the font size as needed */
+  font-weight: 500;
+  margin: 0;
+
+}
+
+.card-market-text{
+  font-size: 1rem;
+  padding: 0;
+  margin: 0;
+}
+
+.card-img-resize {
+  background-color: #f6f3fc;
+  object-fit: contain;
+  overflow: hidden;
+  height: 300px;
+}
+
+.card-market{
+  transition: all 0.3s;
+  width: 14.5rem;
+}
+.card-market:hover{
+  transform: scale(1.1);
+}
+.holder {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+#badge-color{
+  background-color:var(--fnt-hover);
+  color: white;
+}
+.star-rating{
+  padding-right: 4px;
+}
+.remove-styling{
+  text-decoration: none;
+}
+
+@media (min-width: 820px) {
+  .card-market{
+    transition: all 0.3s;
+    width: 13rem;
+  }
+}
+@media (max-width: 1000px) {
+  .card-market{
+    transition: all 0.3s;
+    width: 16rem;
+  }
+}
+@media (max-width: 575px) {
+  .card-market{
+    transition: all 0.3s;
+    width: 16rem;
+  }
+}
+@media (min-width: 1001px) {
+  .card-market{
+    transition: all 0.3s;
+    width: 17rem;
+  }
+}

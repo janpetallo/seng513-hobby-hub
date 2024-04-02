@@ -1,0 +1,69 @@
+import React from "react";
+import { useState } from "react";
+import {Button, Nav, Navbar, NavDropdown, Offcanvas, Row} from "react-bootstrap";
+import {Col, Container, Card, Badge, Image} from "react-bootstrap";
+import {Link, useNavigate} from "react-router-dom";
+import "./SellingItems.scss";
+import locationLogo from "../../assets/selling-items/location.svg";
+import condition from "../../assets/selling-items/condition.svg";
+import rating from "../../assets/selling-items/rating.svg";
+import email from "../../assets/selling-items/email.svg";
+import number from "../../assets/selling-items/phoneNumber.svg";
+
+const SellingItem = () => {
+    return(
+        <Container className=" h-100 w-100">
+            <Row md={2} xs={1} >
+                <Col className="col-length">
+                    <div className="contain-image">
+                        <Image
+                            src="https://crystal-cdn4.crystalcommerce.com/photos/6772128/430px-GyaradosPok%C3%A9monGO22.jpg"
+                            className="post-img"
+                            fluid
+                        />
+                    </div>
+                </Col>
+                <Col className="col-info-color">
+                    <div className=" information-hold">
+
+                    <div className="d-flex justify-content-between">
+                        <h4>Gyarados</h4>
+                        <Badge bg="HHPurple" className="badge d-flex justify-content-center align-items-center">Pokemon</Badge>
+                    </div>
+                    <p className="info-text">$3.50</p>
+                    <div className="d-flex justify-content-between p-0 mb-0">
+                        <div className="d-flex">
+                            <Image src={locationLogo} className="logo"/>
+                            <p className="info-text">South Calgary</p>
+                        </div>
+                        <div className="d-flex">
+                            <Image src={condition} className="logo"/>
+                            <p className="info-text">Open Box</p>
+                        </div>
+                        <div className="d-flex">
+                            <Image src={rating} className="logo"/>
+                            <p className="info-text">4.5</p>
+                        </div>
+                    </div>
+                    <div className="d-flex">
+                        <Image src={email} className="logo"/>
+                        <p className="info-text">example@gmail.com</p>
+                    </div>
+                    <div className="d-flex">
+                        <Image src={number} className="logo"/>
+                        <p className="info-text">541 254 5878</p>
+                    </div>
+
+                    <h5>Description</h5>
+                    <p className="info-text">Good Condition Gyarados card email me for more information.
+                    I am open to trades as well. Located South Calgary.
+                    </p>
+                    </div>
+                </Col>
+            </Row>
+        </Container>
+
+)
+
+}
+export default SellingItem

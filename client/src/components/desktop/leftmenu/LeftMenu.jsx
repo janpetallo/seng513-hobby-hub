@@ -40,7 +40,7 @@ const LeftMenu = () =>{
                         </div>
                     </Link>
 
-                    <Link to="/marketSelection" onClick={() => handleMenuClick('/marketSelection')}>
+                    <Link to="/marketplace-selection" onClick={() => handleMenuClick('/marketSelection')}>
                         <div className={getMenuItemClass('/marketSelection')}>
                             <img src={Market} alt="market"></img>
                             <span>Browse Market</span>
@@ -54,14 +54,14 @@ const LeftMenu = () =>{
             <Row>
                 <Col className="mb-3">
 
-                    <Link to="/" onClick={() => handleMenuClick('/')}>
+                    <Link to="/myhubs" onClick={() => handleMenuClick('/')}>
                         <div className="item">
                             <img src={Hubs} alt="hubs"></img>
                             <span>My Hubs</span>
                         </div>
                     </Link>
 
-                    <Link to="/" onClick={() => handleMenuClick('/')}>
+                    <Link to="/myposts" onClick={() => handleMenuClick('/')}>
                         <div className="item">
                             <img src={Posts} alt="hubs"></img>
                             <span>My Posts</span>
@@ -69,19 +69,19 @@ const LeftMenu = () =>{
                     </Link>
 
 
-                    <Link to="/">
+                    <Link to="/myadstrades">
                         <div className="item" onClick={() => handleMenuClick('/')}>
                             <img src={Ads} alt="hubs"></img>
-                            <span>My Ads</span>
+                            <span>My Ads / Trades</span>
                         </div>
                     </Link>
 
-                    <Link to="/">
-                        <div className="item">
-                            <img src={Trades} alt="hubs"></img>
-                            <span>My Trades</span>
-                        </div>
-                    </Link>
+                    {/*<Link to="/">*/}
+                    {/*    <div className="item">*/}
+                    {/*        <img src={Trades} alt="hubs"></img>*/}
+                    {/*        <span>My Trades</span>*/}
+                    {/*    </div>*/}
+                    {/*</Link>*/}
 
                     <hr className="item divider"/>
                 </Col>
