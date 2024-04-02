@@ -7,10 +7,6 @@ const forumPostSchema = new Schema({
         type: String,
         required: true
     },
-    userID:{
-        type: String,
-        required: true
-    },
     hubName: {
         type: String,
         required: true

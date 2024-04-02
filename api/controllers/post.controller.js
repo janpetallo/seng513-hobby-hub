@@ -12,11 +12,12 @@ export const createPost = async (req, res) => {
             return res.status(403).send("Error you are not authorized to Post on this account! You can Post on your own account!");
         }
 
-        // creating the new post based on the request sent
-        const newPost = new Post({
-            // take the user parameters from the request body
-            ...req.body,
-        })
+        // Create a new object without the userId field
+        const postData = { ...req.body };
+        delete postData.userID;
+
+        // Creating the new post based on the request sent
+        const newPost = new Post(postData);
         // send new post to the database
         await newPost.save();
         res.status(201).send("Created new Post successfully!");
