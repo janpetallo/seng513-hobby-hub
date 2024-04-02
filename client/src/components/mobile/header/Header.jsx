@@ -40,9 +40,9 @@ const Header = () =>{
                     <Offcanvas className="w-75" backdrop={true} show={show} onHide={handleClose}>
                         <Offcanvas.Header closeButton>
                             <Offcanvas.Title>
-                                <span className="m-navbar-logo-wrapper">
+                                <div className="pt-4 ps-3">
                                     <img className="navbar-logo" src={Logo} alt="HobbyHub"/>
-                                </span>
+                                </div>
                             </Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
