@@ -14,14 +14,14 @@ const MarketplaceSelection = () => {
     ];
     return(
         <>
-            <Container >
+            <Container className="pb-3">
                 {categories.map((category, i) => (
                     <Row key={i} className="mt-2 section-font">
                         {category.section}
                         <Row>
                             {/* <Row id={i} className="font-check"> */}
                             {category.markets.map((market, index) => (
-                                <Col xs={4.5} sm={4} md={3.5} lg={3} key={index} className="col-container my-2 me-4 p-2">
+                                <Col xs={4.5} sm={4} md={3.5} lg={3} key={index} className="col-container my-2 me-4 p-3">
                                     <div className="text-center ">
                                         {market}
                                     </div>

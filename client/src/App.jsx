@@ -27,7 +27,11 @@ import SellingItems from "./pages/selling-item/SellingItems.jsx";
 import SearchMenu from "./pages/search-menu/SearchMenu.jsx";
 import MarketplaceSelection from "./pages/marketplace-selection/MarketplaceSelection.jsx";
 import EditProfile from './pages/editprofile/EditProfile.jsx';
+import MyAdsTrades from "./pages/MyAdsTrades/MyAdsTrades.jsx";
+import MyHubs from "./pages/myhubs/MyHubs.jsx";
+import MyPosts from "./pages/myposts/MyPosts.jsx";
 import MarketMenu from "./components/desktop/marketmenu/MarketMenu.jsx";
+
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
     return useMediaQuery({ query: '(min-width: 576px)' });
@@ -67,7 +71,7 @@ function App() {
     const HubLayout = () => {
         return (
             <Row>
-                <Col className="m-0 p-0">
+                <Col className="m-0 p-0 home-layout-body">
                     <Outlet/>
                 </Col>
                 <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky" style={{minWidth: `350px`}}>
@@ -121,6 +125,26 @@ function App() {
                         {
                             path: "/choose-posting",
                             element: <ChoosePostingLocation/>
+                        },
+                        {
+                            path: "/myhubs",
+                            element: <MyHubs/>
+                        },
+                        {
+                            path: "/myposts",
+                            element: <MyPosts/>
+                        },
+                        {
+                            path: "/myadstrades",
+                            element: <MyAdsTrades/>
+                        },
+                        {
+                            path: "/editprofile",
+                            element:<EditProfile/>
+                        },
+                        {
+                            path: "/search-menu",
+                            element: <SearchMenu/>
                         },
                     ]
                 },

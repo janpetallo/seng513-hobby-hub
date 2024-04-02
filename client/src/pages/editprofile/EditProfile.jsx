@@ -64,11 +64,11 @@ const EditProfilePage = () => {
     };
 
     return (
-    <div className="edit-prof-background">
+    <div className="edit-prof-background pb-3">
+        <div className="edit-prof-backbutton" onClick={goBack}>
+            <img src={Back} alt="back button" className ="img-icon mt-4"/>
+        </div>
         <div className="edit-prof-container">
-            <div className="edit-prof-backbutton" onClick={goBack}>
-                <img src={Back} alt="back button" className ="img-icon mt-4"/>
-            </div>
             <div className = "avantar-section">
                 <div className = "edit-prof-img d-flex flex-column align-items-center">
                     <img src={image} alt="profile img" className ="img-user"/>
