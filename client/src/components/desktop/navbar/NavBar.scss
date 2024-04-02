@@ -123,6 +123,7 @@
     }
 
 
+
     .search-visible {
         width: 75%;
         border: 2px solid #8e47ff;
@@ -144,6 +145,10 @@
             display: block;
         }
 
+        .nav-profileImage{
+            display: none;
+        }
+
         &:hover {
             box-shadow: 0 0 0 100vmax rgba(18, 18, 18, 0.28);
             .d-searchbar{
@@ -154,6 +159,8 @@
             .search-dropdown {
                 display: block;
             }
+
+            
         }
     }
 
@@ -176,7 +183,6 @@
 }
 
 .nav-profileImage {
-    position: relative; /* Set the container to relative positioning */
     width: 60px;
     height: 60px;
     border-radius: 50%;
@@ -190,15 +196,13 @@
     border: 1px solid black;
     color: black;
     text-align: center;
-    position: absolute; /* Position the tooltip text absolutely */
-    top: 100%; /* Position it above the image */
-    left: 40%;
     transform: translateX(-50%);
     opacity: 0;
     transition: opacity 0.3s;
     font-size: 12px;
     width:120px;
     height:16px;
+    margin-left: 30px;
 }
 
 .nav-profileImage:hover .nav-profileImageText {
