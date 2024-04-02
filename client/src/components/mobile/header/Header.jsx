@@ -16,6 +16,16 @@ const Header = () =>{
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const [selectedMenu, setSelectedMenu] = useState('/'); // default selected menu is home
+
+    const handleMenuClick = (path) => {
+        setSelectedMenu(path);
+    }
+
+    const getMenuItemClass = (path) => {
+        return selectedMenu === path ? 'item selected' : 'item';
+    }
+
     return (
         <Container className="fixed-top bg-white mobile-header">
             <Row className="p-2">
@@ -27,36 +37,63 @@ const Header = () =>{
 
                     <Offcanvas className="w-75" backdrop={true} show={show} onHide={handleClose}>
                         <Offcanvas.Header closeButton>
-                            <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+                            <Offcanvas.Title>
+                                <span className="m-navbar-logo-wrapper">
+                                    <img className="navbar-logo" src={Logo} alt="HobbyHub"/>
+                                </span>
+                            </Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
-                        <Row>
-                            <Col className="mb-3">
+                            <Container fluid className="p-3 left-menu-hamburger mobile-left-menu">
+                                <Row>
+                                    <Col className="">
 
-                                <Link to="/" onClick={() => handleMenuClick('/')}>
-                                    <div className="item">
-                                        <img src={Hubs} alt="hubs"></img>
-                                        <span>My Hubs</span>
-                                    </div>
-                                </Link>
+                                        <Link to="/myhubs" className="no-link-style" onClick={() => handleMenuClick('/myhubs')}>
+                                            <div className={getMenuItemClass('/myhubs')}>
+                                                <img src={Hubs} alt="hubs"></img>
+                                                <span>My Hubs</span>
+                                            </div>
+                                        </Link>
 
-                                <Link to="/" onClick={() => handleMenuClick('/')}>
-                                    <div className="item">
-                                        <img src={Posts} alt="hubs"></img>
-                                        <span>My Posts</span>
-                                    </div>
-                                </Link>
+                                        <Link to="/myposts" className="no-link-style" onClick={() => handleMenuClick('/myposts')}>
+                                            <div className={getMenuItemClass('/myposts')}>
+                                                <img src={Posts} alt="hubs"></img>
+                                                <span>My Posts</span>
+                                            </div>
+                                        </Link>
 
-                                <Link to="/">
-                                    <div className="item" onClick={() => handleMenuClick('/')}>
-                                        <img src={Ads} alt="hubs"></img>
-                                        <span>My Ads / Trades</span>
-                                    </div>
-                                </Link>
+                                        <Link to="/myadstrades" className="no-link-style"  onClick={() => handleMenuClick('/myadstrades')}>
+                                            <div className={getMenuItemClass('/myadstrades')} >
+                                                <img src={Ads} alt="hubs"></img>
+                                                <span>My Ads / Trades</span>
+                                            </div>
+                                        </Link>
+                                    </Col>
+                                </Row>
+                            </Container>
 
-                                <hr className="item divider"/>
-                            </Col>
-                        </Row>
+                            <Container fluid className="p-3 left-menu-hamburger mobile-left-menu">
+                                <Row>
+                                    <Col className="mb-3">
+
+                                        <Link to='/editprofile' className="no-link-style" onClick={() => handleMenuClick('/editprofile')}>
+                                            <div className={getMenuItemClass('/editprofile')} >
+                                                {/* <img src={Trades} alt="hubs"></img> */}
+                                                <span>Edit Profile</span>
+                                            </div>
+                                        </Link>
+
+                                        <Link to="/login" className="no-link-style" onClick={() => handleMenuClick('/login')}>
+                                            <div className={getMenuItemClass('/login')}>
+                                                <span>Logout</span>
+                                            </div>
+                                        </Link>
+
+                                        
+                                    </Col>
+                                </Row>
+                            </Container>
+
                         </Offcanvas.Body>
                     </Offcanvas>
 
