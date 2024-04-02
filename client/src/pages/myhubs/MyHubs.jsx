@@ -14,7 +14,7 @@ const MyHubs = () => {
     const username = "BimmerGuy";
 
     return (
-        <Container className="pt-2 ps-5 pe-5">
+        <Container className="pt-2 ps-5 pe-5 pb-3">
             <div className="d-flex flex-column align-items-center justify-content-center">
                 <h1 className="pt-2 ps-2 pe-2">{username}'s Hubs</h1>
                 <h6 className="ps-2 pe-2!">View all your hubs here!</h6>
