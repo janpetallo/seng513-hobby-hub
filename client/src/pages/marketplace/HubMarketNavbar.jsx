@@ -9,7 +9,7 @@ const HubMarketNavbar = () => {
     return (
 
         <Navbar expand="lg" className="bg-white border-bottom">
-            <Container fluid>
+            <Container className="container-nav">
                 <Col className="d-flex justify-content-center align-items-center">
                     <Link className="text-decoration-none LinkColor">My Hub Corner</Link>
                 </Col>

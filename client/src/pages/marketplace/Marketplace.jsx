@@ -76,21 +76,21 @@ const Marketplace = () => {
                     <Col className="mb-4 d-flex justify-content-center align-items-stretch" key={i}>
                         <div className="card-deck">
                             <Link to="sellingItems" state={card} className="card-deck p-0 m-0 remove-styling">
-                            <Card className="card">
+                            <Card className="card-market">
                                 <Card.Img variant="top" className="card-img card-img-resize" src={card.image}  height={200} />
                                 <Card.Body className="p-0 m-0" style={{ height: '100%' }}>
-                                    <Card.Title class="card-title m-0">{card.description}</Card.Title>
-                                    <Badge class="badge badge-color">{card.tag}</Badge>
+                                    <Card.Title class="card-market-title m-0">{card.description}</Card.Title>
+                                    <Badge class="badge" id="badge-color">{card.tag}</Badge>
                                     <div className="d-flex justify-content-between p-0 mb-0">
-                                        <Card.Text className="card-text fw-bold">C${card.price}</Card.Text>
+                                        <Card.Text className="card-market-text fw-bold">C${card.price}</Card.Text>
                                         <div className="d-flex">
                                             <Image src={star} alt="star" className="star-rating"/>
-                                            <Card.Text className="card-text">3.5</Card.Text>
+                                            <Card.Text className="card-market-text">3.5</Card.Text>
                                         </div>
                                     </div>
                                     <div className="d-flex justify-content-between p-0 mt-0">
-                                        <Card.Text className="card-text">By: <Link>{card.username}</Link></Card.Text>
-                                        <Card.Text className="card-text fw-bold">{card.location}</Card.Text>
+                                        <Card.Text className="card-market-text">By: <Link>{card.username}</Link></Card.Text>
+                                        <Card.Text className="card-market-text fw-bold">{card.location}</Card.Text>
                                     </div>
                                 </Card.Body>
                             </Card>
