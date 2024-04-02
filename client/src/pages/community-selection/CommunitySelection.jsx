@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Modal, Button, Form} from 'react-bootstrap';
+import { Row, Col, Card, Modal, Button, Form, Container} from 'react-bootstrap';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import CreateIcon from '../../assets/create-hub/create.svg';
@@ -71,24 +71,24 @@ function CommunitySelection() {
                     </Button>
                 </Modal.Footer>
             </Modal>
-            {categories.map((category, i) => (
-                <React.Fragment key={i}>
-                    <div id="hub-category" className='hub-category'>{category.name}</div>
-                    <Row className="align-items-start">
-                        {category.hubs.map((hub, index) => (
-                            <Col key={index}>
-                                <Link to={`/${hub.replace(' ', '')}`} className="hub-card-link">
-                                    <Card id="hub-card" className="hub-card">
-                                        <Card.Body id="hub-card-body">
-                                            <Card.Title id="hub-card-title" className="hub-card-title">{hub}</Card.Title>
-                                        </Card.Body>
-                                    </Card>
-                                </Link>
-                            </Col>
-                        ))}
+            <Container >
+                {categories.map((category, i) => (
+                    <Row key={i} className="section-font">
+                        {category.name}
+                        <Row>
+                            {category.hubs.map((hub, index) => (
+                                <Col xs={4.5} sm={4} md={3.5} lg={3} key={index} className="col-container my-2 me-4 p-2">
+                                    <div className="text-center ">
+                                        <Link className='hub-card-link' to={`/${hub.replace(' ', '')}`}>
+                                            {hub}
+                                        </Link>
+                                    </div>
+                                </Col>
+                            ))}
+                        </Row>
                     </Row>
-                </React.Fragment>
-            ))}
+                ))}
+            </Container>
             {isMobile && (
                 <div id="create-hub-mobile-link" className='create-hub-mobile'>
                     Can't find what you are looking for? <Link to="/create-hub">Create one yourself!</Link>
