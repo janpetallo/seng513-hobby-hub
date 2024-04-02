@@ -140,6 +140,10 @@ function App() {
                             path: "/editprofile",
                             element:<EditProfile/>
                         },
+                        {
+                            path: "/search-menu",
+                            element: <SearchMenu/>
+                        },
                     ]
                 },
                 {
