@@ -35,10 +35,17 @@ const HubPost = () => {
         setTextContent(content);
     };
 
+    // function to get the selected hub from PostToggle.jsx
+    const handleHubSelect = (hub) => {
+        setHub(hub); // Update the selected hub state
+    };
+
+
 
     const handleSubmit = async (event) => {
         console.log(textContent);
         console.log(postTitle);
+        console.log(hub);
 
 
         // prevent the form from auto clearing
@@ -78,7 +85,7 @@ const HubPost = () => {
     return (
         <Form className="p-3 hub-post" noValidate validated={validated} onSubmit={handleSubmit}>
 
-            <PostToggle/>
+            <PostToggle onHubSelect={handleHubSelect} />
 
             <FloatingLabel
                 className="mt-3 mb-3"

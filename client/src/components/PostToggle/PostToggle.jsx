@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import "./PostToggle.scss"
 import {InputGroup} from "react-bootstrap";
 
-const PostToggle = () => {
+const PostToggle = ({onHubSelect}) => {
 
     const [searchResult, setSearchResult] = useState('');
 
@@ -20,6 +20,7 @@ const PostToggle = () => {
     const handleHubClick = (hub) => {
         setSelectedItem(hub);
         setSearchResult(''); // Clear the filter input when an item is selected
+        onHubSelect(hub); // Lift the state up to the parent component
     };
 
     return (
