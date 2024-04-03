@@ -113,9 +113,10 @@
   transition: transform 0.3s ease;
 }
 .menu-accordion .accordion-header {
-  background-color: #8e47ff /* Change to your desired color */
+  background-color: white !important;
 }
 
 .menu-accordion .accordion-header:hover {
-  color: palegreen; /* Change to your desired hover color */
+  background-color: #8e47ff !important;
+  color: white;
 }
