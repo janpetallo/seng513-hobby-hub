@@ -11,6 +11,9 @@ import Birthday from "../../assets/editprofile/birthday.svg";
 import {FormikContext, useFormik} from "formik";
 import {UserSchema} from "../editprofile/UserSchema.jsx";
 import { useNavigate} from 'react-router-dom';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/bootstrap.css';
+import {formatNumber, isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNumberLength} from "libphonenumber-js";
 
 
 const EditProfilePage = () => {
@@ -26,38 +29,116 @@ const EditProfilePage = () => {
     // Parse the JSON string back into a JavaScript object
     const userData = JSON.parse(currentUser);
 
+
+
+    const [emailErrors, setEmailErrors] = useState({message: "", status: false});
+    const [usernameErrors, setUsernameErrors] = useState({message: "", status: false});
+
+    // navigation hook
+    const navigate = useNavigate();
+
+    // register user function
     const onSubmit = async (values, actions) => {
-        try {
-            // localStorage.setItem("currentUser", JSON.stringify(res.data)); // store the user data returned from logging in
-            navigate("/"); // navigate back to the home page
-        }catch (err){
-            console.log(err.response.data);
+
+        let pNumber = "";
+        let pass = true;
+
+        //  if the phone number is not empty, user is trying to give a number then check it otherwise, make account
+        if(phoneNumber.cc !== "") {
+            // Pare and format the phone number input, remove the dialcode, so when formatting the dial code can be put
+            // back in
+            pNumber = formatNumber(
+                {
+                    country: phoneNumber.cc.countryCode.toUpperCase(),
+                    phone: phoneNumber.number.slice(phoneNumber.cc.dialCode.length)
+                },
+                'INTERNATIONAL'
+            );
+
+            //  Check validity
+            if(
+                (((isPossiblePhoneNumber(pNumber) &&
+                    isValidPhoneNumber(pNumber) &&
+                    validatePhoneNumberLength(pNumber) === undefined))) ||
+                (pNumber.length === phoneNumber.cc.dialCode.length + 1)
+            )
+            {
+                setPhoneError("")
+                // console.log("YES")
+                // console.log(pNumber)
+            } else {
+                pass = false
+                setPhoneError("Invalid phone number")
+            }
         }
+
+        // If the phone number is entered and invalid then throw error
+        // If the phone number is empty it is okay (not required)
+        if(pass) {
+             try {
+                 await newRequest.post("/auth/register", {username: values.username,
+                     password: values.password, email: values.email, birthday: values.birthdate, phone: phoneNumber.number});
+                 setEmailErrors({message: "", status: false}); // clear email errors
+                 setUsernameErrors({message: "", status: false}); // clear username errors
+                 actions.resetForm();
+            }catch (err){
+                 console.log("here");
+                 console.log(err);
+                 if (err.response && err.response.status === 400) {
+                      if(err.response.data === "Username is already in use."){
+                         setUsernameErrors({message: "Username is already in use.", status: true});
+                         setEmailErrors({message: "", status: false}); // clear email errors
+
+                     }else if (err.response.data === "Email is already in use."){
+                         setUsernameErrors({message: "", status: false}); // clear username errors
+                         setEmailErrors({message: "Email is already in use.", status: true});
+                     }
+                 } else {
+                     console.log(err);
+                 }
+            }
+        }
+    }
+
+    // Store phone number
+    const [phoneNumber, setPhoneNumber] = useState({
+        number: '',
+        cc: ''
+    });
+
+    // Store phone number
+    const handlePhone = (value, country) => {
+        setPhoneError("")
+        setPhoneNumber({
+            number: value,
+            cc: country
+        });
     };
 
-    const defaultValues = {
-        username: "",
-        email: "",
-        password: "",
-        phone: "",
-        birthdate: "",
+    const handlePhoneReset = () => {
+        setPhoneNumber({
+            number: '1',
+            cc: 'ca',
+        });
     };
 
-    
-    const {values, errors, touched, isSubmitting,handleReset,handleBlur, handleChange, handleSubmit} = useFormik({
-        initialValues:userData ? {
-            username: userData.username || "",
-            email: userData.email || "",
-            phone: userData.phone || "",
-            birthdate: userData.birthdate || "",
-        } : defaultValues,
+    const [phoneError, setPhoneError] = useState(null);
+
+    const {values, errors, touched, isSubmitting,handleBlur,handleReset,handleChange, handleSubmit} = useFormik({
+        initialValues: {
+            username:"",
+            email:"",
+            password:"",
+            birthdate:"",
+            setPhoneNumber:""
+        },
+
         validationSchema: UserSchema,
 
         onSubmit,
     })
 
 
-    const navigate = useNavigate();
 
     const goBack = () => {
         navigate(-1); // This will navigate back one page
@@ -86,16 +167,16 @@ const EditProfilePage = () => {
                     <br/>  
                     <Form.Control
                         type="text"
+                        placeholder=""
                         name="username"
                         value={values.username}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className="custom-input" 
                         isValid={touched.username && !errors.username}
-                        isInvalid={touched.username && !!errors.username}
+                        isInvalid={touched.username && (!!errors.username || usernameErrors.status)}
                     />
                     <Form.Control.Feedback type="invalid">
-                        {errors.username}
+                        {errors.username || usernameErrors.message}
                     </Form.Control.Feedback>
                     {/* <input type="text" className="custom-input"/> */}
                 </Form.Group>
@@ -129,40 +210,36 @@ const EditProfilePage = () => {
                     </Form.Label> 
                     <br/>  
                     <Form.Control
-                        type="email"  // Use "email" type for email input
+                        type="email"
+                        placeholder=""
                         name="email"
                         value={values.email}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className="custom-input" 
                         isValid={touched.email && !errors.email}
-                        isInvalid={touched.email && !!errors.email}
+                        isInvalid={touched.email && (!!errors.email || emailErrors.status)}
                     />
                     <Form.Control.Feedback type="invalid">
-                        {errors.email}
+                        {errors.email || emailErrors.message}
                     </Form.Control.Feedback>
                     {/* <input type="text" className="custom-input"/> */}
                 </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label column>
+                <Form.Group className="phone-dropdown mb-3">
+                <Form.Label column>
                         <img src={Phone} alt="phone" className ="img-icon"/> 
                         <strong>Phone Number</strong> 
                     </Form.Label> 
                     <br/>  
-                    <Form.Control
-                        type="tel"  // Use "tel" type for phone input
-                        name="phone"
-                        value={values.phone}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        className="custom-input" 
-                        isValid={touched.phone && !errors.phone}
-                        isInvalid={touched.phone && !!errors.phone}
+                    <PhoneInput
+                        value={phoneNumber.number}
+                        country={'ca'}
+                        onChange={handlePhone}
                     />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.phone}
-                    </Form.Control.Feedback>
-                    {/* <input type="text" className="custom-input"/> */}
+                    {phoneError &&
+                        <Form.Text className="text-danger">
+                            {phoneError}
+                        </Form.Text>
+                    }
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label column>
@@ -186,7 +263,7 @@ const EditProfilePage = () => {
                     {/* <input type="text" className="custom-input"/> */}
                 </Form.Group>
                 <div className="d-flex justify-content-between">
-                    <Button variant="secondary" type="reset" onClick={handleReset} className="rounded-5 px-4 edit-prof-sub-btn">
+                    <Button variant="secondary" type="reset" onClick={()=>{handleReset();handlePhoneReset()}} className="rounded-5 px-4 edit-prof-sub-btn">
                         Reset
                     </Button>
                     <Button variant="primary" type="submit" onClick={handleSubmit} className="btn-HHPurple rounded-5 edit-prof-sub-btn">

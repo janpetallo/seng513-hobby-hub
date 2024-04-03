@@ -30,6 +30,7 @@ import EditProfile from './pages/editprofile/EditProfile.jsx';
 import MyAdsTrades from "./pages/MyAdsTrades/MyAdsTrades.jsx";
 import MyHubs from "./pages/myhubs/MyHubs.jsx";
 import MyPosts from "./pages/myposts/MyPosts.jsx";
+import MarketMenu from "./components/desktop/marketmenu/MarketMenu.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -86,6 +87,7 @@ function App() {
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
+                    <MarketMenu/>
                 </Col>
             </Row>
         )
@@ -195,6 +197,10 @@ function App() {
         {
             path: "/underdevelopment",
             element:<UnderDevelopment/>
+        },
+        {
+          path:"editprofile",
+          element:<EditProfile/>
         },
     ]);
 
