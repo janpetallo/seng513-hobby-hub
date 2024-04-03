@@ -7,7 +7,7 @@ import {MdOutlineAddToPhotos} from "react-icons/md";
 import { RiCloseCircleFill } from "react-icons/ri";
 import ImageModal from "../desktop/post/ImageModal.jsx";
 
-const ImageDropzone = () => {
+const ImageDropzone = ({ handleImageChange, handleRemoveImage }) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -17,25 +17,18 @@ const ImageDropzone = () => {
 
 
     const onDrop = useCallback(acceptedFiles => {
-
-        // have there been any accepted files
         if (acceptedFiles?.length) {
-
-            // there are new files set them to local state
-            setFiles(previousFiles => [
-                // grab previous files (so we don't overwrite it)
-                ...previousFiles,
-
-                // grab new files and preview it
-                ...acceptedFiles.map(file =>
-                    Object.assign(file, {preview: URL.createObjectURL(file)})
-                )
-            ])
+            const updatedFiles = acceptedFiles.map(file =>
+                Object.assign(file, {preview: URL.createObjectURL(file)})
+            );
+            setFiles(previousFiles => [...previousFiles, ...updatedFiles]);
+            handleImageChange([...files, ...updatedFiles]); // Pass the updated files array to handleImageChange
         }
-    }, [])
+    }, [handleImageChange, files]);
 
     const removeFile = (name) => {
         setFiles(files => files.filter(file => file.name !== name))
+        handleRemoveImage(name);
     }
 
     //  only images and videos

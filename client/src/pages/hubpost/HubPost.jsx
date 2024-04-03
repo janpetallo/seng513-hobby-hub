@@ -9,6 +9,7 @@ import { MdCancelPresentation } from "react-icons/md";
 import { BiSend } from "react-icons/bi";
 import newRequest from "../../utilities/newRequest.js";
 import {useNavigate} from "react-router-dom";
+import upload from "../../utilities/upload.js"
 
 const HubPost = () => {
 
@@ -40,13 +41,17 @@ const HubPost = () => {
         setHub(hub); // Update the selected hub state
     };
 
+    // Function to get the images from imagedropzone.jsx
+    const handleImageChange = (newImages) => {
+        setImages(newImages);
+    };
 
+    // Function to handle the removal of an image from the image drop zone
+    const handleRemoveImage = (imageName) => {
+        setImages(images => images.filter(image => image.name !== imageName));
+    };
 
     const handleSubmit = async (event) => {
-        console.log(textContent);
-        console.log(postTitle);
-        console.log(hub);
-
 
         // prevent the form from auto clearing
         event.preventDefault();
@@ -60,6 +65,18 @@ const HubPost = () => {
         // get the user data from the local storage
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
+        const uploadedImageUrls = []; // Array to store uploaded image URLs
+
+        // Upload each image to Cloudinary and gather their URLs
+        for (const image of images) {
+            try {
+                const imageUrl = await upload(image);
+                uploadedImageUrls.push(imageUrl);
+            } catch (error) {
+                console.error("Error uploading image:", error);
+            }
+        }
+
         // Field to Gather Post data
         const postData = {
             userName: currentUser.username,
@@ -67,7 +84,7 @@ const HubPost = () => {
             hubName: hub,
             title: postTitle,
             description: textContent,
-            img: images, //todo: should use the upload utility in the imagedrop then return urls back here
+            img: uploadedImageUrls,
         };
 
 
@@ -103,7 +120,7 @@ const HubPost = () => {
                 <Form.Control.Feedback type="invalid">Post needs a title!</Form.Control.Feedback>
             </FloatingLabel>
 
-            <ImageDropzone/>
+            <ImageDropzone handleImageChange={handleImageChange} handleRemoveImage={handleRemoveImage}/>
 
             <RichTextEditor onTextContentChange={handleTextContentChange} />
 
