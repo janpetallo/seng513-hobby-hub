@@ -91,7 +91,6 @@ const HubPost = () => {
         // Submit data to server
         try {
             const response = await newRequest.post('/posts/createPost', postData);
-            console.log(response.data);
             navigate("/");
         } catch (error) {
             console.error(error);
