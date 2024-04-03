@@ -10,9 +10,8 @@ const MarketMenu = () => {
 
 
         <Container fluid className="market-menu">
-            <div className="d-flex justify-content-center fw-bold fs-4 mt-2">Filter</div>
-            <Row>
-                <Accordion className="menu-accordion" flush>
+            <h3 className="d-flex justify-content-center align-items-center mt-3">Filter</h3>            <Row>
+            <Accordion className="menu-accordion" flush>
                     <Accordion.Item eventKey="0" className="mb-5 mt-3">
                         <Accordion.Header className="menu-header">Type</Accordion.Header>
                         <Accordion.Body>
