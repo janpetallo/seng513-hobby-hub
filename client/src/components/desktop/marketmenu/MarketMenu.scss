@@ -113,10 +113,24 @@
   transition: transform 0.3s ease;
 }
 .menu-accordion .accordion-header {
-  background-color: white !important;
+  background-color: black !important;
 }
 
 .menu-accordion .accordion-header:hover {
   background-color: #8e47ff !important;
   color: white;
+}
+
+.menu-button{
+  background-color: #8e47ff !important;
+  color: white;
+}
+.hold-button{
+  width: 90%;
+}
+.market-menu{
+  max-height: calc(100vh - 76px);
+}
+.market-menu:hover{
+  overflow-y: scroll;
 }

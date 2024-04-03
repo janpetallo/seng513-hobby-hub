@@ -1,21 +1,19 @@
 import React, {useState} from "react";
 import {Button, Col, Container, Row, Dropdown, Image, Accordion} from "react-bootstrap";
-import {IoPersonSharp} from "react-icons/io5";
 import "./MarketMenu.scss";
 import star from "../../../assets/marketplace/star.svg";
 import unfilledStar from "../../../assets/marketplace/unfilledStar.svg";
-import dropdownLogo from "../../../assets/marketplace/dropdownLogo.svg";
 
 const MarketMenu = () => {
 
     return(
 
 
-        <Container fluid>
-            <div className="d-flex justify-content-center fw-bold fs-4">Filter</div>
-            <Row >
+        <Container fluid className="market-menu">
+            <div className="d-flex justify-content-center fw-bold fs-4 mt-2">Filter</div>
+            <Row>
                 <Accordion className="menu-accordion" flush>
-                    <Accordion.Item eventKey="0" className="mb-5 mt-5">
+                    <Accordion.Item eventKey="0" className="mb-5 mt-3">
                         <Accordion.Header className="menu-header">Type</Accordion.Header>
                         <Accordion.Body>
 
@@ -79,7 +77,12 @@ const MarketMenu = () => {
                     </Accordion.Item>
                 </Accordion>
             </Row>
-
+            <div className="w-100 d-flex justify-content-center">
+                <div className="d-flex justify-content-between hold-button mt-4">
+                    <Button className="menu-button border-0">Reset</Button>
+                    <Button className="menu-button">Apply</Button>
+                </div>
+            </div>
         </Container>
 
     )
