@@ -23,7 +23,7 @@ const NavBar = () =>{
 
                     <Link to="/" className="mobile-links">
                         <div className="mobile-items">
-                            <img src={location.pathname === '/' ? HomeFilled : Home} alt="Home"/>
+                            <img src={location.pathname === '/' || location.pathname === '/marketplace' ? HomeFilled : Home} alt="Home"/>
                         </div>
                     </Link>
 
