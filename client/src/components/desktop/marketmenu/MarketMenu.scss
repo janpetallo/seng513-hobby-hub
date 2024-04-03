@@ -99,3 +99,23 @@
     transform: rotate(90deg);
   }
 }
+
+
+.menu-accordion .accordion-button[aria-expanded="true"]::after {
+  transform: rotate(360deg);
+}
+
+.menu-accordion .accordion-button[aria-expanded="false"]::after {
+  transform: rotate(260deg);
+}
+
+.menu-accordion .accordion-button::after {
+  transition: transform 0.3s ease;
+}
+.menu-accordion .accordion-header {
+  background-color: #8e47ff /* Change to your desired color */
+}
+
+.menu-accordion .accordion-header:hover {
+  color: palegreen; /* Change to your desired hover color */
+}
