@@ -2,6 +2,8 @@ import "./Comments.scss";
 import Comment from "../comment/Comment.jsx";
 import PostPopup from "../../PostPopup/PostPopup.jsx";
 import React from "react";
+import CommentReply from "../../commentreply/CommentReply.jsx";
+import RichTextEditor from "../../TextEditor/RichTextEditor.jsx";
 
 const Comments = ( {post, isPopup} ) => {
     // Temporary Comment Data
@@ -58,7 +60,10 @@ const Comments = ( {post, isPopup} ) => {
 
     const maxCommentsToShow = 4;
 
-    return <div className="Comments">
+    return <div className="mt-3 Comments">
+        <div className="ms-4">
+            <CommentReply/>
+        </div>
 
         {isPopup && (
             comments.map(comment=>(
