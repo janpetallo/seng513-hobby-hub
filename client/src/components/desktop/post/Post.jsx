@@ -30,7 +30,10 @@ const Post = ({ post, isPopup, hubTitle }) => {
     const [numLikes, setNumLikes] = useState(post.upvote);
 
     const toggleLiked = async () => {
+        // variable to hold the number of likes
         let updatedLikes = numLikes;
+
+        // if the post was not liked before then we will increment the likes
         if(!liked){
             try {
                 // Call the likePost endpoint to increment the likes
@@ -41,16 +44,21 @@ const Post = ({ post, isPopup, hubTitle }) => {
                 console.error(error);
             }
 
-
-
+            // if the post was not liked before but was actually disliked, then we will toggled the dislikes off as well
             if(disliked){
                 toggleDisliked();
             }
 
-
-
+        // if the post was already liked before then we will decrement the likes
         }else {
-            setNumLikes(numLikes - 1);
+            try {
+                // Call the likePost endpoint to increment the likes
+                const response = await newRequest.post(`/posts/unlikePost/${post._id}`);
+                // Update the number of likes based on the response
+                updatedLikes = response.data.upvote;
+            } catch (error) {
+                console.error(error);
+            }
         }
 
         // Update the state with the new number of likes

@@ -29,7 +29,7 @@ router.get("/getDownVotes", getDownVotes);
 // route to the likePost function.
 router.post("/likePost/:postId", verifyToken, likePost);
 // route to the unlikePost function.
-router.post("/unlikePost", verifyToken, unlikePost);
+router.post("/unlikePost/:postId", verifyToken, unlikePost);
 // route to the dislikePost function.
 router.post("/disLikePost", verifyToken, disLikePost);
 // route to the undislikePost function.
