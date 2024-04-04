@@ -24,6 +24,20 @@ const Post = ({ post, isPopup, hubTitle }) => {
         setModalImageUrl(imageUrl);
     };
 
+    // check if the user previously liked or disliked the post
+    useEffect(() => {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        if (currentUser) {
+            // Check if the user has already liked the post
+            if (post.usersLiked.includes(currentUser._id)) {
+                setLiked(true);
+            }
+            // Check if the user has already disliked the post
+            if (post.usersDisliked.includes(currentUser._id)) {
+                setDisliked(true);
+            }
+        }
+    }, [post.usersLiked, post.usersDisliked]);
 
 
 
