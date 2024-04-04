@@ -10,6 +10,7 @@ import { FaRegComments } from "react-icons/fa";
 import { FaComments } from "react-icons/fa6";
 import Comments from "../comments/Comments.jsx";
 import PostPopup from "../../PostPopup/PostPopup.jsx";
+import newRequest from "../../../utilities/newRequest.js";
 
 
 
@@ -28,18 +29,32 @@ const Post = ({ post, isPopup, hubTitle }) => {
     const [liked, setLiked] = useState(false);
     const [numLikes, setNumLikes] = useState(post.upvote);
 
-    const toggleLiked = () => {
+    const toggleLiked = async () => {
+        let updatedLikes = numLikes;
         if(!liked){
-            setNumLikes(numLikes + 1);
+            try {
+                // Call the likePost endpoint to increment the likes
+                const response = await newRequest.post(`/posts/likePost/${post._id}`);
+                // Update the number of likes based on the response
+                updatedLikes = response.data.upvote;
+            } catch (error) {
+                console.error(error);
+            }
+
+
 
             if(disliked){
                 toggleDisliked();
             }
 
+
+
         }else {
             setNumLikes(numLikes - 1);
         }
 
+        // Update the state with the new number of likes
+        setNumLikes(updatedLikes);
         setLiked(!liked);
     } ;
 

@@ -17,12 +17,17 @@ const router = express.Router();
 router.post("/createPost", verifyToken, createPost);
 // route to the getAllPosts function. No token verification required
 router.get("/getAllPosts", getAllPosts);
+
+
 // route to the getUpVotes function. No token verification required
 router.get("/getUpVotes", getUpVotes);
 // route to the getDownVotes function. No token verification required
 router.get("/getDownVotes", getDownVotes);
+
+
+
 // route to the likePost function.
-router.post("/likePost", verifyToken, likePost);
+router.post("/likePost/:postId", verifyToken, likePost);
 // route to the unlikePost function.
 router.post("/unlikePost", verifyToken, unlikePost);
 // route to the dislikePost function.
