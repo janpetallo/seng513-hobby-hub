@@ -70,8 +70,14 @@ export const likePost = async (req, res) => {
         // Increment the upvote count
         post.upvote++;
 
+        // Add the user's ID to usersLiked array if not already present
+        if (!post.usersLiked.includes(currentUser._id)) {
+            post.usersLiked.push(currentUser._id);
+        }
+
         // Save the updated post
         await post.save();
+
 
         res.status(200).json(post);
     } catch (error) {
@@ -103,6 +109,12 @@ export const unlikePost = async (req, res) => {
 
         // decrement the upvote count
         post.upvote--;
+
+        // Remove the user's ID from usersLiked array
+        const index = post.usersLiked.indexOf(currentUser._id);
+        if (index !== -1) {
+            post.usersLiked.splice(index, 1);
+        }
 
         // Save the updated post
         await post.save();
@@ -138,6 +150,12 @@ export const disLikePost = async (req, res) => {
         // increment the downvote count
         post.downvote++;
 
+        // Add the user's ID to usersDisliked array if not already present
+        if (!post.usersDisliked.includes(currentUser._id)) {
+            post.usersDisliked.push(currentUser._id);
+        }
+
+
         // Save the updated post
         await post.save();
 
@@ -171,6 +189,12 @@ export const undisLikePost = async (req, res) => {
 
         // increment the downvote count
         post.downvote--;
+
+        // Remove the user's ID from usersDisliked array
+        const index = post.usersDisliked.indexOf(currentUser._id);
+        if (index > -1) {
+            post.usersDisliked.splice(index, 1);
+        }
 
         // Save the updated post
         await post.save();

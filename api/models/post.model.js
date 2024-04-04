@@ -34,6 +34,14 @@ const forumPostSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Comment'
     }],
+    usersLiked: [{
+        type: Schema.Types.ObjectId,
+        ref: 'User' // Reference to the user model
+    }],
+    usersDisliked: [{
+        type: Schema.Types.ObjectId,
+        ref: 'ForumUserPost' // Reference to the user model
+    }],
 });
 
 export default mongoose.model("ForumPost", forumPostSchema)
