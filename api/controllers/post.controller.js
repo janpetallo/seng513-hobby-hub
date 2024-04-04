@@ -33,6 +33,7 @@ export const createPost = async (req, res) => {
     }
 };
 
+
 export const getAllPosts = async (req, res) => {
     try {
         // Fetch all posts from MongoDB
@@ -42,5 +43,105 @@ export const getAllPosts = async (req, res) => {
     } catch (error) {
         res.status(500).send("Error Fetching all Posts");
         console.log(error);
+    }
+};
+
+
+export const likePost = async (req, res) => {
+    try {
+        const postId = req.params.postId;
+
+        // Find the post by ID
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).send("Post not found");
+        }
+
+        // Increment the upvote count
+        post.upvote++;
+
+        // Save the updated post
+        await post.save();
+
+        res.status(200).json(post);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error liking the post");
+    }
+};
+
+
+export const unlikePost = async (req, res) => {
+    try {
+        const postId = req.params.postId;
+
+        // Find the post by ID
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).send("Post not found");
+        }
+
+        // decrement the upvote count
+        post.upvote--;
+
+        // Save the updated post
+        await post.save();
+
+        res.status(200).json(post);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error unliking the post");
+    }
+};
+
+
+export const disLikePost = async (req, res) => {
+    try {
+        const postId = req.params.postId;
+
+        // Find the post by ID
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).send("Post not found");
+        }
+
+        // increment the downvote count
+        post.downvote++;
+
+        // Save the updated post
+        await post.save();
+
+        res.status(200).json(post);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error disliking the post");
+    }
+};
+
+
+export const undisLikePost = async (req, res) => {
+    try {
+        const postId = req.params.postId;
+
+        // Find the post by ID
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).send("Post not found");
+        }
+
+        // increment the downvote count
+        post.downvote--;
+
+        // Save the updated post
+        await post.save();
+
+        res.status(200).json(post);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error disliking the post");
     }
 };

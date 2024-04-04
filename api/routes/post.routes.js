@@ -1,5 +1,12 @@
 import express from "express";
-import {createPost, getAllPosts} from "../controllers/post.controller.js";
+import {
+    createPost,
+    disLikePost,
+    getAllPosts,
+    likePost,
+    undisLikePost,
+    unlikePost
+} from "../controllers/post.controller.js";
 import {verifyToken} from "../middleware/jwt.js";
 
 const router = express.Router();
@@ -10,6 +17,14 @@ const router = express.Router();
 router.post("/createPost", verifyToken, createPost);
 // route to the getAllPosts function. No token verification required
 router.get("/getAllPosts", getAllPosts);
+// route to the likePost function.
+router.post("/likePost", verifyToken, likePost);
+// route to the unlikePost function.
+router.post("/unlikePost", verifyToken, unlikePost);
+// route to the dislikePost function.
+router.post("/disLikePost", verifyToken, disLikePost);
+// route to the undislikePost function.
+router.post("/undisLikePost", verifyToken, undisLikePost);
 
 
 export default router;
