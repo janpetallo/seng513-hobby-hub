@@ -4,6 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import CreateIcon from '../../assets/create-hub/create.svg';
 import './CommunitySelection.scss'
+import CustomizeHub from "../customizehub/CustomizeHub.jsx";
 
 
 function CommunitySelection() {
@@ -47,29 +48,32 @@ function CommunitySelection() {
                     <Modal.Title className="create-modal-title">Create a New Hub</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Form className="ps-3 pe-3">
-                        <Form.Group>
-                            <Form.Label className="create-form-label" >Hub Name</Form.Label>
-                            <Form.Control className="mb-3" id="create-form-control" type="text" placeholder="Enter hub name" maxLength={18} value={hubName} onChange={e => setHubName(e.target.value)} />
-                                {isHubNameTooLong && <Form.Text className="text-danger">Hub name cannot exceed 18 characters</Form.Text>}
-                        </Form.Group>
+                    {/*<Form className="ps-3 pe-3">*/}
+                    {/*    <Form.Group>*/}
+                    {/*        <Form.Label className="create-form-label" >Hub Name</Form.Label>*/}
+                    {/*        <Form.Control className="mb-3" id="create-form-control" type="text" placeholder="Enter hub name" maxLength={18} value={hubName} onChange={e => setHubName(e.target.value)} />*/}
+                    {/*            {isHubNameTooLong && <Form.Text className="text-danger">Hub name cannot exceed 18 characters</Form.Text>}*/}
+                    {/*    </Form.Group>*/}
 
-                        <Form.Group>
-                            <Form.Label className="create-form-label">Type</Form.Label>
-                            <Form.Check className="custom-radio" type="radio" id="publicHub" label={<><strong>Public Hub</strong><span> Anyone can view, post, and comment. Share your hub to the world!</span></>} name="hubType" />
-                            <Form.Check className="custom-radio" type="radio" id="privateHub" label={<><strong>Private Hub</strong><span> Only approved users can enter. Only those worthy shall pass!</span></>} name="hubType" />
-                        </Form.Group>
-                    </Form>
+                    {/*    <Form.Group>*/}
+                    {/*        <Form.Label className="create-form-label">Type</Form.Label>*/}
+                    {/*        <Form.Check className="custom-radio" type="radio" id="publicHub" label={<><strong>Public Hub</strong><span> Anyone can view, post, and comment. Share your hub to the world!</span></>} name="hubType" />*/}
+                    {/*        <Form.Check className="custom-radio" type="radio" id="privateHub" label={<><strong>Private Hub</strong><span> Only approved users can enter. Only those worthy shall pass!</span></>} name="hubType" />*/}
+                    {/*    </Form.Group>*/}
+                    {/*</Form>*/}
+
+                    <CustomizeHub/>
+
                     
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button id="cancel-button" onClick={() => setShowModal(false)}>
-                        Cancel
-                    </Button>
-                    <Button id="create-button" onClick={() => {/* Add function to create a hub here */}}>
-                        Create
-                    </Button>
-                </Modal.Footer>
+                {/*<Modal.Footer>*/}
+                {/*    <Button id="cancel-button" onClick={() => setShowModal(false)}>*/}
+                {/*        Cancel*/}
+                {/*    </Button>*/}
+                {/*    <Button id="create-button" onClick={() => /!* Add function to create a hub here *!/}>*/}
+                {/*        Create*/}
+                {/*    </Button>*/}
+                {/*</Modal.Footer>*/}
             </Modal>
             <Container >
                 {categories.map((category, i) => (
