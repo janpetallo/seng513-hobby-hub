@@ -62,8 +62,15 @@ const HubPost = () => {
             return;
         }
 
-        // get the user data from the local storage
+        // get user data from local storage
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        // Check if user is logged in
+        if (!currentUser) {
+            // Redirect user to login page or display a message
+            console.log("User is not logged in. Redirecting to login page...");
+            // Example: navigate("/login");
+            return;
+        }
 
         const uploadedImageUrls = []; // Array to store uploaded image URLs
 

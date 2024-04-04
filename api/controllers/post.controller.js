@@ -20,6 +20,11 @@ export const createPost = async (req, res) => {
         const newPost = new Post(postData);
         // send new post to the database
         await newPost.save();
+
+        // Add the post's ID to the user's posts array
+        currentUser.posts.push(newPost._id);
+        await currentUser.save();
+
         res.status(201).send("Created new Post successfully!");
 
     } catch (error) {
