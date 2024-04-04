@@ -44,7 +44,7 @@ const CustomizeHub = () => {
             <Tabs
                 activeKey={activeTab}
                 onSelect={setActiveTab}
-                className="mb-3"
+                className="mb-3 customize-hub-tabs"
                 fill
                 variant="pills"
             >
@@ -114,7 +114,7 @@ const CustomizeHub = () => {
                 </Tab>
 
             </Tabs>
-            <div className="d-flex justify-content-end mt-3">
+            <div className="d-flex justify-content-end mt-3 mb-3">
                 {activeTab > 0 && (
                     <Button className='customize-hub-btn' onClick={handlePrevTab} variant="secondary">
                         Back
