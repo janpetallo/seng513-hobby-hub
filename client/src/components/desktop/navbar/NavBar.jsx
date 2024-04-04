@@ -1,11 +1,12 @@
 import React, {useEffect, useRef, useState} from "react";
 import "./NavBar.scss"
-import {Button, Navbar, Nav, Offcanvas, Container, Form, Row, Col} from 'react-bootstrap';
+import {Button, Navbar, Nav, Offcanvas, Container, Form, Row, Col,Dropdown} from 'react-bootstrap';
 import LeftMenu from "../leftmenu/LeftMenu.jsx";
 import {useMediaQuery} from "react-responsive";
 import Logo from "../../../assets/authentication/mobile/logo.svg"
 import Search from "../../../assets/navbar/search.svg"
 import {Link} from "react-router-dom";
+
 
 const NavBar = () => {
 
@@ -53,6 +54,11 @@ const NavBar = () => {
         setPrevSearchVisible(searchVisible);
     }, [isBelow991px, prevSearchVisible, searchVisible]);
 
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+
+
     return (
         <>
             {/* Navbar */}
@@ -89,14 +95,23 @@ const NavBar = () => {
                             </div>
 
 
-                            <div className="nav-profileImage">
-                                <Link to={"/editprofile"}>
-                                    <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile Image" className="nav-profilePic"/>
-                                </Link>
-                                <p className="nav-profileImageText">Click to Edit Profile</p>
-                            </div>
+                            {currentUser && (
+                                <Dropdown>
+                                    <Dropdown.Toggle id="nav-profileDropdown">
+                                        <div className="nav-profileImage">
+                                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile Image" className="nav-profilePic" />
+                                        </div>
+                                    </Dropdown.Toggle>
 
-                            <Button variant="HHPurple"> Log in</Button>
+                                    <Dropdown.Menu id="nav-dropdownContent">
+                                        <Dropdown.Item className="navDropDownItem" as={Link} to="/editprofile">Edit Profile</Dropdown.Item>
+                                        <Dropdown.Item className="navDropDownItem" as={Link} to="/login">Logout</Dropdown.Item>
+                                        {/* Add other dropdown items as needed */}
+                                    </Dropdown.Menu>
+                                </Dropdown>
+                            )}
+
+                            {!currentUser && (<Button variant="HHPurple"> Log in</Button>)}
                         </Col>
                     </Row>
                 </Container>

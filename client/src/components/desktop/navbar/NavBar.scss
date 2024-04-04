@@ -182,30 +182,18 @@
     cursor: pointer;
 }
 
-.nav-profileImage {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    cursor: pointer;
+#nav-profileDropdown.dropdown-toggle::after {
+    display: none;
 }
 
-.nav-profileImageText {
-    visibility: hidden; /* Hide the tooltip text by default */
-    width: auto;
-    background-color: white;
-    border: 1px solid black;
-    color: black;
-    text-align: center;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    font-size: 12px;
-    width:120px;
-    height:16px;
-    margin-left: 30px;
+#nav-profileDropdown.dropdown-toggle {
+    background-color: transparent;
+    border: none;
 }
 
-.nav-profileImage:hover .nav-profileImageText {
-    visibility: visible; /* Show the tooltip text when hovering over the container */
-    opacity: 1;
+.navDropDownItem.dropdown-item:active{
+    background-color: #8e47ff;
+    color: white;
 }
+
+
