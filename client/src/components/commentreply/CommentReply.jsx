@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {Button, Collapse, FloatingLabel, Form, InputGroup} from "react-bootstrap";
 import "./CommentReply.scss"
 import { BiSend } from "react-icons/bi";
@@ -13,6 +13,13 @@ const CommentReply = () => {
         setTextContent(content);
     };
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        // Close the reply section
+        setOpen(false);
+    };
+
     return (
         <>
             <Button
@@ -25,9 +32,9 @@ const CommentReply = () => {
             </Button>
 
             <Collapse in={open}>
-                <Form className="reply-field-wrapper">
+                <Form className="reply-field-wrapper" onSubmit={handleSubmit}>
                     <div className="d-flex reply-editor">
-                        <RichTextEditor onTextContentChange={handleTextContentChange} />
+                        <RichTextEditor onTextContentChange={handleTextContentChange}/>
                     </div>
 
                     <div className="d-flex mt-1">
@@ -35,6 +42,7 @@ const CommentReply = () => {
                             className="ms-auto comment-reply-btn"
                             variant="HHPurple"
                             type="submit"
+                            disabled={!textContent.trim()}
                         >
                             <BiSend /> Send
                         </Button>
