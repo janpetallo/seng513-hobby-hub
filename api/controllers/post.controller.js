@@ -47,6 +47,44 @@ export const getAllPosts = async (req, res) => {
 };
 
 
+export const getUpVotes = async (req, res) => {
+    try {
+        const postId = req.params.postId; // Assuming postId is passed in the request params
+
+        // Find the post by ID
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).send("Post not found");
+        }
+
+        res.status(200).json({ upvotes: post.upvote }); // Return the number of upvotes
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error returning the number of upvotes for the post");
+    }
+};
+
+
+export const getDownVotes = async (req, res) => {
+    try {
+        const postId = req.params.postId; // Assuming postId is passed in the request params
+
+        // Find the post by ID
+        const post = await Post.findById(postId);
+
+        if (!post) {
+            return res.status(404).send("Post not found");
+        }
+
+        res.status(200).json({ downvotes: post.downvote }); // Return the number of downvotes
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error returning the number of downvotes for the post");
+    }
+};
+
+
 export const likePost = async (req, res) => {
     try {
         const postId = req.params.postId;
