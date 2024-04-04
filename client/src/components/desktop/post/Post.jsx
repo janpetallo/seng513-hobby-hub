@@ -66,7 +66,7 @@ const Post = ({ post, isPopup, hubTitle }) => {
         setLiked(!liked);
     } ;
 
-    // temporary functions and variables to enable disliking
+    // functions and variables to enable disliking
     const [disliked, setDisliked] = useState(false);
     const [numDislikes, setNumDislikes] = useState(post.downvote);
     const toggleDisliked = async () => {
