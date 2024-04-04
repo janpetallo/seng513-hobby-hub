@@ -1,6 +1,6 @@
 import "./post.scss";
 import ImageModal from "./ImageModal.jsx";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Carousel from 'react-bootstrap/Carousel';
 import { FaRegThumbsUp } from "react-icons/fa";
 import { FaThumbsUp } from "react-icons/fa";
@@ -25,86 +25,103 @@ const Post = ({ post, isPopup, hubTitle }) => {
     };
 
 
+
+
+
     // functions and variables to enable liking
     const [liked, setLiked] = useState(false);
     const [numLikes, setNumLikes] = useState(post.upvote);
 
     const toggleLiked = async () => {
-        // variable to hold the number of likes
-        let updatedLikes = numLikes;
+        const currentUser = (JSON.parse(localStorage.getItem("currentUser")));
 
-        // if the post was not liked before then we will increment the likes
-        if(!liked){
-            try {
-                // Call the likePost endpoint to increment the likes
-                const response = await newRequest.post(`/posts/likePost/${post._id}`);
-                // Update the number of likes based on the response
-                updatedLikes = response.data.upvote;
-            } catch (error) {
-                console.error(error);
+        // only allow this function to work when the user is logged in
+        if(currentUser !== null) {
+            const userID = currentUser._id;
+
+            // variable to hold the number of likes
+            let updatedLikes = numLikes;
+
+            // if the post was not liked before then we will increment the likes
+            if (!liked) {
+                try {
+                    // Call the likePost endpoint to increment the likes
+                    const response = await newRequest.post(`/posts/likePost/${post._id}`, {userID});
+                    // Update the number of likes based on the response
+                    updatedLikes = response.data.upvote;
+                } catch (error) {
+                    console.error(error);
+                }
+
+                // if the post was not liked before but was actually disliked, then we will toggled the dislikes off as well
+                if (disliked) {
+                    toggleDisliked();
+                }
+
+                // if the post was already liked before then we will decrement the likes
+            } else {
+                try {
+                    // Call the likePost endpoint to increment the likes
+                    const response = await newRequest.post(`/posts/unlikePost/${post._id}`, {userID});
+                    // Update the number of likes based on the response
+                    updatedLikes = response.data.upvote;
+                } catch (error) {
+                    console.error(error);
+                }
             }
 
-            // if the post was not liked before but was actually disliked, then we will toggled the dislikes off as well
-            if(disliked){
-                toggleDisliked();
-            }
-
-        // if the post was already liked before then we will decrement the likes
-        }else {
-            try {
-                // Call the likePost endpoint to increment the likes
-                const response = await newRequest.post(`/posts/unlikePost/${post._id}`);
-                // Update the number of likes based on the response
-                updatedLikes = response.data.upvote;
-            } catch (error) {
-                console.error(error);
-            }
+            // Update the state with the new number of likes
+            setNumLikes(updatedLikes);
+            setLiked(!liked);
         }
-
-        // Update the state with the new number of likes
-        setNumLikes(updatedLikes);
-        setLiked(!liked);
     } ;
 
     // functions and variables to enable disliking
     const [disliked, setDisliked] = useState(false);
     const [numDislikes, setNumDislikes] = useState(post.downvote);
     const toggleDisliked = async () => {
-        // variable to hold the number of dislikes
-        let updatedDisLikes = numDislikes;
+        const currentUser = (JSON.parse(localStorage.getItem("currentUser")));
 
-        // if the post was not disliked before then we will increment the dislikes
-        if (!disliked) {
-            try {
-                // Call the disLikePost endpoint to increment the dislikes
-                const response = await newRequest.post(`/posts/disLikePost/${post._id}`);
-                // Update the number of dislikes based on the response
-                updatedDisLikes = response.data.downvote;
-            } catch (error) {
-                console.error(error);
+        // only allow this function to work when the user is logged in
+        if(currentUser !== null ) {
+            const userID = currentUser._id;
+
+            // variable to hold the number of dislikes
+            let updatedDisLikes = numDislikes;
+
+            // if the post was not disliked before then we will increment the dislikes
+            if (!disliked) {
+                try {
+                    // Call the disLikePost endpoint to increment the dislikes
+                    const response = await newRequest.post(`/posts/disLikePost/${post._id}`, {userID});
+                    // Update the number of dislikes based on the response
+                    updatedDisLikes = response.data.downvote;
+                } catch (error) {
+                    console.error(error);
+                }
+
+                // if the post was not disliked before but was actually liked, then we will toggled the likes off as well
+                if (liked) {
+                    toggleLiked();
+                }
+
+
+                // if the post was already disliked before then we will decrement the dislikes
+            } else {
+                try {
+                    // Call the undisLikePost endpoint to deccrement the dislikes
+                    const response = await newRequest.post(`/posts/undisLikePost/${post._id}`, {userID});
+                    // Update the number of dislikes based on the response
+                    updatedDisLikes = response.data.downvote;
+                } catch (error) {
+                    console.error(error);
+                }
             }
 
-            // if the post was not disliked before but was actually liked, then we will toggled the likes off as well
-            if (liked) {
-                toggleLiked();
-            }
-
-
-        // if the post was already disliked before then we will decrement the dislikes
-        } else {
-            try {
-                // Call the undisLikePost endpoint to deccrement the dislikes
-                const response = await newRequest.post(`/posts/undisLikePost/${post._id}`);
-                // Update the number of dislikes based on the response
-                updatedDisLikes = response.data.downvote;
-            } catch (error) {
-                console.error(error);
-            }
+            // Update the state with the new number of dislikes
+            setNumDislikes(updatedDisLikes);
+            setDisliked(!disliked);
         }
-
-        // Update the state with the new number of dislikes
-        setNumDislikes(updatedDisLikes);
-        setDisliked(!disliked);
     } ;
 
     // temporary functions and variables to enable commenting
