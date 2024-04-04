@@ -2,7 +2,7 @@ import express from "express";
 import {
     createPost,
     disLikePost,
-    getAllPosts, getDownVotes, getUpVotes,
+    getAllPosts,
     likePost,
     undisLikePost,
     unlikePost
