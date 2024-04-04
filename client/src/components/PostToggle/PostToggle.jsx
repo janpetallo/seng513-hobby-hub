@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Form from 'react-bootstrap/Form';
 import "./PostToggle.scss"
 import {InputGroup} from "react-bootstrap";
+import newRequest from "../../utilities/newRequest.js";
 
 const PostToggle = ({onHubSelect}) => {
 
@@ -10,7 +11,33 @@ const PostToggle = ({onHubSelect}) => {
 
     const [selectedItem, setSelectedItem] = useState('');
 
-    const hubs = ['Bimmers', 'Hololive', 'MushroomHunters', 'Nintendo', 'Playstation', 'RemnantGame', 'Speedrunners'];
+    const [hubs, setHubs] = useState([]);
+
+    // get all the hubs when this component launches
+    useEffect(() => {
+        // Fetch hubs data when component mounts
+        fetchHubs();
+    }, []);
+
+    // function to get all the hubs from the back end
+    const fetchHubs = async () => {
+        try {
+            // Fetch hubs from your API or database
+            const response = await newRequest.get("/hubs/getAllHubs");
+            if (response.status !== 200) {
+                throw new Error("Failed to fetch all hubs");
+            }
+            const data = await response.data;
+
+
+            // Extract titles of the hubs and set them to the state
+            const hubTitles = data.map(hub => hub.title);
+            setHubs(hubTitles); // Set the fetched hub titles to the state
+        } catch (error) {
+            console.error('Error fetching hubs:', error);
+        }
+    };
+
 
     // Take database and lower case it so that any typing is case-insensitive
     const filteredHubs = hubs.filter(hub =>
