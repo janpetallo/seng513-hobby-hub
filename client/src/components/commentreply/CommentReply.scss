@@ -11,12 +11,25 @@
     }
 }
 
-.reply-editor {
-    max-height: 400px;
-    // Flex grow 1 to make the text editor go to bottom of page
-    .rich-text-editor {
-        display: flex;
-        flex-direction: column;
-        flex-grow: 1;
+.reply-field-wrapper {
+    border: 2px solid rgba(142, 71, 255, 0.2);
+    border-radius: 8px;
+
+    .reply-editor {
+        max-height: 400px;
+        // Flex grow 1 to make the text editor go to bottom of page
+        .rich-text-editor {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+
+            .ql-toolbar {
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+            }
+
+        }
     }
 }
+
+

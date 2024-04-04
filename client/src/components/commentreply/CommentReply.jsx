@@ -39,7 +39,7 @@ const CommentReply = () => {
 
                     <div className="d-flex mt-1">
                         <Button
-                            className="ms-auto comment-reply-btn"
+                            className="ms-auto m-1 comment-reply-btn"
                             variant="HHPurple"
                             type="submit"
                             disabled={!textContent.trim()}
