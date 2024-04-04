@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './CommunitySelection.scss';
-import CustomizeHub from "../customizehub/CustomizeHub.jsx";
+import CustomizeHub from "../../components/customizehub/CustomizeHub.jsx";
 
 function CreateHubPageMobile() {
     // const [hubName, setHubName] = useState('');
