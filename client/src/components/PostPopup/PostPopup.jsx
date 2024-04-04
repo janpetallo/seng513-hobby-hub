@@ -14,7 +14,7 @@ function PostPopup({ title, hubName, owner, content }) {
                 {title}
             </p>
 
-            <Offcanvas className="w-100 h-100" show={show} onHide={handleClose} placement={`top`}>
+            <Offcanvas className="w-100 h-100" show={show} onHide={handleClose} placement={`end`}>
                 <Offcanvas.Header className="bg-HHPurple text-white" closeButton>
                     <Offcanvas.Title>{`${owner} posted to ${hubName}`}</Offcanvas.Title>
                 </Offcanvas.Header>
