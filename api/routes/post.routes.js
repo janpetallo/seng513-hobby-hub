@@ -33,7 +33,7 @@ router.post("/unlikePost/:postId", verifyToken, unlikePost);
 // route to the dislikePost function.
 router.post("/disLikePost/:postId", verifyToken, disLikePost);
 // route to the undislikePost function.
-router.post("/undisLikePost", verifyToken, undisLikePost);
+router.post("/undisLikePost/:postId", verifyToken, undisLikePost);
 
 
 export default router;

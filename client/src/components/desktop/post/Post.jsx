@@ -76,7 +76,7 @@ const Post = ({ post, isPopup, hubTitle }) => {
         // if the post was not disliked before then we will increment the dislikes
         if (!disliked) {
             try {
-                // Call the disLikePost endpoint to increment the likes
+                // Call the disLikePost endpoint to increment the dislikes
                 const response = await newRequest.post(`/posts/disLikePost/${post._id}`);
                 // Update the number of dislikes based on the response
                 updatedDisLikes = response.data.downvote;
@@ -90,8 +90,16 @@ const Post = ({ post, isPopup, hubTitle }) => {
             }
 
 
+        // if the post was already disliked before then we will decrement the dislikes
         } else {
-            setNumDislikes(numDislikes - 1);
+            try {
+                // Call the undisLikePost endpoint to deccrement the dislikes
+                const response = await newRequest.post(`/posts/undisLikePost/${post._id}`);
+                // Update the number of dislikes based on the response
+                updatedDisLikes = response.data.downvote;
+            } catch (error) {
+                console.error(error);
+            }
         }
 
         // Update the state with the new number of dislikes
