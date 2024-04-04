@@ -26,7 +26,7 @@ const Post = ({ post, isPopup, hubTitle }) => {
 
     // temporary functions and variables to enable liking
     const [liked, setLiked] = useState(false);
-    const [numLikes, setNumLikes] = useState(post.likes);
+    const [numLikes, setNumLikes] = useState(post.upvote);
 
     const toggleLiked = () => {
         if(!liked){
@@ -45,7 +45,7 @@ const Post = ({ post, isPopup, hubTitle }) => {
 
     // temporary functions and variables to enable disliking
     const [disliked, setDisliked] = useState(false);
-    const [numDislikes, setNumDislikes] = useState(post.dislikes);
+    const [numDislikes, setNumDislikes] = useState(post.downvote);
     const toggleDisliked = () => {
         if(!disliked){
             setNumDislikes(numDislikes + 1);
@@ -66,7 +66,7 @@ const Post = ({ post, isPopup, hubTitle }) => {
     // Todo: This one is to control if you have commented or not, fix this so later it only triggers if you post a comment
     const [commented, setCommented] = useState(false);
     const[openComment, setOpenComment] = useState(false);
-    const [numComments, setNumComments] = useState(post.comments);
+    const [numComments, setNumComments] = useState(post.comments.length);
     const toggleComment = () => {
         if(!commented){
             setNumComments(numComments + 1);
@@ -95,16 +95,16 @@ const Post = ({ post, isPopup, hubTitle }) => {
                     <div className="postTitle">
                         {!isPopup && (
                             <PostPopup
-                                title={post.postTitle}
+                                title={post.title}
                                 hubName={post.hubName}
                                 content={post}
-                                owner={post.postOwner}
+                                owner={post.userName}
                             />
                         )}
 
                         {isPopup && (
                             <div>
-                                {post.postTitle}
+                                {post.title}
                             </div>
                         )}
                     </div>
@@ -136,23 +136,20 @@ const Post = ({ post, isPopup, hubTitle }) => {
                         />
                     )}
 
-                    <p className = "postOwner"> <strong>By: </strong> {post.postOwner}</p>
+                    <p className = "postOwner"> <strong>By: </strong> {post.userName}</p>
 
                     {isPopup && (
-                        <p className = "postDescription"> {post.desc} </p>
+                        <div className="postDescription" dangerouslySetInnerHTML={{ __html: post.description }} />
                     )}
-
                     {!isPopup && (
                         <div>
-                            <p className="postDescription">
-                                {post.desc.length > maxLength ? `${post.desc.substring(0, maxLength)}...` : post.desc}
-                            </p>
-                            {post.desc.length > maxLength && (
+                            <div className="postDescription" dangerouslySetInnerHTML={{ __html: post.description }} />
+                            {post.description.length > maxLength && (
                                 <PostPopup
                                     title="Read more..."
                                     hubName={post.hubName}
                                     content={post}
-                                    owner={post.postOwner}
+                                    owner={post.userName}
                                 />
                             )}
                         </div>

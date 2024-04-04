@@ -18,9 +18,6 @@ const Posts = ({hubTitle}) =>{
                 const postsData = response.data;
                 setPosts(postsData);
 
-                console.log(postsData);
-                console.log(posts);
-
             } catch (error) {
                 console.error(error);
             }
@@ -33,7 +30,7 @@ const Posts = ({hubTitle}) =>{
 
     return <div className = "posts">
         {posts.map(post=>(
-            <Post hubTitle={hubTitle} post={post} isPopup={false} key={post.id}/>
+            <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id}/>
         ))}
         </div>;
 };
