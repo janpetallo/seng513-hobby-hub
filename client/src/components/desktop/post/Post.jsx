@@ -25,7 +25,7 @@ const Post = ({ post, isPopup, hubTitle }) => {
     };
 
 
-    // temporary functions and variables to enable liking
+    // functions and variables to enable liking
     const [liked, setLiked] = useState(false);
     const [numLikes, setNumLikes] = useState(post.upvote);
 
@@ -69,18 +69,33 @@ const Post = ({ post, isPopup, hubTitle }) => {
     // temporary functions and variables to enable disliking
     const [disliked, setDisliked] = useState(false);
     const [numDislikes, setNumDislikes] = useState(post.downvote);
-    const toggleDisliked = () => {
-        if(!disliked){
-            setNumDislikes(numDislikes + 1);
+    const toggleDisliked = async () => {
+        // variable to hold the number of dislikes
+        let updatedDisLikes = numDislikes;
 
-            if(liked){
+        // if the post was not disliked before then we will increment the dislikes
+        if (!disliked) {
+            try {
+                // Call the disLikePost endpoint to increment the likes
+                const response = await newRequest.post(`/posts/disLikePost/${post._id}`);
+                // Update the number of dislikes based on the response
+                updatedDisLikes = response.data.downvote;
+            } catch (error) {
+                console.error(error);
+            }
+
+            // if the post was not disliked before but was actually liked, then we will toggled the likes off as well
+            if (liked) {
                 toggleLiked();
             }
 
-        }else {
+
+        } else {
             setNumDislikes(numDislikes - 1);
         }
 
+        // Update the state with the new number of dislikes
+        setNumDislikes(updatedDisLikes);
         setDisliked(!disliked);
     } ;
 

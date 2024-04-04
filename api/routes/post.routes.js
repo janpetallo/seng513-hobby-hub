@@ -31,7 +31,7 @@ router.post("/likePost/:postId", verifyToken, likePost);
 // route to the unlikePost function.
 router.post("/unlikePost/:postId", verifyToken, unlikePost);
 // route to the dislikePost function.
-router.post("/disLikePost", verifyToken, disLikePost);
+router.post("/disLikePost/:postId", verifyToken, disLikePost);
 // route to the undislikePost function.
 router.post("/undisLikePost", verifyToken, undisLikePost);
 
