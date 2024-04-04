@@ -76,3 +76,18 @@
     width: 17rem;
   }
 }
+
+
+.menu-carousel .carousel-indicators .active {
+  background-color: #8e47ff; /* Change to your desired color for active indicator */
+}
+
+.menu-carousel .carousel-control-prev .carousel-control-prev-icon,
+.menu-carousel .carousel-control-next .carousel-control-next-icon{
+  filter: invert(88%) sepia(8%) saturate(0%) hue-rotate(150deg) brightness(77%) contrast(88%);
+}
+.menu-carousel .carousel-control-prev .carousel-control-prev-icon:hover,
+.menu-carousel .carousel-control-next .carousel-control-next-icon:hover{
+  filter: invert(1);
+
+}

@@ -1,20 +1,29 @@
 import React from "react";
 import { useState } from "react";
-import {Button, Nav, Navbar, NavDropdown, Offcanvas, Row} from "react-bootstrap";
+import {Row} from "react-bootstrap";
 import {Col, Container, Card, Badge,Image} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import "./Marketplace.scss";
 import star from "../../assets/marketplace/star.svg";
 import HubMarketNavbar from "./HubMarketNavbar.jsx";
+import Carousel from "react-bootstrap/Carousel";
+
 const Marketplace = () => {
+
+
 
     const [cards] = useState([
         {
             username: "user1",
             email:"user1@email.com",
             phone:1234567890,
+            title:"The Hobbit",
             description: "The Hobbit",
-            image:"https://resizing.flixster.com/fHUZr99k4HWii_jJwo4cA4v0Bb8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p8992211_p_v8_bh.jpg",
+            image:
+                [
+                    "https://resizing.flixster.com/fHUZr99k4HWii_jJwo4cA4v0Bb8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p8992211_p_v8_bh.jpg",
+                    "https://m.media-amazon.com/images/I/71S7Z+YhJFL._AC_UF1000,1000_QL80_.jpg"
+                ],
             price: 100,
             condition:"New",
             tag:"Electronics",
@@ -24,8 +33,11 @@ const Marketplace = () => {
             username: "user2",
             email:"user1@email.com",
             phone:1234567890,
+            title:"Gyarados",
             description: "Gyarados",
-            image:"https://crystal-cdn4.crystalcommerce.com/photos/6772128/430px-GyaradosPok%C3%A9monGO22.jpg",
+            image:[
+                "https://crystal-cdn4.crystalcommerce.com/photos/6772128/430px-GyaradosPok%C3%A9monGO22.jpg"
+                ],
             price: 3.50,
             condition:"New",
             tag:"Pokemon",
@@ -35,8 +47,9 @@ const Marketplace = () => {
             username: "user3",
             email:"user1@email.com",
             phone:1234567890,
+            title:"Mushroom of the Woods",
             description: "Mushroom of the Woods",
-            image:"https://www.nrafamily.org/media/rfziyd0g/mushroom-foraging-lede.jpg",
+            image: ["https://www.nrafamily.org/media/rfziyd0g/mushroom-foraging-lede.jpg"],
             price: 3.50,
             condition:"New",
             tag:"Mushroom Hunters",
@@ -46,8 +59,9 @@ const Marketplace = () => {
             username: "user1",
             email:"user1@email.com",
             phone:1234567890,
+            title:"Fishing Rod",
             description: "Fishing Rod",
-            image:"https://www.discoverboating.com/sites/default/files/how-to-fish-for-beginners.jpg",
+            image:["https://www.discoverboating.com/sites/default/files/how-to-fish-for-beginners.jpg"],
             price: 25.50,
             condition:"New",
             tag:"Fishing",
@@ -57,8 +71,9 @@ const Marketplace = () => {
             username: "user1",
             email:"user1@email.com",
             phone:1234567890,
+            title:"Baseball Gloves",
             description: "Baseball Gloves",
-            image:"https://sportsreplay.ca/cdn/shop/products/Wilson-A700-Baseball-Glove-Wilson-Sports-Replay-Sports-Excellence_940x.jpg?v=1682004023",
+            image:["https://sportsreplay.ca/cdn/shop/products/Wilson-A700-Baseball-Glove-Wilson-Sports-Replay-Sports-Excellence_940x.jpg?v=1682004023"],
             price: 15.50,
             condition:"New",
             tag:"Baseball",
@@ -73,25 +88,39 @@ const Marketplace = () => {
 
         <Container className="w-100">
             <Row lg={3}  sm={2} xs={1} className="my-4">
-                {cards.map((card, i) => (
+                {cards.map((marketCard, i) => (
                     <Col className="mb-4 d-flex justify-content-center align-items-stretch" key={i}>
                         <div className="card-deck">
-                            <Link to="sellingItems" state={card} className="card-deck p-0 m-0 remove-styling">
+                            <Link to="/selling-item" state={marketCard} className="card-deck p-0 m-0 remove-styling">
                             <Card className="card-market">
-                                <Card.Img variant="top" className="card-img card-img-resize" src={card.image}/>
+                                {marketCard.image.length > 1 ? (
+                                    <Carousel className="menu-carousel" slide={false}>
+                                        {marketCard.image.map((image, index) => (
+                                            <Carousel.Item key={index}>
+                                                <Card.Img
+                                                    className="d-block w-100 card-img card-img-resize"
+                                                    src={image}
+                                                    alt={`Slide ${index}`}
+                                                />
+                                            </Carousel.Item>
+                                        ))}
+                                    </Carousel>
+                                ) : //acts as an else
+                                    <Card.Img variant="top" className="card-img card-img-resize" src={marketCard.image[0]} />
+                                }
                                 <Card.Body className="p-2 m-0">
-                                    <Card.Title className="card-market-title m-0">{card.description}</Card.Title>
-                                    <Badge bg="HHPurple" className="badge" id="badge-color">{card.tag}</Badge>
+                                    <Card.Title className="card-market-title m-0">{marketCard.title}</Card.Title>
+                                    <Badge bg="HHPurple" className="badge" id="badge-color">{marketCard.tag}</Badge>
                                     <div className="d-flex justify-content-between p-0 mb-0">
-                                        <Card.Text className="card-market-text fw-bold">C${card.price}</Card.Text>
+                                        <Card.Text className="card-market-text fw-bold">C${marketCard.price}</Card.Text>
                                         <div className="d-flex">
                                             <Image src={star} alt="star" className="star-rating"/>
                                             <Card.Text className="card-market-text">3.5</Card.Text>
                                         </div>
                                     </div>
                                     <div className="d-flex justify-content-between p-0 mt-0">
-                                        <Card.Text className="card-market-text">By: <Link>{card.username}</Link></Card.Text>
-                                        <Card.Text className="card-market-text fw-bold">{card.location}</Card.Text>
+                                        <Card.Text className="card-market-text">By: <Link>{marketCard.username}</Link></Card.Text>
+                                        <Card.Text className="card-market-text fw-bold">{marketCard.location}</Card.Text>
                                     </div>
                                 </Card.Body>
                             </Card>
