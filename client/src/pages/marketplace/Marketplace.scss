@@ -84,10 +84,6 @@
 
 .menu-carousel .carousel-control-prev .carousel-control-prev-icon,
 .menu-carousel .carousel-control-next .carousel-control-next-icon{
-  filter: invert(88%) sepia(8%) saturate(0%) hue-rotate(150deg) brightness(77%) contrast(88%);
-}
-.menu-carousel .carousel-control-prev .carousel-control-prev-icon:hover,
-.menu-carousel .carousel-control-next .carousel-control-next-icon:hover{
-  filter: invert(1);
-
+  border-radius: 5px;
+  background-color: #8e47ff;
 }

@@ -48,8 +48,12 @@
     padding-right: 5px;
   }
   .contain-image{
-    max-width: 100%;
-    max-height: 100%;
+    width:30vw;
+    height: 30vh;
+    //max-width: 100%;
+    //max-height: 100%;
+    //min-width: 90%;
+    //min-height: 90%;
     overflow: hidden;
     //border: 3px solid red;
   }
@@ -84,12 +88,33 @@
 }
 
 .post-img {
-  width: 100%;
-  height: auto;
+  //width: 100%;
+  //height: auto;
   object-fit: cover;
 }
 .contain-image{
   max-width: 60%;
   max-height: 100%;
   overflow: hidden;
+}
+#selling-carousel  .carousel-control {
+  width: 3em;
+  .icon-prev, .icon-next, .glyphicon-chevron-left, .glyphicon-chevron-right {
+    margin: 0.2em;
+  }
+}
+#selling-carousel  .carousel {
+  padding-left: 3em+ 0.5em;
+  padding-right: 3em + 0.5em;
+  height: auto;
+}
+
+.selling-item .carousel-indicators .active {
+  background-color: #8e47ff; /* Change to your desired color for active indicator */
+}
+//
+.selling-item .carousel-control-prev .carousel-control-prev-icon,
+.selling-item .carousel-control-next .carousel-control-next-icon{
+  border-radius: 5px;
+  background-color: #8e47ff;
 }
