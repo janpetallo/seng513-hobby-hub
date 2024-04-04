@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import "./CustomizeHub.scss"
 import {Button, FloatingLabel, Form, Tab, Tabs} from "react-bootstrap";
-import RichTextEditor from "../../components/TextEditor/RichTextEditor.jsx";
+import RichTextEditor from "../TextEditor/RichTextEditor.jsx";
+import {Link} from "react-router-dom";
 
 const CustomizeHub = () => {
 
@@ -126,9 +127,12 @@ const CustomizeHub = () => {
                         Next
                     </Button>
                 ) : (
-                    <Button variant="HHPurple" className="ms-2 customize-hub-btn">
-                        Create
-                    </Button>
+                    // This needs to go to the specific hub idk what the link is going to be yet
+                    <Link to="/hubs">
+                        <Button variant="HHPurple" className="ms-2 customize-hub-btn">
+                            Create
+                        </Button>
+                    </Link>
                 )}
             </div>
         </div>

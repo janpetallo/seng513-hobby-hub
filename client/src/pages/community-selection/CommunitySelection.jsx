@@ -4,7 +4,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import CreateIcon from '../../assets/create-hub/create.svg';
 import './CommunitySelection.scss'
-import CustomizeHub from "../customizehub/CustomizeHub.jsx";
+import CustomizeHub from "../../components/customizehub/CustomizeHub.jsx";
 
 
 function CommunitySelection() {
