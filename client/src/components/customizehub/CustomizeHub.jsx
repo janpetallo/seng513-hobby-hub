@@ -3,6 +3,7 @@ import "./CustomizeHub.scss"
 import {Button, FloatingLabel, Form, Tab, Tabs} from "react-bootstrap";
 import RichTextEditor from "../TextEditor/RichTextEditor.jsx";
 import {Link} from "react-router-dom";
+import HubsCategoryToggle from "../HubsCategoryToggle/HubsCategoryToggle.jsx";
 
 const CustomizeHub = () => {
 
@@ -52,7 +53,7 @@ const CustomizeHub = () => {
 
                 <Tab eventKey={0} title="Hub Name" disabled={true}>
                     <Form className="hub-name">
-                        <h5>Enter a name for your hub</h5>
+                        <h5>Enter a name for your hub:</h5>
                         <FloatingLabel
                             controlId="floating-hubname"
                             label="Name"
@@ -71,8 +72,15 @@ const CustomizeHub = () => {
                             </Form.Control.Feedback>
                         </FloatingLabel>
 
-                        <Form.Group className="mt-3">
-                            <h5>Type</h5>
+                        <hr/>
+
+                        <h5>Pick the category your hub belongs to:</h5>
+                        <HubsCategoryToggle/>
+
+                        <hr/>
+
+                        <Form.Group>
+                            <h5>Pick your hub type:</h5>
                             <Form.Check className="custom-radio"
                                         type="radio"
                                         id="publicHub"
