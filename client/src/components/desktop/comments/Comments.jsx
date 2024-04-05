@@ -62,7 +62,7 @@ const Comments = ( {post, isPopup} ) => {
 
     return <div className="mt-3 Comments">
         <div className="ms-4">
-            <CommentReply/>
+            <CommentReply post={post}/>
         </div>
 
         {isPopup && (

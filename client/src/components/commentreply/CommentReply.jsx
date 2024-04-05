@@ -4,7 +4,9 @@ import "./CommentReply.scss"
 import { BiSend } from "react-icons/bi";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import RichTextEditor from "../TextEditor/RichTextEditor.jsx";
-const CommentReply = () => {
+import newRequest from "../../utilities/newRequest.js";
+import {useNavigate} from "react-router-dom";
+const CommentReply = ({post}) => {
 
     const [open, setOpen] = useState(false);
     const [textContent, setTextContent] = useState("");
@@ -13,8 +15,38 @@ const CommentReply = () => {
         setTextContent(content);
     };
 
-    const handleSubmit = (event) => {
+    // navigation hook
+    const navigate = useNavigate();
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
+
+        // get user data from local storage
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+        // Check if user is logged in
+        if (!currentUser) {
+            // Redirect user to login page or display a message
+            console.log("User is not logged in. Redirecting to login page...");
+            navigate("/login");
+            return;
+        }
+
+        // Field to Gather Comment data
+        const commentData = {
+            username: currentUser.username,
+            userID: currentUser._id,
+            postID: post._id,
+            comment: textContent,
+        };
+
+        // Submit data to server
+        try {
+            const response = await newRequest.post('comments/createComment', commentData);
+
+        } catch (error) {
+            console.error(error);
+        }
+
 
         // Close the reply section
         setOpen(false);
