@@ -2,7 +2,7 @@ import express from "express";
 import {
     createPost,
     disLikePost,
-    getAllPosts,
+    getAllPosts, getPostsByIds,
     likePost,
     undisLikePost,
     unlikePost
@@ -17,6 +17,8 @@ const router = express.Router();
 router.post("/createPost", verifyToken, createPost);
 // route to the getAllPosts function. No token verification required
 router.get("/getAllPosts", getAllPosts);
+// route to the getPostsByIds function.
+router.get("/getPostsByIds", verifyToken, getPostsByIds);
 // route to the likePost function.
 router.post("/likePost/:postId", verifyToken, likePost);
 // route to the unlikePost function.
