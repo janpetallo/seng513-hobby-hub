@@ -9,7 +9,7 @@ export const createPost = async (req, res) => {
 
         // identity verification required to post on your own account
         if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to Post on this account! You can Post on your own account!");
+            return res.status(403).send("Error you are not authorized to Post on this account! You can only Post on your own account!");
         }
 
         // Create a new object without the userId field
