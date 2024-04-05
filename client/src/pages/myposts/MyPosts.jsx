@@ -15,7 +15,6 @@ const MyPosts = () => {
         }
     }, []);
 
-// todo: make a post controller that takes a list containing one or more post id's and returns them
 
 
     return (
@@ -33,7 +32,7 @@ const MyPosts = () => {
                 )}
             </div>
             <hr/>
-            {userName ? (<Posts hubTitle={true}/>) : null}
+            {userName ? (<Posts hubTitle={true} postAll={false}/>) : null}
         </>
     )
 }

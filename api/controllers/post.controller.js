@@ -49,7 +49,7 @@ export const getAllPosts = async (req, res) => {
 
 export const getPostsByIds = async (req, res) => {
     try {
-        const postIDs = req.body.postIDs;
+        const postIDs = req.query.postIDs.split(',');
         // Fetch posts based on the provided post IDs
         const posts = await Post.find({ _id: { $in: postIDs } });
         res.status(200).json(posts);
@@ -58,7 +58,6 @@ export const getPostsByIds = async (req, res) => {
         res.status(500).send("Error fetching posts");
     }
 };
-
 
 export const likePost = async (req, res) => {
     try {
