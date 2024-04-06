@@ -5,7 +5,7 @@ import LeftMenu from "../leftmenu/LeftMenu.jsx";
 import {useMediaQuery} from "react-responsive";
 import Logo from "../../../assets/authentication/mobile/logo.svg"
 import Search from "../../../assets/navbar/search.svg"
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 
 const NavBar = () => {
@@ -57,6 +57,32 @@ const NavBar = () => {
 
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
+    // Search bar
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('Hubs');
+    const navigate = useNavigate();
+
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const handleCategoryChange = (event) => {
+        setSelectedCategory(event.target.value);
+    };
+
+    const handleSearchSubmit = (event) => {
+        event.preventDefault();
+        navigate(`/search?query=${searchQuery}&category=${selectedCategory}`);
+    };
+
+     // handles the enter key being pressed when we are performing a search
+    const handleEnterSearch = (event) => {
+        // key 13 is the enter key
+        if (event.keyCode === 13) {
+        handleSearchSubmit(event);
+        }
+    }
+
 
 
     return (
@@ -83,7 +109,7 @@ const NavBar = () => {
                                     <img src={Search} alt="search" />
                                 </button>
 
-                                <Form.Control type="text" placeholder="Search HobbyHub..."></Form.Control>
+                                {/* <Form.Control type="text" placeholder="Search HobbyHub..."></Form.Control>
 
                                 
                                 <Button className="d-search-btn" variant="HHPurple">Search</Button>
@@ -91,7 +117,19 @@ const NavBar = () => {
                                     <span>Search in:  </span>
                                     <label><input type="radio" name="searchSelection" value="Hubs" defaultChecked/> Hubs</label>
                                     <label><input type="radio" name ="searchSelection" value="Market"/> Market</label>
-                                </div>  
+                                </div>   */}
+
+                                {/* <Form onSubmit={handleSearchSubmit}> */}
+                                    <Form.Control type="text" placeholder="Search HobbyHub..." value={searchQuery} onChange={handleSearchChange} onKeyDown={handleEnterSearch} />
+
+                                    <Button className="d-search-btn" variant="HHPurple" type="submit" onClick={handleSearchSubmit} > Search</Button>
+
+                                    <div className="search-dropdown"  id="search-dropdown">
+                                        <span>Search in:  </span>
+                                        <label><input type="radio" name="searchSelection" value="Hubs" checked={selectedCategory === 'Hubs'} onChange={handleCategoryChange} /> Hubs</label>
+                                        <label><input type="radio" name="searchSelection" value="Market" checked={selectedCategory === 'Market'} onChange={handleCategoryChange} /> Market</label>
+                                    </div>
+                                {/* </Form> */}
                             </div>
 
 
