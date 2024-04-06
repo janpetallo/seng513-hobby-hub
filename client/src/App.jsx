@@ -31,6 +31,7 @@ import MyAdsTrades from "./pages/MyAdsTrades/MyAdsTrades.jsx";
 import MyHubs from "./pages/myhubs/MyHubs.jsx";
 import MyPosts from "./pages/myposts/MyPosts.jsx";
 import MarketMenu from "./components/desktop/marketmenu/MarketMenu.jsx";
+import SearchReults from './pages/search-results/SearhResults.jsx';
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -183,6 +184,10 @@ function App() {
                 {
                     path: "/create-hub",
                     element: <CreateHubPageMobile/>
+                },
+                {
+                    path: "/search-results/:search",
+                    element: <SearchReults/>
                 },
             ]
         },

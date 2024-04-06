@@ -72,7 +72,7 @@ const NavBar = () => {
 
     const handleSearchSubmit = (event) => {
         event.preventDefault();
-        navigate(`/search?query=${searchQuery}&category=${selectedCategory}`);
+        navigate(`/search-results/search?query=${searchQuery}&category=${selectedCategory}`);
     };
 
      // handles the enter key being pressed when we are performing a search
