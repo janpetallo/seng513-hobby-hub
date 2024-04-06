@@ -59,7 +59,7 @@ export const checkValidHubName = async (req, res) => {
         }
 
         // Check if the hub name already exists in the database
-        const existingHub = await Hub.findOne({ name: hubName });
+        const existingHub = await Hub.findOne({ hubName: hubName });
 
         if (existingHub) {
             return res.status(400).send("Error: Hub name already exists.");
