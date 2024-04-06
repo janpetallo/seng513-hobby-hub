@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const hubSchema = new Schema({
-    title: {
+    hubName: {
         type: String,
         required: true,
         unique: true,
