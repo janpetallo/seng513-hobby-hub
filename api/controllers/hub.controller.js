@@ -43,3 +43,33 @@ export const createHub = async (req, res) => {
         console.log(error);
     }
 };
+
+
+export const checkValidHubName = async (req, res) => {
+    try {
+        // Get the hub name from the request body
+        const { hubName, userID } = req.body;
+
+        // get the current user
+        const currentUser = await User.findById(userID);
+
+        // identity verification required to post on your own account
+        if(req.userId !== currentUser._id.toString()){
+            return res.status(403).send("Error you are not authorized to create a hub on this account! You can create hubs on your own account!");
+        }
+
+        // Check if the hub name already exists in the database
+        const existingHub = await Hub.findOne({ name: hubName });
+
+        if (existingHub) {
+            return res.status(400).send("Error: Hub name already exists.");
+        }
+
+        // If the hub name doesn't exist, return success
+        res.status(200).send("Hub name is valid.");
+
+    } catch (error) {
+        res.status(500).send("Error with validating a Hub Name");
+        console.log(error);
+    }
+};
