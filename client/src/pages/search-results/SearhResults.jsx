@@ -66,13 +66,25 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
     }, [searchQuery, posts]);
 
     return (
-        
-
-        <div className = "posts">
-            {filteredPosts.map(post=>(
-                <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id}/>
-            ))}
-        </div>
+        <>
+            {/* temporary search results title */}
+            <div className="search-reults-title">
+                <h1>Search Results</h1>
+            </div>
+            <div className="posts">
+                {filteredPosts.length > 0 && <h3 className="page-title">{searchQuery === "" ? "Suggested Posts: ":'Posts related to "' + searchQuery + '"'}</h3>}
+                {filteredPosts.length === 0 && searchQuery === "" && <h3>No posts to show</h3>}
+                <div className="content">
+                    <div className="card-columns" overflow-y="auto">
+                        {filteredPosts.length === 0 && searchQuery !== "" && <h3>No post related to "{searchQuery}"</h3>}
+                        <p>Total search results: {filteredPosts.length}</p>
+                        {filteredPosts.map(post => (
+                            <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+        </>
     );
 }
 
