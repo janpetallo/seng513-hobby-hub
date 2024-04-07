@@ -11,7 +11,7 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
      // get URL parameters
      const location = useLocation();
      const searchParams = new URLSearchParams(location.search);
-     const searchQuery = searchParams.get("query").toLowerCase();
+     const searchQuery = searchParams.get("query").trim().toLowerCase();
      const category = searchParams.get("category");
 
     // get all posts
@@ -51,10 +51,10 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
         const filterPosts = () => {
             if (searchQuery !== '' && category === 'Hubs') {
                 const newFilteredPosts = posts.filter(post =>
-                    post.title?.toLowerCase().includes(searchQuery) ||
-                    post.description?.toLowerCase().includes(searchQuery) ||
-                    post.userName?.toLowerCase().includes(searchQuery) ||
-                    post.hubName?.toLowerCase().includes(searchQuery) ||
+                    post.title?.toLowerCase().trim().includes(searchQuery) ||
+                    post.description?.toLowerCase().trim().includes(searchQuery) ||
+                    post.userName?.toLowerCase().trim().includes(searchQuery) ||
+                    post.hubName?.toLowerCase().trim().includes(searchQuery) ||
                     post.tags?.includes(searchQuery)
                 );
                 setFilteredPosts(newFilteredPosts);
@@ -63,20 +63,18 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
             }
         };
         filterPosts();
-    }, [searchQuery, posts]);
+    }, [searchQuery, posts, category]);
 
     return (
         <>
-            {/* temporary search results title */}
-            {/* <div className="search-reults-title">
-                <h1>Search Results</h1>
-            </div> */}
             <div className="search-posts">
-                {filteredPosts.length > 0 && <h3 className="page-title">{searchQuery === "" ? "Suggested Posts: ":'Posts related to "' + searchQuery + '"'}</h3>}
+                <div>
+                </div>
+                {filteredPosts.length > 0 && <h3 className="page-title">{searchQuery === "" ? "Suggested Posts: ":'Posts related to "' + searchParams.get('query').trim() + '"'}</h3>}
                 {filteredPosts.length === 0 && searchQuery === "" && <h3>No posts to show</h3>}
                 <div className="content">
                     <div className="card-columns" overflow-y="auto">
-                        {filteredPosts.length === 0 && searchQuery !== "" && <h3>No post related to "{searchQuery}"</h3>}
+                        {filteredPosts.length === 0 && searchQuery !== "" && <h3>No post related to "{searchParams.get('query').trim()}"</h3>}
                         <p className="search-count">Total search results: {filteredPosts.length}</p>
                         {filteredPosts.map(post => (
                             <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} />
