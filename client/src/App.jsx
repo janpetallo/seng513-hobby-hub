@@ -102,6 +102,14 @@ function App() {
         return children;
     }
 
+    //  This prevents logged-in users from going to the login or signup page until they log out
+    const ProtectedRouteLoggedIn = ({ children }) => {
+        if(localStorage.getItem("currentUser")){
+            return <Navigate to={"/"}/>;
+        }
+        return children;
+    }
+
     const router = createBrowserRouter([
         {
             path: "/",
@@ -195,11 +203,11 @@ function App() {
         },
         {
             path: "/login",
-            element: <Login/>
+            element: <ProtectedRouteLoggedIn><Login/></ProtectedRouteLoggedIn>
         },
         {
             path: "/signup",
-            element: <Signup/>
+            element: <ProtectedRouteLoggedIn><Signup/></ProtectedRouteLoggedIn>
         },
         {
             path: "/underdevelopment",
