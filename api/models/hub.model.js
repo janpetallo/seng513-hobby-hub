@@ -11,6 +11,10 @@ const hubSchema = new Schema({
         type: String,
         required: true
     },
+    category: {
+        type: String,
+        required: true
+    },
     hubOwner:{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User' // Reference to the User model
