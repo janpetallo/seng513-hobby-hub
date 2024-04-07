@@ -18,6 +18,7 @@ const Post = ({ post, isPopup, hubTitle, showKebab }) => {
     // to control image pop up when clicked
     const [showModal, setShowModal] = useState(false);
     const [modalImageUrl, setModalImageUrl] = useState("");
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     const toggleModal = (imageUrl) => {
         setShowModal(!showModal);
@@ -192,7 +193,7 @@ const Post = ({ post, isPopup, hubTitle, showKebab }) => {
                     </div>
 
                     {/* Only render the kebab when on dedicated hub pages, can't ban people on your homepage*/}
-                    {showKebab && isAdmin && (<ModKebab/>)}
+                    {showKebab && isAdmin && currentUser && (<ModKebab/>)}
                 </div>
 
                 <div className="post_content">
