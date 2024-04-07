@@ -1,0 +1,47 @@
+.profile-toggle-div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+
+    img {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+
+    .profile-toggle-username {
+        color: var(--HHPurple);
+        font-weight: 500;
+    }
+
+    .profile-toggle-options {
+        position: absolute;
+        top: 50px;
+        right: 0;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid var(--HHPurple);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 250px;
+        color: gray;
+        font-weight: 300;
+        overflow-wrap: break-word;
+
+        .profile-toggle-links {
+            text-decoration: none;
+            color: gray;
+
+            &:hover {
+                color: #8e47ff;
+                font-weight: 400;
+            }
+        }
+
+
+    }
+}
