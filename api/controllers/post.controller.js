@@ -8,7 +8,7 @@ export const createPost = async (req, res) => {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
         // get the hub that the user created this post for
-        const selectedHub = await Hub.findOne(req.body.hubName);
+        const selectedHub = await Hub.findOne({ hubName: req.body.hubName });
 
         // identity verification required to post on your own account
         if(req.userId !== currentUser._id.toString()){
