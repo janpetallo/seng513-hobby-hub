@@ -145,10 +145,6 @@
             display: block;
         }
 
-        .nav-profileImage{
-            display: none;
-        }
-
         &:hover {
             box-shadow: 0 0 0 100vmax rgba(18, 18, 18, 0.28);
             .d-searchbar{
@@ -163,7 +159,6 @@
             
         }
     }
-
 }
 
 .offcanvas-header {
@@ -174,26 +169,3 @@
     margin-left: auto;
     height: 60px;
 }
-
-.nav-profilePic{
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-#nav-profileDropdown.dropdown-toggle::after {
-    display: none;
-}
-
-#nav-profileDropdown.dropdown-toggle {
-    background-color: transparent;
-    border: none;
-}
-
-.navDropDownItem.dropdown-item:active{
-    background-color: #8e47ff;
-    color: white;
-}
-
-
