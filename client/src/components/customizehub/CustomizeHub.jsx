@@ -10,14 +10,25 @@ const CustomizeHub = () => {
     // navigation hook
     const navigate = useNavigate();
 
-    const [textContent, setTextContent] = useState("");
+    const [description, setDescription] = useState("");
+    const [rules, setRules] = useState("");
+    const [resources, setResources] = useState("");
+
+
     // to get the text from the rich text editor
     const handleTextContentChange = (content) => {
-        setTextContent(content);
+        if(activeTab === 1){
+            setDescription(content);
+        }else if (activeTab === 2){
+            setRules(content);
+        }else if(activeTab === 3){
+            setResources(content);
+        }
     };
 
     const [hubName, setHubName] = useState('');
     const [hubNameError, setHubNameError] = useState('')
+    const [hubVisibility, setHubVisibility] = useState('public'); // Default to public
 
     const handleInputChange = (e) => {
         setHubName(e.target.value);
@@ -73,6 +84,10 @@ const CustomizeHub = () => {
         setActiveTab(prevTab => prevTab - 1);
     };
 
+    const handleHubVisibilityChange = (e) => {
+        setHubVisibility(e.target.value);
+    };
+
     return (
         <div className="customize-hub-wrapper">
             <Tabs
@@ -118,8 +133,9 @@ const CustomizeHub = () => {
                                         id="publicHub"
                                         label={<span><strong>Public Hub</strong><span> Anyone can view, post, and comment. Share your hub to the world!</span></span>}
                                         name="hubType"
-                                        disabled
-                                        checked
+                                        value="public"
+                                        checked={hubVisibility === 'public'}
+                                        onChange={handleHubVisibilityChange}
                             />
 
                             <Form.Check className="custom-radio"
@@ -127,7 +143,9 @@ const CustomizeHub = () => {
                                         id="privateHub"
                                         label={<><strong>Private Hub</strong><span> Only approved users can enter. Only those worthy shall pass!</span></>}
                                         name="hubType"
-                                        disabled
+                                        value="private"
+                                        checked={hubVisibility === 'private'}
+                                        onChange={handleHubVisibilityChange}
                             />
                         </Form.Group>
                     </Form>
