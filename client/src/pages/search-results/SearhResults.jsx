@@ -11,9 +11,10 @@ const SearchReults = ({hubTitle, postAll= true})  => {
      // get URL parameters
      const location = useLocation();
      const searchParams = new URLSearchParams(location.search);
-     const search = searchParams.get("query");
+     const searchQuery = searchParams.get("query").toLowerCase();
      const category = searchParams.get("category");
 
+    // get all posts
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
@@ -62,24 +63,28 @@ const SearchReults = ({hubTitle, postAll= true})  => {
         // Call fetchPosts function when component mounts
         fetchPosts();
 
-    }, []); // Empty dependency array ensures this effect runs only once when component mounts
+    }, [postAll, category]); 
+    
+    // filter posts based on search query
+    const [filteredPosts, setFilteredPosts] = useState([]);
 
-   
-
-
-
-    // return (
-    //     <div className="search-results">
-    //         {/* <HubMarketNavbar/> */}
-    //         <Posts hubTitle={true}/>
-    //     </div>
-    // )
+    useEffect(() => {
+        const filterPosts = () => {
+            if (searchQuery !== '') {
+                const newFilteredPosts = posts.filter(post =>
+                    post.title.toLowerCase().includes(searchQuery)
+                );
+                setFilteredPosts(newFilteredPosts);
+            } 
+        };
+        filterPosts();
+    }, [searchQuery, posts]);
 
     return (
         
 
         <div className = "posts">
-            {posts.map(post=>(
+            {filteredPosts.map(post=>(
                 <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id}/>
             ))}
         </div>
