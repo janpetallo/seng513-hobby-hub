@@ -20,25 +20,19 @@ const NavBar = () =>{
     return (
         <Container className="bg-white fixed-bottom mobile-nav">
             <Row>
-                <Col className="d-flex justify-content-evenly mt-2 mb-2 p-1">
+                <Col className="mobile-nav-inner">
 
-                    <Link to="/" className="mobile-links">
+                    <Link to="/">
                         <div className="mobile-items">
                             <img src={location.pathname === '/' || location.pathname === '/marketplace' ? HomeFilled : Home} alt="Home"/>
                         </div>
                     </Link>
 
-                    <Link to="/search-menu" className="mobile-links">
+                    <Link to="/search-menu">
                         <div className="mobile-items">
                             <img src={location.pathname === '/search-menu' ? SearchFilled : Search} alt="Search"/>
                         </div>
                     </Link>
-
-                    {/* <Link to="/create-hub" className="mobile-links">
-                        <div className="mobile-items mobile-create ">
-                            <img src={Create} alt="Create"/>
-                        </div>
-                    </Link> */}
 
                     {currentUser && (
                         <Dropdown>
@@ -56,13 +50,13 @@ const NavBar = () =>{
                         </Dropdown>
                     )}
 
-                    <Link to="/community-selection" className="mobile-links">
+                    <Link to="/community-selection">
                         <div className="mobile-items">
                             <img src={location.pathname === '/community-selection' ? HubsFilled : Hubs} alt="Hubs"/>
                         </div>
                     </Link>
 
-                    <Link to="/marketplace-selection" className="mobile-links">
+                    <Link to="/marketplace-selection">
                         <div className="mobile-items">
                             <img src={location.pathname === '/marketplace-selection' ? MarketFilled : Market} alt="Market"/>
                         </div>
