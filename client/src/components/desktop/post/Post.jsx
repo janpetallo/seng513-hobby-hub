@@ -14,7 +14,7 @@ import newRequest from "../../../utilities/newRequest.js";
 import ModKebab from "../../ModKebab/ModKebab.jsx";
 
 
-const Post = ({ post, isPopup, hubTitle }) => {
+const Post = ({ post, isPopup, hubTitle, showKebab }) => {
     // to control image pop up when clicked
     const [showModal, setShowModal] = useState(false);
     const [modalImageUrl, setModalImageUrl] = useState("");
@@ -179,6 +179,8 @@ const Post = ({ post, isPopup, hubTitle }) => {
                                 hubName={post.hubName}
                                 content={post}
                                 owner={post.userName}
+                                showKebab={showKebab}
+                                isAdmin={isAdmin}
                             />
                         )}
 
@@ -189,7 +191,8 @@ const Post = ({ post, isPopup, hubTitle }) => {
                         )}
                     </div>
 
-                    {!hubTitle && isAdmin && (<ModKebab/>)}
+                    {/* Only render the kebab when on dedicated hub pages, can't ban people on your homepage*/}
+                    {showKebab && isAdmin && (<ModKebab/>)}
                 </div>
 
                 <div className="post_content">

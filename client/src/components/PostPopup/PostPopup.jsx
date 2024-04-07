@@ -3,7 +3,7 @@ import Post from "../desktop/post/Post.jsx";
 import {Col, Container, Offcanvas, Row} from "react-bootstrap";
 import "./PostPopup.scss"
 
-function PostPopup({ title, hubName, owner, content }) {
+function PostPopup({ title, hubName, owner, content, showKebab, isAdmin}) {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -20,7 +20,7 @@ function PostPopup({ title, hubName, owner, content }) {
                 </Offcanvas.Header>
                 <Offcanvas.Body className="p-0 bg-HHPurple-subtle">
                     <Container className="bg-white">
-                        <Post hubTitle={true} post={content} isPopup={true}/>
+                        <Post hubTitle={true} post={content} isPopup={true} showKebab={showKebab} isAdmin={isAdmin}/>
                     </Container>
                 </Offcanvas.Body>
             </Offcanvas>

@@ -8,7 +8,7 @@ const DedicatedHub = () => {
     return (
         <>
             <DedicatedHubHeader/>
-            <Posts/>
+            <Posts showKebab={true}/>
         </>
 
     )
