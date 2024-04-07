@@ -13,28 +13,29 @@ const CustomizeHub = () => {
     const [description, setDescription] = useState("");
     const [rules, setRules] = useState("");
     const [resources, setResources] = useState("");
-
-
-    // to get the text from the rich text editor
-    const handleTextContentChange = (content) => {
-        if(activeTab === 1){
-            setDescription(content);
-        }else if (activeTab === 2){
-            setRules(content);
-        }else if(activeTab === 3){
-            setResources(content);
-        }
-    };
-
+    const [activeTab, setActiveTab] = useState(0);
     const [hubName, setHubName] = useState('');
     const [hubNameError, setHubNameError] = useState('')
     const [hubVisibility, setHubVisibility] = useState('public'); // Default to public
+    const [category, setCategory] = useState("");
+
+    // to get the text from the rich text editor
+    const handleDescChange = (content) => {
+            setDescription(content);
+    };
+
+    const handleRuleChange = (content) => {
+        setRules(content);
+    };
+
+    const handleResourceChange = (content) => {
+        setResources(content);
+    };
 
     const handleInputChange = (e) => {
         setHubName(e.target.value);
     };
 
-    const [activeTab, setActiveTab] = useState(0);
 
     const handleNextTab = async () => {
         if (activeTab === 0) {
@@ -64,7 +65,9 @@ const CustomizeHub = () => {
                     if (response.status === 200) {
                         // Hub name is valid, proceed to the next tab
                         setHubNameError('');
-                        setActiveTab(1);
+                        console.log(activeTab);
+                        setActiveTab(activeTab + 1);
+                        console.log(activeTab);
                     }
                 } catch (error) {
                     // Handle error if the hub name is not valid
@@ -76,7 +79,9 @@ const CustomizeHub = () => {
                 }
             }
         } else {
+            console.log(activeTab);
             setActiveTab(activeTab + 1); // change tabs
+            console.log(activeTab);
         }
     };
 
@@ -87,6 +92,47 @@ const CustomizeHub = () => {
     const handleHubVisibilityChange = (e) => {
         setHubVisibility(e.target.value);
     };
+
+    const handleCategorySelect = (category) => {
+        setCategory(category)
+    };
+
+
+    const handleCreate = async () => {
+        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+        console.log(description);
+        console.log(rules);
+        console.log(resources);
+        console.log(category);
+        console.log(hubName);
+
+        const hubData = {
+            userName: currentUser.userName,
+            userID: currentUser._id,
+            hubOwner: currentUser._id,
+            members: currentUser._id,
+            moderators: currentUser._id,
+            hubName: hubName,
+            visibility: hubVisibility,
+            description: description,
+            rules: rules,
+            resources: resources,
+            category: category,
+        };
+
+        try {
+            const response = await newRequest.post('/hubs/createHub', hubData);
+            if (response.status === 201) {
+                // Hub created successfully, redirect to hubs page
+                navigate("/hubs");
+            }
+        } catch (error) {
+            console.error('Error creating hub:', error);
+        }
+    };
+
+
 
     return (
         <div className="customize-hub-wrapper">
@@ -122,7 +168,7 @@ const CustomizeHub = () => {
                         <hr/>
 
                         <h5>Pick the category your hub belongs to:</h5>
-                        <HubsCategoryToggle/>
+                        <HubsCategoryToggle onCategorySelect={handleCategorySelect}/>
 
                         <hr/>
 
@@ -154,21 +200,21 @@ const CustomizeHub = () => {
                 <Tab eventKey={1} title="Description" disabled={true}>
                     <div className="d-flex flex-column tab-editor ">
                         <h5>Give a description for your hub:</h5>
-                        <RichTextEditor onTextContentChange={handleTextContentChange}/>
+                        <RichTextEditor onTextContentChange={handleDescChange}/>
                     </div>
                 </Tab>
 
                 <Tab eventKey={2} title="Rules" disabled={true}>
                     <div className="d-flex flex-column tab-editor ">
                         <h5>List any rules below:</h5>
-                        <RichTextEditor onTextContentChange={handleTextContentChange}/>
+                        <RichTextEditor onTextContentChange={handleRuleChange}/>
                     </div>
                 </Tab>
 
                 <Tab eventKey={3} title="Resources" disabled={true}>
                     <div className="d-flex flex-column tab-editor ">
                         <h5>List any resources below:</h5>
-                        <RichTextEditor onTextContentChange={handleTextContentChange}/>
+                        <RichTextEditor onTextContentChange={handleResourceChange}/>
                     </div>
                 </Tab>
 
@@ -187,7 +233,7 @@ const CustomizeHub = () => {
                 ) : (
                     // This needs to go to the specific hub idk what the link is going to be yet
                     <Link to="/hubs">
-                        <Button variant="HHPurple" className="ms-2 customize-hub-btn">
+                        <Button variant="HHPurple" className="ms-2 customize-hub-btn" onClick={handleCreate}>
                             Create
                         </Button>
                     </Link>

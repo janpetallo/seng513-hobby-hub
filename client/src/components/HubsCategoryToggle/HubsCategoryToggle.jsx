@@ -5,7 +5,7 @@ import "./HubsCategoryToggle.scss"
 import {InputGroup} from "react-bootstrap";
 import hubCategories from "../../utilities/HubCategories.js";
 
-const HubsCategoryToggle = () => {
+const HubsCategoryToggle = ({onCategorySelect}) => {
 
     const [searchResult, setSearchResult] = useState('');
 
@@ -19,6 +19,7 @@ const HubsCategoryToggle = () => {
     const handleHubClick = (category) => {
         setSelectedItem(category);
         setSearchResult(''); // Clear the filter input when an item is selected
+        onCategorySelect(category); // call back function with the selected category
     };
 
     return (
