@@ -9,7 +9,6 @@ const hubSchema = new Schema({
     },
     description: {
         type: String,
-        required: true
     },
     category: {
         type: String,
@@ -23,13 +22,15 @@ const hubSchema = new Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User' // Reference to the User model
     }],
-    members: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User' // Reference to the User model
-    }],
+    members: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User' // Reference to the User model
+        }],
+        default: [] // Set default value to an empty array
+    },
     rules: {
         type: String,
-        required: true
     },
     visibility: {
         type: String,
