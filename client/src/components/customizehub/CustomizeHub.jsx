@@ -2,10 +2,13 @@ import React, {useState} from "react";
 import "./CustomizeHub.scss"
 import {Button, FloatingLabel, Form, Tab, Tabs} from "react-bootstrap";
 import RichTextEditor from "../TextEditor/RichTextEditor.jsx";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import HubsCategoryToggle from "../HubsCategoryToggle/HubsCategoryToggle.jsx";
+import newRequest from "../../utilities/newRequest.js";
 
 const CustomizeHub = () => {
+    // navigation hook
+    const navigate = useNavigate();
 
     const [textContent, setTextContent] = useState("");
     // to get the text from the rich text editor
@@ -22,15 +25,44 @@ const CustomizeHub = () => {
 
     const [activeTab, setActiveTab] = useState(0);
 
-    const handleNextTab = () => {
+    const handleNextTab = async () => {
         if (activeTab === 0) {
             if (hubName.length > 18) {
                 setHubNameError('Hub name cannot exceed 18 characters.');
             } else if (hubName.length <=0){
                 setHubNameError('Hub name cannot be empty.');
             } else {
-                setHubNameError('');
-                setActiveTab(1);
+
+                // get user data from local storage
+                const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+                // Check if user is logged in
+                if (!currentUser) {
+                    // Redirect user to login page or display a message
+                    console.log("User is not logged in. Redirecting to login page...");
+                    navigate("/");
+                    return;
+                }
+
+                try {
+                    // Make a request to check if the hub name is valid
+                    const response = await newRequest.post('/hubs/checkValidHubName', {
+                        hubName: hubName,
+                        userID: currentUser._id,
+                    });
+
+                    if (response.status === 200) {
+                        // Hub name is valid, proceed to the next tab
+                        setHubNameError('');
+                        setActiveTab(1);
+                    }
+                } catch (error) {
+                    // Handle error if the hub name is not valid
+                    if (error.response && error.response.status === 400) {
+                        setHubNameError('Hub name already exists.');
+                    } else {
+                        console.error('Error:', error);
+                    }
+                }
             }
         } else {
             setActiveTab(activeTab + 1); // change tabs
