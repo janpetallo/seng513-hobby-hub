@@ -39,7 +39,14 @@ const hubSchema = new Schema({
     },
     resources: {
         type: String,
-    }
+    },
+    posts: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'ForumPost' // Reference to the post model
+        }],
+        default: [] // Set default value to an empty array
+    },
 });
 
 export default mongoose.model("Hub", hubSchema);
