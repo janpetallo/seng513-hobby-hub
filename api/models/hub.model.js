@@ -31,6 +31,9 @@ const hubSchema = new Schema({
         type: String,
         enum: ['public', 'private'],
         default: 'public'
+    },
+    resources: {
+        type: String,
     }
 });
 
