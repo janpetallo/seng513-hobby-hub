@@ -1,0 +1,47 @@
+.mod-kebab-wrapper {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    svg {
+        font-size: 25px;
+
+        &:hover {
+            color: #8e47ff;
+            cursor: pointer;
+        }
+    }
+
+    .mod-kebab-options {
+        position: absolute;
+        top: 20px;
+        right: 0;
+        padding: 20px;
+        background-color: white;
+        border-radius: 10px;
+        border: 1px solid var(--HHPurple);
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 250px;
+        color: gray;
+        font-weight: 300;
+        overflow-wrap: break-word;
+        z-index: 1;
+
+        div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            svg {
+                font-size: 25px;
+            }
+
+            &:hover {
+                color: #8e47ff;
+                cursor: pointer;
+            }
+        }
+    }
+}

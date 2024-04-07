@@ -11,7 +11,7 @@ import { FaComments } from "react-icons/fa6";
 import Comments from "../comments/Comments.jsx";
 import PostPopup from "../../PostPopup/PostPopup.jsx";
 import newRequest from "../../../utilities/newRequest.js";
-
+import ModKebab from "../../ModKebab/ModKebab.jsx";
 
 
 const Post = ({ post, isPopup, hubTitle }) => {
@@ -157,6 +157,9 @@ const Post = ({ post, isPopup, hubTitle }) => {
 
     const maxLength = 350;
 
+    // Dummy variable to show kebab for now
+    const isAdmin = true;
+
     return (
         <div className = "post">
             <div className="postContainer">
@@ -185,6 +188,8 @@ const Post = ({ post, isPopup, hubTitle }) => {
                             </div>
                         )}
                     </div>
+
+                    {!hubTitle && isAdmin && (<ModKebab/>)}
                 </div>
 
                 <div className="post_content">

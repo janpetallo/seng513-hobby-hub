@@ -10,9 +10,9 @@ function PostPopup({ title, hubName, owner, content }) {
 
     return (
         <>
-            <p className="post-pop-link" onClick={handleShow}>
+            <span className="post-pop-link" onClick={handleShow}>
                 {title}
-            </p>
+            </span>
 
             <Offcanvas className="w-100 h-100" show={show} onHide={handleClose} placement={`end`}>
                 <Offcanvas.Header className="bg-HHPurple text-white" closeButton>
