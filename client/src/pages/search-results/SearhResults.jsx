@@ -7,7 +7,7 @@ import newRequest from "../../utilities/newRequest.js";
 import {useLocation} from "react-router-dom";
 
 
-const SearchReults = ({hubTitle, postAll= true})  => {
+const SearchReults = ({hubTitle = true, postAll= true})  => {
      // get URL parameters
      const location = useLocation();
      const searchParams = new URLSearchParams(location.search);
@@ -72,10 +72,16 @@ const SearchReults = ({hubTitle, postAll= true})  => {
         const filterPosts = () => {
             if (searchQuery !== '') {
                 const newFilteredPosts = posts.filter(post =>
-                    post.title.toLowerCase().includes(searchQuery)
+                    post.title?.toLowerCase().includes(searchQuery) ||
+                    post.description?.toLowerCase().includes(searchQuery) ||
+                    post.userName?.toLowerCase().includes(searchQuery) ||
+                    post.hubName?.toLowerCase().includes(searchQuery) ||
+                    post.tags?.includes(searchQuery)
                 );
                 setFilteredPosts(newFilteredPosts);
-            } 
+            } else {
+                setFilteredPosts(posts);
+            }
         };
         filterPosts();
     }, [searchQuery, posts]);
