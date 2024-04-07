@@ -16,7 +16,7 @@ const SearchMenu = () => {
     };
 
     const handleCategoryChange = (event) => {
-        setSelectedCategory(event.target.value);
+        setSelectedCategory(event.target.id === "searchHub" ? "Hubs" : "Market");
     };
 
     const handleSearchSubmit = (event) => {
@@ -34,11 +34,11 @@ const SearchMenu = () => {
         <div className="search-background">
             <div className='search-container'>
                 <img src={SearchIcon} alt="search" className= "search-icon" />
-                <Form.Control type="text" placeholder="Search" value={searchQuery} onChange={handleSearchChange} onKeyDown={handleEnterSearch} />
+                <Form.Control type="text" placeholder="Search" style={{ border: 'none',width:'66vw',padding:'0px',height:'2em'}} value={searchQuery} onChange={handleSearchChange} onKeyDown={handleEnterSearch} />
             </div>
             <div className='search-selection'>
-                <Form.Check className="search-radio hub-radio" type="radio" id="searchHub" label={<>Hubs</>} name="searchSelection" checked={selectedCategory === 'Hubs'} onChange={handleCategoryChange} />
-                <Form.Check className="search-radio" type="radio" id="searchMarket" label={<>Market</>} name="searchSelection" checked={selectedCategory === 'Market'} onChange={handleCategoryChange} />
+                <Form.Check className="search-radio hub-radio" type="radio" id="searchHub" label={<>Hubs</>} name="searchSelection" onClick={handleCategoryChange} defaultChecked/>
+                <Form.Check className="search-radio" type="radio" id="searchMarket" label={<>Market</>} name="searchSelection" onClick={handleCategoryChange}/>
             </div>
         </div>
     );
