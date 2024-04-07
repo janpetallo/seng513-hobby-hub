@@ -29,6 +29,10 @@ const ProfileToggle = () => {
         event.stopPropagation(); // prevents click the dropdown from closing the dropdown
     };
 
+    const handleLinkClick = () => {
+        setOpen(false); // Close the dropdown when a link is clicked
+    };
+
     const handleLogout = async () => {
         try {
             await newRequest.post("/auth/logout")
@@ -54,7 +58,7 @@ const ProfileToggle = () => {
                     {open && (
                         <div className="profile-toggle-options" onClick={handleDropdownClick}>
                             <span className="profile-toggle-username">{currentUser?.username}</span>
-                            <Link className="profile-toggle-links" to="/editprofile">View Profile</Link>
+                            <Link className="profile-toggle-links" to="/editprofile" onClick={handleLinkClick}>View Profile</Link>
                             <span className="profile-toggle-links" onClick={handleLogout}>Logout</span>
                         </div>
                     )}
