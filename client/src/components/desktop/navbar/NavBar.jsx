@@ -6,7 +6,7 @@ import {useMediaQuery} from "react-responsive";
 import Logo from "../../../assets/authentication/mobile/logo.svg"
 import Search from "../../../assets/navbar/search.svg"
 import {Link} from "react-router-dom";
-
+import ProfileToggle from "../../ProfileToggle/ProfileToggle.jsx";
 
 const NavBar = () => {
 
@@ -54,11 +54,6 @@ const NavBar = () => {
         setPrevSearchVisible(searchVisible);
     }, [isBelow991px, prevSearchVisible, searchVisible]);
 
-
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-
-
     return (
         <>
             {/* Navbar */}
@@ -85,33 +80,17 @@ const NavBar = () => {
 
                                 <Form.Control type="text" placeholder="Search HobbyHub..."></Form.Control>
 
-                                
                                 <Button className="d-search-btn" variant="HHPurple">Search</Button>
+
                                 <div className="search-dropdown"  id="search-dropdown">
-                                    <span>Search in:  </span>
+                                    <span className="ms-2">Search in:  </span>
                                     <label><input type="radio" name="searchSelection" value="Hubs" defaultChecked/> Hubs</label>
                                     <label><input type="radio" name ="searchSelection" value="Market"/> Market</label>
                                 </div>  
                             </div>
 
+                            <ProfileToggle/>
 
-                            {currentUser && (
-                                <Dropdown>
-                                    <Dropdown.Toggle id="nav-profileDropdown">
-                                        <div className="nav-profileImage">
-                                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile Image" className="nav-profilePic" />
-                                        </div>
-                                    </Dropdown.Toggle>
-
-                                    <Dropdown.Menu id="nav-dropdownContent">
-                                        <Dropdown.Item className="navDropDownItem" as={Link} to="/editprofile">Edit Profile</Dropdown.Item>
-                                        <Dropdown.Item className="navDropDownItem" as={Link} to="/login">Logout</Dropdown.Item>
-                                        {/* Add other dropdown items as needed */}
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            )}
-
-                            {!currentUser && (<Button variant="HHPurple"> Log in</Button>)}
                         </Col>
                     </Row>
                 </Container>
