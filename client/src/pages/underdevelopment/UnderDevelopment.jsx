@@ -7,9 +7,9 @@ import UseGoBack from "../../utilities/UseGoBack/UseGoBack.jsx";
 const UnderDevelopment = () =>{
 
     return (
-        <Container fluid className="notfound-container">
+        <Container fluid className="underdevelopment-container">
             <Row>
-                <Col className="d-flex flex-column justify-content-center align-items-center notfound-col">
+                <Col className="d-flex flex-column justify-content-center align-items-center underdevelopment-col">
                     <div className="d-flex flex-column justify-content-center align-items-center">
                         <h1 className="text-white fw-bolder">This Page Is Under Development</h1>
                         <h1 className="text-white fw-bolder">Some Journey Too Far Into The Great Unknown</h1>
