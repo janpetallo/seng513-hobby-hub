@@ -14,6 +14,7 @@ import { useNavigate} from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css';
 import {formatNumber, isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNumberLength} from "libphonenumber-js";
+import {getElement} from "bootstrap/js/src/util/index.js";
 
 
 const EditProfilePage = () => {
@@ -28,7 +29,6 @@ const EditProfilePage = () => {
 
     // Parse the JSON string back into a JavaScript object
     const userData = JSON.parse(currentUser);
-
 
 
     const [emailErrors, setEmailErrors] = useState({message: "", status: false});
@@ -121,6 +121,29 @@ const EditProfilePage = () => {
             cc: 'ca',
         });
     };
+    const [isDisabled, setIsDisabled] = useState(true);
+    const toggleDisabled = () => {
+        setIsDisabled(!isDisabled);
+    };
+    const handleEdit=()=>{
+        toggleDisabled();
+        console.log("hit edit");
+        let emailField= document.getElementById("email-input");
+        let passwordField = document.getElementById("password-input");
+        let resetButton = document.getElementById("reset-button");
+
+        let phoneInput = document.querySelector(".disable-phone input");
+        if (phoneInput) {
+            phoneInput.disabled = false;
+        }
+
+        passwordField.style.cursor="default";
+        // passwordField.disabled=false;
+        emailField.style.cursor="default";
+        // emailField.disabled=false;
+        resetButton.style.display="block"
+
+    }
 
     const [phoneError, setPhoneError] = useState(null);
 
@@ -167,13 +190,15 @@ const EditProfilePage = () => {
                     <br/>  
                     <Form.Control
                         type="text"
-                        placeholder=""
+                        placeholder={userData.username}
                         name="username"
                         value={values.username}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         isValid={touched.username && !errors.username}
                         isInvalid={touched.username && (!!errors.username || usernameErrors.status)}
+                        disabled={true}
+                        className="disable-input"
                     />
                     <Form.Control.Feedback type="invalid">
                         {errors.username || usernameErrors.message}
@@ -193,9 +218,11 @@ const EditProfilePage = () => {
                         value={values.password}
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        className="custom-input" 
+                        id="password-input"
+                        className="custom-input disable-input"
                         isValid={touched.password && !errors.password}
                         isInvalid={touched.password && !!errors.password}
+                        disabled={isDisabled}
                     />
                     <Form.Control.Feedback type="invalid">
                         {errors.password}
@@ -211,13 +238,16 @@ const EditProfilePage = () => {
                     <br/>  
                     <Form.Control
                         type="email"
-                        placeholder=""
+                        placeholder={userData.email}
                         name="email"
                         value={values.email}
+                        id="email-input"
+                        className="disable-input"
                         onChange={handleChange}
                         onBlur={handleBlur}
                         isValid={touched.email && !errors.email}
                         isInvalid={touched.email && (!!errors.email || emailErrors.status)}
+                        disabled={isDisabled}
                     />
                     <Form.Control.Feedback type="invalid">
                         {errors.email || emailErrors.message}
@@ -225,21 +255,24 @@ const EditProfilePage = () => {
                     {/* <input type="text" className="custom-input"/> */}
                 </Form.Group>
                 <Form.Group className="phone-dropdown mb-3">
-                <Form.Label column>
-                        <img src={Phone} alt="phone" className ="img-icon"/> 
-                        <strong>Phone Number</strong> 
-                    </Form.Label> 
-                    <br/>  
-                    <PhoneInput
-                        value={phoneNumber.number}
-                        country={'ca'}
-                        onChange={handlePhone}
-                    />
-                    {phoneError &&
-                        <Form.Text className="text-danger">
-                            {phoneError}
-                        </Form.Text>
-                    }
+                    <Form.Label column>
+                        <img src={Phone} alt="phone" className ="img-icon"/>
+                        <strong>Phone Number</strong>
+                    </Form.Label>
+                    <br/>
+                        <PhoneInput
+                            placeholder='enter phone'
+                            value={phoneNumber.number}
+                            country={'ca'}
+                            onChange={handlePhone}
+                            className="disable-input disable-phone"
+                            disabled={isDisabled}
+                        />
+                        {phoneError &&
+                            <Form.Text className="text-danger">
+                                {phoneError}
+                            </Form.Text>
+                        }
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Label column>
@@ -248,14 +281,17 @@ const EditProfilePage = () => {
                     </Form.Label> 
                     <br/>  
                     <Form.Control
-                        type="date"
-                        placeholder=""
+                        type="text"
+                        placeholder={new Date(userData.birthday).toLocaleDateString()}
                         name="birthdate"
                         value={values.birthdate}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         isValid={touched.birthdate && !errors.birthdate}
                         isInvalid={touched.birthdate && !!errors.birthdate}
+                        disabled={true}
+                        className="disable-input"
+
                     />
                     <Form.Control.Feedback type="invalid">
                         {errors.birthdate}
@@ -263,8 +299,11 @@ const EditProfilePage = () => {
                     {/* <input type="text" className="custom-input"/> */}
                 </Form.Group>
                 <div className="d-flex justify-content-between">
-                    <Button variant="secondary" type="reset" onClick={()=>{handleReset();handlePhoneReset()}} className="rounded-5 px-4 edit-prof-sub-btn">
+                    <Button variant="secondary" type="reset" onClick={()=>{handleReset();handlePhoneReset()}} className="rounded-5 px-4 edit-prof-sub-btn d-none" id="reset-button">
                         Reset
+                    </Button>
+                    <Button variant="secondary" type="reset" onClick={handleEdit} className="rounded-5 px-4 edit-prof-sub-btn">
+                        Edit
                     </Button>
                     <Button variant="primary" type="submit" onClick={handleSubmit} className="btn-HHPurple rounded-5 edit-prof-sub-btn">
                         Save Changes

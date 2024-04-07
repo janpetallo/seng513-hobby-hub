@@ -29,3 +29,20 @@ export const getUser = async (req, res)=>{
         res.status(500).send("error: unable to get specified account");
     }
 };
+
+export const editUser = async (req, res)=>{
+    try {
+
+        // get the current user
+        const currentUser = await User.findById(req.params.id);
+
+        if (req.userId !== currentUser._id.toString()) {
+            return res.status(403).send("Error you are not authorized to edit this account! You can only edit your own account!");
+        }
+
+        res.status(200).json(currentUser);
+
+    }catch (error){
+        res.status(500).send("error: unable to get specified account");
+    }
+};

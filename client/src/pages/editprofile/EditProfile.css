@@ -88,3 +88,9 @@
         margin-right: 3vw;
     }
 }
+.disable-input{
+    cursor: not-allowed;
+}
+.disable-phone {
+
+}

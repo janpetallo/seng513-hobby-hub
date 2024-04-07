@@ -11,5 +11,6 @@ router.delete("/:id",verifyToken, deleteUser);
 // gets the user specified by id and returns it
 router.get("/getUser/:id",verifyToken, getUser);
 
+router.post("/getUser/:id",verifyToken, editUser);
 
 export default router;
