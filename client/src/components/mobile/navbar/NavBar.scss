@@ -2,33 +2,36 @@
 
     border-top: 1px solid rgba(145, 142, 142, 0.67);
 
-    .mobile-links {
+    .mobile-nav-inner {
+        // DO NOT CHANGE THIS OR ALL THE CALCULATIONS FOR BODY SETUP WILL NO LONGER WORK
+        height: 65px;
         display: flex;
         align-items: center;
-    }
+        justify-content: space-evenly;
 
-    .mobile-items {
-        width: 30px;
-        display: flex;
-        flex-direction: column;
-    }
+        .mobile-items {
+            width: 30px;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .mobile-create {
-        width: 40px;
-    }
+        .mobile-create {
+            width: 40px;
+        }
 
-    #create-dropdown-custom.dropdown-toggle::after {
-        display: none;
-    }
-    
-    #create-dropdown-custom.dropdown-toggle {
-        background-color: transparent;
-        border: none;
-    }
-    
-    .create-item.active,
-    .create-item:hover {
-        background-color: #8e47ff;
-        color: white;
+        #create-dropdown-custom.dropdown-toggle::after {
+            display: none;
+        }
+
+        #create-dropdown-custom.dropdown-toggle {
+            background-color: transparent;
+            border: none;
+        }
+
+        .create-item.active,
+        .create-item:hover {
+            background-color: #8e47ff;
+            color: white;
+        }
     }
 }
