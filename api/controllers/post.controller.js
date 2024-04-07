@@ -1,11 +1,14 @@
 // function to create a new post
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
+import Hub from "../models/hub.model.js";
 
 export const createPost = async (req, res) => {
     try {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
+        // get the hub that the user created this post for
+        const selectedHub = await Hub.findOne({ hubName: req.body.hubName });
 
         // identity verification required to post on your own account
         if(req.userId !== currentUser._id.toString()){
@@ -24,6 +27,10 @@ export const createPost = async (req, res) => {
         // Add the post's ID to the user's posts array
         currentUser.posts.push(newPost._id);
         await currentUser.save();
+
+        // add the post to the hub
+        selectedHub.posts.push(newPost._id);
+        await selectedHub.save();
 
         res.status(201).send("Created new Post successfully!");
 

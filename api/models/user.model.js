@@ -34,6 +34,10 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'ForumPost' // Reference to the post model
     }],
+    hubs: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Hub' // Reference to the post model
+    }],
 });
 
 

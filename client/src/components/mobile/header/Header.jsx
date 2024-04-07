@@ -1,15 +1,10 @@
 import React, {useState} from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Header.scss"
-import {Col, Container, Offcanvas, Row} from "react-bootstrap";
+import {Button, Col, Container, Offcanvas, Row} from "react-bootstrap";
 import Logo from "../../../assets/authentication/mobile/logo.svg"
 import { RxHamburgerMenu } from "react-icons/rx";
-import Hubs from "../../../assets/leftsidemenu/hubs.svg";
-import Posts from "../../../assets/leftsidemenu/posts.svg";
-import Ads from "../../../assets/leftsidemenu/ads.svg";
-import Logout from "../../../assets/leftsidemenu/logout.svg";
-import Trades from "../../../assets/leftsidemenu/trades.svg";
-
+import HamburgerMenu from "../hamburgermenu/HamburgerMenu.jsx";
 
 const Header = () =>{
     const [show, setShow] = useState(false);
@@ -17,16 +12,7 @@ const Header = () =>{
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const [selectedMenu, setSelectedMenu] = useState('/'); // default selected menu is home
-
-    const handleMenuClick = (path) => {
-        // setSelectedMenu(path);
-        setShow(false);
-    }
-
-    const getMenuItemClass = (path) => {
-        return location.pathname === path ? 'item selected' : 'item';
-    }
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     return (
         <Container className="fixed-top bg-white mobile-header">
@@ -46,68 +32,25 @@ const Header = () =>{
                             </Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>
-                        <Container fluid className="p-3 left-menu-hamburger mobile-left-menu">
-                                <Row>
-                                    <Col >
 
-                                        <Link to='/editprofile' className="no-link-style" onClick={() => handleMenuClick('/editprofile')}>
-                                            <div className={getMenuItemClass('/editprofile')} >
-                                                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" 
-                                                    alt="Profile Image"
-                                                    className="nav-profilePic profile-image-mobile"
-                                                />
-                                                <span> Max123 
-                                                    <br></br> 
-                                                    <span className="edit-profile-mobile">Edit Profile</span>
-                                                </span>
-                                            </div>
-                                        </Link>
-                                    </Col>
-                                </Row>
-                            </Container>
+                            {!currentUser && (
+                                <>
+                                    <hr/>
+                                    <h6>Create an account to join HobbyHubs countless communities or to make your own</h6>
+                                    <Link to="/signup">
+                                        <Button className="mobile-header-btn" variant="HHPurple"> Sign up</Button>
+                                    </Link>
 
-                            <Container fluid className="p-3 left-menu-hamburger mobile-left-menu">
-                                <Row>
-                                    <Col >
+                                    <h6 className="mt-3">Or Login if you already have an account</h6>
+                                    <Link to="/login">
+                                        <Button className="mobile-header-btn" variant="HHPurple"> Log in</Button>
+                                    </Link>
+                                </>
+                            )}
 
-                                        <Link to="/myhubs" className="no-link-style" onClick={() => handleMenuClick('/myhubs')}>
-                                            <div className={getMenuItemClass('/myhubs')}>
-                                                <img src={Hubs} alt="hubs"></img>
-                                                <span>My Hubs</span>
-                                            </div>
-                                        </Link>
-
-                                        <Link to="/myposts" className="no-link-style" onClick={() => handleMenuClick('/myposts')}>
-                                            <div className={getMenuItemClass('/myposts')}>
-                                                <img src={Posts} alt="hubs"></img>
-                                                <span>My Posts</span>
-                                            </div>
-                                        </Link>
-
-                                        <Link to="/myadstrades" className="no-link-style"  onClick={() => handleMenuClick('/myadstrades')}>
-                                            <div className={getMenuItemClass('/myadstrades')} >
-                                                <img src={Ads} alt="hubs"></img>
-                                                <span>My Ads / Trades</span>
-                                            </div>
-                                        </Link>
-                                    </Col>
-                                </Row>
-                            </Container>
-
-                            <Container fluid className="p-3 left-menu-hamburger mobile-left-menu">
-                                <Row>
-                                    <Col className="mb-3">
-
-                                        <Link to="/login" className="no-link-style" onClick={() => handleMenuClick('/login')}>
-                                            <div className={getMenuItemClass('/login')}>
-                                                <img src={Logout} alt="logout"></img>
-                                                <span>Logout</span>
-                                            </div>
-                                        </Link>
-
-                                    </Col>
-                                </Row>
-                            </Container>
+                            {currentUser && (
+                                <HamburgerMenu setShow={setShow} handleClose={handleClose}/>
+                            )}
 
                         </Offcanvas.Body>
                     </Offcanvas>

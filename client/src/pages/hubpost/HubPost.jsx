@@ -68,7 +68,7 @@ const HubPost = () => {
         if (!currentUser) {
             // Redirect user to login page or display a message
             console.log("User is not logged in. Redirecting to login page...");
-            // Example: navigate("/login");
+            navigate("/login");
             return;
         }
 

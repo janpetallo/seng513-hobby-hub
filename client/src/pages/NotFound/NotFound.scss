@@ -1,0 +1,43 @@
+.notfound-container {
+    position: relative;
+    text-align: center;
+    height: calc(100vh - 76px - 65px);
+
+    @media screen and (min-width: 576px) {
+        height: calc(100vh - 76px);
+    }
+
+    img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    div {
+        position: absolute;
+        top: 25%;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.84);
+        z-index: 1;
+
+    }
+
+    a {
+        color: black;
+        font-size: 30px;
+        transition: font-size 0.3s ease;
+    }
+
+    a:hover {
+        font-size: 35px;
+    }
+
+    p {
+        font-size: 100px;
+        font-weight: 600;
+    }
+
+}
