@@ -36,9 +36,11 @@ function CommunitySelection() {
         { name: 'Games', hubs: ['League of Legends', 'Game of Life', 'Elden Ring'] },
     ];
 
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
     return (
         <div className="hub-container">
-            {!isMobile && (
+            {!isMobile && currentUser && (
                 <div className="create-hub" >
                     Create a Hub:<img className="create-icon" src={CreateIcon} alt="Create" onClick={() => setShowModal(true)} />
                 </div>
@@ -75,7 +77,7 @@ function CommunitySelection() {
                 {/*    </Button>*/}
                 {/*</Modal.Footer>*/}
             </Modal>
-            <Container >
+            <Container className="mt-3">
                 {categories.map((category, i) => (
                     <Row key={i} className="section-font">
                         {category.name}
@@ -93,7 +95,7 @@ function CommunitySelection() {
                     </Row>
                 ))}
             </Container>
-            {isMobile && (
+            {isMobile && currentUser && (
                 <div id="create-hub-mobile-link" className='create-hub-mobile'>
                     Can't find what you are looking for? <Link to="/create-hub">Create one yourself!</Link>
                 </div>

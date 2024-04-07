@@ -14,7 +14,8 @@ import {Link, useLocation} from "react-router-dom";
 
 const NavBar = () =>{
     const location = useLocation();
-    const [modalShow, setModalShow] = React.useState(false);
+
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     return (
         <Container className="bg-white fixed-bottom mobile-nav">
@@ -39,19 +40,21 @@ const NavBar = () =>{
                         </div>
                     </Link> */}
 
-                    <Dropdown>
-                        <Dropdown.Toggle id="create-dropdown-custom">
-                            <div className="mobile-items mobile-create ">
-                                <img src={Create} alt="Create"/>
-                            </div>
-                        </Dropdown.Toggle>
+                    {currentUser && (
+                        <Dropdown>
+                            <Dropdown.Toggle id="create-dropdown-custom">
+                                <div className="mobile-items mobile-create ">
+                                    <img src={Create} alt="Create"/>
+                                </div>
+                            </Dropdown.Toggle>
 
-                        <Dropdown.Menu id="create-menu">
-                            <Dropdown.Item className="create-item" as={Link} to="/create-hub">Create New Hub</Dropdown.Item>
-                            <Dropdown.Item className="create-item" as={Link} to="/hubpost">Post to Hubs</Dropdown.Item>
-                            <Dropdown.Item className="create-item" as={Link} to="/create-post-market">Post to Market</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                            <Dropdown.Menu id="create-menu">
+                                <Dropdown.Item className="create-item" as={Link} to="/create-hub">Create New Hub</Dropdown.Item>
+                                <Dropdown.Item className="create-item" as={Link} to="/hubpost">Post to Hubs</Dropdown.Item>
+                                <Dropdown.Item className="create-item" as={Link} to="/create-post-market">Post to Market</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    )}
 
                     <Link to="/community-selection" className="mobile-links">
                         <div className="mobile-items">

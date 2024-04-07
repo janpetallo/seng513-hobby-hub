@@ -60,10 +60,14 @@ const Comments = ( {post, isPopup} ) => {
 
     const maxCommentsToShow = 4;
 
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
     return <div className="mt-3 Comments">
-        <div className="ms-4">
-            <CommentReply/>
-        </div>
+        {currentUser && (
+            <div className="ms-4">
+                <CommentReply/>
+            </div>
+        )}
 
         {isPopup && (
             comments.map(comment=>(
