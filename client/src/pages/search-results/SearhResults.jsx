@@ -32,30 +32,9 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
 
                 } else if(postAll === true && category === 'Market') {
                     // Do nothing for now
-                }
-                // else{
-                //     // get currentUser
-                //     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-                //     // get the user data
-                //     const response = await newRequest.get(`/users/getUser/${currentUser._id}`);
-                //     if (response.status === 200) {
-                //         // get the user's post id's
-                //         const userPosts = response.data.posts;
-
-                //         // now we try to get the posts associated with all of the post id's
-                //         try {
-                //             const response2 = await newRequest.get(`/posts/getPostsByIds?postIDs=${userPosts.join(',')}`);
-                //             setPosts(response2.data);
-
-                //         }catch (error){
-                //             console.log("Error getting all posts");
-                //         }
-
-                //     } else {
-                //         console.log("Error getting user data from server");
-                //     }
-                // }
+                    // set posts to empty array
+                    setPosts([]);
+                } 
             } catch (error) {
                 console.error(error);
             }
@@ -70,7 +49,7 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
 
     useEffect(() => {
         const filterPosts = () => {
-            if (searchQuery !== '') {
+            if (searchQuery !== '' && category === 'Hubs') {
                 const newFilteredPosts = posts.filter(post =>
                     post.title?.toLowerCase().includes(searchQuery) ||
                     post.description?.toLowerCase().includes(searchQuery) ||
