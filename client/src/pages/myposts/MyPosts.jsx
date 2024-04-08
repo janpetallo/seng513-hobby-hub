@@ -59,11 +59,11 @@ const MyPosts = () => {
                 )}
             </div>
             <hr/>
-            {userName ? (<Posts hubTitle={true} postAll={false}/>) : null}
+            {/* {userName ? (<Posts hubTitle={true} postAll={false}/>) : null} */}
             <div className="posts">
-            {posts.map(post => (
-                <Post hubTitle={true} post={post} isPopup={false} key={post._id} />
-            ))}
+                {posts.slice().reverse().map(post => (
+                    <Post hubTitle={true} post={post} isPopup={false} key={post._id} />
+                ))}
             </div>
 
         </>
