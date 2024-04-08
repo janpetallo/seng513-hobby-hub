@@ -90,7 +90,7 @@ function CommunitySelection() {
                 </Modal.Body>
             </Modal>
             {/* static data */}
-            <Container className="mt-3">
+            {/* <Container className="mt-3">
                 {categories.map((category, i) => (
                     <Row key={i} className="section-font">
                         {category.name}
@@ -107,7 +107,7 @@ function CommunitySelection() {
                         </Row>
                     </Row>
                 ))}
-            </Container>
+            </Container> */}
             {/* real data from db */}
             <Container className="mt-3">
                 {hubs.map((hub, i) => (
