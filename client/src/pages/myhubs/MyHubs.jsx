@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {Col, Container, Row} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import "./MyHubs.scss"
+import newRequest from "../../utilities/newRequest.js";
 
 const MyHubs = () => {
     const categories = [
@@ -10,6 +11,45 @@ const MyHubs = () => {
         { name: 'Cards', hubs: ['Pokemon', 'Yu-Gi-Oh'] },
         { name: 'Games', hubs: ['League of Legends', 'Game of Life', 'Elden Ring'] },
     ];
+
+    // get all hubs from backend
+    const [hubs, setHubs] = useState([]);
+
+    useEffect(() => {
+
+        // Function to fetch all posts from backend API server
+        const fetchHubs = async () => {
+            try {
+                const response = await newRequest.get("/hubs/getAllHubs");
+                if (response.status !== 200) {
+                    throw new Error("Failed to fetch hubs");
+                }
+                const hubsData = response.data;
+                // filter out the hubs that are not the current user's
+                const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+                const userHubs = hubsData.filter(hub => hub.hubOwner === currentUser._id);
+
+                // in categories
+                const categories = {};
+                userHubs.forEach(hub => {
+                    if (!categories[hub.category]) {
+                        categories[hub.category] = [];
+                    }
+                    categories[hub.category].push(hub);
+                });
+                const categoriesArray = Object.keys(categories).map(category => ({
+                    name: category,
+                    hubs: categories[category]
+                }));
+                setHubs(categoriesArray);
+                console.log(hubs);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        // Call fetchHubs function when component mounts
+        fetchHubs();
+    }, []); 
 
     // const username = "BimmerGuy";
     const username = JSON.parse(localStorage.getItem("currentUser")).username;
@@ -21,7 +61,7 @@ const MyHubs = () => {
                 <h6 className="ps-2 pe-2!">View all your hubs here!</h6>
             </div>
             <hr/>
-            {categories.map((category, i) => (
+            {/* {categories.map((category, i) => (
                 <Row key={i} className="ps-3 pe-3 section-bold">
                     {category.name}
                     <Row>
@@ -36,8 +76,25 @@ const MyHubs = () => {
                         ))}
                     </Row>
                 </Row>
-            ))}
+            ))} */}
+            {hubs.map((hub, i) => (
+                    <Row key={i} className="section-font">
+                        {hub.name}
+                        <Row>
+                            {hub.hubs.map((hub, index) => (
+                            <Col xs={4.5} sm={4} md={3.5} lg={3} className="col-container my-2 me-4 p-3">
+                                <div className="text-center ">
+                                    <Link className='hub-card-link' to={`/${hub.hubName.replace(' ', '')}`} >
+                                        {hub.hubName}
+                                    </Link>
+                                </div>
+                            </Col>
+                            ))}
+                        </Row>
+                    </Row>
+                ))}
         </Container>
+        
     )
 }
 
