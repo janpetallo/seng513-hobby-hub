@@ -38,7 +38,7 @@ function CommunitySelection() {
 
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-    // get all posts
+    // get all hubs from backend
     const [hubs, setHubs] = useState([]);
 
     useEffect(() => {
@@ -89,6 +89,7 @@ function CommunitySelection() {
                     <CustomizeHub/>
                 </Modal.Body>
             </Modal>
+            {/* static data */}
             <Container className="mt-3">
                 {categories.map((category, i) => (
                     <Row key={i} className="section-font">
@@ -102,6 +103,25 @@ function CommunitySelection() {
                                         </Link>
                                     </div>
                                 </Col>
+                            ))}
+                        </Row>
+                    </Row>
+                ))}
+            </Container>
+            {/* real data from db */}
+            <Container className="mt-3">
+                {hubs.map((hub, i) => (
+                    <Row key={i} className="section-font">
+                        {hub.name}
+                        <Row>
+                            {hub.hubs.map((hub, index) => (
+                            <Col xs={4.5} sm={4} md={3.5} lg={3} className="col-container my-2 me-4 p-3">
+                                <div className="text-center ">
+                                    <Link className='hub-card-link' to={`/${hub.hubName.replace(' ', '')}`} >
+                                        {hub.hubName}
+                                    </Link>
+                                </div>
+                            </Col>
                             ))}
                         </Row>
                     </Row>
