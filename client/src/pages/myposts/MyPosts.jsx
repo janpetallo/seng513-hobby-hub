@@ -1,6 +1,9 @@
 import React, {useEffect, useState} from "react";
 import Posts from "../../components/desktop/posts/Posts.jsx";
+import Post from "../../components/desktop/post/Post.jsx";
 import newRequest from "../../utilities/newRequest.js";
+import "../../components/desktop/posts/posts.scss";
+
 
 
 const MyPosts = () => {
@@ -57,6 +60,10 @@ const MyPosts = () => {
             </div>
             <hr/>
             {userName ? (<Posts hubTitle={true} postAll={false}/>) : null}
+            
+            {posts.map(post => (
+                <Post hubTitle={true} post={post} isPopup={false} key={post._id} />
+            ))}
 
         </>
     )
