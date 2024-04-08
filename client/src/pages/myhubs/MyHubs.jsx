@@ -11,7 +11,8 @@ const MyHubs = () => {
         { name: 'Games', hubs: ['League of Legends', 'Game of Life', 'Elden Ring'] },
     ];
 
-    const username = "BimmerGuy";
+    // const username = "BimmerGuy";
+    const username = JSON.parse(localStorage.getItem("currentUser")).username;
 
     return (
         <Container className="pt-2 ps-5 pe-5 pb-3">
