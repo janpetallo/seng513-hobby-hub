@@ -51,8 +51,20 @@ function CommunitySelection() {
                     throw new Error("Failed to fetch hubs");
                 }
                 const hubsData = response.data;
-                setHubs(hubsData);
+                const categories = {};
+                hubsData.forEach(hub => {
+                    if (!categories[hub.category]) {
+                        categories[hub.category] = [];
+                    }
+                    categories[hub.category].push(hub);
+                });
+                const categoriesArray = Object.keys(categories).map(category => ({
+                    name: category,
+                    hubs: categories[category]
+                }));
+                setHubs(categoriesArray);
                 console.log(hubs);
+                console.log(categoriesArray);
             } catch (error) {
                 console.error(error);
             }
