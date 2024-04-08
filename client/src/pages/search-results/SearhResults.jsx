@@ -76,7 +76,7 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
                     <div className="card-columns" overflow-y="auto">
                         {filteredPosts.length === 0 && searchQuery !== "" && <h3>No post related to "{searchParams.get('query').trim()}"</h3>}
                         <p className="search-count">Total search results: {filteredPosts.length}</p>
-                        {filteredPosts.map(post => (
+                        {filteredPosts.slice().reverse().map(post => (
                             <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} />
                         ))}
                     </div>
