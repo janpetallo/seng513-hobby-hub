@@ -1,0 +1,116 @@
+// Animation inspiration: https://codepen.io/a--w/pen/vOzgjd
+
+.notfound-container {
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: calc(100vh - 76px - 65px);
+
+    // Prevent animation from clipping out of allowable area
+    overflow: hidden;
+
+    @media screen and (min-width: 576px) {
+        height: calc(100vh - 76px);
+    }
+
+    .animate {
+        transition: 4s ease;
+        -webkit-transition: .4s ease;
+    }
+
+    // Classes for animation sizes
+    .small {
+        // Choose size
+        width: 100px;
+        height: 100px;
+    }
+
+    .med {
+        // Choose size
+        width: 200px;
+        height: 200px;
+    }
+
+    .large {
+        width: 300px;
+        height: 300px;
+    }
+
+    // Classes for animation positions
+    .top {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .middle {
+        position: absolute;
+        top: 500px;
+    }
+
+    .right {
+        position: absolute;
+        top: 200px;
+        left: 80%;
+    }
+
+    // Animations
+    .float {
+        animation-name: Floating;
+        animation-duration: 30s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+
+    @keyframes Floating {
+        from {transform: translateY(0);}
+        75% {transform: translateY(75vh);}
+        to {transform: translateY(0);}
+    }
+
+    .spin {
+        animation-name: Spinning;
+        animation-duration: 12s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in-out;
+    }
+
+    @keyframes Spinning {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+
+    .notfound-content {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.84);
+    }
+
+    a {
+        color: black;
+        font-size: 30px;
+        transition: font-size 0.3s ease;
+    }
+
+    a:hover {
+        font-size: 35px;
+    }
+
+    p {
+        font-size: 100px;
+        font-weight: 600;
+        margin-bottom: 0;
+    }
+
+}

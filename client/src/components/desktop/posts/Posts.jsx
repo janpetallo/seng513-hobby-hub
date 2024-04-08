@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import newRequest from "../../../utilities/newRequest.js";
 
 // if postIDs =! null then we get posts specified by the id
-const Posts = ({hubTitle, postAll= true}) =>{
+const Posts = ({hubTitle, postAll= true, showKebab}) =>{
     // Post data
     const [posts, setPosts] = useState([]);
 
@@ -59,7 +59,7 @@ const Posts = ({hubTitle, postAll= true}) =>{
 
     return <div className = "posts">
         {posts.map(post=>(
-            <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id}/>
+            <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} showKebab={showKebab}/>
         ))}
         </div>;
 };

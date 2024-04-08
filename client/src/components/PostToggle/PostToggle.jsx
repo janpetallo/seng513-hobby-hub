@@ -31,8 +31,8 @@ const PostToggle = ({onHubSelect}) => {
 
 
             // Extract titles of the hubs and set them to the state
-            const hubTitles = data.map(hub => hub.title);
-            setHubs(hubTitles); // Set the fetched hub titles to the state
+            const hubNames = data.map(hub => hub.hubName);
+            setHubs(hubNames); // Set the fetched hub titles to the state
         } catch (error) {
             console.error('Error fetching hubs:', error);
         }

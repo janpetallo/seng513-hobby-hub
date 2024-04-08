@@ -5,8 +5,8 @@ import LeftMenu from "../leftmenu/LeftMenu.jsx";
 import {useMediaQuery} from "react-responsive";
 import Logo from "../../../assets/authentication/mobile/logo.svg"
 import Search from "../../../assets/navbar/search.svg"
-import {Link} from "react-router-dom";
-
+import {Link, useNavigate} from "react-router-dom";
+import ProfileToggle from "../../ProfileToggle/ProfileToggle.jsx";
 
 const NavBar = () => {
 
@@ -55,7 +55,31 @@ const NavBar = () => {
     }, [isBelow991px, prevSearchVisible, searchVisible]);
 
 
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    // Search bar
+    const [searchQuery, setSearchQuery] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('Hubs');
+    const navigate = useNavigate();
+
+    const handleSearchChange = (event) => {
+        setSearchQuery(event.target.value);
+    };
+
+    const handleCategoryChange = (event) => {
+        setSelectedCategory(event.target.value);
+    };
+
+    const handleSearchSubmit = (event) => {
+        event.preventDefault();
+        navigate(`/search-results/search?query=${searchQuery}&category=${selectedCategory}`);
+    };
+
+     // handles the enter key being pressed when we are performing a search
+    const handleEnterSearch = (event) => {
+        // key 13 is the enter key
+        if (event.keyCode === 13) {
+        handleSearchSubmit(event);
+        }
+    }
 
 
 
@@ -83,35 +107,31 @@ const NavBar = () => {
                                     <img src={Search} alt="search" />
                                 </button>
 
-                                <Form.Control type="text" placeholder="Search HobbyHub..."></Form.Control>
+                                {/* <Form.Control type="text" placeholder="Search HobbyHub..."></Form.Control>
 
-                                
                                 <Button className="d-search-btn" variant="HHPurple">Search</Button>
+
                                 <div className="search-dropdown"  id="search-dropdown">
-                                    <span>Search in:  </span>
+                                    <span className="ms-2">Search in:  </span>
                                     <label><input type="radio" name="searchSelection" value="Hubs" defaultChecked/> Hubs</label>
                                     <label><input type="radio" name ="searchSelection" value="Market"/> Market</label>
-                                </div>  
+                                </div>   */}
+
+                                {/* <Form onSubmit={handleSearchSubmit}> */}
+                                    <Form.Control type="text" placeholder="Search HobbyHub..." value={searchQuery} onChange={handleSearchChange} onKeyDown={handleEnterSearch} />
+
+                                    <Button className="d-search-btn" variant="HHPurple" type="submit" onClick={handleSearchSubmit} > Search</Button>
+
+                                    <div className="search-dropdown"  id="search-dropdown">
+                                        <span className="ms-2">Search in:  </span>
+                                        <label><input type="radio" name="searchSelection" value="Hubs" checked={selectedCategory === 'Hubs'} onChange={handleCategoryChange} /> Hubs</label>
+                                        <label><input type="radio" name="searchSelection" value="Market" checked={selectedCategory === 'Market'} onChange={handleCategoryChange} /> Market</label>
+                                    </div>
+                                {/* </Form> */}
                             </div>
 
+                            <ProfileToggle/>
 
-                            {currentUser && (
-                                <Dropdown>
-                                    <Dropdown.Toggle id="nav-profileDropdown">
-                                        <div className="nav-profileImage">
-                                            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="Profile Image" className="nav-profilePic" />
-                                        </div>
-                                    </Dropdown.Toggle>
-
-                                    <Dropdown.Menu id="nav-dropdownContent">
-                                        <Dropdown.Item className="navDropDownItem" as={Link} to="/editprofile">Edit Profile</Dropdown.Item>
-                                        <Dropdown.Item className="navDropDownItem" as={Link} to="/login">Logout</Dropdown.Item>
-                                        {/* Add other dropdown items as needed */}
-                                    </Dropdown.Menu>
-                                </Dropdown>
-                            )}
-
-                            {!currentUser && (<Button variant="HHPurple"> Log in</Button>)}
                         </Col>
                     </Row>
                 </Container>

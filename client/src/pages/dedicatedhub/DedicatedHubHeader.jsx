@@ -6,7 +6,7 @@ import ReadMore from "./ReadMore.jsx";
 import {useMediaQuery} from "react-responsive";
 
 function useDesktopOrLaptopMediaQuery() {
-    return useMediaQuery({ query: '(min-width: 576px)' });
+    return useMediaQuery({ query: '(min-width: 768px)' });
 }
 
 const DedicatedHubHeader = () => {
@@ -57,7 +57,7 @@ const DedicatedHubHeader = () => {
                     See more!
                 </p>
 
-                <Offcanvas className="d-sm-none h-75" show={show} onHide={handleClose} placement={`top`}>
+                <Offcanvas className="d-md-none h-75" show={show} onHide={handleClose} placement={`top`}>
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title>About: {hubName}</Offcanvas.Title>
                     </Offcanvas.Header>

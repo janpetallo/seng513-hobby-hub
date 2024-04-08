@@ -11,13 +11,14 @@ import { FaComments } from "react-icons/fa6";
 import Comments from "../comments/Comments.jsx";
 import PostPopup from "../../PostPopup/PostPopup.jsx";
 import newRequest from "../../../utilities/newRequest.js";
+import ModKebab from "../../ModKebab/ModKebab.jsx";
 
 
-
-const Post = ({ post, isPopup, hubTitle }) => {
+const Post = ({ post, isPopup, hubTitle, showKebab }) => {
     // to control image pop up when clicked
     const [showModal, setShowModal] = useState(false);
     const [modalImageUrl, setModalImageUrl] = useState("");
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     const toggleModal = (imageUrl) => {
         setShowModal(!showModal);
@@ -157,6 +158,9 @@ const Post = ({ post, isPopup, hubTitle }) => {
 
     const maxLength = 350;
 
+    // Dummy variable to show kebab for now
+    const isAdmin = true;
+
     return (
         <div className = "post">
             <div className="postContainer">
@@ -176,6 +180,8 @@ const Post = ({ post, isPopup, hubTitle }) => {
                                 hubName={post.hubName}
                                 content={post}
                                 owner={post.userName}
+                                showKebab={showKebab}
+                                isAdmin={isAdmin}
                             />
                         )}
 
@@ -185,6 +191,9 @@ const Post = ({ post, isPopup, hubTitle }) => {
                             </div>
                         )}
                     </div>
+
+                    {/* Only render the kebab when on dedicated hub pages, can't ban people on your homepage*/}
+                    {showKebab && isAdmin && currentUser && (<ModKebab/>)}
                 </div>
 
                 <div className="post_content">
