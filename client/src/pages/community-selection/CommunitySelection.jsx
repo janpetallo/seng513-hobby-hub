@@ -5,7 +5,7 @@ import { useMediaQuery } from 'react-responsive';
 import CreateIcon from '../../assets/create-hub/create.svg';
 import './CommunitySelection.scss'
 import CustomizeHub from "../../components/customizehub/CustomizeHub.jsx";
-
+import newRequest from "../../utilities/newRequest.js";
 
 function CommunitySelection() {
     const location = useLocation();
@@ -38,6 +38,30 @@ function CommunitySelection() {
 
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
+    // get all posts
+    const [hubs, setHubs] = useState([]);
+
+    useEffect(() => {
+
+        // Function to fetch all posts from backend API server
+        const fetchHubs = async () => {
+            try {
+                const response = await newRequest.get("/hubs/getAllHubs");
+                if (response.status !== 200) {
+                    throw new Error("Failed to fetch hubs");
+                }
+                const hubsData = response.data;
+                setHubs(hubsData);
+                console.log(hubs);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        // Call fetchHubs function when component mounts
+        fetchHubs();
+    }, []); 
+    
+    
     return (
         <div className="hub-container">
             {!isMobile && currentUser && (
@@ -50,32 +74,8 @@ function CommunitySelection() {
                     <Modal.Title className="create-modal-title">Create a New Hub</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    {/*<Form className="ps-3 pe-3">*/}
-                    {/*    <Form.Group>*/}
-                    {/*        <Form.Label className="create-form-label" >Hub Name</Form.Label>*/}
-                    {/*        <Form.Control className="mb-3" id="create-form-control" type="text" placeholder="Enter hub name" maxLength={18} value={hubName} onChange={e => setHubName(e.target.value)} />*/}
-                    {/*            {isHubNameTooLong && <Form.Text className="text-danger">Hub name cannot exceed 18 characters</Form.Text>}*/}
-                    {/*    </Form.Group>*/}
-
-                    {/*    <Form.Group>*/}
-                    {/*        <Form.Label className="create-form-label">Type</Form.Label>*/}
-                    {/*        <Form.Check className="custom-radio" type="radio" id="publicHub" label={<><strong>Public Hub</strong><span> Anyone can view, post, and comment. Share your hub to the world!</span></>} name="hubType" />*/}
-                    {/*        <Form.Check className="custom-radio" type="radio" id="privateHub" label={<><strong>Private Hub</strong><span> Only approved users can enter. Only those worthy shall pass!</span></>} name="hubType" />*/}
-                    {/*    </Form.Group>*/}
-                    {/*</Form>*/}
-
                     <CustomizeHub/>
-
-                    
                 </Modal.Body>
-                {/*<Modal.Footer>*/}
-                {/*    <Button id="cancel-button" onClick={() => setShowModal(false)}>*/}
-                {/*        Cancel*/}
-                {/*    </Button>*/}
-                {/*    <Button id="create-button" onClick={() => /!* Add function to create a hub here *!/}>*/}
-                {/*        Create*/}
-                {/*    </Button>*/}
-                {/*</Modal.Footer>*/}
             </Modal>
             <Container className="mt-3">
                 {categories.map((category, i) => (
