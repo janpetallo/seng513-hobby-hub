@@ -57,11 +57,13 @@ const Posts = ({hubTitle, postAll= true, showKebab}) =>{
     }, []); // Empty dependency array ensures this effect runs only once when component mounts
 
 
-    return <div className = "posts">
-        {posts.map(post=>(
-            <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} showKebab={showKebab}/>
-        ))}
-        </div>;
+    return (
+        <div className = "posts">
+            {posts.slice().reverse().map(post => (
+                <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} showKebab={showKebab}/>
+            ))}
+        </div>
+    );
 };
 
 export default Posts;
