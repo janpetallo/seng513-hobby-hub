@@ -18,32 +18,6 @@ const MyPosts = () => {
         }
     }, []);
 
-   //get all posts and filter them by the current user
-   const [posts, setPosts] = useState([]);
-   useEffect(() => {
-       const fetchPosts = async () => {
-           try {
-               const response = await newRequest.get("/posts/getAllPosts");
-               if (response.status !== 200) {
-                   throw new Error("Failed to fetch posts");
-               }
-               const postsData = response.data;
-               // filter posts by the current user
-               const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-               const userPosts = postsData.filter(post => post.userName === currentUser.username);
-
-               setPosts(userPosts);
-               console.log(posts);
-               // console.log(postsData);
-           } catch (error) {
-               console.error(error);
-           }
-       };
-       fetchPosts();
-   }, []);
-
-
-
     return (
         <>
             <div className="d-flex flex-column align-items-center justify-content-center">
@@ -59,12 +33,7 @@ const MyPosts = () => {
                 )}
             </div>
             <hr/>
-            {/* {userName ? (<Posts hubTitle={true} postAll={false}/>) : null} */}
-            <div className="posts">
-                {posts.slice().reverse().map(post => (
-                    <Post hubTitle={true} post={post} isPopup={false} key={post._id} />
-                ))}
-            </div>
+            {userName ? (<Posts hubTitle={true} postAll={false}/>) : null}
 
         </>
     )
