@@ -1,5 +1,5 @@
 import express from "express";
-import {deleteUser, getUser} from "../controllers/user.controller.js";
+import {deleteUser, editUser, getUser} from "../controllers/user.controller.js";
 import {verifyToken} from "../middleware/jwt.js";
 
 const router = express.Router();
@@ -11,5 +11,6 @@ router.delete("/:id",verifyToken, deleteUser);
 // gets the user specified by id and returns it
 router.get("/getUser/:id",verifyToken, getUser);
 
+router.post("/editUser/:id",verifyToken, editUser);
 
 export default router;

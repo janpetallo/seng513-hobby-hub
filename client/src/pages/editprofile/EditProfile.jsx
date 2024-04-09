@@ -14,6 +14,7 @@ import { useNavigate} from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css';
 import {formatNumber, isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNumberLength} from "libphonenumber-js";
+import newRequest from "../../utilities/newRequest.js";
 
 
 const EditProfilePage = () => {
@@ -75,7 +76,15 @@ const EditProfilePage = () => {
         // If the phone number is entered and invalid then throw error
         // If the phone number is empty it is okay (not required)
         if(pass) {
-
+            try {
+                await newRequest.post(`/users/editUser/${userData._id}`, {
+                    email: "testUser1@email.com",
+                    userId: userData._id,
+                    phone: phoneNumber.number,
+                })
+            }catch (error){
+                console.log(error);
+            }
         }
     }
 
