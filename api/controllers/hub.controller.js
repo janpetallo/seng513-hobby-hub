@@ -13,6 +13,29 @@ export const getAllHubs = async (req, res) => {
 };
 
 
+export const getHub = async (req, res) => {
+    try {
+        // Extract the hub ID from the request parameters
+        const { hubID } = req.params;
+
+        // Find the hub by ID
+        const hub = await Hub.findById(hubID);
+
+        // Check if the hub exists
+        if (!hub) {
+            return res.status(404).send("Hub not found");
+        }
+
+        // If the hub exists, send it as a response
+        res.status(200).json(hub);
+    } catch (error) {
+        // Handle errors
+        console.error(error);
+        res.status(500).send("Error fetching hub");
+    }
+};
+
+
 export const createHub = async (req, res) => {
     try {
         // get the current user
