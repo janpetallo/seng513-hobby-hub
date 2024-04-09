@@ -1,5 +1,5 @@
 import express from "express";
-import {checkValidHubName, createHub, getAllHubs} from "../controllers/hub.controller.js";
+import {checkValidHubName, createHub, getAllHubs, getHub} from "../controllers/hub.controller.js";
 import {verifyToken} from "../middleware/jwt.js";
 
 const router = express.Router();
@@ -8,6 +8,8 @@ const router = express.Router();
 
 // route to the getAllHubs function
 router.get("/getAllHubs", getAllHubs);
+// route to the getHub function
+router.get("/getHub/:hubID", getHub);
 // route to the createHub function. Token verified before hand
 router.post("/createHub", verifyToken, createHub);
 // route to the createHub function. Token verified before hand
