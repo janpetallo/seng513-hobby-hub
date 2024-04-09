@@ -75,28 +75,7 @@ const EditProfilePage = () => {
         // If the phone number is entered and invalid then throw error
         // If the phone number is empty it is okay (not required)
         if(pass) {
-             try {
-                 await newRequest.post("/auth/register", {username: values.username,
-                     password: values.password, email: values.email, birthday: values.birthdate, phone: phoneNumber.number});
-                 setEmailErrors({message: "", status: false}); // clear email errors
-                 setUsernameErrors({message: "", status: false}); // clear username errors
-                 actions.resetForm();
-            }catch (err){
-                 console.log("here");
-                 console.log(err);
-                 if (err.response && err.response.status === 400) {
-                      if(err.response.data === "Username is already in use."){
-                         setUsernameErrors({message: "Username is already in use.", status: true});
-                         setEmailErrors({message: "", status: false}); // clear email errors
 
-                     }else if (err.response.data === "Email is already in use."){
-                         setUsernameErrors({message: "", status: false}); // clear username errors
-                         setEmailErrors({message: "Email is already in use.", status: true});
-                     }
-                 } else {
-                     console.log(err);
-                 }
-            }
         }
     }
 
@@ -145,134 +124,134 @@ const EditProfilePage = () => {
     };
 
     return (
-    <div className="edit-prof-background pb-3">
-        <div className="edit-prof-backbutton" onClick={goBack}>
-            <img src={Back} alt="back button" className ="img-icon mt-4"/>
-        </div>
-        <div className="edit-prof-container">
-            <div className = "avantar-section">
-                <div className = "edit-prof-img d-flex flex-column align-items-center">
-                    <img src={image} alt="profile img" className ="img-user"/>
-                    <input type="file" onChange={handleImageChange} style={{ display: "none" }} />
-                    <button className="change-img-btn mb-3 " onClick={() => document.querySelector('input[type="file"]').click()}>Change Profile Picture</button>
-                </div>
+        <div className="edit-prof-background pb-3">
+            <div className="edit-prof-backbutton" onClick={goBack}>
+                <img src={Back} alt="back button" className ="img-icon mt-4"/>
             </div>
-            <hr></hr>
-            <Form className="profile-form-section m-2" onSubmit={handleSubmit}>
-                <Form.Group className="mb-3">
-                    <Form.Label column>
-                        <img src={Username} alt="username" className ="img-icon"/> 
-                        <strong>Username</strong> 
-                    </Form.Label> 
-                    <br/>  
-                    <Form.Control
-                        type="text"
-                        placeholder=""
-                        name="username"
-                        value={values.username}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        isValid={touched.username && !errors.username}
-                        isInvalid={touched.username && (!!errors.username || usernameErrors.status)}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.username || usernameErrors.message}
-                    </Form.Control.Feedback>
-                    {/* <input type="text" className="custom-input"/> */}
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label column>
-                        <img src={Password} alt="password" className ="img-icon"/> 
-                        <strong>Password</strong> 
-                    </Form.Label> 
-                    <br/>  
-
-                    <Form.Control
-                        type="text"
-                        name="password"
-                        value={values.password}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        className="custom-input" 
-                        isValid={touched.password && !errors.password}
-                        isInvalid={touched.password && !!errors.password}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.password}
-                    </Form.Control.Feedback>
-
-                    {/* <input type="text" className="custom-input"/> */}
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label column>
-                        <img src={Email} alt="email" className ="img-icon"/> 
-                        <strong>Email</strong> 
-                    </Form.Label> 
-                    <br/>  
-                    <Form.Control
-                        type="email"
-                        placeholder=""
-                        name="email"
-                        value={values.email}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        isValid={touched.email && !errors.email}
-                        isInvalid={touched.email && (!!errors.email || emailErrors.status)}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.email || emailErrors.message}
-                    </Form.Control.Feedback>
-                    {/* <input type="text" className="custom-input"/> */}
-                </Form.Group>
-                <Form.Group className="phone-dropdown mb-3">
-                <Form.Label column>
-                        <img src={Phone} alt="phone" className ="img-icon"/> 
-                        <strong>Phone Number</strong> 
-                    </Form.Label> 
-                    <br/>  
-                    <PhoneInput
-                        value={phoneNumber.number}
-                        country={'ca'}
-                        onChange={handlePhone}
-                    />
-                    {phoneError &&
-                        <Form.Text className="text-danger">
-                            {phoneError}
-                        </Form.Text>
-                    }
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Label column>
-                        <img src={Birthday} alt="birthday" className ="img-icon"/> 
-                        <strong>Birthdate</strong> 
-                    </Form.Label> 
-                    <br/>  
-                    <Form.Control
-                        type="date"
-                        placeholder=""
-                        name="birthdate"
-                        value={values.birthdate}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        isValid={touched.birthdate && !errors.birthdate}
-                        isInvalid={touched.birthdate && !!errors.birthdate}
-                    />
-                    <Form.Control.Feedback type="invalid">
-                        {errors.birthdate}
-                    </Form.Control.Feedback>
-                    {/* <input type="text" className="custom-input"/> */}
-                </Form.Group>
-                <div className="d-flex justify-content-between">
-                    <Button variant="secondary" type="reset" onClick={()=>{handleReset();handlePhoneReset()}} className="rounded-5 px-4 edit-prof-sub-btn">
-                        Reset
-                    </Button>
-                    <Button variant="primary" type="submit" onClick={handleSubmit} className="btn-HHPurple rounded-5 edit-prof-sub-btn">
-                        Save Changes
-                    </Button>
+            <div className="edit-prof-container">
+                <div className = "avantar-section">
+                    <div className = "edit-prof-img d-flex flex-column align-items-center">
+                        <img src={image} alt="profile img" className ="img-user"/>
+                        <input type="file" onChange={handleImageChange} style={{ display: "none" }} />
+                        <button className="change-img-btn mb-3 " onClick={() => document.querySelector('input[type="file"]').click()}>Change Profile Picture</button>
+                    </div>
                 </div>
-            </Form>
+                <hr></hr>
+                <Form className="profile-form-section m-2" onSubmit={handleSubmit}>
+                    <Form.Group className="mb-3">
+                        <Form.Label column>
+                            <img src={Username} alt="username" className ="img-icon"/>
+                            <strong>Username</strong>
+                        </Form.Label>
+                        <br/>
+                        <Form.Control
+                            type="text"
+                            placeholder=""
+                            name="username"
+                            value={values.username}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            isValid={touched.username && !errors.username}
+                            isInvalid={touched.username && (!!errors.username || usernameErrors.status)}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.username || usernameErrors.message}
+                        </Form.Control.Feedback>
+                        {/* <input type="text" className="custom-input"/> */}
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label column>
+                            <img src={Password} alt="password" className ="img-icon"/>
+                            <strong>Password</strong>
+                        </Form.Label>
+                        <br/>
+
+                        <Form.Control
+                            type="text"
+                            name="password"
+                            value={values.password}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            className="custom-input"
+                            isValid={touched.password && !errors.password}
+                            isInvalid={touched.password && !!errors.password}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.password}
+                        </Form.Control.Feedback>
+
+                        {/* <input type="text" className="custom-input"/> */}
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label column>
+                            <img src={Email} alt="email" className ="img-icon"/>
+                            <strong>Email</strong>
+                        </Form.Label>
+                        <br/>
+                        <Form.Control
+                            type="email"
+                            placeholder=""
+                            name="email"
+                            value={values.email}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            isValid={touched.email && !errors.email}
+                            isInvalid={touched.email && (!!errors.email || emailErrors.status)}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.email || emailErrors.message}
+                        </Form.Control.Feedback>
+                        {/* <input type="text" className="custom-input"/> */}
+                    </Form.Group>
+                    <Form.Group className="phone-dropdown mb-3">
+                        <Form.Label column>
+                            <img src={Phone} alt="phone" className ="img-icon"/>
+                            <strong>Phone Number</strong>
+                        </Form.Label>
+                        <br/>
+                        <PhoneInput
+                            value={phoneNumber.number}
+                            country={'ca'}
+                            onChange={handlePhone}
+                        />
+                        {phoneError &&
+                            <Form.Text className="text-danger">
+                                {phoneError}
+                            </Form.Text>
+                        }
+                    </Form.Group>
+                    <Form.Group className="mb-3">
+                        <Form.Label column>
+                            <img src={Birthday} alt="birthday" className ="img-icon"/>
+                            <strong>Birthdate</strong>
+                        </Form.Label>
+                        <br/>
+                        <Form.Control
+                            type="date"
+                            placeholder=""
+                            name="birthdate"
+                            value={values.birthdate}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            isValid={touched.birthdate && !errors.birthdate}
+                            isInvalid={touched.birthdate && !!errors.birthdate}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.birthdate}
+                        </Form.Control.Feedback>
+                        {/* <input type="text" className="custom-input"/> */}
+                    </Form.Group>
+                    <div className="d-flex justify-content-between">
+                        <Button variant="secondary" type="reset" onClick={()=>{handleReset();handlePhoneReset()}} className="rounded-5 px-4 edit-prof-sub-btn">
+                            Reset
+                        </Button>
+                        <Button variant="primary" type="submit" onClick={onSubmit} className="btn-HHPurple rounded-5 edit-prof-sub-btn">
+                            Save Changes
+                        </Button>
+                    </div>
+                </Form>
+            </div>
         </div>
-    </div>
     );
 };
 
