@@ -15,6 +15,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css';
 import {formatNumber, isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNumberLength} from "libphonenumber-js";
 import {getElement} from "bootstrap/js/src/util/index.js";
+import newRequest from "../../utilities/newRequest.js";
 
 
 const EditProfilePage = () => {
@@ -138,9 +139,7 @@ const EditProfilePage = () => {
         }
 
         passwordField.style.cursor="default";
-        // passwordField.disabled=false;
         emailField.style.cursor="default";
-        // emailField.disabled=false;
         resetButton.style.display="block"
 
     }
@@ -149,17 +148,25 @@ const EditProfilePage = () => {
 
     const {values, errors, touched, isSubmitting,handleBlur,handleReset,handleChange, handleSubmit} = useFormik({
         initialValues: {
-            username:"",
-            email:"",
-            password:"",
-            birthdate:"",
-            setPhoneNumber:""
+            username:userData.username,
+            email:userData.email,
+            password:userData.password,
+            birthdate:userData.birthday,
+            setPhoneNumber:userData.phone
         },
 
         validationSchema: UserSchema,
 
-        onSubmit,
+        onSubmit:async (values) => {
+            try {
+                const response =  newRequest.post(`/users/editUser`, values); // Assuming your backend endpoint is "/users/:id" for updating user data
+                navigate("/profile"); // Navigate to the profile page after successful update
+            } catch (error) {
+                console.error("Error updating user:", error);
+            }
+        }
     })
+
 
 
 
@@ -192,7 +199,7 @@ const EditProfilePage = () => {
                         type="text"
                         placeholder={userData.username}
                         name="username"
-                        value={values.username}
+                        // value={values.username}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         isValid={touched.username && !errors.username}
@@ -284,7 +291,7 @@ const EditProfilePage = () => {
                         type="text"
                         placeholder={new Date(userData.birthday).toLocaleDateString()}
                         name="birthdate"
-                        value={values.birthdate}
+                        // value={values.birthdate}
                         onChange={handleChange}
                         onBlur={handleBlur}
                         isValid={touched.birthdate && !errors.birthdate}

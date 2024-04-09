@@ -32,7 +32,7 @@ export const getUser = async (req, res)=>{
 
 export const editUser = async (req, res)=>{
     try {
-
+        console.log("reached inside edit user");
         // get the current user
         const currentUser = await User.findById(req.params.id);
 
@@ -40,9 +40,32 @@ export const editUser = async (req, res)=>{
             return res.status(403).send("Error you are not authorized to edit this account! You can only edit your own account!");
         }
 
-        res.status(200).json(currentUser);
+        if (req.body.email) {
+            console.log("reached inside edit user");
 
-    }catch (error){
-        res.status(500).send("error: unable to get specified account");
+            currentUser.email = req.body.email;
+        }
+        if (req.body.password) {
+            console.log("reached inside edit user");
+
+            currentUser.password = req.body.password;
+        }
+        if (req.body.phone) {
+            console.log("reached inside edit user");
+
+            currentUser.phone = req.body.phone;
+        }
+        // Update other fields as needed
+
+        // const postData={...req.body}
+        //
+        // const newUser = new User(postData);
+        await currentUser.save();
+        //
+        // Return updated user data as response
+        res.status(200).json(currentUser);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error: Unable to edit user");
     }
 };
