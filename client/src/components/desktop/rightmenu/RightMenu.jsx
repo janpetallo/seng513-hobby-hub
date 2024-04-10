@@ -3,6 +3,7 @@ import "./RightMenu.scss"
 import {Button, Col, Container, Row} from "react-bootstrap";
 import {IoPersonSharp} from "react-icons/io5";
 import {useLocation, useNavigate} from "react-router-dom";
+import newRequest from "../../../utilities/newRequest.js";
 
 const RightMenu = () => {
     // navigation hook
@@ -15,17 +16,42 @@ const RightMenu = () => {
     const [hubName, setHubName] = useState("");
     const [numMembers, setNumMembers ]= useState(0);
     const [followText, setFollowText] = useState('Follow');
+    const [description, setDescription] = useState("");
+    const [rules, setRules] = useState("");
+    const [resources, setResources] = useState("");
 
+    // ToDO: make follow function and check if you already follow it, load actual posts for the hub, then do mobile menu
 
     useEffect(() => {
         // make sure hub data is present otherwise the user is trying to load /hubs manually instead of through the menu
         // so navigate back to the home page to prevent errors
-        if (!hub || typeof hub !== "object") {
-            console.log("True");
+        if (!hub) {
+            console.log(hub);
             navigate("/");
-        }else {
-            setHubName(hub.hubName);
-            setNumMembers(hub.members.length);
+        } else {
+            const fetchData = async () => {
+                try {
+                    console.log(hub);
+                    const response = await newRequest.get(`/hubs/getHub/${hub}`);
+                    console.log(response.data);
+
+                    if (response.status !== 200) {
+                        throw new Error(`Failed to fetch hub data. Status: ${response.status}`);
+                    } else {
+                        setHubName(response.data.hubName);
+                        setNumMembers(response.data.members.length);
+                        setDescription(response.data.description);
+                        setRules(response.data.rules);
+                        setResources(response.data.resources);
+                    }
+                } catch (error) {
+                    // upon error log the error and navigate back home
+                    console.log(error);
+                    navigate("/");
+                }
+            };
+
+            fetchData();
         }
     }, [hub, navigate]);
 
@@ -38,9 +64,6 @@ const RightMenu = () => {
             setFollowText('Follow');
         }
     }
-
-    const description = "Welcome to the dedicated hub for speedrunners! Share your runs," +
-        " compete with others and just have an overall great time."
 
 
     return (
@@ -61,86 +84,21 @@ const RightMenu = () => {
             <Row className="right-menu-section">
                 <Col>
                     <h5>Description</h5>
-                    <p>{description}</p>
+                    <div className="RM-hubDescription" dangerouslySetInnerHTML={{ __html: description }} />
                 </Col>
             </Row>
 
             <Row className="right-menu-section">
                 <Col>
                     <h5>Rules</h5>
-                    <ol>
-                        <li>
-                            Respect others
-                        </li>
-                        <li>
-                            Be Civil
-                        </li>
-                        <li>
-                            No toxic posting
-                        </li>
-                        <li>
-                            Have fun
-                        </li>
-                    </ol>
+                    <div className="RM-HubRules" dangerouslySetInnerHTML={{ __html: rules }} />
                 </Col>
             </Row>
 
             <Row className="right-menu-section">
                 <Col>
                     <h5>Resources</h5>
-                    <div>
-                        Want to get into speedrunning here are some great links to start:
-                        <ul>
-                            <li>
-                                "https://www.speedrun.com/"
-                            </li>
-
-                            <li>
-                                "https://livesplit.org/"
-                            </li>
-
-                            <li>
-                                "https://obsproject.com/"
-
-                            </li>
-
-                            <li>
-                                "https://www.xsplit.com/"
-                            </li>
-                        </ul>
-                    </div>
-                </Col>
-            </Row>
-
-            <Row className="right-menu-section">
-                <Col>
-                    <h5>Test too much content can scroll</h5>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                    </p>
+                    <div className="RM-hubResource" dangerouslySetInnerHTML={{ __html: resources }} />
                 </Col>
             </Row>
         </Container>
