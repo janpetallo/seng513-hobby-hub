@@ -16,10 +16,10 @@ export const getAllHubs = async (req, res) => {
 export const getHub = async (req, res) => {
     try {
         // Extract the hub ID from the request parameters
-        const { hubID } = req.params;
+        const { hubName } = req.params;
 
         // Find the hub by ID
-        const hub = await Hub.findById(hubID);
+        const hub = await Hub.findOne({ hubName: hubName });
 
         // Check if the hub exists
         if (!hub) {
