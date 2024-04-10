@@ -24,8 +24,8 @@ const RightMenu = () => {
             console.log("True");
             navigate("/");
         }else {
-
-
+            setHubName(hub.hubName);
+            setNumMembers(hub.members.length);
         }
     }, [hub, navigate]);
 
