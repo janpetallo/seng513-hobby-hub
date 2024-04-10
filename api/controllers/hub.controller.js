@@ -129,3 +129,33 @@ export const addMemberToHub = async (req, res) => {
 };
 
 
+export const removeMemberFromHub = async (req, res) => {
+    try {
+        // Extract the hub ID and member ID from the request body
+        const { hubID, userID } = req.body;
+
+        // Find the hub by ID
+        const hub = await Hub.findById(hubID);
+
+        // Check if the hub exists
+        if (!hub) {
+            return res.status(404).send("Hub not found");
+        }
+
+        // Check if the member ID exists in the members array
+        if (!hub.members.includes(userID)) {
+            return res.status(400).send("User is not a member of this hub");
+        }
+
+        // Remove the member ID from the members array
+        hub.members = hub.members.filter(member => member.toString() !== userID);
+
+        // Save the updated hub
+        await hub.save();
+
+        res.status(200).send("User removed from hub successfully");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error removing user from hub");
+    }
+};
