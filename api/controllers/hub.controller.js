@@ -112,12 +112,12 @@ export const addMemberToHub = async (req, res) => {
         }
 
         // Check if the user ID already exists in the members array
-        if (hub.members.includes(UserID)) {
+        if (hub.members.includes(userID)) {
             return res.status(400).send("User is already a member of this hub");
         }
 
         // Add the user ID to the members array
-        hub.members.push(UserID);
+        hub.members.push(userID);
 
         // Save the updated hub
         await hub.save();
