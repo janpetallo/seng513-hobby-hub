@@ -224,3 +224,24 @@ export const undisLikePost = async (req, res) => {
         res.status(500).send("Error disliking the post");
     }
 };
+
+
+export const deletePostById = async (req, res) => {
+    try {
+        // Extract the post ID from the request parameters
+        const { postId } = req.params;
+
+        // Find the post by ID and delete it
+        const deletedPost = await Post.findByIdAndDelete(postId);
+
+        // Check if the post exists, if not throw an error
+        if (!deletedPost) {
+            return res.status(404).send("Post not found");
+        }
+
+        res.status(200).send("Post deleted successfully");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error deleting post");
+    }
+};
