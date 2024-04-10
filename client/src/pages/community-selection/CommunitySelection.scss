@@ -3,6 +3,10 @@
     --fnt-hover: #8e47ff;
 }
 
+.hub-selection-text-center{
+    user-select: none;
+}
+
 .hub-container {
     display: flex;
     flex-direction: column;
