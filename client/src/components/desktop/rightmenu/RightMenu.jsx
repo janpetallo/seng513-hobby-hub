@@ -20,6 +20,8 @@ const RightMenu = () => {
     const [rules, setRules] = useState("");
     const [resources, setResources] = useState("");
     const [moderator, setModerator] = useState(false);
+    const [moderatorID, setModeratorID] = useState("");
+    const [hubID, setHubID] = useState("");
 
 
     // ToDO: make follow function and check if you already follow it, delete post, and bann user functions
@@ -42,9 +44,12 @@ const RightMenu = () => {
                         setDescription(response.data.description);
                         setRules(response.data.rules);
                         setResources(response.data.resources);
+                        setHubID(response.data._id);
 
                         // get the hub's moderator id
                         const modID = response.data.moderators[0];
+
+                        setModeratorID(modID);
                         // get current User
                         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
