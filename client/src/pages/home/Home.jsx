@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.scss"
 import Posts from "../../components/desktop/posts/Posts.jsx";
-import Marketplace from "../marketplace/Marketplace.jsx";
+import ItemCards from "../../components/marketplace/itemcards/ItemCards.jsx";
 import {Tab, Tabs} from "react-bootstrap";
 
 const Home = () => {
@@ -16,7 +16,7 @@ const Home = () => {
                     <Posts hubTitle={true}/>
                 </Tab>
                 <Tab eventKey="market" title="Market Corner">
-                    <Marketplace/>
+                    <ItemCards/>
                 </Tab>
             </Tabs>
         </div>

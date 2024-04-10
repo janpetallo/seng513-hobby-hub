@@ -1,5 +1,5 @@
 import React from "react";
-import Marketplace from "../marketplace/Marketplace.jsx";
+import ItemCards from "../../components/marketplace/itemcards/ItemCards.jsx";
 
 
 const MyAdsTrades = () => {
@@ -14,7 +14,7 @@ const MyAdsTrades = () => {
             </div>
             <hr/>
 
-            <Marketplace/>
+            <ItemCards/>
         </>
     )
 }
