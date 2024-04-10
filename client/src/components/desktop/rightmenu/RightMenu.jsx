@@ -19,8 +19,10 @@ const RightMenu = () => {
     const [description, setDescription] = useState("");
     const [rules, setRules] = useState("");
     const [resources, setResources] = useState("");
+    const [moderator, setModerator] = useState(false);
 
-    // ToDO: make follow function and check if you already follow it
+
+    // ToDO: make follow function and check if you already follow it, delete post, and bann user functions
 
     useEffect(() => {
         // make sure hub data is present otherwise the user is trying to load /hubs manually instead of through the menu
@@ -40,6 +42,18 @@ const RightMenu = () => {
                         setDescription(response.data.description);
                         setRules(response.data.rules);
                         setResources(response.data.resources);
+
+                        // get the hub's moderator id
+                        const modID = response.data.moderators[0];
+                        // get current User
+                        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+                        // if the current user is a moderator do not allow them to unfollow the hub, and set status to following
+                        if(modID === currentUser._id){
+                           setFollowText('Following');
+                           setModerator(true);
+                        }
+
                     }
                 } catch (error) {
                     // upon error log the error and navigate back home
@@ -74,7 +88,7 @@ const RightMenu = () => {
                         <span>{numMembers} Members</span>
                     </div>
 
-                    <Button className="mt-1 right-menu-follow-btn" variant="HHPurple" onClick={handleClick}>{followText}</Button>
+                    <Button className="mt-1 right-menu-follow-btn" variant="HHPurple" onClick={handleClick} disabled={moderator}>{followText}</Button>
                 </Col>
             </Row>
 
