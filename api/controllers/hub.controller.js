@@ -163,6 +163,14 @@ export const removeMemberFromHub = async (req, res) => {
 
 export const removePostFromHub = async (req, res) => {
     try {
+        // get the current user
+        const currentUser = await User.findById(req.body.userID);
+
+        // identity verification required to interact with posts on your own account
+        if(req.userId !== currentUser._id.toString()){
+            return res.status(403).send("Error you are not authorized to delete Posts from the hub on this account! You can only delete posts from your own account!");
+        }
+
         // Extract the hub name and post ID from the request body
         const { hubName, postID } = req.body;
 
@@ -172,6 +180,13 @@ export const removePostFromHub = async (req, res) => {
         // Check if the hub exists
         if (!hub) {
             return res.status(404).send("Hub not found");
+        }
+
+        // check if the current user is the moderator. If not return with an error as they aren't allowed to delete posts
+        if(hub.moderators[0].toString() !== currentUser._id.toString()) {
+            console.log(hub.moderators[0]);
+            console.log(currentUser._id);
+            return res.status(403).send("Error you are not authorized to delete Posts from the hub as you are not an authorized moderator!");
         }
 
         // Check if the post ID exists in the posts array
