@@ -12,18 +12,22 @@ const RightMenu = () => {
     const location = useLocation();
     const hub = location.state?.hub;
 
+    const [hubName, setHubName] = useState("");
+    const [numMembers, setNumMembers ]= useState(0);
+    const [followText, setFollowText] = useState('Follow');
+
+
     useEffect(() => {
+        // make sure hub data is present otherwise the user is trying to load /hubs manually instead of through the menu
+        // so navigate back to the home page to prevent errors
         if (!hub || typeof hub !== "object") {
             console.log("True");
             navigate("/");
+        }else {
+
+
         }
     }, [hub, navigate]);
-
-
-
-    const hubName = "Test2";
-    const numMembers = 1251;
-    const [followText, setFollowText] = useState('Follow');
 
     const handleClick = () => {
         if (followText === 'Follow') {
