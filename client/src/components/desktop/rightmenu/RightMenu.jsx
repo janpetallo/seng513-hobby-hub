@@ -20,20 +20,17 @@ const RightMenu = () => {
     const [rules, setRules] = useState("");
     const [resources, setResources] = useState("");
 
-    // ToDO: make follow function and check if you already follow it, load actual posts for the hub, then do mobile menu
+    // ToDO: make follow function and check if you already follow it
 
     useEffect(() => {
         // make sure hub data is present otherwise the user is trying to load /hubs manually instead of through the menu
         // so navigate back to the home page to prevent errors
         if (!hub) {
-            console.log(hub);
             navigate("/");
         } else {
             const fetchData = async () => {
                 try {
-                    console.log(hub);
                     const response = await newRequest.get(`/hubs/getHub/${hub}`);
-                    console.log(response.data);
 
                     if (response.status !== 200) {
                         throw new Error(`Failed to fetch hub data. Status: ${response.status}`);
