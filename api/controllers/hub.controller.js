@@ -99,6 +99,11 @@ export const checkValidHubName = async (req, res) => {
 
 export const addMemberToHub = async (req, res) => {
     try {
+        // identity verification required to interact with posts on your own account
+        if(req.userId !== currentUser._id.toString()){
+            return res.status(403).send("Error you are not authorized to follow hubs on this account! You can only follow hubs from your own account!");
+        }
+
         // Extract the hub name and member ID from the request body
         const { hubName, userID } = req.body;
 
@@ -132,6 +137,14 @@ export const addMemberToHub = async (req, res) => {
 
 export const removeMemberFromHub = async (req, res) => {
     try {
+        // get the current user
+        const currentUser = await User.findById(req.body.userID);
+
+        // identity verification required to interact with posts on your own account
+        if(req.userId !== currentUser._id.toString()){
+            return res.status(403).send("Error you are not authorized to unfollow a hub on this account! You can only unfollow hubs from your own account!");
+        }
+
         // Extract the hub name and member ID from the request body
         const { hubName, userID } = req.body;
 
