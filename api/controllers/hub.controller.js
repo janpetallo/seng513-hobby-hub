@@ -159,3 +159,35 @@ export const removeMemberFromHub = async (req, res) => {
         res.status(500).send("Error removing user from hub");
     }
 };
+
+
+export const removePostFromHub = async (req, res) => {
+    try {
+        // Extract the hub name and post ID from the request body
+        const { hubName, postID } = req.body;
+
+        // Find the hub by name
+        const hub = await Hub.findOne({ hubName: hubName });
+
+        // Check if the hub exists
+        if (!hub) {
+            return res.status(404).send("Hub not found");
+        }
+
+        // Check if the post ID exists in the posts array
+        if (!hub.posts.includes(postID)) {
+            return res.status(400).send("Post does not exist in this hub");
+        }
+
+        // Remove the post ID from the posts array
+        hub.posts = hub.posts.filter(post => post.toString() !== postID);
+
+        // Save the updated hub
+        await hub.save();
+
+        res.status(200).send("Post removed from hub successfully");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error removing post from hub");
+    }
+};
