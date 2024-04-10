@@ -102,7 +102,7 @@ export const addMemberToHub = async (req, res) => {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
 
-        // identity verification required to interact with posts on your own account
+        // identity verification required to allow folloing on your own account
         if(req.userId !== currentUser._id.toString()){
             return res.status(403).send("Error you are not authorized to follow hubs on this account! You can only follow hubs from your own account!");
         }
@@ -143,16 +143,18 @@ export const removeMemberFromHub = async (req, res) => {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
 
-        // identity verification required to interact with posts on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to unfollow a hub on this account! You can only unfollow hubs from your own account!");
-        }
-
         // Extract the hub name and member ID from the request body
         const { hubName, userID } = req.body;
 
         // Find the hub by name
         const hub = await Hub.findOne({ hubName: hubName });
+
+
+        // identity verification required to allow unfollowing on your own account
+        if(req.userId !== currentUser._id.toString()){
+            return res.status(403).send("Error you are not authorized to unfollow a hub on this account! You can only unfollow hubs from your own account!");
+        }
+
 
         // Check if the hub exists
         if (!hub) {
