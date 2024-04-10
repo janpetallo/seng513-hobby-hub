@@ -65,9 +65,7 @@ const CustomizeHub = () => {
                     if (response.status === 200) {
                         // Hub name is valid, proceed to the next tab
                         setHubNameError('');
-                        console.log(activeTab);
                         setActiveTab(activeTab + 1);
-                        console.log(activeTab);
                     }
                 } catch (error) {
                     // Handle error if the hub name is not valid
@@ -79,9 +77,7 @@ const CustomizeHub = () => {
                 }
             }
         } else {
-            console.log(activeTab);
             setActiveTab(activeTab + 1); // change tabs
-            console.log(activeTab);
         }
     };
 
@@ -122,10 +118,13 @@ const CustomizeHub = () => {
         };
 
         try {
+            // create hub
             const response = await newRequest.post('/hubs/createHub', hubData);
             if (response.status === 201) {
+
+
                 // Hub created successfully, redirect to hubs page
-                navigate("/hubs");
+                navigate('/hubs', { state: { hub: hubName } });
             }
         } catch (error) {
             console.error('Error creating hub:', error);
