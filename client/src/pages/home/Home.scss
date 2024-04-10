@@ -1,0 +1,27 @@
+.home {
+    .home-header {
+        position: sticky;
+        top: 76px;
+        z-index: 9999;
+        background-color: #f6f2fd;
+        --bs-nav-tabs-link-active-border-color: var(--bs-border-color);
+        .nav-link {
+            color: grey;
+        }
+        .nav-link.active {
+            text-decoration: underline;
+        }
+
+
+        .nav-item {
+            width: 50%;
+            button {
+                height: 60px;
+                width: 100%;
+                font-size: 1.4rem;
+                --bs-nav-tabs-link-active-color: var(--HHPurple);
+                //text-decoration: underline;
+            }
+        }
+    }
+}

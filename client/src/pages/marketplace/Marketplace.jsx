@@ -69,7 +69,7 @@ const Marketplace = () => {
 
     return(
         <>
-        <HubMarketNavbar/>
+        {/*<HubMarketNavbar/>*/}
 
         <Container className="w-100">
             <Row lg={3}  sm={2} xs={1} className="my-4">

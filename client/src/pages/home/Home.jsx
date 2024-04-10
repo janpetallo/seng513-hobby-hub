@@ -1,14 +1,24 @@
 import React from "react";
 import "./Home.scss"
-import {Button, Container, Nav, Navbar, NavDropdown, Offcanvas} from "react-bootstrap";
 import Posts from "../../components/desktop/posts/Posts.jsx";
-import HubMarketNavbar from "../marketplace/HubMarketNavbar.jsx";
+import Marketplace from "../marketplace/Marketplace.jsx";
+import {Tab, Tabs} from "react-bootstrap";
 
 const Home = () => {
+
     return (
         <div className="home">
-            <HubMarketNavbar/>
-            <Posts hubTitle={true}/>
+            <Tabs
+                defaultActiveKey="hubs"
+                className="home-header"
+            >
+                <Tab eventKey="hubs" title="Hub Corner">
+                    <Posts hubTitle={true}/>
+                </Tab>
+                <Tab eventKey="market" title="Market Corner">
+                    <Marketplace/>
+                </Tab>
+            </Tabs>
         </div>
     )
 }
