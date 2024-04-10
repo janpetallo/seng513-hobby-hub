@@ -71,9 +71,8 @@ function CommunitySelection() {
         fetchHubs();
     }, []);
 
-    const handleClick = (hub) => {
-        console.log("Clicked on hub:", hub.hubName);
-        navigate('/hubs', { state: { hub: hub } });
+    const handleClick = (hubName) => {
+        navigate('/hubs', { state: { hub: hubName } });
     };
     
     return (
@@ -99,7 +98,7 @@ function CommunitySelection() {
                         <Row>
                             {hub.hubs.map((hub, index) => (
                             <Col xs={4.5} sm={4} md={3.5} lg={3} className="col-container my-2 me-4 p-3" key={index}>
-                                <div className="hub-selection-text-center"  onClick={() => handleClick(hub)}>
+                                <div className="hub-selection-text-center"  onClick={() => handleClick(hub.hubName)}>
                                     {hub.hubName}
                                 </div>
                             </Col>
