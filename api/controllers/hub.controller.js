@@ -99,11 +99,12 @@ export const checkValidHubName = async (req, res) => {
 
 export const addMemberToHub = async (req, res) => {
     try {
-        // Extract the hub ID and member ID from the request body
-        const { hubID, UserID } = req.body;
+        // Extract the hub name and member ID from the request body
+        const { hubName, userID } = req.body;
 
-        // Find the hub by ID
-        const hub = await Hub.findById(hubID);
+        // Find the hub by name
+        const hub = await Hub.findOne({ hubName: hubName });
+
 
         // Check if the hub exists
         if (!hub) {
@@ -131,11 +132,11 @@ export const addMemberToHub = async (req, res) => {
 
 export const removeMemberFromHub = async (req, res) => {
     try {
-        // Extract the hub ID and member ID from the request body
-        const { hubID, userID } = req.body;
+        // Extract the hub name and member ID from the request body
+        const { hubName, userID } = req.body;
 
-        // Find the hub by ID
-        const hub = await Hub.findById(hubID);
+        // Find the hub by name
+        const hub = await Hub.findOne({ hubName: hubName });
 
         // Check if the hub exists
         if (!hub) {
