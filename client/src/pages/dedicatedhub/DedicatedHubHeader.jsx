@@ -4,19 +4,14 @@ import {IoPersonSharp} from "react-icons/io5";
 import "./DedicatedHubHeader.scss"
 import ReadMore from "./ReadMore.jsx";
 import {useMediaQuery} from "react-responsive";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import newRequest from "../../utilities/newRequest.js";
 
 function useDesktopOrLaptopMediaQuery() {
     return useMediaQuery({ query: '(min-width: 768px)' });
 }
 
-const DedicatedHubHeader = () => {
-
-
-    // get the hub name passed to dedicated hub when clicking on the hub
-    const location = useLocation();
-    const hub = location.state?.hub;
+const DedicatedHubHeader = ({hub}) => {
 
     const [hubName, setHubName] = useState("");
     const [numMembers, setNumMembers ]= useState(0);
@@ -28,32 +23,27 @@ const DedicatedHubHeader = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        // make sure hub data is present otherwise the user is trying to load /hubs manually instead of through the menu
-        // so navigate back to the home page to prevent errors
-        if (!hub) {
-            navigate("/");
-        } else {
-            const fetchData = async () => {
-                try {
-                    const response = await newRequest.get(`/hubs/getHub/${hub}`);
+        const fetchData = async () => {
+            try {
+                const response = await newRequest.get(`/hubs/getHub/${hub}`);
 
-                    if (response.status !== 200) {
-                        throw new Error(`Failed to fetch hub data. Status: ${response.status}`);
-                    } else {
-                        setHubName(response.data.hubName);
-                        setNumMembers(response.data.members.length);
-                        setDescription(response.data.description);
-                        setRules(response.data.rules);
-                        setResources(response.data.resources);
-                    }
-                } catch (error) {
-                    // upon error log the error and navigate back home
-                    navigate("/");
+                if (response.status !== 200) {
+                    throw new Error(`Failed to fetch hub data. Status: ${response.status}`);
+                } else {
+                    setHubName(response.data.hubName);
+                    setNumMembers(response.data.members.length);
+                    setDescription(response.data.description);
+                    setRules(response.data.rules);
+                    setResources(response.data.resources);
                 }
-            };
+            } catch (error) {
+                // upon error log the error and navigate back home
+                console.log(error);
+                navigate("/");
+            }
+        };
 
-            fetchData();
-        }
+        fetchData();
     }, [hub, navigate]);
 
 
