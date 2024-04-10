@@ -96,3 +96,36 @@ export const checkValidHubName = async (req, res) => {
         console.log(error);
     }
 };
+
+export const addMemberToHub = async (req, res) => {
+    try {
+        // Extract the hub ID and member ID from the request body
+        const { hubID, UserID } = req.body;
+
+        // Find the hub by ID
+        const hub = await Hub.findById(hubID);
+
+        // Check if the hub exists
+        if (!hub) {
+            return res.status(404).send("Hub not found");
+        }
+
+        // Check if the user ID already exists in the members array
+        if (hub.members.includes(UserID)) {
+            return res.status(400).send("User is already a member of this hub");
+        }
+
+        // Add the user ID to the members array
+        hub.members.push(UserID);
+
+        // Save the updated hub
+        await hub.save();
+
+        res.status(200).send("User added to hub successfully");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error adding user to hub");
+    }
+};
+
+
