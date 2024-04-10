@@ -1,11 +1,28 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./RightMenu.scss"
 import {Button, Col, Container, Row} from "react-bootstrap";
 import {IoPersonSharp} from "react-icons/io5";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const RightMenu = () => {
-    const hubName = "Speedrunners";
-    const numMembers = 1250;
+    // navigation hook
+    const navigate = useNavigate();
+
+    // get the hub data passed to dedicated hub when clicking on the hub
+    const location = useLocation();
+    const hub = location.state?.hub;
+
+    useEffect(() => {
+        if (!hub || typeof hub !== "object") {
+            console.log("True");
+            navigate("/");
+        }
+    }, [hub, navigate]);
+
+
+
+    const hubName = "Test2";
+    const numMembers = 1251;
     const [followText, setFollowText] = useState('Follow');
 
     const handleClick = () => {
