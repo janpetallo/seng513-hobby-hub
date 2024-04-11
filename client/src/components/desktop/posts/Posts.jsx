@@ -7,6 +7,7 @@ import newRequest from "../../../utilities/newRequest.js";
 const Posts = ({hubTitle, postAll= true, showKebab, hubPosts = false, hubName}) =>{
     // Post data
     const [posts, setPosts] = useState([]);
+    const [moderators, setModerators] = useState([]);
 
 
     useEffect(() => {
@@ -32,6 +33,9 @@ const Posts = ({hubTitle, postAll= true, showKebab, hubPosts = false, hubName}) 
                             if (response.status !== 200) {
                                 throw new Error(`Failed to fetch hub data. Status: ${response.status}`);
                             } else {
+                                // set moderators of the hub
+                                setModerators(response.data.moderators);
+
                                 // get the posts from this hub
                                 // now we try to get the posts associated with all of the post id's
                                 try {
@@ -87,7 +91,7 @@ const Posts = ({hubTitle, postAll= true, showKebab, hubPosts = false, hubName}) 
     return (
         <div className = "posts">
             {posts.slice().reverse().map(post => (
-                <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} showKebab={showKebab}/>
+                <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} showKebab={showKebab} moderators={moderators}/>
             ))}
         </div>
     );

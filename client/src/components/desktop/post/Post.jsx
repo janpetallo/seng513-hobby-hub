@@ -14,11 +14,13 @@ import newRequest from "../../../utilities/newRequest.js";
 import ModKebab from "../../ModKebab/ModKebab.jsx";
 
 
-const Post = ({ post, isPopup, hubTitle, showKebab }) => {
+const Post = ({ post, isPopup, hubTitle, showKebab, moderators = [] }) => {
     // to control image pop up when clicked
     const [showModal, setShowModal] = useState(false);
     const [modalImageUrl, setModalImageUrl] = useState("");
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const [isAdmin, setIsAdmin] = useState(false);
+
 
     const toggleModal = (imageUrl) => {
         setShowModal(!showModal);
@@ -36,6 +38,10 @@ const Post = ({ post, isPopup, hubTitle, showKebab }) => {
             // Check if the user has already disliked the post
             if (post.usersDisliked.includes(currentUser._id)) {
                 setDisliked(true);
+            }
+            // check if the current user is a moderator
+            if(moderators.includes(currentUser._id)){
+                setIsAdmin(true);
             }
         }
     }, [post.usersLiked, post.usersDisliked]);
@@ -157,9 +163,6 @@ const Post = ({ post, isPopup, hubTitle, showKebab }) => {
     } ;
 
     const maxLength = 350;
-
-    // Dummy variable to show kebab for now
-    const isAdmin = true;
 
     return (
         <div className = "post">
