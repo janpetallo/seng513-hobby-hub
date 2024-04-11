@@ -97,6 +97,7 @@ export const checkValidHubName = async (req, res) => {
     }
 };
 
+
 export const addMemberToHub = async (req, res) => {
     try {
         // get the current user
@@ -129,6 +130,14 @@ export const addMemberToHub = async (req, res) => {
 
         // Save the updated hub
         await hub.save();
+
+        // add the hub only to the user's hub array if it isn't already in it
+        if(!currentUser.hubs.includes(hub._id)) {
+            currentUser.hubs.push(hub._id);
+        }
+
+        await currentUser.save();
+
 
         res.status(200).send("User added to hub successfully");
     } catch (error) {
@@ -171,6 +180,13 @@ export const removeMemberFromHub = async (req, res) => {
 
         // Save the updated hub
         await hub.save();
+
+        // remove the hub only to the user's hub array if it is already in it
+        if(currentUser.hubs.includes(hub._id)) {
+            currentUser.hubs = currentUser.hubs.filter(hubId => hubId.toString() !== hub._id.toString());
+        }
+
+        await currentUser.save();
 
         res.status(200).send("User removed from hub successfully");
     } catch (error) {
