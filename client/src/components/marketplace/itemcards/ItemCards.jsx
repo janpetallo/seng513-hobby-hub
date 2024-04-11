@@ -6,6 +6,7 @@ const ItemCards = () => {
 
     const items = [
         {
+            id: 1,
             username: "user1",
             email:"user1@email.com",
             phone:1234567890,
@@ -22,6 +23,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 2,
             username: "user2",
             email:"user1@email.com",
             phone:1234567890,
@@ -36,6 +38,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 3,
             username: "user3",
             email:"user1@email.com",
             phone:1234567890,
@@ -48,6 +51,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 4,
             username: "user1",
             email:"user1@email.com",
             phone:1234567890,
@@ -60,6 +64,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 5,
             username: "user1",
             email:"user1@email.com",
             phone:1234567890,
@@ -72,6 +77,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 6,
             username: "user1",
             email:"user1@email.com",
             phone:1234567890,
@@ -88,6 +94,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 7,
             username: "user2",
             email:"user1@email.com",
             phone:1234567890,
@@ -102,6 +109,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 8,
             username: "user3",
             email:"user1@email.com",
             phone:1234567890,
@@ -114,6 +122,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 9,
             username: "user1",
             email:"user1@email.com",
             phone:1234567890,
@@ -126,6 +135,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 10,
             username: "user1",
             email:"user1@email.com",
             phone:1234567890,
@@ -138,6 +148,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 11,
             username: "user1",
             email:"user1@email.com",
             phone:1234567890,
@@ -154,6 +165,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 12,
             username: "user2",
             email:"user1@email.com",
             phone:1234567890,
@@ -168,6 +180,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 13,
             username: "user3",
             email:"user1@email.com",
             phone:1234567890,
@@ -180,6 +193,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 14,
             username: "user1",
             email:"user1@email.com",
             phone:1234567890,
@@ -192,6 +206,7 @@ const ItemCards = () => {
             location:"Location 1"
         },
         {
+            id: 15,
             username: "user1",
             email:"user1@email.com",
             phone:1234567890,

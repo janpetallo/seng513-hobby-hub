@@ -36,7 +36,7 @@ const ItemCard = ({item}) => {
                         </div>
                     </div>
                     <div className="d-flex justify-content-between p-0 mt-0">
-                        <Card.Text className="card-market-text">By: <Link>{item.username}</Link></Card.Text>
+                        <Card.Text className="card-market-text fw-bold">By:{item.username}</Card.Text>
                         <Card.Text className="card-market-text fw-bold">{item.location}</Card.Text>
                     </div>
                 </Card.Body>
