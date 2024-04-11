@@ -20,7 +20,6 @@ const RightMenu = () => {
     const [rules, setRules] = useState("");
     const [resources, setResources] = useState("");
     const [moderator, setModerator] = useState(false);
-    const [moderatorID, setModeratorID] = useState("");
     const [currentUserID, setCurrentUserID] = useState("");
 
 
@@ -47,8 +46,6 @@ const RightMenu = () => {
 
                         // get the hub's moderator id
                         const modID = response.data.moderators[0];
-
-                        setModeratorID(modID);
                         // get current User
                         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -83,7 +80,7 @@ const RightMenu = () => {
                     userID: currentUserID,
                 });
 
-                if (response !== 200){
+                if (response.status !== 200){
                     throw new Error(`Failed to follow hub. Status: ${response.status}`);
                 }
 
@@ -103,7 +100,7 @@ const RightMenu = () => {
                     userID: currentUserID,
                 });
 
-                if (response !== 200){
+                if (response.status !== 200){
                     throw new Error(`Failed to unfollow hub. Status: ${response.status}`);
                 }
 
