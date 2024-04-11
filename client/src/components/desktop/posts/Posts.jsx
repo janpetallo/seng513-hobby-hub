@@ -2,6 +2,8 @@ import "./posts.scss";
 import Post from "../post/Post.jsx";
 import {useEffect, useState} from "react";
 import newRequest from "../../../utilities/newRequest.js";
+import NoPostsYet from "../../nopostsyet/NoPostsYet.jsx";
+import {useNavigate} from "react-router-dom";
 
 // if postIDs =! null then we get posts specified by the id
 const Posts = ({hubTitle, postAll= true, showKebab, hubPosts = false, hubName}) =>{
@@ -9,6 +11,9 @@ const Posts = ({hubTitle, postAll= true, showKebab, hubPosts = false, hubName}) 
     const [posts, setPosts] = useState([]);
     const [moderators, setModerators] = useState([]);
     const [refreshTrigger, setRefreshTrigger] = useState(false);
+
+    // navigation hook
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -33,17 +38,24 @@ const Posts = ({hubTitle, postAll= true, showKebab, hubPosts = false, hubName}) 
                             if (response.status !== 200) {
                                 throw new Error(`Failed to fetch hub data. Status: ${response.status}`);
                             } else {
-                                // set moderators of the hub
-                                setModerators(response.data.moderators);
+                                // if no posts in hub set no posts
+                                if(response.data.posts.length === 0){
+                                    setPosts([]);
 
-                                // get the posts from this hub
-                                // now we try to get the posts associated with all of the post id's
-                                try {
-                                    const response2 = await newRequest.get(`/posts/getPostsByIds?postIDs=${response.data.posts.join(',')}`);
-                                    setPosts(response2.data);
+                                // otherwise get the posts
+                                }else {
+                                    // set moderators of the hub
+                                    setModerators(response.data.moderators);
 
-                                } catch (error) {
-                                    console.log("Error getting all posts");
+                                    // get the posts from this hub
+                                    // now we try to get the posts associated with all of the post id's
+                                    try {
+                                        const response2 = await newRequest.get(`/posts/getPostsByIds?postIDs=${response.data.posts.join(',')}`);
+                                        setPosts(response2.data);
+
+                                    } catch (error) {
+                                        console.log("Error getting all posts");
+                                    }
                                 }
                             }
                         } catch (error) {
@@ -93,10 +105,14 @@ const Posts = ({hubTitle, postAll= true, showKebab, hubPosts = false, hubName}) 
     };
 
     return (
-        <div className = "posts">
-            {posts.slice().reverse().map(post => (
-                <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} showKebab={showKebab} moderators={moderators} refreshPosts={refreshPosts}/>
-            ))}
+        <div className="posts">
+            {posts.length === 0 ? (
+                <NoPostsYet />
+            ) : (
+                posts.slice().reverse().map(post => (
+                    <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} showKebab={showKebab} moderators={moderators} refreshPosts={refreshPosts} />
+                ))
+            )}
         </div>
     );
 };
