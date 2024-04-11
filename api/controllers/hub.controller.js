@@ -1,5 +1,6 @@
 import Hub from '../models/hub.model.js';
 import User from "../models/user.model.js";
+import Post from "../models/post.model.js";
 
 export const getAllHubs = async (req, res) => {
     try {
@@ -234,6 +235,40 @@ export const removePostFromHub = async (req, res) => {
 
         // Save the updated hub
         await hub.save();
+
+
+        // Find the post using the post ID
+        const post = await Post.findById(postID);
+
+        // Check if the post exists
+        if (!post) {
+            console.error("Post not found");
+            return;
+        }
+
+        // Get the username associated with the post
+        const username = post.userName;
+
+        // Find the user using the username
+        const user = await User.findOne({ username });
+
+        // Check if the user exists
+        if (!user) {
+            console.error("User not found");
+            return;
+        }
+
+        // Remove the post ID from the user's posts array
+        user.posts = user.posts.filter(userPost => userPost.toString() !== postID);
+
+        // Save the updated user document
+        await user.save();
+
+
+        // Remove the post from the ForumPost collection - aka wipe it from hobby hub
+        await Post.findByIdAndDelete(postID);
+
+
 
         res.status(200).send("Post removed from hub successfully");
     } catch (error) {
