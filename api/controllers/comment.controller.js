@@ -38,12 +38,12 @@ export const createComment = async (req, res) => {
 };
 
 
-export const getAllPosts = async (req, res) => {
+export const getAllComments = async (req, res) => {
     try {
         // Fetch all posts from MongoDB
-        const allPosts = await Post.find();
+        const allComments = await Comment.find();
         // Send the fetched posts as response
-        res.status(200).json(allPosts);
+        res.status(200).json(allComments);
     } catch (error) {
         res.status(500).send("Error Fetching all Posts");
         console.log(error);
