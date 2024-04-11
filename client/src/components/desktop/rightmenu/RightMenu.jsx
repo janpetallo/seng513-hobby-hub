@@ -23,7 +23,6 @@ const RightMenu = () => {
     const [currentUserID, setCurrentUserID] = useState("");
 
 
-    // ToDO: delete post, and bann user functions, conditionally render the page depending on if you are banned/not banned or if the hub is private or public
 
     useEffect(() => {
         // make sure hub data is present otherwise the user is trying to load /hubs manually instead of through the menu
