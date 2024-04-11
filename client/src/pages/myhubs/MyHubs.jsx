@@ -1,17 +1,12 @@
 import React, {useState, useEffect} from "react";
 import {Col, Container, Row} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import "./MyHubs.scss"
 import newRequest from "../../utilities/newRequest.js";
 
 const MyHubs = () => {
-    const categories = [
-        { name: 'Outdoors', hubs: ['Mushroom Hunters', 'Fishing', 'Hiking'] },
-        { name: 'Indoors', hubs: ['Books', 'Painting'] },
-        { name: 'Cards', hubs: ['Pokemon', 'Yu-Gi-Oh'] },
-        { name: 'Games', hubs: ['League of Legends', 'Game of Life', 'Elden Ring'] },
-    ];
 
+    const navigate = useNavigate();
     // get all hubs from backend
     const [hubs, setHubs] = useState([]);
 
@@ -54,6 +49,10 @@ const MyHubs = () => {
     // const username = "BimmerGuy";
     const username = JSON.parse(localStorage.getItem("currentUser")).username;
 
+    const handleClick = (hubName) => {
+        navigate('/hubs', { state: { hub: hubName } });
+    };
+
     return (
         <Container className="pt-2 ps-5 pe-5 pb-3">
             <div className="d-flex flex-column align-items-center justify-content-center">
@@ -84,9 +83,9 @@ const MyHubs = () => {
                             {hub.hubs.map((hub, index) => (
                             <Col xs={4.5} sm={4} md={3.5} lg={3} className="col-container my-2 me-4 p-3">
                                 <div className="text-center ">
-                                    <Link className='hub-card-link' to={`/${hub.hubName.replace(' ', '')}`} >
+                                    <div className="Myhub-selection-text-center"  onClick={() => handleClick(hub.hubName)}>
                                         {hub.hubName}
-                                    </Link>
+                                    </div>
                                 </div>
                             </Col>
                             ))}
