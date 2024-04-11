@@ -8,7 +8,7 @@ import Email from "../../assets/editprofile/email.svg";
 import Phone from "../../assets/editprofile/phone.svg";
 import Back from "../../assets/editprofile/back.svg";
 import Birthday from "../../assets/editprofile/birthday.svg";
-import {FormikContext, useFormik} from "formik";
+import {FormikContext, useFormik, useFormikContext} from "formik";
 import {UserSchema} from "../editprofile/UserSchema.jsx";
 import { useNavigate} from 'react-router-dom';
 import PhoneInput from 'react-phone-input-2'
@@ -25,12 +25,34 @@ const EditProfilePage = () => {
         setImage(URL.createObjectURL(selectedImage));
     };
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const currentUser = localStorage.getItem("currentUser");
+    const [phoneError, setPhoneError] = useState(null);
+    const [isdisabled, setdisabled] = useState(true);
+    const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false);
 
     // Parse the JSON string back into a JavaScript object
     const userData = JSON.parse(currentUser);
 
+    const [editing, setEditing] = useState(false);
 
+    const handleEditClick = () => {
+        setdisabled(false);
+
+        setEditing(true);
+        setConfirmPasswordVisible(true);
+    };
+
+    const handleSaveCancelClick = () => {
+        // Handle save logic
+        setdisabled(true);
+        handleReset(); // Reset the form
+        setEditing(false);
+        setConfirmPasswordVisible(false);
+
+        navigate("/editprofile");
+    };
 
     const [emailErrors, setEmailErrors] = useState({message: "", status: false});
     const [usernameErrors, setUsernameErrors] = useState({message: "", status: false});
@@ -40,6 +62,7 @@ const EditProfilePage = () => {
 
     // register user function
     const onSubmit = async (values, actions) => {
+        console.log("Form values:", values);
 
         let pNumber = "";
         let pass = true;
@@ -75,13 +98,19 @@ const EditProfilePage = () => {
 
         // If the phone number is entered and invalid then throw error
         // If the phone number is empty it is okay (not required)
+        console.log("before pass");
         if(pass) {
+            console.log("Form values:", values.email, values.setPhoneNumber, values.password);
             try {
                 await newRequest.post(`/users/editUser/${userData._id}`, {
-                    email: "testUser1@email.com",
+                    username:userData.username,
+                    password: values.password, email: values.email, phone: phoneNumber.number,
                     userId: userData._id,
-                    phone: phoneNumber.number,
-                })
+                });
+
+                handleSaveCancelClick();
+                // handleReset();
+
             }catch (error){
                 console.log(error);
             }
@@ -110,22 +139,30 @@ const EditProfilePage = () => {
         });
     };
 
-    const [phoneError, setPhoneError] = useState(null);
 
-    const {values, errors, touched, isSubmitting,handleBlur,handleReset,handleChange, handleSubmit} = useFormik({
+
+    console.log("user data is ", userData);
+    console.log(" email is ", new Date(userData.birthday).toLocaleDateString());
+    console.log(" number is ", userData.username)
+    const {values,
+        errors,
+        touched, isSubmitting,
+        handleBlur,
+        handleReset,
+        handleChange, handleSubmit
+    } = useFormik({
         initialValues: {
-            username:"",
-            email:"",
-            password:"",
-            birthdate:"",
-            setPhoneNumber:""
+            username:userData.username,
+            email:userData.email,
+            password:"initial pass",
+            confirmPassword:"",
+            setPhoneNumber:phoneNumber.phone
         },
 
         validationSchema: UserSchema,
 
         onSubmit,
-    })
-
+    });
 
 
     const goBack = () => {
@@ -146,7 +183,8 @@ const EditProfilePage = () => {
                     </div>
                 </div>
                 <hr></hr>
-                <Form className="profile-form-section m-2" onSubmit={handleSubmit}>
+
+                <Form className="profile-form-section m-2" onSubmit={handleSubmit} onReset={handleReset}>
                     <Form.Group className="mb-3">
                         <Form.Label column>
                             <img src={Username} alt="username" className ="img-icon"/>
@@ -155,13 +193,14 @@ const EditProfilePage = () => {
                         <br/>
                         <Form.Control
                             type="text"
-                            placeholder=""
+                            placeholder={userData.username}
                             name="username"
                             value={values.username}
-                            onChange={handleChange}
                             onBlur={handleBlur}
                             isValid={touched.username && !errors.username}
                             isInvalid={touched.username && (!!errors.username || usernameErrors.status)}
+                            disabled={true}
+                            className="disable-input"
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.username || usernameErrors.message}
@@ -176,14 +215,16 @@ const EditProfilePage = () => {
                         <br/>
 
                         <Form.Control
-                            type="text"
+                            type="password"
                             name="password"
-                            value={values.password}
-                            onChange={handleChange}
+                            placeholder="Enter your new password"
+                            value={values.password || ''}
                             onBlur={handleBlur}
-                            className="custom-input"
+                            onChange={handleChange}
                             isValid={touched.password && !errors.password}
                             isInvalid={touched.password && !!errors.password}
+                            disabled={isdisabled}
+
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.password}
@@ -191,6 +232,32 @@ const EditProfilePage = () => {
 
                         {/* <input type="text" className="custom-input"/> */}
                     </Form.Group>
+                    {confirmPasswordVisible && (
+                        <Form.Group className="mb-3">
+                        <Form.Label column>
+                        <img src={Password} alt="password" className ="img-icon"/>
+                        <strong>Confirm Password</strong>
+                        </Form.Label>
+                        <br/>
+
+                        <Form.Control
+                            type="password"
+                            name="password"
+                            placeholder="Enter your new password"
+                            value={values.confirmPassword || ''}
+                            onBlur={handleBlur}
+                            onChange={handleChange}
+                            isValid={touched.confirmPassword && !errors.confirmPassword}
+                            isInvalid={touched.confirmPassword && !!errors.confirmPassword}
+
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.password}
+                        </Form.Control.Feedback>
+
+                        {/* <input type="text" className="custom-input"/> */}
+                    </Form.Group>
+                        )}
                     <Form.Group className="mb-3">
                         <Form.Label column>
                             <img src={Email} alt="email" className ="img-icon"/>
@@ -199,16 +266,20 @@ const EditProfilePage = () => {
                         <br/>
                         <Form.Control
                             type="email"
-                            placeholder=""
+                            placeholder={userData.email}
                             name="email"
                             value={values.email}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             isValid={touched.email && !errors.email}
                             isInvalid={touched.email && (!!errors.email || emailErrors.status)}
+                            disabled={isdisabled}
+
                         />
                         <Form.Control.Feedback type="invalid">
-                            {errors.email || emailErrors.message}
+                            {touched.email && errors.email ? (
+                                <div>{errors.email}</div>
+                            ) : null}
                         </Form.Control.Feedback>
                         {/* <input type="text" className="custom-input"/> */}
                     </Form.Group>
@@ -219,9 +290,12 @@ const EditProfilePage = () => {
                         </Form.Label>
                         <br/>
                         <PhoneInput
+                            placeholder="enter number"
                             value={phoneNumber.number}
                             country={'ca'}
                             onChange={handlePhone}
+                            disabled={isdisabled}
+
                         />
                         {phoneError &&
                             <Form.Text className="text-danger">
@@ -237,13 +311,16 @@ const EditProfilePage = () => {
                         <br/>
                         <Form.Control
                             type="date"
-                            placeholder=""
+                            placeholder={new Date(userData.birthday).toLocaleDateString()}
                             name="birthdate"
-                            value={values.birthdate}
+                            value={new Date(userData.birthday).toLocaleDateString()}
                             onChange={handleChange}
                             onBlur={handleBlur}
                             isValid={touched.birthdate && !errors.birthdate}
                             isInvalid={touched.birthdate && !!errors.birthdate}
+                            disabled={true}
+                            className="disable-input"
+
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.birthdate}
@@ -251,12 +328,23 @@ const EditProfilePage = () => {
                         {/* <input type="text" className="custom-input"/> */}
                     </Form.Group>
                     <div className="d-flex justify-content-between">
-                        <Button variant="secondary" type="reset" onClick={()=>{handleReset();handlePhoneReset()}} className="rounded-5 px-4 edit-prof-sub-btn">
-                            Reset
-                        </Button>
-                        <Button variant="primary" type="submit" onClick={onSubmit} className="btn-HHPurple rounded-5 edit-prof-sub-btn">
-                            Save Changes
-                        </Button>
+                        {editing ? (
+                            <>
+                                <Button variant="secondary" type="reset" onClick={handleReset} className="rounded-5 px-4 edit-prof-sub-btn" id="reset-button">
+                                    Reset
+                                </Button>
+                                <Button variant="secondary" type="reset" onClick={handleSaveCancelClick} className="rounded-5 px-4 edit-prof-sub-btn" id="cancel-button">
+                                    Cancel
+                                </Button>
+                                <Button variant="primary" type="submit" onClick={onSubmit} className="btn-HHPurple rounded-5 edit-prof-sub-btn" id="save-button">
+                                    Save Changes
+                                </Button>
+                            </>
+                        ) : (
+                            <Button variant="secondary" type="button" onClick={handleEditClick} className="rounded-5 px-4 edit-prof-sub-btn" id="edit-button">
+                                Edit
+                            </Button>
+                        )}
                     </div>
                 </Form>
             </div>

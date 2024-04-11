@@ -42,28 +42,23 @@ export const editUser = async (req, res)=>{
         }
 
         if (req.body.email) {
-            console.log("reached inside edit user");
+            console.log("reached inside email ", req.body.email);
 
             currentUser.email = req.body.email;
         }
         if (req.body.password) {
-            console.log("reached inside edit user");
+            console.log("reached inside password ");
 
             currentUser.password = req.body.password;
         }
         if (req.body.phone) {
-            console.log("reached inside edit user");
+            console.log("reached inside phone ", req.body.phone);
 
             currentUser.phone = req.body.phone;
         }
-        // Update other fields as needed
 
-        // const postData={...req.body}
-        //
-        // const newUser = new User(postData);
         await currentUser.save();
-        //
-        // Return updated user data as response
+
         res.status(200).json(currentUser);
     } catch (error) {
         console.error(error);
