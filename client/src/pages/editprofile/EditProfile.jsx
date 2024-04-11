@@ -16,7 +16,7 @@ import 'react-phone-input-2/lib/bootstrap.css';
 import {formatNumber, isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNumberLength} from "libphonenumber-js";
 import newRequest from "../../utilities/newRequest.js";
 import ImageModal from "../../../src/components/desktop/post/ImageModal.jsx";
-
+import ProfileImageModal from "../../../src/components/ProfileToggle/profileImageModal.jsx"
 
 const EditProfilePage = () => {
 
@@ -364,7 +364,7 @@ const EditProfilePage = () => {
                     </div>
                 </Form>
             </div>
-            {showModal && <ImageModal imageUrl={modalImageUrl} onClose={toggleModal} />}
+            {showModal && <ProfileImageModal imageUrl={modalImageUrl} onClose={toggleModal} />}
 
         </div>
     );
