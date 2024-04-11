@@ -54,7 +54,8 @@ const ProfileToggle = () => {
             )}
             {currentUser && (
                 <div className="profile-toggle-div" onClick={()=>setOpen(!open)} ref={profileToggleRef} >
-                    <img src={currentUser.img || profileDefault} alt="" />
+                    <img src={localStorage.getItem("profileImage") || profileDefault}
+                         alt="" />
                     {open && (
                         <div className="profile-toggle-options" onClick={handleDropdownClick}>
                             <span className="profile-toggle-username">{currentUser?.username}</span>

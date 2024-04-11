@@ -15,15 +15,29 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/bootstrap.css';
 import {formatNumber, isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNumberLength} from "libphonenumber-js";
 import newRequest from "../../utilities/newRequest.js";
+import ImageModal from "../../../src/components/desktop/post/ImageModal.jsx";
 
 
 const EditProfilePage = () => {
 
-    const [image, setImage] = useState("https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+    const [image, setImage] = useState(localStorage.getItem("profileImage") || "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png");
+
     const handleImageChange = (event) => {
         const selectedImage = event.target.files[0];
-        setImage(URL.createObjectURL(selectedImage));
+        const imgURL = URL.createObjectURL(selectedImage);
+        setImage(imgURL);
+        localStorage.setItem("profileImage", imgURL);
     };
+    const [showModal, setShowModal] = useState(false);
+    const [modalImageUrl, setModalImageUrl] = useState("");
+
+    const toggleModal = (imageUrl) => {
+        setShowModal(!showModal);
+        setModalImageUrl(imageUrl);
+    };
+
+
+
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -177,7 +191,9 @@ const EditProfilePage = () => {
             <div className="edit-prof-container">
                 <div className = "avantar-section">
                     <div className = "edit-prof-img d-flex flex-column align-items-center">
-                        <img src={image} alt="profile img" className ="img-user"/>
+                        <img src={image} alt="profile img" className ="img-user"
+                             onClick={() => toggleModal(image)}
+                        />
                         <input type="file" onChange={handleImageChange} style={{ display: "none" }} />
                         <button className="change-img-btn mb-3 " onClick={() => document.querySelector('input[type="file"]').click()}>Change Profile Picture</button>
                     </div>
@@ -348,6 +364,8 @@ const EditProfilePage = () => {
                     </div>
                 </Form>
             </div>
+            {showModal && <ImageModal imageUrl={modalImageUrl} onClose={toggleModal} />}
+
         </div>
     );
 };
