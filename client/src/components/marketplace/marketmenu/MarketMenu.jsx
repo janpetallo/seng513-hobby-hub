@@ -6,7 +6,8 @@ import star from "../../../assets/marketplace/star.svg";
 import unfilledStar from "../../../assets/marketplace/unfilledStar.svg";
 import { IoIosClose } from "react-icons/io";
 
-const MarketMenu = () => {
+const MarketMenu = ({isDesktop}) => {
+
     const priceFilter = [
         "Low-High",
         "High-Low"
@@ -55,7 +56,7 @@ const MarketMenu = () => {
     }, [selectedChecks]);
 
     return(
-        <Accordion flush className="market-menu">
+        <Accordion flush className={isDesktop? "market-menu" : "mobile-market-menu"}>
             {selectedChecks.length > 0 ? (
                 <ul className="market-menu-selections">
                     <li>

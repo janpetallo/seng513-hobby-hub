@@ -90,7 +90,7 @@ function App() {
                     <Outlet/>
                 </Col>
                 <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky menu-fix-width menu-left-border">
-                    <MarketMenu/>
+                    <MarketMenu isDesktop={true}/>
                 </Col>
             </Row>
         )
