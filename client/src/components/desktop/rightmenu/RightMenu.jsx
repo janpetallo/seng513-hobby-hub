@@ -24,7 +24,7 @@ const RightMenu = () => {
     const [currentUserID, setCurrentUserID] = useState("");
 
 
-    // ToDO: make follow function and check if you already follow it, delete post, and bann user functions, conditionally render the page depending on if you are banned/not banned or if the hub is private or public
+    // ToDO: delete post, and bann user functions, conditionally render the page depending on if you are banned/not banned or if the hub is private or public
 
     useEffect(() => {
         // make sure hub data is present otherwise the user is trying to load /hubs manually instead of through the menu
@@ -58,6 +58,10 @@ const RightMenu = () => {
                         if(modID === currentUser._id){
                            setFollowText('Following');
                            setModerator(true);
+
+                        // if the user already follows this hub set the button to reflect that
+                        }else if (response.data.members.includes(currentUser._id)){
+                            setFollowText('Following');
                         }
                     }
                 } catch (error) {
