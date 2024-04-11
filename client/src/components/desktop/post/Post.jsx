@@ -164,6 +164,32 @@ const Post = ({ post, isPopup, hubTitle, showKebab, moderators = [] }) => {
 
     const maxLength = 350;
 
+
+// Inside the Post component
+    const handleDeletePost = async () => {
+        try {
+            console.log(currentUser._id);
+            console.log(post.hubName);
+            console.log(post._id);
+            // Call the removePostFromHub function with the appropriate parameters
+            await newRequest.put("hubs/removePostFromHub",{
+                userID: currentUser._id,
+                hubName: post.hubName,
+                postID: post._id
+            });
+            console.log("Post removed from hub successfully");
+            // Reload the page to reflect the changes
+            window.location.reload();
+        } catch (error) {
+            console.error("Error removing post from hub:", error);
+            // Optionally, you can add logic to handle errors
+        }
+    };
+
+
+
+
+
     return (
         <div className = "post">
             <div className="postContainer">
@@ -196,7 +222,7 @@ const Post = ({ post, isPopup, hubTitle, showKebab, moderators = [] }) => {
                     </div>
 
                     {/* Only render the kebab when on dedicated hub pages, can't ban people on your homepage*/}
-                    {showKebab && isAdmin && currentUser && (<ModKebab/>)}
+                    {showKebab && isAdmin && currentUser && (<ModKebab onDeletePost = {handleDeletePost}/>)}
                 </div>
 
                 <div className="post_content">
