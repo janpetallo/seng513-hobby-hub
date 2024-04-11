@@ -30,7 +30,7 @@ import EditProfile from './pages/editprofile/EditProfile.jsx';
 import MyAdsTrades from "./pages/MyAdsTrades/MyAdsTrades.jsx";
 import MyHubs from "./pages/myhubs/MyHubs.jsx";
 import MyPosts from "./pages/myposts/MyPosts.jsx";
-import MarketMenu from "./components/desktop/marketmenu/MarketMenu.jsx";
+import MarketMenu from "./components/marketplace/marketmenu/MarketMenu.jsx";
 import SearchReults from './pages/search-results/SearhResults.jsx';
 import NotFound from "./pages/NotFound/NotFound.jsx";
 
