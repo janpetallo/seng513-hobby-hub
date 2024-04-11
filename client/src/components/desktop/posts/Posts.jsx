@@ -8,7 +8,7 @@ const Posts = ({hubTitle, postAll= true, showKebab, hubPosts = false, hubName}) 
     // Post data
     const [posts, setPosts] = useState([]);
     const [moderators, setModerators] = useState([]);
-
+    const [refreshTrigger, setRefreshTrigger] = useState(false);
 
     useEffect(() => {
 
@@ -85,13 +85,17 @@ const Posts = ({hubTitle, postAll= true, showKebab, hubPosts = false, hubName}) 
         // Call fetchPosts function when component mounts
         fetchPosts();
 
-    }, []); // Empty dependency array ensures this effect runs only once when component mounts
+    }, [refreshTrigger]);
 
+    // Function to trigger a refresh
+    const refreshPosts = () => {
+        setRefreshTrigger(prevState => !prevState);
+    };
 
     return (
         <div className = "posts">
             {posts.slice().reverse().map(post => (
-                <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} showKebab={showKebab} moderators={moderators}/>
+                <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} showKebab={showKebab} moderators={moderators} refreshPosts={refreshPosts}/>
             ))}
         </div>
     );

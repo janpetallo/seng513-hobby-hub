@@ -14,7 +14,7 @@ import newRequest from "../../../utilities/newRequest.js";
 import ModKebab from "../../ModKebab/ModKebab.jsx";
 
 
-const Post = ({ post, isPopup, hubTitle, showKebab, moderators = [] }) => {
+const Post = ({ refreshPosts, post, isPopup, hubTitle, showKebab, moderators = [] }) => {
     // to control image pop up when clicked
     const [showModal, setShowModal] = useState(false);
     const [modalImageUrl, setModalImageUrl] = useState("");
@@ -168,25 +168,19 @@ const Post = ({ post, isPopup, hubTitle, showKebab, moderators = [] }) => {
 // Inside the Post component
     const handleDeletePost = async () => {
         try {
-            console.log(currentUser._id);
-            console.log(post.hubName);
-            console.log(post._id);
             // Call the removePostFromHub function with the appropriate parameters
             await newRequest.put("hubs/removePostFromHub",{
                 userID: currentUser._id,
                 hubName: post.hubName,
                 postID: post._id
             });
-            console.log("Post removed from hub successfully");
             // Reload the page to reflect the changes
-            window.location.reload();
+            refreshPosts();
         } catch (error) {
             console.error("Error removing post from hub:", error);
             // Optionally, you can add logic to handle errors
         }
     };
-
-
 
 
 
