@@ -46,7 +46,7 @@ function App() {
             <Container fluid className="m-0 p-0">
                 {useDesktopOrLaptopMediaQuery() ? <DNavBar/> : <Header/>}
                 <Row className="m-0 home-body">
-                    <Col xl={2} className="m-0 p-0 d-none d-xl-block position-sticky left-menu-fix-width">
+                    <Col xl={2} className="m-0 p-0 d-none d-xl-block position-sticky menu-fix-width">
                         <LeftMenu/>
                     </Col>
                     <Col>
@@ -76,19 +76,20 @@ function App() {
                 <Col className="m-0 p-0 home-layout-body">
                     <Outlet/>
                 </Col>
-                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky left-menu-fix-width">
+                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky menu-fix-width">
                     <RightMenu/>
                 </Col>
             </Row>
         )
     }
+
     const MarketplaceLayout = () => {
         return (
             <Row>
                 <Col className="m-0 p-0 home-layout-body">
                     <Outlet/>
                 </Col>
-                <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
+                <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky menu-fix-width menu-left-border">
                     <MarketMenu/>
                 </Col>
             </Row>

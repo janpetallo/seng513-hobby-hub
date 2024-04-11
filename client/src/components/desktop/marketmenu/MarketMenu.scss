@@ -1,71 +1,69 @@
+.market-menu {
 
-.market-button{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15%;
-  padding:10px;
-  background-color: white;
-  width: 100%;
-}
+    //This is so the drop down icon is white when active and you can see it
+    --bs-accordion-btn-active-icon:
+            url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='M2 5L8 11L14 5'/%3e%3c/svg%3e") !important;
 
-.store-filter{
-  width: 100%;
-  //border: 3px solid red;
-}
+    position: sticky;
+    top: 76px;
+    max-width: 400px;
+    max-height: calc(100vh - 76px);
+    padding-right: 20px;
+    overflow: hidden;
 
-.rating-stars{
-  width: 25px;
-  height: 25px;
-  padding-right: 3px;
-}
-
-.drop-logo{
-  width: 15px;
-  height: 15px;
-}
-#button-menu:active{
-  .drop-logo{
-    transform: rotate(90deg);
-  }
-}
-
-.menu-accordion .accordion-button[aria-expanded="true"]::after {
-  transform: rotate(360deg);
-}
-
-.menu-accordion .accordion-button[aria-expanded="false"]::after {
-  transform: rotate(270deg);
-}
-
-.menu-accordion .accordion-button::after {
-  transition: transform 0.3s ease;
-}
-.menu-accordion {
-  .accordion-item {
-    .accordion-header {
-      .accordion-button:not(.collapsed) {
-        color: white;
-      }
-      .accordion-button {
-        --bs-accordion-active-bg: #8e47ff;
-      }
+    .accordion-button[aria-expanded="true"]::after {
+        transform: rotate(360deg);
     }
-  }
+
+    .accordion-button[aria-expanded="false"]::after {
+        transform: rotate(270deg);
+    }
+
+    .accordion-button::after {
+        transition: transform 0.3s ease;
+    }
+
+    .accordion-item {
+        .accordion-header {
+            .accordion-button:not(.collapsed) {
+                color: white;
+            }
+
+            .accordion-button {
+                --bs-accordion-active-bg: #8e47ff;
+            }
+        }
+    }
+
+    .rating-stars {
+        width: 25px;
+        height: 25px;
+        padding-right: 3px;
+    }
+
+    &:hover {
+        overflow-y: scroll;
+        padding: 0;
+    }
+
+    &::-webkit-scrollbar {
+        width: 20px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--scrollbar-clr);
+        border-radius: 20px;
+        border: 6px solid transparent;
+        background-clip: content-box;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background-color: var(--scrollbar-hover);
+    }
 }
 
-.menu-button{
-  background-color: #8e47ff !important;
-  color: white;
-}
-.hold-button{
-  width: 90%;
-}
-.market-menu{
-  max-height: calc(100vh - 76px);
-  margin: 0;
-  padding: 0;
-}
-.market-menu:hover{
-  overflow-y: scroll;
-}
+
