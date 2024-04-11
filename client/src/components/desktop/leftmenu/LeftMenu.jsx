@@ -22,6 +22,8 @@ const LeftMenu = () =>{
         }
     }
 
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
     return (
         <Container fluid className="p-3 left-menu">
             <Row>
@@ -47,55 +49,60 @@ const LeftMenu = () =>{
                         </div>
                     </Link>
 
-                    <hr className="item divider"/>
+                    {currentUser && (<hr className="item divider"/>)}
                 </Col>
             </Row>
 
-            <Row>
-                <Col className="mb-3">
+            {currentUser && (
+                <>
+                    <Row>
+                        <Col className="mb-3">
 
-                    <Link to="/myhubs" >
-                        <div className={getMenuItemClass('/myhubs')}>
-                            <img src={Hubs} alt="hubs"></img>
-                            <span>My Hubs</span>
-                        </div>
-                    </Link>
+                            <Link to="/myhubs" >
+                                <div className={getMenuItemClass('/myhubs')}>
+                                    <img src={Hubs} alt="hubs"></img>
+                                    <span>My Hubs</span>
+                                </div>
+                            </Link>
 
-                    <Link to="/myposts">
-                        <div className={getMenuItemClass('/myposts')} >
-                            <img src={Posts} alt="hubs"></img>
-                            <span>My Posts</span>
-                        </div>
-                    </Link>
+                            <Link to="/myposts">
+                                <div className={getMenuItemClass('/myposts')} >
+                                    <img src={Posts} alt="hubs"></img>
+                                    <span>My Posts</span>
+                                </div>
+                            </Link>
 
 
-                    <Link to="/myadstrades" >
-                        <div className={getMenuItemClass('/myadstrades')} >
-                            <img src={Ads} alt="hubs"></img>
-                            <span>My Ads / Trades</span>
-                        </div>
-                    </Link>
+                            <Link to="/myadstrades" >
+                                <div className={getMenuItemClass('/myadstrades')} >
+                                    <img src={Ads} alt="hubs"></img>
+                                    <span>My Ads / Trades</span>
+                                </div>
+                            </Link>
 
-                    {/*<Link to="/">*/}
-                    {/*    <div className="item">*/}
-                    {/*        <img src={Trades} alt="hubs"></img>*/}
-                    {/*        <span>My Trades</span>*/}
-                    {/*    </div>*/}
-                    {/*</Link>*/}
+                            {/*<Link to="/">*/}
+                            {/*    <div className="item">*/}
+                            {/*        <img src={Trades} alt="hubs"></img>*/}
+                            {/*        <span>My Trades</span>*/}
+                            {/*    </div>*/}
+                            {/*</Link>*/}
 
-                    <hr className="item divider"/>
-                </Col>
-            </Row>
+                            <hr className="item divider"/>
+                        </Col>
+                    </Row>
 
-            <Row>
-                <Col>
-                    <div className="item" >
-                        <Link to="/choose-posting" >
-                            <Button className="btn-HHPurple left-post-btn">Post</Button>
-                        </Link>
-                    </div>
-                </Col>
-            </Row>
+                    <Row>
+                        <Col>
+                            <div className="item" >
+                                <Link to="/choose-posting" >
+                                    <Button className="btn-HHPurple left-post-btn">Post</Button>
+                                </Link>
+                            </div>
+                        </Col>
+                    </Row>
+                </>
+            )}
+
         </Container>
     )
 }

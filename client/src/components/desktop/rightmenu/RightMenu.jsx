@@ -1,25 +1,118 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./RightMenu.scss"
 import {Button, Col, Container, Row} from "react-bootstrap";
 import {IoPersonSharp} from "react-icons/io5";
+import {useLocation, useNavigate} from "react-router-dom";
+import newRequest from "../../../utilities/newRequest.js";
 
 const RightMenu = () => {
-    const hubName = "Speedrunners";
-    const numMembers = 1250;
-    const [followText, setFollowText] = useState('Follow');
+    // navigation hook
+    const navigate = useNavigate();
 
-    const handleClick = () => {
+    // get the hub data passed to dedicated hub when clicking on the hub
+    const location = useLocation();
+    const hub = location.state?.hub;
+
+    const [hubName, setHubName] = useState("");
+    const [numMembers, setNumMembers ]= useState(0);
+    const [followText, setFollowText] = useState('Follow');
+    const [description, setDescription] = useState("");
+    const [rules, setRules] = useState("");
+    const [resources, setResources] = useState("");
+    const [moderator, setModerator] = useState(false);
+    const [currentUserID, setCurrentUserID] = useState("");
+
+
+
+    useEffect(() => {
+        // make sure hub data is present otherwise the user is trying to load /hubs manually instead of through the menu
+        // so navigate back to the home page to prevent errors
+        if (!hub) {
+            navigate("/");
+        } else {
+            const fetchData = async () => {
+                try {
+                    const response = await newRequest.get(`/hubs/getHub/${hub}`);
+
+                    if (response.status !== 200) {
+                        throw new Error(`Failed to fetch hub data. Status: ${response.status}`);
+                    } else {
+                        setHubName(response.data.hubName);
+                        setNumMembers(response.data.members.length);
+                        setDescription(response.data.description);
+                        setRules(response.data.rules);
+                        setResources(response.data.resources);
+
+                        // get the hub's moderator id
+                        const modID = response.data.moderators[0];
+                        // get current User
+                        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+                        setCurrentUserID(currentUser._id);
+
+                        // if the current user is a moderator do not allow them to unfollow the hub, and set status to following
+                        if(modID === currentUser._id){
+                           setFollowText('Following');
+                           setModerator(true);
+
+                        // if the user already follows this hub set the button to reflect that
+                        }else if (response.data.members.includes(currentUser._id)){
+                            setFollowText('Following');
+                        }
+                    }
+                } catch (error) {
+                    // upon error log the error and navigate back home
+                    console.log(error);
+                    navigate("/");
+                }
+            };
+
+            fetchData();
+        }
+    }, [hub, navigate]);
+
+    const handleClick = async () => {
         if (followText === 'Follow') {
+            try{
+                const response = await newRequest.put("/hubs/addMemberToHub", {
+                    hubName: hubName,
+                    userID: currentUserID,
+                });
+
+                if (response.status !== 200){
+                    throw new Error(`Failed to follow hub. Status: ${response.status}`);
+                }
+
+            }catch (error){
+                console.log(error);
+            }
+
             setFollowText('Following');
+            // no live updates till the page refreshes, as it makes it faster
+            setNumMembers(prevNumMembers => prevNumMembers + 1);
         }
 
         if (followText === 'Following') {
+            try{
+                const response = await newRequest.put("/hubs/removeMemberFromHub", {
+                    hubName: hubName,
+                    userID: currentUserID,
+                });
+
+                if (response.status !== 200){
+                    throw new Error(`Failed to unfollow hub. Status: ${response.status}`);
+                }
+
+            }catch (error){
+                console.log(error);
+            }
+
+
             setFollowText('Follow');
+            // no live updates till the page refreshes, as it makes it faster
+            setNumMembers(prevNumMembers => prevNumMembers - 1 );
         }
     }
-
-    const description = "Welcome to the dedicated hub for speedrunners! Share your runs," +
-        " compete with others and just have an overall great time."
 
 
     return (
@@ -33,93 +126,28 @@ const RightMenu = () => {
                         <span>{numMembers} Members</span>
                     </div>
 
-                    <Button className="mt-1 right-menu-follow-btn" variant="HHPurple" onClick={handleClick}>{followText}</Button>
+                    <Button className="mt-1 right-menu-follow-btn" variant="HHPurple" onClick={handleClick} disabled={moderator}>{followText}</Button>
                 </Col>
             </Row>
 
             <Row className="right-menu-section">
                 <Col>
                     <h5>Description</h5>
-                    <p>{description}</p>
+                    <div className="RM-hubDescription" dangerouslySetInnerHTML={{ __html: description }} />
                 </Col>
             </Row>
 
             <Row className="right-menu-section">
                 <Col>
                     <h5>Rules</h5>
-                    <ol>
-                        <li>
-                            Respect others
-                        </li>
-                        <li>
-                            Be Civil
-                        </li>
-                        <li>
-                            No toxic posting
-                        </li>
-                        <li>
-                            Have fun
-                        </li>
-                    </ol>
+                    <div className="RM-HubRules" dangerouslySetInnerHTML={{ __html: rules }} />
                 </Col>
             </Row>
 
             <Row className="right-menu-section">
                 <Col>
                     <h5>Resources</h5>
-                    <div>
-                        Want to get into speedrunning here are some great links to start:
-                        <ul>
-                            <li>
-                                "https://www.speedrun.com/"
-                            </li>
-
-                            <li>
-                                "https://livesplit.org/"
-                            </li>
-
-                            <li>
-                                "https://obsproject.com/"
-
-                            </li>
-
-                            <li>
-                                "https://www.xsplit.com/"
-                            </li>
-                        </ul>
-                    </div>
-                </Col>
-            </Row>
-
-            <Row className="right-menu-section">
-                <Col>
-                    <h5>Test too much content can scroll</h5>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium autem dignissimos dolore
-                        impedit modi perferendis possimus quia ut voluptates? Animi corporis delectus dolorem eius et
-                        illo ipsam minima obcaecati voluptatibus.
-                    </p>
+                    <div className="RM-hubResource" dangerouslySetInnerHTML={{ __html: resources }} />
                 </Col>
             </Row>
         </Container>

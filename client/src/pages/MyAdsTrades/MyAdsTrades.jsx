@@ -3,7 +3,8 @@ import Marketplace from "../marketplace/Marketplace.jsx";
 
 
 const MyAdsTrades = () => {
-    const username = "BimmerGuy"
+    // const username = "BimmerGuy"
+    const username = JSON.parse(localStorage.getItem("currentUser")).username;
 
     return (
         <>

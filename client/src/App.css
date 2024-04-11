@@ -23,3 +23,7 @@
         min-height: calc(100vh - 76px);
     }
 }
+
+.left-menu-fix-width {
+    min-width: 350px;
+}

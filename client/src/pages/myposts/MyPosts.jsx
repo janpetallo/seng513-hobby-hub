@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Posts from "../../components/desktop/posts/Posts.jsx";
-import newRequest from "../../utilities/newRequest.js";
+import "../../components/desktop/posts/posts.scss";
+
 
 
 const MyPosts = () => {
@@ -14,8 +15,6 @@ const MyPosts = () => {
             setUserName(currentUser.username);
         }
     }, []);
-
-
 
     return (
         <>
@@ -33,6 +32,7 @@ const MyPosts = () => {
             </div>
             <hr/>
             {userName ? (<Posts hubTitle={true} postAll={false}/>) : null}
+
         </>
     )
 }

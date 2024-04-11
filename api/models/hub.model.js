@@ -2,36 +2,51 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const hubSchema = new Schema({
-    title: {
+    hubName: {
         type: String,
         required: true,
         unique: true,
     },
     description: {
         type: String,
+    },
+    category: {
+        type: String,
         required: true
+    },
+    hubOwner:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User' // Reference to the User model
     },
     moderators: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User' // Reference to the User model
     }],
-    users: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User' // Reference to the User model
-    }],
+    members: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User' // Reference to the User model
+        }],
+        default: [] // Set default value to an empty array
+    },
     rules: {
         type: String,
-        required: true
-    },
-    resources: {
-        type: String,
-        required: true
     },
     visibility: {
         type: String,
         enum: ['public', 'private'],
         default: 'public'
-    }
+    },
+    resources: {
+        type: String,
+    },
+    posts: {
+        type: [{
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'ForumPost' // Reference to the post model
+        }],
+        default: [] // Set default value to an empty array
+    },
 });
 
 export default mongoose.model("Hub", hubSchema);

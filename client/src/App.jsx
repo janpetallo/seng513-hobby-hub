@@ -31,6 +31,8 @@ import MyAdsTrades from "./pages/MyAdsTrades/MyAdsTrades.jsx";
 import MyHubs from "./pages/myhubs/MyHubs.jsx";
 import MyPosts from "./pages/myposts/MyPosts.jsx";
 import MarketMenu from "./components/desktop/marketmenu/MarketMenu.jsx";
+import SearchReults from './pages/search-results/SearhResults.jsx';
+import NotFound from "./pages/NotFound/NotFound.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -44,7 +46,7 @@ function App() {
             <Container fluid className="m-0 p-0">
                 {useDesktopOrLaptopMediaQuery() ? <DNavBar/> : <Header/>}
                 <Row className="m-0 home-body">
-                    <Col xl={2} className="m-0 p-0 d-none d-xl-block position-sticky" style={{minWidth: `300px`}}>
+                    <Col xl={2} className="m-0 p-0 d-none d-xl-block position-sticky left-menu-fix-width">
                         <LeftMenu/>
                     </Col>
                     <Col>
@@ -74,7 +76,7 @@ function App() {
                 <Col className="m-0 p-0 home-layout-body">
                     <Outlet/>
                 </Col>
-                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky" style={{minWidth: `350px`}}>
+                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky left-menu-fix-width">
                     <RightMenu/>
                 </Col>
             </Row>
@@ -101,6 +103,14 @@ function App() {
         return children;
     }
 
+    //  This prevents logged-in users from going to the login or signup page until they log out
+    const ProtectedRouteLoggedIn = ({ children }) => {
+        if(localStorage.getItem("currentUser")){
+            return <Navigate to={"/"}/>;
+        }
+        return children;
+    }
+
     const router = createBrowserRouter([
         {
             path: "/",
@@ -115,36 +125,42 @@ function App() {
                             element: <Home/>
                         },
                         {
-                          path: "/hubpost",
-                            element: <HubPost/>
+                            path: "/hubpost",
+                            element:  <ProtectedRoute><HubPost/></ProtectedRoute>
                         },
                         {
                             path: "/marketpost",
-                            element: <MarketPost/>
+                            element: <ProtectedRoute><MarketPost/></ProtectedRoute>
                         },
                         {
                             path: "/choose-posting",
-                            element: <ChoosePostingLocation/>
+                            element: <ProtectedRoute><ChoosePostingLocation/></ProtectedRoute>
                         },
                         {
                             path: "/myhubs",
-                            element: <MyHubs/>
+                            element: <ProtectedRoute><MyHubs/></ProtectedRoute>
                         },
                         {
                             path: "/myposts",
-                            element: <MyPosts/>
+                            element: <ProtectedRoute><MyPosts/></ProtectedRoute>
                         },
                         {
                             path: "/myadstrades",
-                            element: <MyAdsTrades/>
+                            element: <ProtectedRoute><MyAdsTrades/></ProtectedRoute>
                         },
                         {
                             path: "/editprofile",
-                            element:<EditProfile/>
+                            element:<ProtectedRoute><EditProfile/></ProtectedRoute>
                         },
                         {
                             path: "/search-menu",
                             element: <SearchMenu/>
+                        },
+
+                        // Default fall to page when user types a link that does not exist
+                        {
+                            path:"*",
+                            element:<NotFound/>
                         },
                     ]
                 },
@@ -182,25 +198,25 @@ function App() {
                 },
                 {
                     path: "/create-hub",
-                    element: <CreateHubPageMobile/>
+                    element: <ProtectedRoute><CreateHubPageMobile/></ProtectedRoute>
+                },
+                {
+                    path: "/search-results/:search",
+                    element: <SearchReults/>
                 },
             ]
         },
         {
             path: "/login",
-            element: <Login/>
+            element: <ProtectedRouteLoggedIn><Login/></ProtectedRouteLoggedIn>
         },
         {
             path: "/signup",
-            element: <Signup/>
+            element: <ProtectedRouteLoggedIn><Signup/></ProtectedRouteLoggedIn>
         },
         {
             path: "/underdevelopment",
             element:<UnderDevelopment/>
-        },
-        {
-          path:"editprofile",
-          element:<EditProfile/>
         },
     ]);
 

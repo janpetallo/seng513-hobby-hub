@@ -1,11 +1,14 @@
 // function to create a new post
 import Post from "../models/post.model.js";
 import User from "../models/user.model.js";
+import Hub from "../models/hub.model.js";
 
 export const createPost = async (req, res) => {
     try {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
+        // get the hub that the user created this post for
+        const selectedHub = await Hub.findOne({ hubName: req.body.hubName });
 
         // identity verification required to post on your own account
         if(req.userId !== currentUser._id.toString()){
@@ -24,6 +27,10 @@ export const createPost = async (req, res) => {
         // Add the post's ID to the user's posts array
         currentUser.posts.push(newPost._id);
         await currentUser.save();
+
+        // add the post to the hub
+        selectedHub.posts.push(newPost._id);
+        await selectedHub.save();
 
         res.status(201).send("Created new Post successfully!");
 
@@ -215,5 +222,26 @@ export const undisLikePost = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send("Error disliking the post");
+    }
+};
+
+
+export const deletePostById = async (req, res) => {
+    try {
+        // Extract the post ID from the request parameters
+        const { postId } = req.params;
+
+        // Find the post by ID and delete it
+        const deletedPost = await Post.findByIdAndDelete(postId);
+
+        // Check if the post exists, if not throw an error
+        if (!deletedPost) {
+            return res.status(404).send("Post not found");
+        }
+
+        res.status(200).send("Post deleted successfully");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error deleting post");
     }
 };
