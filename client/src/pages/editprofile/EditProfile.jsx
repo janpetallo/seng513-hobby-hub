@@ -17,6 +17,13 @@ import {formatNumber, isPossiblePhoneNumber, isValidPhoneNumber, validatePhoneNu
 import newRequest from "../../utilities/newRequest.js";
 import ImageModal from "../../../src/components/desktop/post/ImageModal.jsx";
 import ProfileImageModal from "../../../src/components/ProfileToggle/profileImageModal.jsx"
+import * as yup from "yup";
+
+const oneUpper = /(?=.*[A-Z])/;
+const oneLower = /(?=.*[a-z])/;
+const oneDigit = /(?=.*\d)/;
+const oneSymbol = /(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?~\\|\-=/"'])/;
+
 
 const EditProfilePage = () => {
 
@@ -121,12 +128,26 @@ const EditProfilePage = () => {
                     password: values.password, email: values.email, phone: phoneNumber.number,
                     userId: userData._id,
                 });
-
+                setEmailErrors({message: "", status: false}); // clear email errors
+                setUsernameErrors({message: "", status: false}); // clear username errors
                 handleSaveCancelClick();
                 // handleReset();
 
-            }catch (error){
-                console.log(error);
+            }catch (err) {
+                console.log("here");
+                console.log(err);
+                if (err.response && err.response.status === 400) {
+                    if (err.response.data === "Username is already in use.") {
+                        setUsernameErrors({message: "Username is already in use.", status: true});
+                        setEmailErrors({message: "", status: false}); // clear email errors
+
+                    } else if (err.response.data === "Email is already in use.") {
+                        setUsernameErrors({message: "", status: false}); // clear username errors
+                        setEmailErrors({message: "Email is already in use.", status: true});
+                    }
+                } else {
+                    console.log(err);
+                }
             }
         }
     }
@@ -155,6 +176,30 @@ const EditProfilePage = () => {
 
 
 
+    const UserEditSchema = yup.object().shape({
+        username: yup.string().min(4, "Username must be 4 or more characters"),
+        email: yup.string().email("Please enter a valid email"),
+        password: yup
+            .string()
+            .min(4, "Password must be 4 or more characters")
+            .matches(oneUpper, { message: "Password should contain at least one uppercase letter" })
+            .matches(oneLower, { message: "Password should contain at least one lowercase letter" })
+            .matches(oneDigit, { message: "Password should contain at least one digit" })
+            .matches(oneSymbol, { message: "Password should contain at least one special character" }),
+        confirmPassword: yup
+            .string()
+            .oneOf([yup.ref("password"), null], "Passwords must match"),
+        birthdate: yup.date().max(new Date(new Date().getFullYear() - 12, new Date().getMonth(), new Date().getDate()), "Website's age restriction is 12"),
+        phone: yup.string().matches(/^[0-9]{10}$/, "Phone number must be 10 digits"),
+    });
+
+
+
+
+
+
+
+
     console.log("user data is ", userData);
     console.log(" email is ", new Date(userData.birthday).toLocaleDateString());
     console.log(" number is ", userData.username)
@@ -168,12 +213,12 @@ const EditProfilePage = () => {
         initialValues: {
             username:userData.username,
             email:userData.email,
-            password:"initial pass",
-            confirmPassword:"",
+            password:"",
+            confirmPassword:" ",
             setPhoneNumber:phoneNumber.phone
         },
 
-        validationSchema: UserSchema,
+        validationSchema: UserEditSchema,
 
         onSubmit,
     });
@@ -211,7 +256,7 @@ const EditProfilePage = () => {
                             type="text"
                             placeholder={userData.username}
                             name="username"
-                            value={values.username}
+                            // value={values.username}
                             onBlur={handleBlur}
                             isValid={touched.username && !errors.username}
                             isInvalid={touched.username && (!!errors.username || usernameErrors.status)}
@@ -258,7 +303,7 @@ const EditProfilePage = () => {
 
                         <Form.Control
                             type="password"
-                            name="password"
+                            name="confirmPassword"
                             placeholder="Enter your new password"
                             value={values.confirmPassword || ''}
                             onBlur={handleBlur}

@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import bcrypt from "bcryptjs";
 
 // function to delete a user
 export const deleteUser = async (req, res)=>{
@@ -42,18 +43,13 @@ export const editUser = async (req, res)=>{
         }
 
         if (req.body.email) {
-            console.log("reached inside email ", req.body.email);
-
             currentUser.email = req.body.email;
         }
         if (req.body.password) {
-            console.log("reached inside password ");
-
-            currentUser.password = req.body.password;
+            const encryptedPWD = bcrypt.hashSync(req.body.password, 9);
+            currentUser.password = encryptedPWD;
         }
         if (req.body.phone) {
-            console.log("reached inside phone ", req.body.phone);
-
             currentUser.phone = req.body.phone;
         }
 
