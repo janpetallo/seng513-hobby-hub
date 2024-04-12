@@ -5,19 +5,13 @@ import {Image, Accordion,Form} from "react-bootstrap";
 import star from "../../../assets/marketplace/star.svg";
 import unfilledStar from "../../../assets/marketplace/unfilledStar.svg";
 import { IoIosClose } from "react-icons/io";
+import Conditions from "../../../utilities/Conditions.js";
 
 const MarketMenu = ({isDesktop}) => {
 
     const priceFilter = [
         "Low-High",
         "High-Low"
-    ]
-
-    const condition = [
-        "New",
-        "Used/Pre-owned",
-        "Damaged/For Parts",
-        "Like New"
     ]
 
     // Stored checkmarks in local storage
@@ -95,7 +89,7 @@ const MarketMenu = ({isDesktop}) => {
                 <Accordion.Header>Condition</Accordion.Header>
                 <Accordion.Body>
                     <Form>
-                        {condition.map((condition, index) => (
+                        {Conditions.map((condition, index) => (
                             <Form.Check
                                 key={`k-condition-${index}`}
                                 type="checkbox"
@@ -110,14 +104,17 @@ const MarketMenu = ({isDesktop}) => {
                 </Accordion.Body>
             </Accordion.Item>
 
+            {/*If you end up using location then make sure price event key is 3*/}
+
+            {/*<Accordion.Item eventKey="2">*/}
+            {/*    <Accordion.Header>Location</Accordion.Header>*/}
+            {/*    <Accordion.Body>*/}
+
+            {/*    </Accordion.Body>*/}
+            {/*</Accordion.Item>*/}
+
+            {/*If you end up using location then make sure price event key is 3*/}
             <Accordion.Item eventKey="2">
-                <Accordion.Header>Location</Accordion.Header>
-                <Accordion.Body>
-
-                </Accordion.Body>
-            </Accordion.Item>
-
-            <Accordion.Item eventKey="3">
                 <Accordion.Header>Price</Accordion.Header>
                 <Accordion.Body>
                     <Form>
@@ -136,102 +133,102 @@ const MarketMenu = ({isDesktop}) => {
                 </Accordion.Body>
             </Accordion.Item>
 
-            <Accordion.Item eventKey="4">
-                <Accordion.Header>Rating</Accordion.Header>
-                <Accordion.Body>
-                    <Form>
-                        <Form.Check
-                            key={`k-rating-5`}
-                            type="checkbox"
-                            id="rating5-checkbox"
-                            name="5 Star"
-                            onChange={handleCheckboxChange}
-                            checked={selectedChecks.includes("5 Star")}
-                            label={
-                                <div className="d-flex align-items-center">
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={star} alt="" className="rating-stars" />
-                                </div>
-                            }
-                        />
+            {/*<Accordion.Item eventKey="4">*/}
+            {/*    <Accordion.Header>Rating</Accordion.Header>*/}
+            {/*    <Accordion.Body>*/}
+            {/*        <Form>*/}
+            {/*            <Form.Check*/}
+            {/*                key={`k-rating-5`}*/}
+            {/*                type="checkbox"*/}
+            {/*                id="rating5-checkbox"*/}
+            {/*                name="5 Star"*/}
+            {/*                onChange={handleCheckboxChange}*/}
+            {/*                checked={selectedChecks.includes("5 Star")}*/}
+            {/*                label={*/}
+            {/*                    <div className="d-flex align-items-center">*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                    </div>*/}
+            {/*                }*/}
+            {/*            />*/}
 
-                        <Form.Check
-                            key={`k-rating-4`}
-                            type="checkbox"
-                            id={"rating4-checkbox"}
-                            name={"4 Star"}
-                            onChange={handleCheckboxChange}
-                            checked={selectedChecks.includes("4 Star")}
-                            label={
-                                <div className="d-flex align-items-center">
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={unfilledStar} alt="" className="rating-stars" />
-                                </div>
-                            }
-                        />
+            {/*            <Form.Check*/}
+            {/*                key={`k-rating-4`}*/}
+            {/*                type="checkbox"*/}
+            {/*                id={"rating4-checkbox"}*/}
+            {/*                name={"4 Star"}*/}
+            {/*                onChange={handleCheckboxChange}*/}
+            {/*                checked={selectedChecks.includes("4 Star")}*/}
+            {/*                label={*/}
+            {/*                    <div className="d-flex align-items-center">*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={unfilledStar} alt="" className="rating-stars" />*/}
+            {/*                    </div>*/}
+            {/*                }*/}
+            {/*            />*/}
 
-                        <Form.Check
-                            key={`k-rating-3`}
-                            type="checkbox"
-                            id="rating3-checkbox"
-                            name="3 Star"
-                            onChange={handleCheckboxChange}
-                            checked={selectedChecks.includes("3 Star")}
-                            label={
-                                <div className="d-flex align-items-center">
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={unfilledStar} alt="" className="rating-stars" />
-                                    <Image src={unfilledStar} alt="" className="rating-stars" />
-                                </div>
-                            }
-                        />
+            {/*            <Form.Check*/}
+            {/*                key={`k-rating-3`}*/}
+            {/*                type="checkbox"*/}
+            {/*                id="rating3-checkbox"*/}
+            {/*                name="3 Star"*/}
+            {/*                onChange={handleCheckboxChange}*/}
+            {/*                checked={selectedChecks.includes("3 Star")}*/}
+            {/*                label={*/}
+            {/*                    <div className="d-flex align-items-center">*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={unfilledStar} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={unfilledStar} alt="" className="rating-stars" />*/}
+            {/*                    </div>*/}
+            {/*                }*/}
+            {/*            />*/}
 
-                        <Form.Check
-                            key={`k-rating-2`}
-                            type="checkbox"
-                            id="rating2-checkbox"
-                            name="2 Star"
-                            onChange={handleCheckboxChange}
-                            checked={selectedChecks.includes("2 Star")}
-                            label={
-                                <div className="d-flex align-items-center">
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={star} alt="" className="rating-stars" />
-                                    <Image src={unfilledStar} alt="" className="rating-stars" />
-                                    <Image src={unfilledStar} alt="" className="rating-stars" />
-                                    <Image src={unfilledStar} alt="" className="rating-stars" />
-                                </div>
-                            }
-                        />
+            {/*            <Form.Check*/}
+            {/*                key={`k-rating-2`}*/}
+            {/*                type="checkbox"*/}
+            {/*                id="rating2-checkbox"*/}
+            {/*                name="2 Star"*/}
+            {/*                onChange={handleCheckboxChange}*/}
+            {/*                checked={selectedChecks.includes("2 Star")}*/}
+            {/*                label={*/}
+            {/*                    <div className="d-flex align-items-center">*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={star} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={unfilledStar} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={unfilledStar} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={unfilledStar} alt="" className="rating-stars" />*/}
+            {/*                    </div>*/}
+            {/*                }*/}
+            {/*            />*/}
 
-                        <Form.Check
-                            key={`k-rating-1`}
-                            type="checkbox"
-                            id="rating1-checkbox"
-                            name="1 Star"
-                            onChange={handleCheckboxChange}
-                            checked={selectedChecks.includes("1 Star")}
-                            label={
-                                <div className="d-flex align-items-center">
-                                    <Image src={star} alt="rating" className="rating-stars" />
-                                    <Image src={unfilledStar} alt="" className="rating-stars" />
-                                    <Image src={unfilledStar} alt="" className="rating-stars" />
-                                    <Image src={unfilledStar} alt="" className="rating-stars" />
-                                    <Image src={unfilledStar} alt="" className="rating-stars" />
-                                </div>
-                            }
-                        />
-                    </Form>
-                </Accordion.Body>
-            </Accordion.Item>
+            {/*            <Form.Check*/}
+            {/*                key={`k-rating-1`}*/}
+            {/*                type="checkbox"*/}
+            {/*                id="rating1-checkbox"*/}
+            {/*                name="1 Star"*/}
+            {/*                onChange={handleCheckboxChange}*/}
+            {/*                checked={selectedChecks.includes("1 Star")}*/}
+            {/*                label={*/}
+            {/*                    <div className="d-flex align-items-center">*/}
+            {/*                        <Image src={star} alt="rating" className="rating-stars" />*/}
+            {/*                        <Image src={unfilledStar} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={unfilledStar} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={unfilledStar} alt="" className="rating-stars" />*/}
+            {/*                        <Image src={unfilledStar} alt="" className="rating-stars" />*/}
+            {/*                    </div>*/}
+            {/*                }*/}
+            {/*            />*/}
+            {/*        </Form>*/}
+            {/*    </Accordion.Body>*/}
+            {/*</Accordion.Item>*/}
         </Accordion>
     )
 }

@@ -3,12 +3,11 @@ import "./ItemCard.scss"
 import {Badge, Card} from "react-bootstrap";
 import {Link} from "react-router-dom";
 import Carousel from "react-bootstrap/Carousel";
-import star from "../../../assets/marketplace/star.svg"
 
 const ItemCard = ({item}) => {
 
     return (
-        <Link to="/selling-item" className="remove-styling">
+        <Link to="/selling-item" className="remove-styling" state={item}>
             <Card className="card-market">
                 {item.image.length > 1 ? (
                         <Carousel className="menu-carousel" slide={false}>
