@@ -31,9 +31,13 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
                     setPosts(postsData);
 
                 } else if(postAll === true && category === 'Market') {
-                    // Do nothing for now
-                    // set posts to empty array
-                    setPosts([]);
+                    const response = await newRequest.get("/marketPlacePosts/getAllMarketPlacePosts");
+                    if (response.status !== 200) {
+                        throw new Error("Failed to fetch posts");
+                    }
+                    const postsData = response.data;
+                    setPosts(postsData);
+                    console.log(postsData);
                 } 
             } catch (error) {
                 console.error(error);
