@@ -10,7 +10,6 @@
     top: 76px;
     max-height: calc(100vh - 76px);
     overflow: hidden;
-    border-left: 1px solid var(--border-shade);
 
     .right-menu-section {
         min-height: 100px;
@@ -24,7 +23,7 @@
 }
 
 .right-menu:hover {
-    overflow-y: auto;
+    overflow-y: scroll;
 
     .right-menu-section {
         padding-right: 0;

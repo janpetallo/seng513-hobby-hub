@@ -31,3 +31,7 @@
 .menu-left-border {
     border-left: 1px solid rgba(145, 142, 142, 0.67);
 }
+
+.menu-right-border {
+    border-left: 1px solid rgba(145, 142, 142, 0.67);
+}
