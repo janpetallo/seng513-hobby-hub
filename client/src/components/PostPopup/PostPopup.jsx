@@ -19,7 +19,7 @@ function PostPopup({ title, hubName, owner, content, showKebab, isAdmin}) {
                     <Offcanvas.Title>{`${owner} posted to ${hubName}`}</Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body className="p-0 bg-HHPurple-subtle">
-                    <Container className="bg-white">
+                    <Container className="bg-white h-100">
                         <Post hubTitle={true} post={content} isPopup={true} showKebab={showKebab} isAdmin={isAdmin}/>
                     </Container>
                 </Offcanvas.Body>
