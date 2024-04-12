@@ -13,7 +13,7 @@
     top: 76px;
     height: calc(100vh - 76px);
     border-left: 1px solid rgba(145, 142, 142, 0.67);
-    border-top: 1px solid rgba(145, 142, 142, 0.67);;
+    border-top: 1px solid rgba(145, 142, 142, 0.67);
 }
 
 .home-layout-body {
@@ -24,6 +24,14 @@
     }
 }
 
-.left-menu-fix-width {
+.menu-fix-width {
     min-width: 350px;
+}
+
+.menu-left-border {
+    border-left: 1px solid rgba(145, 142, 142, 0.67);
+}
+
+.menu-right-border {
+    border-left: 1px solid rgba(145, 142, 142, 0.67);
 }

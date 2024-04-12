@@ -1,17 +1,12 @@
 import React, {useState, useEffect} from "react";
-import {Col, Container, Row} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Col, Container, Row, Accordion} from "react-bootstrap";
+import {Link, useNavigate} from "react-router-dom";
 import "./MyHubs.scss"
 import newRequest from "../../utilities/newRequest.js";
 
 const MyHubs = () => {
-    const categories = [
-        { name: 'Outdoors', hubs: ['Mushroom Hunters', 'Fishing', 'Hiking'] },
-        { name: 'Indoors', hubs: ['Books', 'Painting'] },
-        { name: 'Cards', hubs: ['Pokemon', 'Yu-Gi-Oh'] },
-        { name: 'Games', hubs: ['League of Legends', 'Game of Life', 'Elden Ring'] },
-    ];
 
+    const navigate = useNavigate();
     // get all hubs from backend
     const [hubs, setHubs] = useState([]);
 
@@ -54,10 +49,15 @@ const MyHubs = () => {
     // const username = "BimmerGuy";
     const username = JSON.parse(localStorage.getItem("currentUser")).username;
 
+    const handleClick = (hubName) => {
+        navigate('/hubs', { state: { hub: hubName } });
+    };
+
     return (
-        <Container className="pt-2 ps-5 pe-5 pb-3">
+        // <Container className="pt-2 ps-5 pe-5 pb-3">
+        <div>
             <div className="d-flex flex-column align-items-center justify-content-center">
-                <h1 className="pt-2 ps-2 pe-2">{username}'s Hubs</h1>
+                <h1 className="pt-3 ps-2 pe-2">{username}'s Hubs</h1>
                 <h6 className="ps-2 pe-2!">View all your hubs here!</h6>
             </div>
             <hr/>
@@ -77,24 +77,56 @@ const MyHubs = () => {
                     </Row>
                 </Row>
             ))} */}
-            {hubs.map((hub, i) => (
+
+            {/* {hubs.map((hub, i) => (
                     <Row key={i} className="section-font">
                         {hub.name}
                         <Row>
                             {hub.hubs.map((hub, index) => (
                             <Col xs={4.5} sm={4} md={3.5} lg={3} className="col-container my-2 me-4 p-3">
                                 <div className="text-center ">
-                                    <Link className='hub-card-link' to={`/${hub.hubName.replace(' ', '')}`} >
+                                    <div className="Myhub-selection-text-center"  onClick={() => handleClick(hub.hubName)}>
                                         {hub.hubName}
-                                    </Link>
+                                    </div>
                                 </div>
                             </Col>
                             ))}
                         </Row>
                     </Row>
-                ))}
-        </Container>
-        
+                ))} */}
+
+            <Accordion className="browse-hub-accordion" flush>
+                {hubs.map((category, categoryIndex) => {
+                    // Check if any hub belongs to this category
+                    const categoryHasHubs = category.hubs.length > 0;
+
+                    // Only render the category if it has hubs
+                    return categoryHasHubs && (
+                        <Accordion.Item key={categoryIndex} eventKey={categoryIndex.toString()}>
+                            <Accordion.Header>{category.name}</Accordion.Header>
+                            <Accordion.Body className="browse-hub-body">
+                                {category.hubs.map((filteredHub, filteredIndex) => (
+                                    <div
+                                        className="hub-selection-card"
+                                        key={filteredIndex}
+                                        onClick={() => handleClick(filteredHub.hubName)}
+                                    >
+                                        <pre className="hub-selection-title">
+                                            Hub:{filteredHub.hubName}{'\n'}
+                                        </pre>
+                                        <pre>
+                                            Members:{filteredHub.members.length}
+                                        </pre>
+                                    </div>
+                                ))}
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    );
+                })}
+            </Accordion>
+        {/* // </Container> */}
+        </div>
+
     )
 }
 

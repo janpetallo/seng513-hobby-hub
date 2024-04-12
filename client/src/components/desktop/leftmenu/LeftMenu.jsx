@@ -15,11 +15,8 @@ const LeftMenu = () =>{
     const location = useLocation();
 
     const getMenuItemClass = (path) => {
-        if (path === '/') {
-            return location.pathname === '/' || location.pathname === '/marketplace' ? 'item selected' : 'item';
-        } else {
             return location.pathname === path ? 'item selected' : 'item';
-        }
+        
     }
 
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -42,8 +39,8 @@ const LeftMenu = () =>{
                         </div>
                     </Link>
 
-                    <Link to="/marketplace-selection" >
-                        <div className={getMenuItemClass('/marketplace-selection')}>
+                    <Link to="/marketplace" >
+                        <div className={getMenuItemClass('/marketplace')}>
                             <img src={Market} alt="market"></img>
                             <span>Browse Market</span>
                         </div>

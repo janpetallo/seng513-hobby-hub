@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Modal, Button, Form, Container} from 'react-bootstrap';
+import {Row, Col, Card, Modal, Button, Form, Container, Accordion} from 'react-bootstrap';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 import CreateIcon from '../../assets/create-hub/create.svg';
 import './CommunitySelection.scss'
 import CustomizeHub from "../../components/customizehub/CustomizeHub.jsx";
 import newRequest from "../../utilities/newRequest.js";
+import HubCategories from "../../utilities/HubCategories.js";
 
 function CommunitySelection() {
     const location = useLocation();
@@ -17,7 +18,7 @@ function CommunitySelection() {
     const [isHubNameTooLong, setIsHubNameTooLong] = useState(false);
 
     useEffect(() => {
-        setIsHubNameTooLong(hubName.length == 18);
+        setIsHubNameTooLong(hubName.length === 18);
     }, [hubName]);
 
     const navigate = useNavigate();
@@ -28,13 +29,6 @@ function CommunitySelection() {
             navigate('/create-hub');
         }
     }, [isMobile, showModal, navigate]);
-
-    const categories = [
-        { name: 'Outdoors', hubs: ['Mushroom Hunters', 'Fishing', 'Hiking'] },
-        { name: 'Indoors', hubs: ['Books', 'Painting'] },
-        { name: 'Cards', hubs: ['Pokemon', 'Yu-Gi-Oh'] },
-        { name: 'Games', hubs: ['League of Legends', 'Game of Life', 'Elden Ring'] },
-    ];
 
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -63,19 +57,21 @@ function CommunitySelection() {
                     hubs: categories[category]
                 }));
                 setHubs(categoriesArray);
-                console.log(hubs);
-                console.log(categoriesArray);
             } catch (error) {
                 console.error(error);
             }
         };
         // Call fetchHubs function when component mounts
         fetchHubs();
-    }, []); 
-    
+    }, []);
+
+    const handleClick = (hubName) => {
+        navigate('/hubs', { state: { hub: hubName } });
+    };
     
     return (
-        <div className="hub-container">
+        <div style={{display: 'flex', flexDirection: 'column', minHeight: 'calc(100vh - 150px)'}}>
+            <div style={{flex: 1}}>
             {!isMobile && currentUser && (
                 <div className="create-hub" >
                     Create a Hub:<img className="create-icon" src={CreateIcon} alt="Create" onClick={() => setShowModal(true)} />
@@ -89,46 +85,92 @@ function CommunitySelection() {
                     <CustomizeHub/>
                 </Modal.Body>
             </Modal>
-            {/* static data */}
-            {/* <Container className="mt-3">
-                {categories.map((category, i) => (
-                    <Row key={i} className="section-font">
-                        {category.name}
-                        <Row>
-                            {category.hubs.map((hub, index) => (
-                                <Col xs={4.5} sm={4} md={3.5} lg={3} key={index} className="col-container my-2 me-4 p-3">
-                                    <div className="text-center ">
-                                        <Link className='hub-card-link' to={`/${hub.replace(' ', '')}`}>
-                                            {hub}
-                                        </Link>
+
+            {/* <Accordion className="browse-hub-accordion" flush>
+                {HubCategories.map((category, categoryIndex) => (
+                    <Accordion.Item key={categoryIndex} eventKey={categoryIndex.toString()}>
+                        <Accordion.Header>{category}</Accordion.Header>
+                        <Accordion.Body className="browse-hub-body">
+                            {hubs.map((hub, hubIndex) => {
+                                // Get the hubs that match the category
+                                const filteredHubs = hub.hubs.filter((item) => item.category === category);
+                                // map through and return them in the accordion
+                                return filteredHubs.map((filteredHub, filteredIndex) => (
+                                    <div
+                                        className="hub-selection-card"
+                                        key={filteredIndex}
+                                        onClick={() => handleClick(filteredHub.hubName)}
+                                    >
+                                    <pre className="hub-selection-title">
+                                        Hub:{filteredHub.hubName}{'\n'}
+                                    </pre>
+                                        <pre>
+                                        Members:{filteredHub.members.length}
+                                    </pre>
                                     </div>
-                                </Col>
-                            ))}
-                        </Row>
-                    </Row>
+                                ));
+                            })}
+                        </Accordion.Body>
+                    </Accordion.Item>
                 ))}
-            </Container> */}
-            {/* real data from db */}
-            <Container className="mt-3">
-                {hubs.map((hub, i) => (
-                    <Row key={i} className="section-font">
-                        {hub.name}
-                        <Row>
-                            {hub.hubs.map((hub, index) => (
-                            <Col xs={4.5} sm={4} md={3.5} lg={3} className="col-container my-2 me-4 p-3">
-                                <div className="text-center ">
-                                    <Link className='hub-card-link' to={`/${hub.hubName.replace(' ', '')}`} >
-                                        {hub.hubName}
-                                    </Link>
-                                </div>
-                            </Col>
-                            ))}
-                        </Row>
-                    </Row>
-                ))}
-            </Container>
+            </Accordion> */}
+
+            <Accordion className="browse-hub-accordion" flush>
+                {HubCategories.map((category, categoryIndex) => {
+                    // Check if any hub belongs to this category
+                    const categoryHasHubs = hubs.some(hub => hub.hubs.some(item => item.category === category));
+
+                    // Only render the category if it has hubs
+                    return categoryHasHubs && (
+                        <Accordion.Item key={categoryIndex} eventKey={categoryIndex.toString()}>
+                            <Accordion.Header>{category}</Accordion.Header>
+                            <Accordion.Body className="browse-hub-body">
+                                {hubs.map((hub, hubIndex) => {
+                                    // Get the hubs that match the category
+                                    const filteredHubs = hub.hubs.filter((item) => item.category === category);
+                                    // map through and return them in the accordion
+                                    return filteredHubs.map((filteredHub, filteredIndex) => (
+                                        <div
+                                            className="hub-selection-card"
+                                            key={filteredIndex}
+                                            onClick={() => handleClick(filteredHub.hubName)}
+                                        >
+                                            <pre className="hub-selection-title">
+                                                Hub:{filteredHub.hubName}{'\n'}
+                                            </pre>
+                                            <pre>
+                                                Members:{filteredHub.members.length}
+                                            </pre>
+                                        </div>
+                                    ));
+                                })}
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    );
+                })}
+            </Accordion>
+            </div>
+
+
+            {/*<Container className="mt-3">*/}
+            {/*    {hubs.map((hub, i) => (*/}
+            {/*        <Row key={i} className="section-font">*/}
+            {/*            {hub.name}*/}
+            {/*            <Row>*/}
+            {/*                {hub.hubs.map((hub, index) => (*/}
+            {/*                <Col xs={4.5} sm={4} md={3.5} lg={3} className="col-container my-2 me-4 p-3" key={index}>*/}
+            {/*                    <div className="hub-selection-text-center"  onClick={() => handleClick(hub.hubName)}>*/}
+            {/*                        {hub.hubName}*/}
+            {/*                    </div>*/}
+            {/*                </Col>*/}
+            {/*                ))}*/}
+            {/*            </Row>*/}
+            {/*        </Row>*/}
+            {/*    ))}*/}
+            {/*</Container>*/}
+
             {isMobile && currentUser && (
-                <div id="create-hub-mobile-link" className='create-hub-mobile'>
+                <div id="create-hub-mobile-link" className='create-hub-mobile m-3' style={{fontWeight: '550'}} >
                     Can't find what you are looking for? <Link to="/create-hub">Create one yourself!</Link>
                 </div>
             )}

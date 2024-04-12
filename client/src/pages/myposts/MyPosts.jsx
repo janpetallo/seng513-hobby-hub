@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from "react";
 import Posts from "../../components/desktop/posts/Posts.jsx";
-import Post from "../../components/desktop/post/Post.jsx";
-import newRequest from "../../utilities/newRequest.js";
 import "../../components/desktop/posts/posts.scss";
 
 

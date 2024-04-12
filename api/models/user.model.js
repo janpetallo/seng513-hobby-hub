@@ -26,10 +26,10 @@ const userSchema = new Schema({
         type:Number,
         required:false
     },
-    marketplaceRating: {
-        type: Number,
-        default:0
-    },
+    marketPosts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'MarketPost' // Reference to the MarketPost model
+    }],
     posts: [{
         type: Schema.Types.ObjectId,
         ref: 'ForumPost' // Reference to the post model

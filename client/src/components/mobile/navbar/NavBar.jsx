@@ -24,7 +24,7 @@ const NavBar = () =>{
 
                     <Link to="/">
                         <div className="mobile-items">
-                            <img src={location.pathname === '/' || location.pathname === '/marketplace' ? HomeFilled : Home} alt="Home"/>
+                            <img src={location.pathname === '/' ? HomeFilled : Home} alt="Home"/>
                         </div>
                     </Link>
 
@@ -45,7 +45,7 @@ const NavBar = () =>{
                             <Dropdown.Menu id="create-menu">
                                 <Dropdown.Item className="create-item" as={Link} to="/create-hub">Create New Hub</Dropdown.Item>
                                 <Dropdown.Item className="create-item" as={Link} to="/hubpost">Post to Hubs</Dropdown.Item>
-                                <Dropdown.Item className="create-item" as={Link} to="/create-post-market">Post to Market</Dropdown.Item>
+                                <Dropdown.Item className="create-item" as={Link} to="/marketpost">Post to Market</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     )}
@@ -56,9 +56,9 @@ const NavBar = () =>{
                         </div>
                     </Link>
 
-                    <Link to="/marketplace-selection">
+                    <Link to="/marketplace">
                         <div className="mobile-items">
-                            <img src={location.pathname === '/marketplace-selection' ? MarketFilled : Market} alt="Market"/>
+                            <img src={location.pathname === '/marketplace' ? MarketFilled : Market} alt="Market"/>
                         </div>
                     </Link>
                 </Col>

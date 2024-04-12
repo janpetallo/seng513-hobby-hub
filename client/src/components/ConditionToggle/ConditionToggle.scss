@@ -1,0 +1,9 @@
+.condition-toggle {
+    .dropdown-toggle {
+        width: 100%;
+    }
+
+    .dropdown-item.active, .dropdown-item:active {
+        background-color: var(--HHPurple);
+    }
+}

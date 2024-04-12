@@ -12,7 +12,7 @@ export const createPost = async (req, res) => {
 
         // identity verification required to post on your own account
         if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to Post on this account! You can Post on your own account!");
+            return res.status(403).send("Error you are not authorized to Post on this account! You can only Post on your own account!");
         }
 
         // Create a new object without the userId field
@@ -222,5 +222,26 @@ export const undisLikePost = async (req, res) => {
     } catch (error) {
         console.error(error);
         res.status(500).send("Error disliking the post");
+    }
+};
+
+
+export const deletePostById = async (req, res) => {
+    try {
+        // Extract the post ID from the request parameters
+        const { postId } = req.params;
+
+        // Find the post by ID and delete it
+        const deletedPost = await Post.findByIdAndDelete(postId);
+
+        // Check if the post exists, if not throw an error
+        if (!deletedPost) {
+            return res.status(404).send("Post not found");
+        }
+
+        res.status(200).send("Post deleted successfully");
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error deleting post");
     }
 };
