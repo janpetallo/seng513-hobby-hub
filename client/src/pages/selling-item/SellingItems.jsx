@@ -16,9 +16,9 @@ const SellingItem = () => {
         <Row className="selling-item-wrapper">
             <Col lg={7} xl={8} className="m-0 p-0">
                 <div className="item-slider-wrapper">
-                    {state.image.length > 1 && (
+                    {state.img.length > 1 && (
                         <Carousel interval={null} className="item-image-carousel">
-                            {state.image.map((image, index) => (
+                            {state.img.map((image, index) => (
                                 <Carousel.Item key={index}>
                                     <img
                                         className="w-100 d-block"
@@ -31,11 +31,11 @@ const SellingItem = () => {
                         </Carousel>
                     )}
 
-                    {state.image.length === 1 && (
+                    {state.img.length === 1 && (
                         <>
                             <img
                                 className="w-100 d-block"
-                                src={state.image[0]}
+                                src={state.img[0]}
                                 alt="Image can't be loaded"
                             />
                             <div className="blur-background" style={{ backgroundImage: `url(${state.image[0]})` }}></div>
@@ -48,7 +48,7 @@ const SellingItem = () => {
                 <div className="post-details-wrapper">
                     <h3>{state.title}</h3>
 
-                    <h4 className="info-text">${state.price}</h4>
+                    <h4 className="info-text">{state.price}</h4>
 
                     <h5>
                         <Badge bg="HHPurple">{state.tag}</Badge>
@@ -83,11 +83,7 @@ const SellingItem = () => {
 
                     <hr/>
                     <h5>Description</h5>
-                    <div>
-                        <p>
-                            {state.description}
-                        </p>
-                    </div>
+                    <div className="postDescription" dangerouslySetInnerHTML={{ __html: state.description }} />
                 </div>
             </Col>
         </Row>

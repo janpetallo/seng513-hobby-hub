@@ -30,7 +30,7 @@ import EditProfile from './pages/editprofile/EditProfile.jsx';
 import MyAdsTrades from "./pages/MyAdsTrades/MyAdsTrades.jsx";
 import MyHubs from "./pages/myhubs/MyHubs.jsx";
 import MyPosts from "./pages/myposts/MyPosts.jsx";
-import SearchResults from './pages/search-results/SearhResults.jsx';
+import SearchResults from './pages/search-results/SearchResults.jsx';
 import NotFound from "./pages/NotFound/NotFound.jsx";
 import MarketLayout from "./layouts/MarketLayout/MarketLayout.jsx";
 import useLocalStorageClear from "./utilities/useLocalStorageClear/useLocalStorageClear.jsx";
@@ -147,6 +147,10 @@ function App() {
                             path: "/search-menu",
                             element: <SearchMenu/>
                         },
+                        {
+                            path: "/search-results/:search",
+                            element: <SearchResults/>
+                        },
 
                         // Default fall to page when user types a link that does not exist
                         {
@@ -190,10 +194,6 @@ function App() {
                 {
                     path: "/create-hub",
                     element: <ProtectedRoute><CreateHubPageMobile/></ProtectedRoute>
-                },
-                {
-                    path: "/search-results/:search",
-                    element: <SearchResults/>
                 },
             ]
         },
