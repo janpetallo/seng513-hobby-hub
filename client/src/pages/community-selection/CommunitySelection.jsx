@@ -70,7 +70,8 @@ function CommunitySelection() {
     };
     
     return (
-        <div>
+        <div style={{display: 'flex', flexDirection: 'column', minHeight: 'calc(100vh - 150px)'}}>
+            <div style={{flex: 1}}>
             {!isMobile && currentUser && (
                 <div className="create-hub" >
                     Create a Hub:<img className="create-icon" src={CreateIcon} alt="Create" onClick={() => setShowModal(true)} />
@@ -148,6 +149,7 @@ function CommunitySelection() {
                     );
                 })}
             </Accordion>
+            </div>
 
 
             {/*<Container className="mt-3">*/}
@@ -168,7 +170,7 @@ function CommunitySelection() {
             {/*</Container>*/}
 
             {isMobile && currentUser && (
-                <div id="create-hub-mobile-link" className='create-hub-mobile m-3'>
+                <div id="create-hub-mobile-link" className='create-hub-mobile m-3' style={{fontWeight: '550'}} >
                     Can't find what you are looking for? <Link to="/create-hub">Create one yourself!</Link>
                 </div>
             )}
