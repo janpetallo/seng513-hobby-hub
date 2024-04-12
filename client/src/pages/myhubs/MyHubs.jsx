@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {Col, Container, Row} from "react-bootstrap";
+import {Col, Container, Row, Accordion} from "react-bootstrap";
 import {Link, useNavigate} from "react-router-dom";
 import "./MyHubs.scss"
 import newRequest from "../../utilities/newRequest.js";
@@ -54,7 +54,8 @@ const MyHubs = () => {
     };
 
     return (
-        <Container className="pt-2 ps-5 pe-5 pb-3">
+        // <Container className="pt-2 ps-5 pe-5 pb-3">
+        <div>
             <div className="d-flex flex-column align-items-center justify-content-center">
                 <h1 className="pt-2 ps-2 pe-2">{username}'s Hubs</h1>
                 <h6 className="ps-2 pe-2!">View all your hubs here!</h6>
@@ -76,7 +77,8 @@ const MyHubs = () => {
                     </Row>
                 </Row>
             ))} */}
-            {hubs.map((hub, i) => (
+
+            {/* {hubs.map((hub, i) => (
                     <Row key={i} className="section-font">
                         {hub.name}
                         <Row>
@@ -91,9 +93,40 @@ const MyHubs = () => {
                             ))}
                         </Row>
                     </Row>
-                ))}
-        </Container>
-        
+                ))} */}
+
+            <Accordion className="browse-hub-accordion" flush>
+                {hubs.map((category, categoryIndex) => {
+                    // Check if any hub belongs to this category
+                    const categoryHasHubs = category.hubs.length > 0;
+
+                    // Only render the category if it has hubs
+                    return categoryHasHubs && (
+                        <Accordion.Item key={categoryIndex} eventKey={categoryIndex.toString()}>
+                            <Accordion.Header>{category.name}</Accordion.Header>
+                            <Accordion.Body className="browse-hub-body">
+                                {category.hubs.map((filteredHub, filteredIndex) => (
+                                    <div
+                                        className="hub-selection-card"
+                                        key={filteredIndex}
+                                        onClick={() => handleClick(filteredHub.hubName)}
+                                    >
+                                        <pre className="hub-selection-title">
+                                            Hub:{filteredHub.hubName}{'\n'}
+                                        </pre>
+                                        <pre>
+                                            Members:{filteredHub.members.length}
+                                        </pre>
+                                    </div>
+                                ))}
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    );
+                })}
+            </Accordion>
+        {/* // </Container> */}
+        </div>
+
     )
 }
 
