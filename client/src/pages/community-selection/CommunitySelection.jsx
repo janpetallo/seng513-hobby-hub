@@ -86,7 +86,7 @@ function CommunitySelection() {
                 </Modal.Body>
             </Modal>
 
-            {/* <Accordion className="browse-hub-accordion" flush>
+            <Accordion className="browse-hub-accordion" flush>
                 {HubCategories.map((category, categoryIndex) => (
                     <Accordion.Item key={categoryIndex} eventKey={categoryIndex.toString()}>
                         <Accordion.Header>{category}</Accordion.Header>
@@ -113,9 +113,9 @@ function CommunitySelection() {
                         </Accordion.Body>
                     </Accordion.Item>
                 ))}
-            </Accordion> */}
+            </Accordion>
 
-            <Accordion className="browse-hub-accordion" flush>
+            {/* <Accordion className="browse-hub-accordion" flush>
                 {HubCategories.map((category, categoryIndex) => {
                     // Check if any hub belongs to this category
                     const categoryHasHubs = hubs.some(hub => hub.hubs.some(item => item.category === category));
@@ -148,7 +148,7 @@ function CommunitySelection() {
                         </Accordion.Item>
                     );
                 })}
-            </Accordion>
+            </Accordion> */}
             </div>
 
 
