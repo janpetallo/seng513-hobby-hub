@@ -23,6 +23,7 @@ const MarketPost = () => {
     const [conditionError, setConditionError] = useState(false);
 
     const [marketPostTitle, setMarketPostTitle] = useState(''); // market post title
+    const [price, setPrice] = useState(''); // market post title
 
 
 
@@ -31,6 +32,10 @@ const MarketPost = () => {
         setMarketPostTitle(event.target.value);
     };
 
+    // to get the price
+    const handlePriceChange = (event) => {
+        setPrice(event.target.value);
+    };
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -81,6 +86,7 @@ const MarketPost = () => {
                 className="mb-3"
                 controlId="floating-price"
                 label="Price"
+                onChange={handlePriceChange}
             >
                 <Form.Control
                     className="market-post-field"
