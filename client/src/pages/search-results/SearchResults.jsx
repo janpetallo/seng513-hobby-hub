@@ -62,6 +62,17 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
                     post.tags?.includes(searchQuery)
                 );
                 setFilteredPosts(newFilteredPosts);
+            } else if (searchQuery !== '' && category === 'Market') {
+                const newFilteredPosts = posts.filter(post =>
+                    post.title?.toLowerCase().trim().includes(searchQuery) ||
+                    post.description?.toLowerCase().trim().includes(searchQuery) ||
+                    post.username?.toLowerCase().trim().includes(searchQuery) ||
+                    post.category?.toLowerCase().trim().includes(searchQuery) ||
+                    post.location?.toLowerCase().trim().includes(searchQuery) ||
+                    post.condition?.toLowerCase().trim().includes(searchQuery) ||
+                    post.email?.toLowerCase().trim().includes(searchQuery)
+                );
+                setFilteredPosts(newFilteredPosts);
             } else {
                 setFilteredPosts(posts);
             }
@@ -80,6 +91,7 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
                     <div className="card-columns">
                         {filteredPosts.length === 0 && searchQuery !== "" && <h3>No post related to "{searchParams.get('query').trim()}"</h3>}
                         <p className="search-count p-1">Total search results: {filteredPosts.length}</p>
+                        
                         {filteredPosts.slice().reverse().map(post => (
                             <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} />
                         ))}
