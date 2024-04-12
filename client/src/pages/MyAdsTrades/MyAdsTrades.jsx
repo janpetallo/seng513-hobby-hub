@@ -14,7 +14,7 @@ const MyAdsTrades = () => {
             </div>
             <hr/>
 
-            <ItemCards/>
+            <ItemCards allPosts={false}/>
         </>
     )
 }
