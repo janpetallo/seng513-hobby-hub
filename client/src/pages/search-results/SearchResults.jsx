@@ -3,6 +3,7 @@ import "./SearchResults.scss"
 import {Button, Container, Nav, Navbar, NavDropdown, Offcanvas} from "react-bootstrap";
 import Posts from "../../components/desktop/posts/Posts.jsx";
 import Post from "../../components/desktop/post/Post.jsx";
+import ItemCard from "../../components/marketplace/itemcard/ItemCard.jsx";
 import newRequest from "../../utilities/newRequest.js";
 import {useLocation} from "react-router-dom";
 
@@ -58,8 +59,7 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
                     post.title?.toLowerCase().trim().includes(searchQuery) ||
                     post.description?.toLowerCase().trim().includes(searchQuery) ||
                     post.userName?.toLowerCase().trim().includes(searchQuery) ||
-                    post.hubName?.toLowerCase().trim().includes(searchQuery) ||
-                    post.tags?.includes(searchQuery)
+                    post.hubName?.toLowerCase().trim().includes(searchQuery)
                 );
                 setFilteredPosts(newFilteredPosts);
             } else if (searchQuery !== '' && category === 'Market') {
@@ -92,9 +92,20 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
                         {filteredPosts.length === 0 && searchQuery !== "" && <h3>No post related to "{searchParams.get('query').trim()}"</h3>}
                         <p className="search-count p-1">Total search results: {filteredPosts.length}</p>
                         
-                        {filteredPosts.slice().reverse().map(post => (
+                        {/* {filteredPosts.slice().reverse().map(post => (
                             <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} />
-                        ))}
+                        ))} */}
+
+                        {category === 'Hubs' ? 
+                            filteredPosts.slice().reverse().map(post => (
+                                <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} />
+                            )) :
+                            <div className="item-card-wrapper">
+                                {filteredPosts.slice().reverse().map(post => (
+                                    <ItemCard item={post} key={post._id} />
+                                ))}
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
