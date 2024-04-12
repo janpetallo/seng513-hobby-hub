@@ -25,6 +25,7 @@ const MarketPost = () => {
 
     const [marketPostTitle, setMarketPostTitle] = useState(''); // market post title
     const [price, setPrice] = useState(''); // market post price
+    const[location, setLocation] = useState(""); // market post location
 
 
 
@@ -37,6 +38,12 @@ const MarketPost = () => {
     const handlePriceChange = (event) => {
         setPrice(event.target.value);
     };
+
+    // to get the location
+    const handleLocationChange = (event) => {
+        setLocation(event.target.value);
+    };
+
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -101,6 +108,7 @@ const MarketPost = () => {
                 className="mb-3"
                 controlId="floating-Location"
                 label="Location"
+                onChange={handleLocationChange}
             >
                 <Form.Control
                     className="market-post-field"
