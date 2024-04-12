@@ -57,7 +57,7 @@ const MyHubs = () => {
         // <Container className="pt-2 ps-5 pe-5 pb-3">
         <div>
             <div className="d-flex flex-column align-items-center justify-content-center">
-                <h1 className="pt-2 ps-2 pe-2">{username}'s Hubs</h1>
+                <h1 className="pt-3 ps-2 pe-2">{username}'s Hubs</h1>
                 <h6 className="ps-2 pe-2!">View all your hubs here!</h6>
             </div>
             <hr/>
