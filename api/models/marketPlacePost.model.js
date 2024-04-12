@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import * as stream from "stream";
 const { Schema } = mongoose;
 
 const marketPlacePostSchema = new Schema({
@@ -18,20 +19,28 @@ const marketPlacePostSchema = new Schema({
         required:true
     },
     price:{
-        type:Number,
+        type:String,
+        required:true
+    },
+    category:{
+        type:String,
         required:true
     },
     condition:{
         type:String,
         required:true
     },
-    tag:{
-        type:String
-    },
     location:{
         type:String,
         required:true
-    }
+    },
+    img: [{
+        type: String
+    }],
+    title:{
+        type:String,
+        required:true
+    },
 });
 
 export default mongoose.model("MarketPlacePost", marketPlacePostSchema)
