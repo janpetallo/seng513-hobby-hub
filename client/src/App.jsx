@@ -30,9 +30,10 @@ import EditProfile from './pages/editprofile/EditProfile.jsx';
 import MyAdsTrades from "./pages/MyAdsTrades/MyAdsTrades.jsx";
 import MyHubs from "./pages/myhubs/MyHubs.jsx";
 import MyPosts from "./pages/myposts/MyPosts.jsx";
-import MarketMenu from "./components/marketplace/marketmenu/MarketMenu.jsx";
-import SearchReults from './pages/search-results/SearhResults.jsx';
+import SearchResults from './pages/search-results/SearhResults.jsx';
 import NotFound from "./pages/NotFound/NotFound.jsx";
+import MarketLayout from "./layouts/MarketLayout/MarketLayout.jsx";
+import useLocalStorageClear from "./utilities/useLocalStorageClear/useLocalStorageClear.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -83,19 +84,6 @@ function App() {
         )
     }
 
-    const MarketplaceLayout = () => {
-        return (
-            <Row>
-                <Col className="m-0 p-0 home-layout-body">
-                    <Outlet/>
-                </Col>
-                <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky menu-fix-width menu-left-border">
-                    <MarketMenu isDesktop={true}/>
-                </Col>
-            </Row>
-        )
-    }
-
     // route protection function
     const ProtectedRoute = ({children}) => {
         if(!localStorage.getItem("currentUser")){
@@ -111,6 +99,8 @@ function App() {
         }
         return children;
     }
+
+    useLocalStorageClear();
 
     const router = createBrowserRouter([
         {
@@ -177,7 +167,7 @@ function App() {
                 },
                 {
                     path: "/marketplace",
-                    element: <MarketplaceLayout/>,
+                    element: <MarketLayout/>,
                     children: [
                         {
                             path: "/marketplace",
@@ -203,7 +193,7 @@ function App() {
                 },
                 {
                     path: "/search-results/:search",
-                    element: <SearchReults/>
+                    element: <SearchResults/>
                 },
             ]
         },

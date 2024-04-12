@@ -20,13 +20,15 @@ const MarketMenu = ({isDesktop}) => {
         "Like New"
     ]
 
-    //  Tracks the things the user checked to filter
-    const [selectedChecks, setSelectedChecks] = useState([]);
+    // Stored checkmarks in local storage
+    const [selectedChecks, setSelectedChecks] = useState(
+        JSON.parse(localStorage.getItem('selectedChecks')) || []
+    );
 
     const handleCheckboxChange = (event) => {
         const name = event.target.name;
 
-        // If check it save it to array
+        // If checked save it to array
         if (event.target.checked) {
             setSelectedChecks([...selectedChecks, name]);
 
@@ -46,14 +48,12 @@ const MarketMenu = ({isDesktop}) => {
         setSelectedChecks([]);
     };
 
-
-
-    //  For testing purposes (can remove later)
+    // Store into local storage
     useEffect(() => {
-        if(selectedChecks.length > 0) {
-            console.log("Checked Categories:", selectedChecks);
-        }
+        localStorage.setItem('selectedChecks', JSON.stringify(selectedChecks));
     }, [selectedChecks]);
+
+
 
     return(
         <Accordion flush className={isDesktop? "market-menu" : "mobile-market-menu"}>
