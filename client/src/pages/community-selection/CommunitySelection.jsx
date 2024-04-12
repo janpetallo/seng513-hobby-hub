@@ -30,13 +30,6 @@ function CommunitySelection() {
         }
     }, [isMobile, showModal, navigate]);
 
-    const categories = [
-        { name: 'Outdoors', hubs: ['Mushroom Hunters', 'Fishing', 'Hiking'] },
-        { name: 'Indoors', hubs: ['Books', 'Painting'] },
-        { name: 'Cards', hubs: ['Pokemon', 'Yu-Gi-Oh'] },
-        { name: 'Games', hubs: ['League of Legends', 'Game of Life', 'Elden Ring'] },
-    ];
-
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     // get all hubs from backend
@@ -92,7 +85,7 @@ function CommunitySelection() {
                 </Modal.Body>
             </Modal>
 
-            <Accordion className="browse-hub-accordion" flush>
+            {/* <Accordion className="browse-hub-accordion" flush>
                 {HubCategories.map((category, categoryIndex) => (
                     <Accordion.Item key={categoryIndex} eventKey={categoryIndex.toString()}>
                         <Accordion.Header>{category}</Accordion.Header>
@@ -119,6 +112,41 @@ function CommunitySelection() {
                         </Accordion.Body>
                     </Accordion.Item>
                 ))}
+            </Accordion> */}
+
+            <Accordion className="browse-hub-accordion" flush>
+                {HubCategories.map((category, categoryIndex) => {
+                    // Check if any hub belongs to this category
+                    const categoryHasHubs = hubs.some(hub => hub.hubs.some(item => item.category === category));
+
+                    // Only render the category if it has hubs
+                    return categoryHasHubs && (
+                        <Accordion.Item key={categoryIndex} eventKey={categoryIndex.toString()}>
+                            <Accordion.Header>{category}</Accordion.Header>
+                            <Accordion.Body className="browse-hub-body">
+                                {hubs.map((hub, hubIndex) => {
+                                    // Get the hubs that match the category
+                                    const filteredHubs = hub.hubs.filter((item) => item.category === category);
+                                    // map through and return them in the accordion
+                                    return filteredHubs.map((filteredHub, filteredIndex) => (
+                                        <div
+                                            className="hub-selection-card"
+                                            key={filteredIndex}
+                                            onClick={() => handleClick(filteredHub.hubName)}
+                                        >
+                                            <pre className="hub-selection-title">
+                                                Hub:{filteredHub.hubName}{'\n'}
+                                            </pre>
+                                            <pre>
+                                                Members:{filteredHub.members.length}
+                                            </pre>
+                                        </div>
+                                    ));
+                                })}
+                            </Accordion.Body>
+                        </Accordion.Item>
+                    );
+                })}
             </Accordion>
 
 
