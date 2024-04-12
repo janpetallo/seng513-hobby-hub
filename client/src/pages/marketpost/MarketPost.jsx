@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import "./MarketPost.scss"
 import {Button, FloatingLabel, Form} from "react-bootstrap";
 import RichTextEditor from "../../components/TextEditor/RichTextEditor.jsx";
@@ -9,6 +9,7 @@ import {BiSend} from "react-icons/bi";
 import HubsCategoryToggle from "../../components/HubsCategoryToggle/HubsCategoryToggle.jsx";
 import ConditionToggle from "../../components/ConditionToggle/ConditionToggle.jsx";
 import {useNavigate} from "react-router-dom";
+
 
 const MarketPost = () => {
     // navigation hook
@@ -23,7 +24,7 @@ const MarketPost = () => {
     const [conditionError, setConditionError] = useState(false);
 
     const [marketPostTitle, setMarketPostTitle] = useState(''); // market post title
-    const [price, setPrice] = useState(''); // market post title
+    const [price, setPrice] = useState(''); // market post price
 
 
 
@@ -112,13 +113,29 @@ const MarketPost = () => {
             <FloatingLabel
                 className="mb-3"
                 controlId="floating-contact"
-                label="Email"
+                label={`Email: ${JSON.parse(localStorage.getItem("currentUser")).email}`}
             >
                 <Form.Control
                     className="market-post-field"
                     type="email"
                     placeholder=""
                     name="email"
+                    disabled={true}
+                />
+
+            </FloatingLabel>
+
+            <FloatingLabel
+                className="mb-3"
+                controlId="floating-contact"
+                label={`Phone: ${JSON.parse(localStorage.getItem("currentUser")).phone}`}
+            >
+                <Form.Control
+                    className="market-post-field"
+                    type="phone"
+                    placeholder=""
+                    name="phone"
+                    disabled={true}
                 />
             </FloatingLabel>
 
