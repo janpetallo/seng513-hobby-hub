@@ -77,7 +77,7 @@ function App() {
                 <Col className="m-0 p-0 home-layout-body">
                     <Outlet/>
                 </Col>
-                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky menu-fix-width">
+                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky menu-fix-width menu-right-border">
                     <RightMenu/>
                 </Col>
             </Row>
