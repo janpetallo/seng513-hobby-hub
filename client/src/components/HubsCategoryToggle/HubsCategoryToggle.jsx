@@ -16,6 +16,7 @@ const HubsCategoryToggle = ({onCategorySelect}) => {
         category.toLowerCase().includes(searchResult.toLowerCase())
     );
 
+    // TODO fix onCategorySelect
     const handleHubClick = (category) => {
         setSelectedItem(category);
         setSearchResult(''); // Clear the filter input when an item is selected

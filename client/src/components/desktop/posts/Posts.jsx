@@ -11,6 +11,7 @@ const Posts = ({hubTitle, postAll= true, showKebab, hubPosts = false, hubName}) 
     const [posts, setPosts] = useState([]);
     const [moderators, setModerators] = useState([]);
     const [refreshTrigger, setRefreshTrigger] = useState(false);
+    const [loading, setLoading] = useState(true); // State to control the loading delay
 
     // navigation hook
     const navigate = useNavigate();
@@ -90,6 +91,8 @@ const Posts = ({hubTitle, postAll= true, showKebab, hubPosts = false, hubName}) 
                         }
                     }
                 }
+                // Set loading to false after posts are fetched
+                setLoading(false);
             } catch (error) {
                 console.error(error);
             }
@@ -106,7 +109,9 @@ const Posts = ({hubTitle, postAll= true, showKebab, hubPosts = false, hubName}) 
 
     return (
         <div className="posts">
-            {posts.length === 0 ? (
+            {loading ? ( // Render a blank div while loading posts to get rid of the no posts yet card flashing up
+                <div></div>
+            ) : posts.length === 0 ? (
                 <NoPostsYet />
             ) : (
                 posts.slice().reverse().map(post => (
