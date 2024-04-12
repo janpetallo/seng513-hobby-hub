@@ -83,7 +83,6 @@ const EditProfilePage = () => {
 
     // register user function
     const onSubmit = async (values, actions) => {
-        console.log("Form values:", values);
 
         let pNumber = "";
         let pass = true;
@@ -119,9 +118,7 @@ const EditProfilePage = () => {
 
         // If the phone number is entered and invalid then throw error
         // If the phone number is empty it is okay (not required)
-        console.log("before pass");
         if(pass) {
-            console.log("Form values:", values.email, values.setPhoneNumber, values.password);
             try {
                 await newRequest.post(`/users/editUser/${userData._id}`, {
                     username:userData.username,
@@ -194,15 +191,6 @@ const EditProfilePage = () => {
     });
 
 
-
-
-
-
-
-
-    console.log("user data is ", userData);
-    console.log(" email is ", new Date(userData.birthday).toLocaleDateString());
-    console.log(" number is ", userData.username)
     const {values,
         errors,
         touched, isSubmitting,
@@ -214,7 +202,7 @@ const EditProfilePage = () => {
             username:userData.username,
             email:userData.email,
             password:"",
-            confirmPassword:" ",
+            confirmPassword:"",
             setPhoneNumber:phoneNumber.phone
         },
 
