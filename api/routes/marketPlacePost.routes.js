@@ -1,12 +1,13 @@
 import express from "express";
-import {tempfunction} from "../controllers/marketPlacePost.controller.js";
+import {createMarketPlacePost} from "../controllers/marketPlacePost.controller.js";
+import {verifyToken} from "../middleware/jwt.js";
 
 const router = express.Router();
 
 // routing the url request for marketplace posts to the marketplace controller
 
-// temp function
-router.get("/temp", tempfunction);
+// route to the createMarketPlacePost function. Token verified beforehand
+router.post("/createMarketPlacePost", verifyToken, createMarketPlacePost);
 
 
 export default router;
