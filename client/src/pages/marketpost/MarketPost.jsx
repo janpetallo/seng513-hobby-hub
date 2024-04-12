@@ -27,6 +27,7 @@ const MarketPost = () => {
     const [price, setPrice] = useState(''); // market post price
     const[location, setLocation] = useState(""); // market post location
     const [images, setImages] = useState([]); // images for a market place post
+    const [textContent, setTextContent] = useState(""); // market place post text
 
 
     // to get the market post title
@@ -52,6 +53,11 @@ const MarketPost = () => {
     // Function to handle the removal of an image from the image drop zone
     const handleRemoveImage = (imageName) => {
         setImages(images => images.filter(image => image.name !== imageName));
+    };
+
+    // to get the text from the rich text editor
+    const handleTextContentChange = (content) => {
+        setTextContent(content);
     };
 
 
@@ -181,7 +187,7 @@ const MarketPost = () => {
 
             <ImageDropzone handleImageChange={handleImageChange} handleRemoveImage={handleRemoveImage}/>
 
-            <RichTextEditor/>
+            <RichTextEditor onTextContentChange={handleTextContentChange}/>
 
             <div className="d-flex justify-content-center flex-wrap mt-3">
                 <Button className="market-post-btn" variant="secondary" onClick={UseGoBack()}>
