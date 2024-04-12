@@ -8,15 +8,29 @@ import {MdCancelPresentation} from "react-icons/md";
 import {BiSend} from "react-icons/bi";
 import HubsCategoryToggle from "../../components/HubsCategoryToggle/HubsCategoryToggle.jsx";
 import ConditionToggle from "../../components/ConditionToggle/ConditionToggle.jsx";
+import {useNavigate} from "react-router-dom";
 
 const MarketPost = () => {
+    // navigation hook
+    const navigate = useNavigate();
+
     const [validated, setValidated] = useState(false);
 
-    const [selectedCategoryO, setSelectedCategoryO] = useState(null);
+    const [selectedCategoryO, setSelectedCategoryO] = useState(null); // this one is the item category
     const [categoryError, setCategoryError] = useState(false);
 
-    const [selectedConditionO, setSelectedConditionO] = useState(null);
+    const [selectedConditionO, setSelectedConditionO] = useState(null); // this one is item condition
     const [conditionError, setConditionError] = useState(false);
+
+    const [marketPostTitle, setMarketPostTitle] = useState(''); // market post title
+
+
+
+    // to get the market post title
+    const handleTitleChange = (event) => {
+        setMarketPostTitle(event.target.value);
+    };
+
 
     const handleSubmit = (event) => {
         const form = event.currentTarget;
@@ -50,6 +64,7 @@ const MarketPost = () => {
                 className="mb-3"
                 controlId="floating-title"
                 label="Title"
+                onChange={handleTitleChange}
             >
                 <Form.Control
                     className="market-post-field"
