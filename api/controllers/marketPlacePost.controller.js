@@ -37,3 +37,16 @@ export const createMarketPlacePost = async (req, res) => {
         console.log(error);
     }
 };
+
+
+export const getAllMarketPlacePosts = async (req, res) => {
+    try {
+        // Fetch all posts from MongoDB
+        const allMarketPosts = await MarketPost.find();
+        // Send the fetched posts as response
+        res.status(200).json(allMarketPosts);
+    } catch (error) {
+        res.status(500).send("Error Fetching all Market Posts");
+        console.log(error);
+    }
+};
