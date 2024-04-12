@@ -26,7 +26,7 @@ const MarketPost = () => {
     const [marketPostTitle, setMarketPostTitle] = useState(''); // market post title
     const [price, setPrice] = useState(''); // market post price
     const[location, setLocation] = useState(""); // market post location
-
+    const [images, setImages] = useState([]); // images for a market place post
 
 
     // to get the market post title
@@ -43,6 +43,18 @@ const MarketPost = () => {
     const handleLocationChange = (event) => {
         setLocation(event.target.value);
     };
+
+    // Function to get the images from imagedropzone.jsx
+    const handleImageChange = (newImages) => {
+        setImages(newImages);
+    };
+
+    // Function to handle the removal of an image from the image drop zone
+    const handleRemoveImage = (imageName) => {
+        setImages(images => images.filter(image => image.name !== imageName));
+    };
+
+
 
 
     const handleSubmit = (event) => {
@@ -167,7 +179,7 @@ const MarketPost = () => {
                 )}
             </div>
 
-            <ImageDropzone/>
+            <ImageDropzone handleImageChange={handleImageChange} handleRemoveImage={handleRemoveImage}/>
 
             <RichTextEditor/>
 
