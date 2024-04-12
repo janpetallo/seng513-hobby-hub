@@ -97,12 +97,6 @@ const CustomizeHub = () => {
     const handleCreate = async () => {
         const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
-        console.log(description);
-        console.log(rules);
-        console.log(resources);
-        console.log(category);
-        console.log(hubName);
-
         const hubData = {
             userName: currentUser.userName,
             userID: currentUser._id,
