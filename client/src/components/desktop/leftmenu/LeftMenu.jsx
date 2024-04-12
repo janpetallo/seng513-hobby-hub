@@ -15,11 +15,8 @@ const LeftMenu = () =>{
     const location = useLocation();
 
     const getMenuItemClass = (path) => {
-        if (path === '/') {
-            return location.pathname === '/' || location.pathname === '/marketplace' ? 'item selected' : 'item';
-        } else {
             return location.pathname === path ? 'item selected' : 'item';
-        }
+        
     }
 
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
