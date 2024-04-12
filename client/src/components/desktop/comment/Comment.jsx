@@ -91,7 +91,6 @@ const Comment = ({ comment }) => {
                     const response = await newRequest.post(`/comments/dislikeComment/${comment._id}`, {userID});
                     // Update the number of dislikes based on the response
                     updatedDisLikes = response.data.downvote;
-                    console.log(comment);
                 } catch (error) {
                     console.error(error);
                 }
