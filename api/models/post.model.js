@@ -40,7 +40,7 @@ const forumPostSchema = new Schema({
     }],
     usersDisliked: [{
         type: Schema.Types.ObjectId,
-        ref: 'ForumUserPost' // Reference to the user model
+        ref: 'User' // Reference to the user model
     }],
 });
 
