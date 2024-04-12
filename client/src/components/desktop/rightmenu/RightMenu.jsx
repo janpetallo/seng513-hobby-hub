@@ -19,8 +19,10 @@ const RightMenu = () => {
     const [description, setDescription] = useState("");
     const [rules, setRules] = useState("");
     const [resources, setResources] = useState("");
+    const [moderator, setModerator] = useState(false);
+    const [currentUserID, setCurrentUserID] = useState("");
 
-    // ToDO: make follow function and check if you already follow it
+
 
     useEffect(() => {
         // make sure hub data is present otherwise the user is trying to load /hubs manually instead of through the menu
@@ -40,6 +42,23 @@ const RightMenu = () => {
                         setDescription(response.data.description);
                         setRules(response.data.rules);
                         setResources(response.data.resources);
+
+                        // get the hub's moderator id
+                        const modID = response.data.moderators[0];
+                        // get current User
+                        const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+                        setCurrentUserID(currentUser._id);
+
+                        // if the current user is a moderator do not allow them to unfollow the hub, and set status to following
+                        if(modID === currentUser._id){
+                           setFollowText('Following');
+                           setModerator(true);
+
+                        // if the user already follows this hub set the button to reflect that
+                        }else if (response.data.members.includes(currentUser._id)){
+                            setFollowText('Following');
+                        }
                     }
                 } catch (error) {
                     // upon error log the error and navigate back home
@@ -52,13 +71,46 @@ const RightMenu = () => {
         }
     }, [hub, navigate]);
 
-    const handleClick = () => {
+    const handleClick = async () => {
         if (followText === 'Follow') {
+            try{
+                const response = await newRequest.put("/hubs/addMemberToHub", {
+                    hubName: hubName,
+                    userID: currentUserID,
+                });
+
+                if (response.status !== 200){
+                    throw new Error(`Failed to follow hub. Status: ${response.status}`);
+                }
+
+            }catch (error){
+                console.log(error);
+            }
+
             setFollowText('Following');
+            // no live updates till the page refreshes, as it makes it faster
+            setNumMembers(prevNumMembers => prevNumMembers + 1);
         }
 
         if (followText === 'Following') {
+            try{
+                const response = await newRequest.put("/hubs/removeMemberFromHub", {
+                    hubName: hubName,
+                    userID: currentUserID,
+                });
+
+                if (response.status !== 200){
+                    throw new Error(`Failed to unfollow hub. Status: ${response.status}`);
+                }
+
+            }catch (error){
+                console.log(error);
+            }
+
+
             setFollowText('Follow');
+            // no live updates till the page refreshes, as it makes it faster
+            setNumMembers(prevNumMembers => prevNumMembers - 1 );
         }
     }
 
@@ -74,7 +126,7 @@ const RightMenu = () => {
                         <span>{numMembers} Members</span>
                     </div>
 
-                    <Button className="mt-1 right-menu-follow-btn" variant="HHPurple" onClick={handleClick}>{followText}</Button>
+                    <Button className="mt-1 right-menu-follow-btn" variant="HHPurple" onClick={handleClick} disabled={moderator}>{followText}</Button>
                 </Col>
             </Row>
 

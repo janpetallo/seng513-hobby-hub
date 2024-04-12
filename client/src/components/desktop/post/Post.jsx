@@ -14,11 +14,13 @@ import newRequest from "../../../utilities/newRequest.js";
 import ModKebab from "../../ModKebab/ModKebab.jsx";
 
 
-const Post = ({ post, isPopup, hubTitle, showKebab }) => {
+const Post = ({ refreshPosts, post, isPopup, hubTitle, showKebab, moderators = [] }) => {
     // to control image pop up when clicked
     const [showModal, setShowModal] = useState(false);
     const [modalImageUrl, setModalImageUrl] = useState("");
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const [isAdmin, setIsAdmin] = useState(false);
+
 
     const toggleModal = (imageUrl) => {
         setShowModal(!showModal);
@@ -36,6 +38,10 @@ const Post = ({ post, isPopup, hubTitle, showKebab }) => {
             // Check if the user has already disliked the post
             if (post.usersDisliked.includes(currentUser._id)) {
                 setDisliked(true);
+            }
+            // check if the current user is a moderator
+            if(moderators.includes(currentUser._id)){
+                setIsAdmin(true);
             }
         }
     }, [post.usersLiked, post.usersDisliked]);
@@ -158,8 +164,25 @@ const Post = ({ post, isPopup, hubTitle, showKebab }) => {
 
     const maxLength = 350;
 
-    // Dummy variable to show kebab for now
-    const isAdmin = true;
+
+// Inside the Post component
+    const handleDeletePost = async () => {
+        try {
+            // Call the removePostFromHub function with the appropriate parameters
+            await newRequest.put("hubs/removePostFromHub",{
+                userID: currentUser._id,
+                hubName: post.hubName,
+                postID: post._id
+            });
+            // Reload the page to reflect the changes
+            refreshPosts();
+        } catch (error) {
+            console.error("Error removing post from hub:", error);
+            // Optionally, you can add logic to handle errors
+        }
+    };
+
+
 
     return (
         <div className = "post">
@@ -193,7 +216,7 @@ const Post = ({ post, isPopup, hubTitle, showKebab }) => {
                     </div>
 
                     {/* Only render the kebab when on dedicated hub pages, can't ban people on your homepage*/}
-                    {showKebab && isAdmin && currentUser && (<ModKebab/>)}
+                    {showKebab && isAdmin && currentUser && (<ModKebab onDeletePost = {handleDeletePost}/>)}
                 </div>
 
                 <div className="post_content">

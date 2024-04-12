@@ -1,6 +1,6 @@
 import express from "express";
 import {
-    createPost,
+    createPost, deletePostById,
     disLikePost,
     getAllPosts, getPostsByIds,
     likePost,
@@ -27,6 +27,7 @@ router.post("/unlikePost/:postId", verifyToken, unlikePost);
 router.post("/disLikePost/:postId", verifyToken, disLikePost);
 // route to the undislikePost function.
 router.post("/undisLikePost/:postId", verifyToken, undisLikePost);
-
+// Route to delete a post by its ID. Token verified beforehand
+router.delete("/deletePost/:postId", verifyToken, deletePostById);
 
 export default router;

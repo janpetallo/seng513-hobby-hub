@@ -4,7 +4,7 @@ import { IoEllipsisHorizontal } from "react-icons/io5";
 import { MdDeleteOutline } from "react-icons/md";
 import { IoBanSharp } from "react-icons/io5";
 
-const ModKebab = () => {
+const ModKebab = ({onDeletePost}) => {
     const [open, setOpen] = useState(false);
     const modKebabToggleRef = useRef(null);
 
@@ -29,18 +29,30 @@ const ModKebab = () => {
         setOpen(false); // Close the dropdown when a link is clicked
     };
 
+    const handleDeleteClick = async () => {
+        try {
+            // Call the onDeletePost function passed from the parent component
+            if (onDeletePost) {
+                onDeletePost(); // Call the function to delete the post
+            }
+            setOpen(false); // Close the dropdown after deleting the post
+        } catch (error) {
+            console.error("Error deleting post:", error);
+        }
+    };
+
     return (
         <div className="mod-kebab-wrapper"  onClick={()=>setOpen(!open)} ref={modKebabToggleRef} >
             <IoEllipsisHorizontal />
             {open && (
                 <div className="mod-kebab-options" onClick={handleDropdownClick}>
-                    <div onClick={handleOptionClick}>
+                    <div onClick={handleDeleteClick}>
                         <MdDeleteOutline /> <span>Delete Post</span>
                     </div>
 
-                    <div onClick={handleOptionClick}>
+                  {/*  <div onClick={handleOptionClick}>
                         <IoBanSharp /><span>Ban User</span>
-                    </div>
+                    </div>*/}
                 </div>
             )}
         </div>

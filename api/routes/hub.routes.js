@@ -1,5 +1,13 @@
 import express from "express";
-import {checkValidHubName, createHub, getAllHubs, getHub} from "../controllers/hub.controller.js";
+import {
+    addMemberToHub,
+    checkValidHubName,
+    createHub,
+    getAllHubs,
+    getHub,
+    removeMemberFromHub,
+    removePostFromHub
+} from "../controllers/hub.controller.js";
 import {verifyToken} from "../middleware/jwt.js";
 
 const router = express.Router();
@@ -14,6 +22,12 @@ router.get("/getHub/:hubName", getHub);
 router.post("/createHub", verifyToken, createHub);
 // route to the createHub function. Token verified before hand
 router.post("/checkValidHubName", verifyToken, checkValidHubName);
+// Route to remove a post from a hub. Token verified beforehand
+router.put("/removePostFromHub", verifyToken, removePostFromHub);
+// Route to remove a member from a hub. Token verified beforehand
+router.put("/removeMemberFromHub", verifyToken, removeMemberFromHub);
+// Route to add a member to a hub. Token verified beforehand
+router.put("/addMemberToHub", verifyToken, addMemberToHub);
 
 
 export default router;
