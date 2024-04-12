@@ -28,17 +28,8 @@ const ItemCard = ({item}) => {
                 <Card.Body className="p-2 m-0">
                     <Card.Title className="card-market-title m-0">{item.title}</Card.Title>
                     <Badge bg="HHPurple" className="badge" id="badge-color">{item.tag}</Badge>
-                    <div className="d-flex justify-content-between p-0 mb-0">
-                        <Card.Text className="card-market-text fw-bold">C${item.price}</Card.Text>
-                        <div className="d-flex">
-                            <img src={star} alt="star" className="star-rating"/>
-                            <Card.Text className="card-market-text">3.5</Card.Text>
-                        </div>
-                    </div>
-                    <div className="d-flex justify-content-between p-0 mt-0">
-                        <Card.Text className="card-market-text fw-bold">By:{item.username}</Card.Text>
-                        <Card.Text className="card-market-text fw-bold">{item.location}</Card.Text>
-                    </div>
+                    <Card.Text className="card-market-text fw-bold">C${item.price}</Card.Text>
+                    <Card.Text className="card-market-text ">{item.location}</Card.Text>
                 </Card.Body>
             </Card>
         </Link>
