@@ -30,9 +30,10 @@ import EditProfile from './pages/editprofile/EditProfile.jsx';
 import MyAdsTrades from "./pages/MyAdsTrades/MyAdsTrades.jsx";
 import MyHubs from "./pages/myhubs/MyHubs.jsx";
 import MyPosts from "./pages/myposts/MyPosts.jsx";
-import MarketMenu from "./components/desktop/marketmenu/MarketMenu.jsx";
-import SearchReults from './pages/search-results/SearhResults.jsx';
+import SearchResults from './pages/search-results/SearhResults.jsx';
 import NotFound from "./pages/NotFound/NotFound.jsx";
+import MarketLayout from "./layouts/MarketLayout/MarketLayout.jsx";
+import useLocalStorageClear from "./utilities/useLocalStorageClear/useLocalStorageClear.jsx";
 
 //  External media query to prevent re-rendering of pages whenever it rescales
 function useDesktopOrLaptopMediaQuery() {
@@ -46,7 +47,7 @@ function App() {
             <Container fluid className="m-0 p-0">
                 {useDesktopOrLaptopMediaQuery() ? <DNavBar/> : <Header/>}
                 <Row className="m-0 home-body">
-                    <Col xl={2} className="m-0 p-0 d-none d-xl-block position-sticky left-menu-fix-width">
+                    <Col xl={2} className="m-0 p-0 d-none d-xl-block position-sticky menu-fix-width">
                         <LeftMenu/>
                     </Col>
                     <Col>
@@ -76,20 +77,8 @@ function App() {
                 <Col className="m-0 p-0 home-layout-body">
                     <Outlet/>
                 </Col>
-                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky left-menu-fix-width">
+                <Col md={3} className="m-0 p-0 d-none d-md-block position-sticky menu-fix-width">
                     <RightMenu/>
-                </Col>
-            </Row>
-        )
-    }
-    const MarketplaceLayout = () => {
-        return (
-            <Row>
-                <Col className="m-0 p-0 home-layout-body">
-                    <Outlet/>
-                </Col>
-                <Col xl={3} className="m-0 p-0 d-none d-xxl-block position-sticky home-rightbar">
-                    <MarketMenu/>
                 </Col>
             </Row>
         )
@@ -110,6 +99,8 @@ function App() {
         }
         return children;
     }
+
+    useLocalStorageClear();
 
     const router = createBrowserRouter([
         {
@@ -176,7 +167,7 @@ function App() {
                 },
                 {
                     path: "/marketplace",
-                    element: <MarketplaceLayout/>,
+                    element: <MarketLayout/>,
                     children: [
                         {
                             path: "/marketplace",
@@ -202,7 +193,7 @@ function App() {
                 },
                 {
                     path: "/search-results/:search",
-                    element: <SearchReults/>
+                    element: <SearchResults/>
                 },
             ]
         },

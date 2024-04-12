@@ -1,0 +1,16 @@
+.mobile-market-menu-wrapper{
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px 20px 0 20px;
+
+    .market-filter-btn{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+
+        svg {
+            font-size: 25px;
+        }
+    }
+}
