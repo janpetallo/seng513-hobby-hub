@@ -39,6 +39,11 @@ const MarketPost = () => {
         setValidated(true);
     };
 
+    const handleCategorySelect = (category) => {
+        setSelectedCategoryO(category)
+    };
+
+
     return (
         <Form className="p-3 market-post-form" noValidate validated={validated} onSubmit={handleSubmit}>
             <FloatingLabel
@@ -98,7 +103,7 @@ const MarketPost = () => {
 
             <div className="mb-3">
                 Item Category
-                <HubsCategoryToggle setSelectedCategoryO={setSelectedCategoryO}/>
+                <HubsCategoryToggle onCategorySelect={handleCategorySelect}/>
                 {categoryError && (
                     <Form.Text className="text-danger">
                         Category cannot be empty
