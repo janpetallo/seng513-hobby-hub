@@ -48,7 +48,6 @@ const Comment = ({ comment }) => {
                     const response = await newRequest.post(`/comments/likeComment/${comment._id}`, {userID});
                     // Update the number of likes based on the response
                     updatedLikes = response.data.upvote;
-                    console.log(comment);
                 } catch (error) {
                     console.error(error);
                 }

@@ -45,7 +45,7 @@ export const getAllComments = async (req, res) => {
         // Send the fetched posts as response
         res.status(200).json(allComments);
     } catch (error) {
-        res.status(500).send("Error Fetching all Posts");
+        res.status(500).send("Error Fetching all Comments");
         console.log(error);
     }
 };
@@ -55,24 +55,20 @@ export const likeComment = async (req, res) => {
     try {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
-        console.log("reached")
 
         // identity verification required to interact with posts on your own account
         if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to interact with Posts on this account! You can Post on your own account!");
+            return res.status(403).send("Error you are not authorized to write comments on this account! You can comment once you have logged in!");
         }
-        console.log("reached")
 
 
         const commentId = req.params.commentId;
-        console.log("reached")
 
         // Find the post by ID
         const comment = await Comment.findById(commentId);
-        console.log("reached")
 
         if (!comment) {
-            return res.status(404).send("Post not found");
+            return res.status(404).send("Comment not found");
         }
 
         // Increment the upvote count
@@ -90,7 +86,7 @@ export const likeComment = async (req, res) => {
         res.status(200).json(comment);
     } catch (error) {
         console.error(error);
-        res.status(500).send("Error liking the post");
+        res.status(500).send("Error liking the Comment");
     }
 };
 
@@ -102,7 +98,7 @@ export const unlikeComment = async (req, res) => {
 
         // identity verification required to interact with posts on your own account
         if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to interact with Posts on this account! You can Post on your own account!");
+            return res.status(403).send("Error you are not authorized to interact with Comments on this account! You can Comment once you are logged in!");
         }
 
 
@@ -130,7 +126,7 @@ export const unlikeComment = async (req, res) => {
         res.status(200).json(comment);
     } catch (error) {
         console.error(error);
-        res.status(500).send("Error unliking the post");
+        res.status(500).send("Error unliking the Comment");
     }
 };
 
@@ -142,7 +138,7 @@ export const dislikeComment = async (req, res) => {
 
         // identity verification required to interact with posts on your own account
         if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to interact with Posts on this account! You can Post on your own account!");
+            return res.status(403).send("Error you are not authorized to interact with Comments on this account! You can Comment once you are logged in!");
         }
 
 
@@ -152,7 +148,7 @@ export const dislikeComment = async (req, res) => {
         const comment = await Comment.findById(commentId);
 
         if (!comment) {
-            return res.status(404).send("Post not found");
+            return res.status(404).send("Comment not found");
         }
 
         // increment the downvote count
@@ -170,7 +166,7 @@ export const dislikeComment = async (req, res) => {
         res.status(200).json(comment);
     } catch (error) {
         console.error(error);
-        res.status(500).send("Error disliking the post");
+        res.status(500).send("Error disliking the comment");
     }
 };
 
@@ -182,7 +178,7 @@ export const undislikeComment = async (req, res) => {
 
         // identity verification required to interact with posts on your own account
         if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to interact with Posts on this account! You can Post on your own account!");
+            return res.status(403).send("Error you are not authorized to interact with Comments on this account! You can Comment once you are logged in!");
         }
 
 
@@ -192,7 +188,7 @@ export const undislikeComment = async (req, res) => {
         const comment = await Comment.findById(commentId);
 
         if (!comment) {
-            return res.status(404).send("Post not found");
+            return res.status(404).send("Comment not found");
         }
 
         // increment the downvote count
@@ -210,6 +206,6 @@ export const undislikeComment = async (req, res) => {
         res.status(200).json(comment);
     } catch (error) {
         console.error(error);
-        res.status(500).send("Error disliking the post");
+        res.status(500).send("Error disliking the comment");
     }
 };
