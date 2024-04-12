@@ -31,7 +31,6 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
                     }
                     const hubPostsData = response.data;
                     setHubPosts(hubPostsData);
-                    console.log(hubPostsData);
 
                 } else if(postAll === true && category === 'Market') {
                     const response = await newRequest.get("/marketPlacePosts/getAllMarketPlacePosts");
@@ -40,7 +39,6 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
                     }
                     const marketPostsData = response.data;
                     setMarketPosts(marketPostsData);
-                    console.log(marketPostsData);
                 } 
             } catch (error) {
                 console.error(error);
@@ -58,7 +56,6 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
     useEffect(() => {
         const filterPosts = () => {
             if (searchQuery !== '' && category === 'Hubs') {
-                console.log("Filtering Hubs")
                 const newFilteredPosts = hubsPosts.filter(post =>
                     post.title?.toLowerCase().trim().includes(searchQuery) ||
                     post.description?.toLowerCase().trim().includes(searchQuery) ||
@@ -67,7 +64,6 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
                 );
                 setFilteredHubPosts(newFilteredPosts);
             } else if (searchQuery !== '' && category === 'Market') {
-                console.log("Filtering Market")
                 const newFilteredPosts = marketPosts.filter(post =>
                     post.title?.toLowerCase().trim().includes(searchQuery) ||
                     post.description?.toLowerCase().trim().includes(searchQuery) ||
@@ -102,15 +98,11 @@ const SearchReults = ({hubTitle = true, postAll= true})  => {
                         {category === 'Market' && filteredMarketPosts.length === 0 && searchQuery !== "" && <h3>No item related to "{searchParams.get('query').trim()}"</h3>}
                         {category === 'Hubs' && <p className="search-count p-1">Total search results: {filteredHubPosts.length}</p> }
                         {category === 'Market' && <p className="search-count p-1">Total search results: {filteredMarketPosts.length}</p> } 
-{
-                        console.log(category)
-}
+
                         {category === 'Hubs' ? 
-                            console.log("Hubs mapping") ||
                             filteredHubPosts.slice().reverse().map(post => (
                                 <Post hubTitle={hubTitle} post={post} isPopup={false} key={post._id} />
                             )) :
-                            console.log("Market mapping") ||
                             <div className="item-card-wrapper">
                                 {filteredMarketPosts.slice().reverse().map(post => (
                                     <ItemCard item={post} key={post._id} />
