@@ -42,7 +42,7 @@ const HamburgerMenu = ({handleClose}) => {
                                 alt="Profile Image"
                                 className="nav-profilePic profile-image-mobile"
                             />
-                            <span> Max123
+                            <span>{currentUser?.username}
                                 <br></br>
                                 <span className="edit-profile-mobile">View Profile</span>
                             </span>

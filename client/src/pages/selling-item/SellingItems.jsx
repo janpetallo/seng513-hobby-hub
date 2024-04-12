@@ -1,69 +1,92 @@
 import React from "react";
-import { useState } from "react";
-import {Button, Nav, Navbar, NavDropdown, Offcanvas, Row} from "react-bootstrap";
-import {Col, Container, Card, Badge, Image} from "react-bootstrap";
-import {Link, useNavigate} from "react-router-dom";
+import {Row, Col} from "react-bootstrap";
+import {Badge, Image} from "react-bootstrap";
+import {useLocation} from "react-router-dom";
 import "./SellingItems.scss";
 import locationLogo from "../../assets/selling-items/location.svg";
 import condition from "../../assets/selling-items/condition.svg";
 import rating from "../../assets/selling-items/rating.svg";
 import email from "../../assets/selling-items/email.svg";
 import number from "../../assets/selling-items/phoneNumber.svg";
+import Carousel from "react-bootstrap/Carousel";
 
 const SellingItem = () => {
-    return(
-        <Container className=" h-100 w-100">
-            <Row md={2} xs={1} >
-                <Col className="col-length">
-                    <div className="contain-image">
-                        <Image
-                            src="https://crystal-cdn4.crystalcommerce.com/photos/6772128/430px-GyaradosPok%C3%A9monGO22.jpg"
-                            className="post-img"
-                            fluid
-                        />
-                    </div>
-                </Col>
-                <Col className="col-info-color">
-                    <div className=" information-hold">
+    const {state} = useLocation();
+    return (
+        <Row className="selling-item-wrapper">
+            <Col lg={7} xl={8} className="m-0 p-0">
+                <div className="item-slider-wrapper">
+                    {state.img.length > 1 && (
+                        <Carousel interval={null} className="item-image-carousel">
+                            {state.img.map((image, index) => (
+                                <Carousel.Item key={index}>
+                                    <img
+                                        className="w-100 d-block"
+                                        src={image}
+                                        alt="Image can't be loaded"
+                                    />
+                                    <div className="blur-background" style={{ backgroundImage: `url(${image})` }}></div>
+                                </Carousel.Item>
+                            ))}
+                        </Carousel>
+                    )}
 
-                    <div className="d-flex justify-content-between">
-                        <h4>Gyarados</h4>
-                        <Badge bg="HHPurple" className="badge d-flex justify-content-center align-items-center">Pokemon</Badge>
+                    {state.img.length === 1 && (
+                        <>
+                            <img
+                                className="w-100 d-block"
+                                src={state.img[0]}
+                                alt="Image can't be loaded"
+                            />
+                            <div className="blur-background" style={{ backgroundImage: `url(${state.image[0]})` }}></div>
+                        </>
+                    )}
+                </div>
+            </Col>
+
+            <Col lg={5} xl={4} className="m-0 post-details-col">
+                <div className="post-details-wrapper">
+                    <h3>{state.title}</h3>
+
+                    <h4 className="info-text">{state.price}</h4>
+
+                    <h5>
+                        <Badge bg="HHPurple">{state.tag}</Badge>
+                    </h5>
+
+                    <div className="item-icon">
+                        <Image src={condition} className="logo"/>
+                        <span className="info-text">{state.condition}</span>
                     </div>
-                    <p className="info-text">$3.50</p>
-                    <div className="d-flex justify-content-between p-0 mb-0">
-                        <div className="d-flex">
-                            <Image src={locationLogo} className="logo"/>
-                            <p className="info-text">South Calgary</p>
-                        </div>
-                        <div className="d-flex">
-                            <Image src={condition} className="logo"/>
-                            <p className="info-text">Open Box</p>
-                        </div>
-                        <div className="d-flex">
-                            <Image src={rating} className="logo"/>
-                            <p className="info-text">4.5</p>
-                        </div>
-                    </div>
-                    <div className="d-flex">
+
+                    <hr/>
+                    <h5>Seller Information</h5>
+                    <div className="item-icon">
                         <Image src={email} className="logo"/>
-                        <p className="info-text">example@gmail.com</p>
+                        <span className="info-text">{state.email}</span>
                     </div>
-                    <div className="d-flex">
+
+                    <div className="item-icon">
                         <Image src={number} className="logo"/>
-                        <p className="info-text">541 254 5878</p>
+                        <span className="info-text">{state.phone}</span>
                     </div>
 
+                    <div className="item-icon">
+                        <Image src={locationLogo} className="logo"/>
+                        <span className="info-text">{state.location}</span>
+                    </div>
+
+                    {/*<div className="item-icon">*/}
+                    {/*    <Image src={rating} className="logo"/>*/}
+                    {/*    <span className="info-text">4.5</span>*/}
+                    {/*</div>*/}
+
+                    <hr/>
                     <h5>Description</h5>
-                    <p className="info-text">Good Condition Gyarados card email me for more information.
-                    I am open to trades as well. Located South Calgary.
-                    </p>
-                    </div>
-                </Col>
-            </Row>
-        </Container>
-
-)
-
+                    <div className="postDescription" dangerouslySetInnerHTML={{ __html: state.description }} />
+                </div>
+            </Col>
+        </Row>
+    )
 }
 export default SellingItem

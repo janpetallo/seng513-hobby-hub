@@ -42,8 +42,8 @@ const LeftMenu = () =>{
                         </div>
                     </Link>
 
-                    <Link to="/marketplace-selection" >
-                        <div className={getMenuItemClass('/marketplace-selection')}>
+                    <Link to="/marketplace" >
+                        <div className={getMenuItemClass('/marketplace')}>
                             <img src={Market} alt="market"></img>
                             <span>Browse Market</span>
                         </div>
