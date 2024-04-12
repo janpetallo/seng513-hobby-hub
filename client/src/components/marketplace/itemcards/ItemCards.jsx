@@ -1,224 +1,55 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./ItemCards.scss";
 import ItemCard from "../itemcard/ItemCard.jsx";
+import newRequest from "../../../utilities/newRequest.js";
 
-const ItemCards = () => {
+const ItemCards = ({allPosts=true}) => {
 
-    const items = [
-        {
-            id: 1,
-            username: "user1",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"The Hobbit",
-            description: "The Hobbit",
-            image:
-                [
-                    "https://resizing.flixster.com/fHUZr99k4HWii_jJwo4cA4v0Bb8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p8992211_p_v8_bh.jpg",
-                    "https://m.media-amazon.com/images/I/71S7Z+YhJFL._AC_UF1000,1000_QL80_.jpg"
-                ],
-            price: 100,
-            condition:"New",
-            tag:"Electronics",
-            location:"Location 1"
-        },
-        {
-            id: 2,
-            username: "user2",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"Gyarados",
-            description: "Gyarados",
-            image:[
-                "https://m.media-amazon.com/images/I/51CXJ8Rl7UL._AC_SL1500_.jpg"
-            ],
-            price: 3.50,
-            condition:"New",
-            tag:"Pokemon",
-            location:"Location 1"
-        },
-        {
-            id: 3,
-            username: "user3",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"Mushroom of the Woods",
-            description: "Mushroom of the Woods",
-            image: ["https://www.nrafamily.org/media/rfziyd0g/mushroom-foraging-lede.jpg"],
-            price: 3.50,
-            condition:"New",
-            tag:"Mushroom Hunters",
-            location:"Location 1"
-        },
-        {
-            id: 4,
-            username: "user1",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"Fishing Rod",
-            description: "Fishing Rod",
-            image:["https://www.discoverboating.com/sites/default/files/how-to-fish-for-beginners.jpg"],
-            price: 25.50,
-            condition:"New",
-            tag:"Fishing",
-            location:"Location 1"
-        },
-        {
-            id: 5,
-            username: "user1",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"Baseball Gloves",
-            description: "Baseball Gloves",
-            image:["https://sportsreplay.ca/cdn/shop/products/Wilson-A700-Baseball-Glove-Wilson-Sports-Replay-Sports-Excellence_940x.jpg?v=1682004023"],
-            price: 15.50,
-            condition:"New",
-            tag:"Baseball",
-            location:"Location 1"
-        },
-        {
-            id: 6,
-            username: "user1",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"The Hobbit",
-            description: "The Hobbit",
-            image:
-                [
-                    "https://resizing.flixster.com/fHUZr99k4HWii_jJwo4cA4v0Bb8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p8992211_p_v8_bh.jpg",
-                    "https://m.media-amazon.com/images/I/71S7Z+YhJFL._AC_UF1000,1000_QL80_.jpg"
-                ],
-            price: 100,
-            condition:"New",
-            tag:"Electronics",
-            location:"Location 1"
-        },
-        {
-            id: 7,
-            username: "user2",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"Gyarados",
-            description: "Gyarados",
-            image:[
-                "https://crystal-cdn4.crystalcommerce.com/photos/6772128/430px-GyaradosPok%C3%A9monGO22.jpg"
-            ],
-            price: 3.50,
-            condition:"New",
-            tag:"Pokemon",
-            location:"Location 1"
-        },
-        {
-            id: 8,
-            username: "user3",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"Mushroom of the Woods",
-            description: "Mushroom of the Woods",
-            image: ["https://www.nrafamily.org/media/rfziyd0g/mushroom-foraging-lede.jpg"],
-            price: 3.50,
-            condition:"New",
-            tag:"Mushroom Hunters",
-            location:"Location 1"
-        },
-        {
-            id: 9,
-            username: "user1",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"Fishing Rod",
-            description: "Fishing Rod",
-            image:["https://www.discoverboating.com/sites/default/files/how-to-fish-for-beginners.jpg"],
-            price: 25.50,
-            condition:"New",
-            tag:"Fishing",
-            location:"Location 1"
-        },
-        {
-            id: 10,
-            username: "user1",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"Baseball Gloves",
-            description: "Baseball Gloves",
-            image:["https://sportsreplay.ca/cdn/shop/products/Wilson-A700-Baseball-Glove-Wilson-Sports-Replay-Sports-Excellence_940x.jpg?v=1682004023"],
-            price: 15.50,
-            condition:"New",
-            tag:"Baseball",
-            location:"Location 1"
-        },
-        {
-            id: 11,
-            username: "user1",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"The Hobbit",
-            description: "The Hobbit",
-            image:
-                [
-                    "https://resizing.flixster.com/fHUZr99k4HWii_jJwo4cA4v0Bb8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p8992211_p_v8_bh.jpg",
-                    "https://m.media-amazon.com/images/I/71S7Z+YhJFL._AC_UF1000,1000_QL80_.jpg"
-                ],
-            price: 100,
-            condition:"New",
-            tag:"Electronics",
-            location:"Location 1"
-        },
-        {
-            id: 12,
-            username: "user2",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"Gyarados",
-            description: "Gyarados",
-            image:[
-                "https://crystal-cdn4.crystalcommerce.com/photos/6772128/430px-GyaradosPok%C3%A9monGO22.jpg"
-            ],
-            price: 3.50,
-            condition:"New",
-            tag:"Pokemon",
-            location:"Location 1"
-        },
-        {
-            id: 13,
-            username: "user3",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"Mushroom of the Woods",
-            description: "Mushroom of the Woods",
-            image: ["https://www.nrafamily.org/media/rfziyd0g/mushroom-foraging-lede.jpg"],
-            price: 3.50,
-            condition:"New",
-            tag:"Mushroom Hunters",
-            location:"Location 1"
-        },
-        {
-            id: 14,
-            username: "user1",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"Fishing Rod",
-            description: "Fishing Rod",
-            image:["https://www.discoverboating.com/sites/default/files/how-to-fish-for-beginners.jpg"],
-            price: 25.50,
-            condition:"New",
-            tag:"Fishing",
-            location:"Location 1"
-        },
-        {
-            id: 15,
-            username: "user1",
-            email:"user1@email.com",
-            phone:1234567890,
-            title:"Baseball Gloves",
-            description: "Baseball Gloves",
-            image:["https://sportsreplay.ca/cdn/shop/products/Wilson-A700-Baseball-Glove-Wilson-Sports-Replay-Sports-Excellence_940x.jpg?v=1682004023"],
-            price: 15.50,
-            condition:"New",
-            tag:"Baseball",
-            location:"Location 1"
-        }
-    ]
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        // Function to fetch all marketplace posts and update state
+        const fetchMarketPlacePosts = async () => {
+            try {
+                if(allPosts){
+                const response = await newRequest.get("marketPlacePosts/getAllMarketPlacePosts");
+                    setItems(response.data);
+
+                // get all the user's specific item posts
+                }else {
+                    // get currentUser
+                    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+                    // get the user data
+                    const response = await newRequest.get(`/users/getUser/${currentUser._id}`);
+                    if (response.status === 200) {
+                        // get the user's post id's
+                        const userMarketPosts = response.data.marketPosts;
+
+                        // now we try to get the market posts associated with all of the market post id's
+                        try {
+                            const response2 = await newRequest.get(`/marketPlacePosts/getMarketPostsByIds?marketPostIDs=${userMarketPosts.join(',')}`);
+                            setItems(response2.data);
+
+                        } catch (error) {
+                            console.log("Error getting all market posts");
+                        }
+
+                    } else {
+                        console.log("Error getting user data from server");
+                    }
+
+                }
+            } catch (error) {
+                console.error("Error fetching marketplace posts:", error);
+            }
+        };
+
+        // Call the fetchMarketPlacePosts function upon component loading
+        fetchMarketPlacePosts();
+    }, []); // Empty dependency array to ensure the effect runs only once on component mount
+
+
 
     return(
         <>
@@ -226,7 +57,7 @@ const ItemCards = () => {
                 {/* Map over the data array */}
                 {items.map(item => (
                     // Render the ItemComponent for each item in the array
-                    <ItemCard key={item.id} item={item} />
+                    <ItemCard key={item._id} item={item} />
                 ))}
             </div>
         </>

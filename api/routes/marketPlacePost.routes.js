@@ -1,5 +1,9 @@
 import express from "express";
-import {createMarketPlacePost} from "../controllers/marketPlacePost.controller.js";
+import {
+    createMarketPlacePost,
+    getAllMarketPlacePosts,
+    getMarketPostsByIds
+} from "../controllers/marketPlacePost.controller.js";
 import {verifyToken} from "../middleware/jwt.js";
 
 const router = express.Router();
@@ -8,6 +12,9 @@ const router = express.Router();
 
 // route to the createMarketPlacePost function. Token verified beforehand
 router.post("/createMarketPlacePost", verifyToken, createMarketPlacePost);
-
+// route to the getAllMarketPlacePosts function. No token verification required
+router.get("/getAllMarketPlacePosts", getAllMarketPlacePosts);
+// route to the getMarketPostsByIds function.
+router.get("/getMarketPostsByIds", verifyToken, getMarketPostsByIds);
 
 export default router;
