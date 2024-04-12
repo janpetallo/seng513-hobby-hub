@@ -51,39 +51,43 @@ export const getAllComments = async (req, res) => {
 };
 
 
-export const likePost = async (req, res) => {
+export const likeComment = async (req, res) => {
     try {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
+        console.log("reached")
 
         // identity verification required to interact with posts on your own account
         if(req.userId !== currentUser._id.toString()){
             return res.status(403).send("Error you are not authorized to interact with Posts on this account! You can Post on your own account!");
         }
+        console.log("reached")
 
 
-        const postId = req.params.postId;
+        const commentId = req.params.commentId;
+        console.log("reached")
 
         // Find the post by ID
-        const post = await Post.findById(postId);
+        const comment = await Comment.findById(commentId);
+        console.log("reached")
 
-        if (!post) {
+        if (!comment) {
             return res.status(404).send("Post not found");
         }
 
         // Increment the upvote count
-        post.upvote++;
+        comment.upvote++;
 
         // Add the user's ID to usersLiked array if not already present
-        if (!post.usersLiked.includes(currentUser._id)) {
-            post.usersLiked.push(currentUser._id);
+        if (!comment.usersLiked.includes(currentUser._id)) {
+            comment.usersLiked.push(currentUser._id);
         }
 
         // Save the updated post
-        await post.save();
+        await comment.save();
 
 
-        res.status(200).json(post);
+        res.status(200).json(comment);
     } catch (error) {
         console.error(error);
         res.status(500).send("Error liking the post");
@@ -91,7 +95,7 @@ export const likePost = async (req, res) => {
 };
 
 
-export const unlikePost = async (req, res) => {
+export const unlikeComment = async (req, res) => {
     try {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
@@ -102,28 +106,28 @@ export const unlikePost = async (req, res) => {
         }
 
 
-        const postId = req.params.postId;
+        const commentId = req.params.commentId;
 
         // Find the post by ID
-        const post = await Post.findById(postId);
+        const comment = await Comment.findById(commentId);
 
-        if (!post) {
+        if (!comment) {
             return res.status(404).send("Post not found");
         }
 
         // decrement the upvote count
-        post.upvote--;
+        comment.upvote--;
 
         // Remove the user's ID from usersLiked array
-        const index = post.usersLiked.indexOf(currentUser._id);
+        const index = comment.usersLiked.indexOf(currentUser._id);
         if (index !== -1) {
-            post.usersLiked.splice(index, 1);
+            comment.usersLiked.splice(index, 1);
         }
 
         // Save the updated post
-        await post.save();
+        await comment.save();
 
-        res.status(200).json(post);
+        res.status(200).json(comment);
     } catch (error) {
         console.error(error);
         res.status(500).send("Error unliking the post");
@@ -131,7 +135,7 @@ export const unlikePost = async (req, res) => {
 };
 
 
-export const disLikePost = async (req, res) => {
+export const dislikeComment = async (req, res) => {
     try {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
@@ -142,28 +146,28 @@ export const disLikePost = async (req, res) => {
         }
 
 
-        const postId = req.params.postId;
+        const commentId = req.params.commentId;
 
         // Find the post by ID
-        const post = await Post.findById(postId);
+        const comment = await Comment.findById(commentId);
 
-        if (!post) {
+        if (!comment) {
             return res.status(404).send("Post not found");
         }
 
         // increment the downvote count
-        post.downvote++;
+        comment.downvote++;
 
         // Add the user's ID to usersDisliked array if not already present
-        if (!post.usersDisliked.includes(currentUser._id)) {
-            post.usersDisliked.push(currentUser._id);
+        if (!comment.usersDisliked.includes(currentUser._id)) {
+            comment.usersDisliked.push(currentUser._id);
         }
 
 
         // Save the updated post
-        await post.save();
+        await comment.save();
 
-        res.status(200).json(post);
+        res.status(200).json(comment);
     } catch (error) {
         console.error(error);
         res.status(500).send("Error disliking the post");
@@ -171,7 +175,7 @@ export const disLikePost = async (req, res) => {
 };
 
 
-export const undisLikePost = async (req, res) => {
+export const undislikeComment = async (req, res) => {
     try {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
@@ -182,28 +186,28 @@ export const undisLikePost = async (req, res) => {
         }
 
 
-        const postId = req.params.postId;
+        const commentId = req.params.commentId;
 
         // Find the post by ID
-        const post = await Post.findById(postId);
+        const comment = await Comment.findById(commentId);
 
-        if (!post) {
+        if (!comment) {
             return res.status(404).send("Post not found");
         }
 
         // increment the downvote count
-        post.downvote--;
+        comment.downvote--;
 
         // Remove the user's ID from usersDisliked array
-        const index = post.usersDisliked.indexOf(currentUser._id);
+        const index = comment.usersDisliked.indexOf(currentUser._id);
         if (index > -1) {
-            post.usersDisliked.splice(index, 1);
+            comment.usersDisliked.splice(index, 1);
         }
 
         // Save the updated post
-        await post.save();
+        await comment.save();
 
-        res.status(200).json(post);
+        res.status(200).json(comment);
     } catch (error) {
         console.error(error);
         res.status(500).send("Error disliking the post");
