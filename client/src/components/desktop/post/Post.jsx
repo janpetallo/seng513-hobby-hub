@@ -225,18 +225,25 @@ const Post = ({ refreshPosts, post, isPopup, hubTitle, showKebab, moderators = [
                                         src={image}
                                         alt="Image can't be loaded"
                                     />
+                                    <div className="blur-background" style={{ backgroundImage: `url(${image})` }}></div>
                                 </Carousel.Item>
                             ))}
                         </Carousel>
                     )}
 
+                    <div>
+                        
+                    </div>
                     {post.img.length === 1 && (
-                        <img
-                            onClick={() => toggleModal(post.img[0])}
-                            className="d-block w-100"
-                            src={post.img[0]}
-                            alt="Image can't be loaded"
-                        />
+                        <>
+                            <img
+                                onClick={() => toggleModal(post.img[0])}
+                                className="d-block w-100"
+                                src={post.img[0]}
+                                alt="Image can't be loaded"
+                            />
+                            <div className="blur-background" style={{ backgroundImage: `url(${post.img[0]})` }}></div>
+                        </>
                     )}
 
                     <p className = "postOwner"> <strong>By: </strong> {post.userName}</p>
