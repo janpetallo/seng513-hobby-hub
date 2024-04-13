@@ -147,16 +147,10 @@ const Post = ({ refreshPosts, post, isPopup, hubTitle, showKebab, moderators = [
 
     // temporary functions and variables to enable commenting
 
-    // Todo: This one is to control if you have commented or not, fix this so later it only triggers if you post a comment
     const [commented, setCommented] = useState(false);
     const[openComment, setOpenComment] = useState(false);
     const [numComments, setNumComments] = useState(post.comments.length);
     const toggleComment = () => {
-        if(!commented){
-            setNumComments(numComments + 1);
-        }else {
-            setNumComments(numComments - 1);
-        }
 
         setCommented(!commented);
         setOpenComment(!openComment);

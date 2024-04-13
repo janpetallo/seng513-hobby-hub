@@ -128,7 +128,7 @@ const Comment = ({ comment }) => {
               </div>
 
               <p className="comment-message">
-                  {comment.comment}
+                  <div className="postDescription" dangerouslySetInnerHTML={{ __html: comment.comment }} />
               </p>
 
               <div className="comment-Info">

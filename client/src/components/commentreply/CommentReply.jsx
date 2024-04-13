@@ -42,6 +42,8 @@ const CommentReply = ({post}) => {
         // Submit data to server
         try {
             const response = await newRequest.post('comments/createComment', commentData);
+            // Reload the entire page
+            window.location.reload();
 
         } catch (error) {
             console.error(error);

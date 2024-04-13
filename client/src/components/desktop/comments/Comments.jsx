@@ -10,7 +10,6 @@ const Comments = ( {post, isPopup} ) => {
 
     const maxCommentsToShow = 4;
     const [comments, setComments] = useState([]);
-    const [refreshTrigger, setRefreshTrigger] = useState(false);
 
     useEffect(() => {
         const fetchComments = async () => {
@@ -32,19 +31,16 @@ const Comments = ( {post, isPopup} ) => {
         }
         fetchComments();
 
-    }, [refreshTrigger]);
+    }, []);
 
     // Function to trigger a refresh
-    const refreshPosts = () => {
-        setRefreshTrigger(prevState => !prevState);
-    };
     // console.log("post coments are " , post.comments);
     const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
     return <div className="mt-3 Comments">
         {currentUser && (
             <div className="ms-4">
-                <CommentReply post={post}/>
+                <CommentReply post={post} />
             </div>
         )}
 
