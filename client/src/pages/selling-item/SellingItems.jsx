@@ -16,7 +16,33 @@ const SellingItem = () => {
         <Row className="selling-item-wrapper">
             <Col lg={7} xl={8} className="m-0 p-0">
                 <div className="item-slider-wrapper">
-                    {state.img.length > 1 && (
+                    {/*{state.img.length > 1 && (*/}
+                    {/*    <Carousel interval={null} className="item-image-carousel">*/}
+                    {/*        {state.img.map((image, index) => (*/}
+                    {/*            <Carousel.Item key={index}>*/}
+                    {/*                <img*/}
+                    {/*                    className="w-100 d-block"*/}
+                    {/*                    src={image}*/}
+                    {/*                    alt="Image can't be loaded"*/}
+                    {/*                />*/}
+                    {/*                <div className="blur-background" style={{ backgroundImage: `url(${image})` }}></div>*/}
+                    {/*            </Carousel.Item>*/}
+                    {/*        ))}*/}
+                    {/*    </Carousel>*/}
+                    {/*)}*/}
+
+                    {/*{state.img.length === 1 && (*/}
+                    {/*    <>*/}
+                    {/*        <img*/}
+                    {/*            className="w-100 d-block"*/}
+                    {/*            src={state.img[0]}*/}
+                    {/*            alt="Image can't be loaded"*/}
+                    {/*        />*/}
+                    {/*        <div className="blur-background" style={{ backgroundImage: `url(${state.image[0]})` }}></div>*/}
+                    {/*    </>*/}
+                    {/*)}*/}
+
+                    {state.img.length > 1 ? (
                         <Carousel interval={null} className="item-image-carousel">
                             {state.img.map((image, index) => (
                                 <Carousel.Item key={index}>
@@ -29,16 +55,14 @@ const SellingItem = () => {
                                 </Carousel.Item>
                             ))}
                         </Carousel>
-                    )}
-
-                    {state.img.length === 1 && (
+                    ) : (
                         <>
                             <img
                                 className="w-100 d-block"
                                 src={state.img[0]}
                                 alt="Image can't be loaded"
                             />
-                            <div className="blur-background" style={{ backgroundImage: `url(${state.image[0]})` }}></div>
+                            <div className="blur-background" style={{ backgroundImage: `url(${state.img[0]})` }}></div>
                         </>
                     )}
                 </div>
