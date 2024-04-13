@@ -96,7 +96,7 @@ const MyHubs = () => {
                 ))} */}
 
             <Accordion className="browse-hub-accordion" flush>
-                {hubs.map((category, categoryIndex) => {
+                {hubs.sort((a, b) => a.name.localeCompare(b.name)).map((category, categoryIndex) => {
                     // Check if any hub belongs to this category
                     const categoryHasHubs = category.hubs.length > 0;
 
