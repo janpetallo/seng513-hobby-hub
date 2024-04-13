@@ -15,17 +15,17 @@ const router = express.Router();
 // routing the url request for comments to the comments controller
 
 // route to the create Comment function. Token verified before hand
-router.post("/createComment", verifyToken, createComment);
+router.post("/createComment", createComment);
 // route to the getAllPosts function. No token verification required
 router.get("/getAllComments", getAllComments);
 
-router.post("/likeComment/:commentId", verifyToken, likeComment);
+router.post("/likeComment/:commentId", likeComment);
 // route to the unlikePost function.
-router.post("/unlikeComment/:commentId", verifyToken, unlikeComment);
+router.post("/unlikeComment/:commentId", unlikeComment);
 // // route to the dislikePost function.
-router.post("/dislikeComment/:commentId", verifyToken, dislikeComment);
+router.post("/dislikeComment/:commentId", dislikeComment);
 // // route to the undislikePost function.
-router.post("/undislikeComment/:commentId", verifyToken, undislikeComment);
+router.post("/undislikeComment/:commentId", undislikeComment);
 // // Route to delete a post by its ID. Token verified beforehand
 // router.delete("/deletePost/:postId", verifyToken, deletePostById);
 

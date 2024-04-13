@@ -10,11 +10,6 @@ export const createPost = async (req, res) => {
         // get the hub that the user created this post for
         const selectedHub = await Hub.findOne({ hubName: req.body.hubName });
 
-        // identity verification required to post on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to Post on this account! You can only Post on your own account!");
-        }
-
         // Create a new object without the userId field
         const postData = { ...req.body };
         delete postData.userID;
@@ -71,11 +66,6 @@ export const likePost = async (req, res) => {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
 
-        // identity verification required to interact with posts on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to interact with Posts on this account! You can Post on your own account!");
-        }
-
 
         const postId = req.params.postId;
 
@@ -111,12 +101,6 @@ export const unlikePost = async (req, res) => {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
 
-        // identity verification required to interact with posts on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to interact with Posts on this account! You can Post on your own account!");
-        }
-
-
         const postId = req.params.postId;
 
         // Find the post by ID
@@ -151,12 +135,6 @@ export const disLikePost = async (req, res) => {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
 
-        // identity verification required to interact with posts on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to interact with Posts on this account! You can Post on your own account!");
-        }
-
-
         const postId = req.params.postId;
 
         // Find the post by ID
@@ -190,12 +168,6 @@ export const undisLikePost = async (req, res) => {
     try {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
-
-        // identity verification required to interact with posts on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to interact with Posts on this account! You can Post on your own account!");
-        }
-
 
         const postId = req.params.postId;
 

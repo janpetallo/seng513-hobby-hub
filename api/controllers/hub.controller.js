@@ -42,11 +42,6 @@ export const createHub = async (req, res) => {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
 
-        // identity verification required to post on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to create a hub on this account! You can create hubs on your own account!");
-        }
-
         // Create a new object without the userId field
         const hubData = { ...req.body };
         delete hubData.userID;
@@ -77,11 +72,6 @@ export const checkValidHubName = async (req, res) => {
         // get the current user
         const currentUser = await User.findById(userID);
 
-        // identity verification required to post on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to create a hub on this account! You can create hubs on your own account!");
-        }
-
         // Check if the hub name already exists in the database
         const existingHub = await Hub.findOne({ hubName: hubName });
 
@@ -103,11 +93,6 @@ export const addMemberToHub = async (req, res) => {
     try {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
-
-        // identity verification required to allow folloing on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to follow hubs on this account! You can only follow hubs from your own account!");
-        }
 
         // Extract the hub name and member ID from the request body
         const { hubName, userID } = req.body;
@@ -160,12 +145,6 @@ export const removeMemberFromHub = async (req, res) => {
         const hub = await Hub.findOne({ hubName: hubName });
 
 
-        // identity verification required to allow unfollowing on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to unfollow a hub on this account! You can only unfollow hubs from your own account!");
-        }
-
-
         // Check if the hub exists
         if (!hub) {
             return res.status(404).send("Hub not found");
@@ -201,11 +180,6 @@ export const removePostFromHub = async (req, res) => {
     try {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
-
-        // identity verification required to interact with posts on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to delete Posts from the hub on this account! You can only delete posts from your own account!");
-        }
 
         // Extract the hub name and post ID from the request body
         const { hubName, postID } = req.body;

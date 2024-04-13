@@ -8,11 +8,6 @@ export const createMarketPlacePost = async (req, res) => {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
 
-        // identity verification required to post on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to make a marketplace Post on this account! You can Post on your own account!");
-        }
-
         // Create a new object without the userId field
         const marketPlacePostData = { ...req.body };
         delete marketPlacePostData.userID;

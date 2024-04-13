@@ -11,10 +11,10 @@ const router = express.Router();
 // routing the url request for marketplace posts to the marketplace controller
 
 // route to the createMarketPlacePost function. Token verified beforehand
-router.post("/createMarketPlacePost", verifyToken, createMarketPlacePost);
+router.post("/createMarketPlacePost", createMarketPlacePost);
 // route to the getAllMarketPlacePosts function. No token verification required
 router.get("/getAllMarketPlacePosts", getAllMarketPlacePosts);
 // route to the getMarketPostsByIds function.
-router.get("/getMarketPostsByIds", verifyToken, getMarketPostsByIds);
+router.get("/getMarketPostsByIds", getMarketPostsByIds);
 
 export default router;

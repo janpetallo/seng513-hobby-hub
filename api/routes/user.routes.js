@@ -7,10 +7,10 @@ const router = express.Router();
 // routing the url request for user to the user controller
 
 // user delete route -> the function will verify the token before heading to the delete user controller
-router.delete("/:id",verifyToken, deleteUser);
+router.delete("/:id", deleteUser);
 // gets the user specified by id and returns it
-router.get("/getUser/:id",verifyToken, getUser);
+router.get("/getUser/:id", getUser);
 
-router.post("/editUser/:id",verifyToken, editUser);
+router.post("/editUser/:id", editUser);
 
 export default router;

@@ -32,7 +32,7 @@ const connect = async () => {
 
 
 // middleware
-app.use(cors({origin:"http://localhost:5173", credentials:true})); // cors middleware to allow the front end to communicate with the backend
+app.use(cors({origin:"https://3f5d-2001-56a-7de9-ce00-3897-709a-77e0-e26c.ngrok-free.app", credentials:true})); // cors middleware to allow the front end to communicate with the backend
 app.use(express.json()); // allow the app to take json input
 app.use(cookieParser()); // allow the app to use cookie parser
 

@@ -10,11 +10,6 @@ export const createComment = async (req, res) => {
         // get the current post
         const currentPost = await Post.findById(req.body.postID);
 
-        // identity verification required to post on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to Comment on this account! You can only Comment on your own account!");
-        }
-
         // Create a new object without the userID and postID field
         const commentData = { ...req.body };
         delete commentData.userID;
@@ -56,11 +51,6 @@ export const likeComment = async (req, res) => {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
 
-        // identity verification required to interact with posts on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to write comments on this account! You can comment once you have logged in!");
-        }
-
 
         const commentId = req.params.commentId;
 
@@ -96,12 +86,6 @@ export const unlikeComment = async (req, res) => {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
 
-        // identity verification required to interact with posts on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to interact with Comments on this account! You can Comment once you are logged in!");
-        }
-
-
         const commentId = req.params.commentId;
 
         // Find the post by ID
@@ -135,11 +119,6 @@ export const dislikeComment = async (req, res) => {
     try {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
-
-        // identity verification required to interact with posts on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to interact with Comments on this account! You can Comment once you are logged in!");
-        }
 
 
         const commentId = req.params.commentId;
@@ -175,12 +154,6 @@ export const undislikeComment = async (req, res) => {
     try {
         // get the current user
         const currentUser = await User.findById(req.body.userID);
-
-        // identity verification required to interact with posts on your own account
-        if(req.userId !== currentUser._id.toString()){
-            return res.status(403).send("Error you are not authorized to interact with Comments on this account! You can Comment once you are logged in!");
-        }
-
 
         const commentId = req.params.commentId;
 
