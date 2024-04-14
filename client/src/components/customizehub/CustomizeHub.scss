@@ -1,0 +1,66 @@
+:root {
+    --check-clr: #8e47ff;
+}
+
+.customize-hub-wrapper {
+    .customize-hub-tabs {
+        display: flex;
+        flex-direction: column;
+        
+        @media screen and (min-width: 576px) {
+            flex-direction: row;
+        }
+    }
+
+    .nav button {
+        color: #8e47ff;
+    }
+
+    .nav-pills {
+        .nav-link.active{
+            background-color:  #8e47ff;
+        }
+    }
+
+    .hub-name {
+        height: 450px;
+    }
+
+    .tab-editor {
+        height: 450px;
+
+        // Flex grow 1 to make the text editor go to bottom of page
+        .rich-text-editor {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+
+            .ql-toolbar {
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+            }
+
+        }
+    }
+
+    .customize-hub-btn {
+        width: 100px;
+    }
+
+    .custom-radio .form-check-input{
+        border-color: var( --check-clr);
+    }
+
+    .custom-radio .form-check-input:checked {
+        background-color: var( --check-clr);
+        border-color: var( --check-clr);
+    }
+
+    .custom-radio .form-check-label:hover,
+    .custom-radio .form-check-input:hover {
+        cursor: pointer;
+    }
+}
+
+
+

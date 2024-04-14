@@ -1,0 +1,4 @@
+node_modules/
+api/DBSeedingScripts/.env
+api/.env
+.env

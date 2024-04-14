@@ -1,0 +1,16 @@
+.no-post-yet-wrapper {
+    padding-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .no-post-yet-card {
+        width: 90%;
+        border-color: #8e47ff;
+        
+        @media screen and (min-width: 576px) {
+            width: 60%
+        }
+    }
+}
+
